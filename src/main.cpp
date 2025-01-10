@@ -6,14 +6,80 @@
 #include "plane.h"
 #include "passenger.h"
 
-void genPassengers(std::vector<Passenger> &passengers)
+void initPassengers(size_t num, pid_t mainPID)
 {
-	// TODO: generate passengers
+	pid_t prev = mainPID;
+	for (size_t i = 0; i < num; ++i)
+	{
+		fork();
+		pid_t pid = getpid();
+		if (pid != prev)
+		{
+			prev = pid;
+		}
+		else
+		{
+			break;
+		}
+
+	}
+
+	if (getpid() == mainPID)
+	{
+		return;
+	}
+
+	std::cout << "Passenger process: " << getpid() << std::endl;
+
+	// TODO: increment semaphore value by 1
+
+	// wait for init phase to finish (semaphore)
+	// TODO: wait for semaphore value to be set to 0
+
+	// TODO: run passenger tasks here
+
+	if (getpid() != mainPID)
+	{
+		exit(0);
+	}
 }
 
-void genPlanes(std::vector<Plane> &planes)
+void initPlanes(size_t num, pid_t mainPID)
 {
-	// TODO: generate planes
+	pid_t prev = mainPID;
+	for (size_t i = 0; i < num; ++i)
+	{
+		fork();
+		pid_t pid = getpid();
+		if (pid != prev)
+		{
+			prev = pid;
+		}
+		else
+		{
+			break;
+		}
+
+	}
+
+	if (getpid() == mainPID)
+	{
+		return;
+	}
+
+	std::cout << "Plane process: " << getpid() << std::endl;
+
+	// TODO: increment semaphore value by 1
+
+	// wait for init phase to finish (semaphore)
+	// TODO: wait for semaphore value to be set to 0
+
+	// TODO: run plane tasks here
+
+	if (getpid() != mainPID)
+	{
+		exit(0);
+	}
 }
 
 int secControl()
@@ -32,54 +98,52 @@ int dispatcher()
 	}
 }
 
-int passenger()
-{
-}
-
-int plane()
-{
-}
-
 int main(int argc, char* argv[])
 {
 	// TODO: checks for argc and argv
 
-	const size_t numPlanes = 10;
 
-	// get this instance pid
-	const pid_t mainPID = getpid();
+	std::vector<pid_t> pids(3);
+	pids[0] = getpid();
 
-	// fork secControl
-	const pid_t secControlPID = fork();
+	// main + secControl + dispatcher + n passengers + n planes
 
-	// fork dispatcher
-	const pid_t dispatcherPID = fork();
+	size_t numPassengers = std::stoul(argv[1]);
+	size_t numPlanes = std::stoul(argv[2]);
 
-	std::vector<Passenger> passengersInTerminal;
-	std::vector<Plane> planes;
 
-	if (getpid() == mainPID)
+	// TODO: init semaphore with value 0
+
+	initPassengers(numPassengers, pids[0]);
+	initPlanes(numPlanes, pids[0]);
+
+	fork();
+	pid_t pid = getpid();
+	if (pid != pids[0])
 	{
-		size_t numPassengers = 0;
-		numPassengers = std::stoul(argv[1]);
-		passengersInTerminal.reserve(numPassengers);
-		genPassengers(passengersInTerminal);
+		pids[1] = pid;
+		fork();
+		pid = getpid();
+		if (pid != pids[0] && pid != pids[1])
+		{
+			pids[2] = pid;
+		}
+	}
 
-		size_t numPlanes = 0;
-		numPlanes = std::stoul(argv[2]);
-		planes.reserve(numPlanes);
-		genPlanes(planes);
+	// TODO: check if semaphore is set to numPassengers + numPlanes
 
-		std::cout << "this is main\n";
-	}
-	else if (getpid() == dispatcherPID)
-	{
-		std::cout << "this is dispatcher\n";
-	}
-	else if (getpid() == secControlPID)
-	{
-		std::cout << "this is secControl\n";
-	}
+	// if semaphore value = numPassengers + numPlanes set semaphore to 0
+
+	// TODO: runtime
+
+	//
+
+	if (getpid() == pids[0])
+		std::cout << "Main process: " << getpid() << std::endl;
+	else if (getpid() == pids[1])
+		std::cout << "SecControl process: " << getpid() << std::endl;
+	else if (getpid() == pids[2])
+		std::cout << "Dispatcher process: " << getpid() << std::endl;
 
 	return 0;
 }
