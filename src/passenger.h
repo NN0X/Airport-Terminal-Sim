@@ -7,14 +7,16 @@
 
 class Passenger
 {
-private:
+public: // temporary
 	uint64_t id;
 	bool isVip;
 	bool type; // each gate can have 2 same type passengers at the same time
 	uint64_t baggageWeight; // in arbitrary units
-	bool isAggressive;
+	bool isAggressive; // causes random negative events
+        bool hasDangerousBaggage; // causes event at security control
 
 public:
+        Passenger();
 	Passenger(uint64_t id, bool isVip, bool type, uint64_t baggageWeight);
 	uint64_t getId() const;
 	bool getIsVip() const;
