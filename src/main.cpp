@@ -22,7 +22,7 @@ struct ThreadArgs
 std::mutex coutMutex;
 
 #define VERBOSE 1
-#define MAX_PASSENGER_DELAY 2 // in sec
+#define MAX_PASSENGER_DELAY 10000 // in ticks
 
 void syncedCout(std::string msg)
 {
@@ -38,13 +38,13 @@ void *passengerThread(void *arg)
 
         syncedCout("Passenger thread: " + std::to_string(args->id) + "\n");
 
-        // TODO: data generation here
+        Passenger passenger(args->id);
 
         // TODO: run passenger tasks here
 
-        // TODO: passenger waits for security control to be free
-        // TODO: passenger waits for plane to be ready
-        // TODO: passenger thread ends
+        // INFO: passenger waits for security control to be free
+        // INFO: passenger waits for plane to be ready
+        // INFO: passenger thread ends
 
         pthread_exit(NULL);
 }
@@ -64,8 +64,8 @@ std::vector<pthread_t> initPassengers(size_t num, int *semIDs, const std::vector
                         perror("pthread_create");
                         exit(1);
                 }
-                syncedCout("Waiting for " + std::to_string(delays[i]) + " seconds\n");
-                sleep(delays[i]);
+                syncedCout("Waiting for " + std::to_string(delays[i]) + " ticks\n");
+                for(uint64_t j = 0; j < delays[i]; j++) {}
         }
 
         syncedCout("All passengers created\n");
@@ -79,7 +79,7 @@ void *planeThread(void *arg)
 
         syncedCout("Plane thread: " + std::to_string(args->id) + "\n");
 
-        // TODO: data generation here
+        Plane plane(args->id);
 
         // decrement semaphore value by 1
         sembuf buf = {0, -1, 0};
@@ -99,10 +99,10 @@ void *planeThread(void *arg)
 
         // TODO: run plane tasks here
 
-        // TODO: plane waits for terminal to be free
-        // TODO: plane waits for passengers to board
-        // TODO: plane waits x time
-        // TODO: repeat until signal to exit
+        // INFO: plane waits for terminal to be free
+        // INFO: plane waits for passengers to board
+        // INFO: plane waits x time
+        // INFO: repeat until signal to exit
 
         pthread_exit(NULL);
 }
@@ -134,15 +134,19 @@ int baggageControl()
         }
 }
 
+void *secGateThread(void *arg)
+{
+}
+
 int secControl()
 {
         // INFO: each sec gate is a separate thread
         while (true)
         {
-                // TODO: routes passengers to 3 different gates from one queue
-                // TODO: max 2 passengers per gate (same gender)
-                // TODO: count passengers passing through each gate and when N passengers pass through, signal dispatcher
-                // TODO: repeat until queue is empty
+                // INFO: routes passengers to 3 different gates from one queue
+                // INFO: max 2 passengers per gate (same gender)
+                // INFO: count passengers passing through each gate and when N passengers pass through, signal dispatcher
+                // INFO: repeat until queue is empty
         }
 }
 
@@ -150,11 +154,11 @@ int dispatcher()
 {
         while (true)
         {
-                // TODO: signal plane to go to terminal
-                // TODO: signal plane to wait for passengers if queue is not empty
-                // TODO: signal gate to let passengers board
-                // TODO: signal plane when passengers are on board (on stairs)
-                // TODO: repeat until signal to exit
+                // INFO: signal plane to go to terminal
+                // INFO: signal plane to wait for passengers if queue is not empty
+                // INFO: signal gate to let passengers board
+                // INFO: signal plane when passengers are on board (on stairs)
+                // INFO: repeat until signal to exit
         }
 }
 
@@ -162,10 +166,10 @@ int gate()
 {
         while (true)
         {
-                // TODO: queue of passengers waiting to board
-                // TODO: wait for signal to let passengers board and open gate
-                // TODO: signal dispatcher when N passengers are pass the gate and close gate
-                // TODO: repeat until signal to exit
+                // INFO: queue of passengers waiting to board
+                // INFO: wait for signal to let passengers board and open gate
+                // INFO: signal dispatcher when N passengers are pass the gate and close gate
+                // INFO: repeat until signal to exit
         }
 }
 
@@ -173,9 +177,9 @@ int stairs()
 {
         while (true)
         {
-                // TODO: this is only a complication point for simulating communication delays between dispatcher and plane
-                // TODO: sends queue from gate to plane
-                // TODO: repeat until signal to exit
+                // INFO: this is only a complication point for simulating communication delays between dispatcher and plane
+                // INFO: sends queue from gate to plane
+                // INFO: repeat until signal to exit
         }
 }
 
@@ -218,7 +222,6 @@ void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max)
         }
 }
 
-// FIX: hangs after initPassengers
 int main(int argc, char* argv[])
 {
         // TODO: consider dynamic addition of semaphores based on number of passengers and planes
@@ -278,18 +281,17 @@ int main(int argc, char* argv[])
         {
                 syncedCout("Main process: " + std::to_string(getpid()) + " waiting for planes to init\n");
 
-                sembuf buf1 = {0, -1, 0};
-                if (semop(semIDsPlanes[0], &buf1, 1) == -1)
+                sembuf buf = {0, 0, 0};
+                if (semop(semIDsPlanes[0], &buf, 1) == -1)
                 {
                         perror("semop");
                         exit(1);
                 }
 
-                // increment semaphore 3 by 1 * numPlanes
+                buf = {0, 1, 0};
                 for (size_t i = 0; i < numPlanes; i++)
                 {
-                        sembuf buf2 = {0, 1, 0};
-                        if (semop(semIDsPlanes[1], &buf2, 1) == -1)
+                        if (semop(semIDsPlanes[1], &buf, 1) == -1)
                         {
                                 perror("semop");
                                 exit(1);
@@ -315,6 +317,7 @@ int main(int argc, char* argv[])
                                 exit(1);
                         }
                 }
+                syncedCout("All passengers finished\n");
                 for (pthread_t thread : planeThreads)
                 {
                         if (pthread_join(thread, NULL) != 0)
@@ -323,7 +326,7 @@ int main(int argc, char* argv[])
                                 exit(1);
                         }
                 }
-
+                syncedCout("All planes finished\n");
                 if (semctl(semIDsPlanes[0], 0, IPC_RMID) == -1)
                 {
                         perror("semctl");
