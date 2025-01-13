@@ -8,6 +8,7 @@
 #include <errno.h>
 #include <pthread.h>
 #include <mutex>
+#include <random>
 
 #include "plane.h"
 #include "passenger.h"
@@ -21,6 +22,7 @@ struct ThreadArgs
 std::mutex coutMutex;
 
 #define VERBOSE 1
+#define MAX_PASSENGER_DELAY 2 // in sec
 
 void syncedCout(std::string msg)
 {
@@ -36,21 +38,7 @@ void *passengerThread(void *arg)
 
         syncedCout("Passenger thread: " + std::to_string(args->id) + "\n");
 
-        // decrement semaphore value by 1
-        sembuf buf = {0, -1, 0};
-        if (semop(args->semIDs[0], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Semaphore decremented\nPassenger thread: " + std::to_string(args->id) + " waiting for semaphore 1\n");
-        // wait for semaphore 1 to be incremented by 1
-        if (semop(args->semIDs[1], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Passenger thread: " + std::to_string(args->id) + " released\n");
+        // TODO: data generation here
 
         // TODO: run passenger tasks here
 
@@ -61,7 +49,7 @@ void *passengerThread(void *arg)
         pthread_exit(NULL);
 }
 
-std::vector<pthread_t> initPassengers(size_t num, int *semIDs)
+std::vector<pthread_t> initPassengers(size_t num, int *semIDs, const std::vector<uint64_t> &delays)
 {
         std::vector<pthread_t> threads(num);
         for (size_t i = 0; i < num; i++)
@@ -76,7 +64,11 @@ std::vector<pthread_t> initPassengers(size_t num, int *semIDs)
                         perror("pthread_create");
                         exit(1);
                 }
+                syncedCout("Waiting for " + std::to_string(delays[i]) + " seconds\n");
+                sleep(delays[i]);
         }
+
+        syncedCout("All passengers created\n");
 
         return threads;
 }
@@ -86,6 +78,8 @@ void *planeThread(void *arg)
         ThreadArgs *args = (ThreadArgs *)arg;
 
         syncedCout("Plane thread: " + std::to_string(args->id) + "\n");
+
+        // TODO: data generation here
 
         // decrement semaphore value by 1
         sembuf buf = {0, -1, 0};
@@ -142,6 +136,7 @@ int baggageControl()
 
 int secControl()
 {
+        // INFO: each sec gate is a separate thread
         while (true)
         {
                 // TODO: routes passengers to 3 different gates from one queue
@@ -211,6 +206,18 @@ int eventHandler()
         }
 }
 
+void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max)
+{
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<uint64_t> dis(min, max);
+
+        for (size_t i = 0; i < vec.size(); i++)
+        {
+                vec[i] = dis(gen);
+        }
+}
+
 int main(int argc, char* argv[])
 {
         // TODO: consider dynamic addition of semaphores based on number of passengers and planes
@@ -237,26 +244,20 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        int semIDsPassengers[2];
         int semIDsPlanes[2];
 
-        semIDsPassengers[0] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
-        semIDsPassengers[1] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
         semIDsPlanes[0] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
         semIDsPlanes[1] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
 
-        if (semIDsPassengers[0] == -1 || semIDsPassengers[1] == -1 || semIDsPlanes[0] == -1 || semIDsPlanes[1] == -1)
+        if (semIDsPlanes[0] == -1 || semIDsPlanes[1] == -1)
         {
                 perror("semget");
                 exit(1);
         }
 
-        semctl(semIDsPassengers[0], 0, SETVAL, numPassengers);
-        semctl(semIDsPassengers[1], 0, SETVAL, 0);
         semctl(semIDsPlanes[0], 0, SETVAL, numPlanes);
         semctl(semIDsPlanes[1], 0, SETVAL, 0);
 
-        std::vector<pthread_t> passengerThreads = initPassengers(numPassengers, semIDsPassengers);
         std::vector<pthread_t> planeThreads = initPlanes(numPlanes, semIDsPlanes);
 
         fork();
@@ -274,37 +275,20 @@ int main(int argc, char* argv[])
 
         if (pid == pids[0])
         {
-                syncedCout("Main process: " + std::to_string(getpid()) + " waiting for passengers to init\n");
-                sembuf buf = {0, 0, 0};
-                if (semop(semIDsPassengers[0], &buf, 1) == -1)
-                {
-                        perror("semop");
-                        exit(1);
-                }
                 syncedCout("Main process: " + std::to_string(getpid()) + " waiting for planes to init\n");
 
-                if (semop(semIDsPlanes[0], &buf, 1) == -1)
+                sembuf buf1 = {0, -1, 0};
+                if (semop(semIDsPlanes[0], &buf1, 1) == -1)
                 {
                         perror("semop");
                         exit(1);
-                }
-
-                // increment semaphore 1 by 1 * numPassengers
-                for (size_t i = 0; i < numPassengers; i++)
-                {
-                        sembuf buf = {0, 1, 0};
-                        if (semop(semIDsPassengers[1], &buf, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
                 }
 
                 // increment semaphore 3 by 1 * numPlanes
                 for (size_t i = 0; i < numPlanes; i++)
                 {
-                        sembuf buf = {0, 1, 0};
-                        if (semop(semIDsPlanes[1], &buf, 1) == -1)
+                        sembuf buf2 = {0, 1, 0};
+                        if (semop(semIDsPlanes[1], &buf2, 1) == -1)
                         {
                                 perror("semop");
                                 exit(1);
@@ -315,6 +299,10 @@ int main(int argc, char* argv[])
 
                 // TODO: runtime
 
+                // TODO: move passenger spawning to another process
+                std::vector<uint64_t> delays(numPassengers);
+                genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
+                std::vector<pthread_t> passengerThreads = initPassengers(numPassengers, semIDsPlanes, delays);
 
                 // cleanup
 
@@ -335,16 +323,6 @@ int main(int argc, char* argv[])
                         }
                 }
 
-                if (semctl(semIDsPassengers[0], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
-                        exit(1);
-                }
-                if (semctl(semIDsPassengers[1], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
-                        exit(1);
-                }
                 if (semctl(semIDsPlanes[0], 0, IPC_RMID) == -1)
                 {
                         perror("semctl");
@@ -368,3 +346,5 @@ int main(int argc, char* argv[])
 
         return 0;
 }
+
+
