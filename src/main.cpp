@@ -64,7 +64,7 @@ void *passengerThread(void *arg)
 std::vector<pthread_t> initPassengers(size_t num, int *semIDs)
 {
         std::vector<pthread_t> threads(num);
-        for (size_t i = 0; i < num; ++i)
+        for (size_t i = 0; i < num; i++)
         {
                 ThreadArgs *args = new ThreadArgs;
                 args->id = i;
@@ -116,7 +116,7 @@ void *planeThread(void *arg)
 std::vector<pthread_t> initPlanes(size_t num, int *semIDs)
 {
         std::vector<pthread_t> threads(num);
-        for (size_t i = 0; i < num; ++i)
+        for (size_t i = 0; i < num; i++)
         {
                 ThreadArgs *args = new ThreadArgs;
                 args->id = i;
