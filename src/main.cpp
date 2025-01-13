@@ -218,6 +218,7 @@ void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max)
         }
 }
 
+// FIX: hangs after initPassengers
 int main(int argc, char* argv[])
 {
         // TODO: consider dynamic addition of semaphores based on number of passengers and planes
