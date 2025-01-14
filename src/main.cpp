@@ -13,6 +13,15 @@
 #include "plane.h"
 #include "passenger.h"
 
+// TODO: change ticks to ms
+// TODO: change passengers to processes
+// TODO: change planes to processes
+// TODO: change dispatcher, secControl, planesInit, passengersInit to separate binaries (or use prctl?)
+// TODO: change planes and passengers init to (planes/passengers)Control
+// TODO: move plane and passenger processes to separate binaries (or use prctl?)
+
+// INFO: can use fifo and semaphores for totality of communication
+
 struct ThreadArgs
 {
         uint64_t id;
