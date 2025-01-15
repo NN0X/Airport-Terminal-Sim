@@ -20,6 +20,7 @@
 // INFO: can use fifo and semaphores for totality of communication
 
 // FIX: there is an unknown process in the switch statement. find out what it is
+// FIX: check if all processes are cleaned up properly
 
 #define MAX_BAGGAGE_WEIGHT 200 // kg
 
