@@ -4,17 +4,20 @@
 #include <cstdint>
 
 #define PLANE_PLACES 100
-#define MIN_TIME 10
-#define MAX_TIME 1000
-#define MAX_ALLOWED_BAGGAGE_WEIGHT 75
+#define MIN_TIME 10 // in sec
+#define MAX_TIME 1000 // in sec
+#define MAX_ALLOWED_BAGGAGE_WEIGHT 75 // kg
+
+void planeProcess(size_t id, int semIDPlaneStairs);
+void initPlanes(size_t num, int semIDPlaneStairs);
 
 class Plane
 {
 private:
         uint64_t mID;
         uint64_t mMaxPassengers;
-        uint64_t mMaxBaggageWeight; // in arbitrary units
-        uint64_t mTimeOfCycle; // in arbitrary units
+        uint64_t mMaxBaggageWeight; // kg
+        uint64_t mTimeOfCycle; // sec
 
 public:
         Plane(uint64_t id);

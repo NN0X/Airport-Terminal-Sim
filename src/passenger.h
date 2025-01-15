@@ -4,10 +4,14 @@
 #define VIP_PROBABILITY 0.1
 #define MAX_BAGGAGE_WEIGHT 100
 #define DANGEROUS_BAGGAGE_PROBABILITY 0.05
+#define MAX_PASSENGER_DELAY 100 // in ms
 
 #include <cstdint>
 
 #include "plane.h"
+
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int semIDGate);
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int semIDGate);
 
 class Passenger
 {
@@ -15,7 +19,8 @@ public: // temporary
         uint64_t mID;
         bool mIsVip;
         bool mType; // each gate can have 2 same type passengers at the same time
-        uint64_t mBaggageWeight; // in arbitrary units
+        uint64_t mBaggageWeight; // kg
+        uint64_t mPersonalBaggageWeight; // kg
         bool mIsAggressive; // causes random negative events
         bool mHasDangerousBaggage; // causes event at security control
 
