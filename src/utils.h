@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include <sys/types.h>
+#include <signal.h>
 
 enum ProcessTypes
 {
@@ -24,7 +25,7 @@ enum Semaphores
 
 enum Signals
 {
-        BAGGAGE_CTRL_OPEN = 0, // INFO: opens baggage control [dispatcher -> baggageControl]
+        BAGGAGE_CTRL_OPEN = 35, // INFO: opens baggage control [dispatcher -> baggageControl]
         BAGGAGE_CTRL_CLOSE, // INFO: closes baggage control [dispatcher -> baggageControl]
         SEC_GATE_OPEN, // INFO: opens security gate [dispatcher -> secControl]
         SEC_GATE_CLOSE, // INFO: closes security gate [dispatcher -> secControl]
@@ -36,6 +37,7 @@ enum Signals
         PASSENGER_IS_VIP_SEC, // INFO: signals security control that passenger is VIP [passenger -> secControl]
         PASSENGER_IS_OVERWEIGHT, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
         PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [baggageControl -> passenger]
+        SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
 };
 
 enum EventSignals

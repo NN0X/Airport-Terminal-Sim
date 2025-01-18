@@ -15,7 +15,7 @@
 std::mutex coutMutex;
 
 #define VERBOSE 1
-#define SEM_INIT_VALUE 1
+#define SEM_INIT_VALUE 0
 
 std::vector<int> initSemaphores(int permissions)
 {
@@ -79,8 +79,7 @@ void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<st
 
         for (size_t i = offset; i < n + offset; i++)
         {
-                fork();
-                pids[i] = getpid();
+                pids[i] = fork();
                 if (getpid() == pids[MAIN])
                 {
                         continue;
@@ -90,6 +89,7 @@ void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<st
                         perror("fork");
                         exit(1);
                 }
+                pids[i] = getpid();
                 if (pids[i] != 0)
                 {
                         if (names[i - offset] != "" && prctl(PR_SET_NAME, names[i - offset].c_str()) == -1)

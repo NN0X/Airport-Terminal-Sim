@@ -7,11 +7,18 @@
 #define MAX_PASSENGER_DELAY 100 // in ms
 
 #include <cstdint>
+#include <sys/types.h>
 
 #include "plane.h"
 
 void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int semIDGate);
 void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int semIDGate);
+
+struct BaggageInfo
+{
+        pid_t mPid;
+        uint64_t mBaggageWeight;
+};
 
 class Passenger
 {

@@ -11,6 +11,9 @@
 #include <mutex>
 #include <random>
 #include <string>
+#include <fcntl.h> // O_RDONLY, O_WRONLY
+#include <sys/stat.h> // mkfifo
+#include <signal.h>
 
 #include "plane.h"
 #include "passenger.h"
@@ -19,18 +22,97 @@
 
 // INFO: can use fifo and semaphores for totality of communication
 
-// FIX: there is an unknown process in the switch statement. find out what it is
-// FIX: check if all processes are cleaned up properly
+// TODO: send sigterm to all processes not just baggage control
+// TODO: cleanup baggage control and passenger
 
-#define MAX_BAGGAGE_WEIGHT 200 // kg
+void baggageControlSignalHandler(int signum)
+{
+        switch (signum)
+        {
+                case SIGNAL_OK:
+                        syncedCout("Baggage control: Received signal OK\n");
+                        break;
+                case SIGTERM:
+                        syncedCout("Baggage control: Received signal SIGTERM\n");
+                        exit(0);
+                default:
+                        syncedCout("Baggage control: Received unknown signal\n");
+                        break;
+        }
+}
 
 int baggageControl(int semID)
 {
         // INFO: check if passenger baggage weight is within limits
         // INFO: if not, signal event handler
         // INFO: repeat until signal to exit
+
+        // check if fifo exists
+        if (access("baggageControlFIFO", F_OK) == -1)
+        {
+                if (mkfifo("baggageControlFIFO", 0666) == -1)
+                {
+                        perror("mkfifo");
+                        exit(1);
+                }
+        }
+
+        // set signal handler
+        struct sigaction sa;
+        sa.sa_handler = baggageControlSignalHandler;
+        sigemptyset(&sa.sa_mask);
+        sa.sa_flags = 0;
+        if (sigaction(SIGNAL_OK, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGTERM, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+
         while (true)
         {
+                // increment semaphore
+                syncedCout("Baggage control: incrementing semaphore\n");
+                sembuf inc = {0, 1, 0};
+                if (semop(semID, &inc, 1) == -1)
+                {
+                        perror("semop");
+                        exit(1);
+                }
+                int fd = open("baggageControlFIFO", O_RDONLY);
+                if (fd == -1)
+                {
+                        perror("open");
+                        exit(1);
+                }
+
+                // read from fifo the passenger pid and baggage weight
+                BaggageInfo baggageInfo;
+                if (read(fd, &baggageInfo, sizeof(baggageInfo)) == -1)
+                {
+                        perror("read");
+                        exit(1);
+                }
+                close(fd);
+                syncedCout("Baggage control: received baggage info\n");
+
+                if (baggageInfo.mBaggageWeight > MAX_ALLOWED_BAGGAGE_WEIGHT)
+                {
+                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is overweight\n");
+                        kill(baggageInfo.mPid, PASSENGER_IS_OVERWEIGHT);
+                        // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
+                        // and then event handler sending signal to passenger
+                }
+                else
+                {
+                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is not overweight\n");
+                        // send empty signal to unblock passenger
+                        kill(baggageInfo.mPid, SIGNAL_OK);
+                }
         }
 }
 
@@ -108,8 +190,11 @@ int main(int argc, char* argv[])
         std::vector<std::string> names = {"baggageControl", "secControl", "dispatcher", "stairs"};
         createSubprocesses(4, pids, names);
 
-        if (getpid() == pids[MAIN])
+        pid_t currPid = getpid();
+
+        if (currPid == pids[MAIN])
         {
+                std::cout << "Main process\n";
                 // TODO: runtime
 
                 std::vector<uint64_t> delays(numPassengers);
@@ -123,66 +208,54 @@ int main(int argc, char* argv[])
 
                 while (true)
                 {
-                        // INFO: wait for all processes to finish
-
+                        // INFO: wait for signal to exit
                         if (getc(stdin) == 'q')
                         {
+                                for (size_t i = 1; i < pids.size(); i++)
+                                {
+                                        kill(pids[i], SIGTERM);
+                                }
                                 break;
                         }
                 }
-
                 // INFO: cleanup
-                // INFO: exit
 
+                // delete semaphores
+                for (size_t i = 0; i < semIDs.size(); i++)
+                {
+                        if (semctl(semIDs[i], 0, IPC_RMID) == -1)
+                        {
+                                perror("semctl");
+                                exit(1);
+                        }
+                }
+                // delete fifo
+                if (unlink("baggageControlFIFO") == -1)
+                {
+                        perror("unlink");
+                        exit(1);
+                }
+                vCout("Main process: Exiting\n");
         }
-
-        switch (getpid())
-        {
-                case MAIN:
-                        break;
-                case BAGGAGE_CONTROL:
-                        baggageControl(semIDs[BAGGAGE_CTRL]);
-                        break;
-                case SEC_CONTROL:
-                        secControl(semIDs[SEC_GATE]);
-                        break;
-                case DISPATCHER:
-                        dispatcher();
-                        break;
-                case STAIRS:
-                        stairs(semIDs[GATE], semIDs[PLANE_STAIRS]);
-                        break;
-                default:
-                        std::cerr << "Unknown process\n";
-                        break;
-        }
-
-
-        // debug process identification
-        pid_t pid = getpid();
-        if (pid == pids[MAIN])
-        {
-                std::cout << "Main process\n";
-        }
-        else if (pid == pids[BAGGAGE_CONTROL])
+        else if (currPid == pids[BAGGAGE_CONTROL])
         {
                 std::cout << "Baggage control process\n";
+                baggageControl(semIDs[BAGGAGE_CTRL]);
         }
-        else if (pid == pids[SEC_CONTROL])
+        else if (currPid == pids[SEC_CONTROL])
         {
                 std::cout << "Security control process\n";
+                secControl(semIDs[SEC_GATE]);
         }
-        else if (pid == pids[DISPATCHER])
+        else if (currPid == pids[DISPATCHER])
         {
                 std::cout << "Dispatcher process\n";
+                dispatcher();
         }
-        else if (pid == pids[STAIRS])
+        else if (currPid == pids[STAIRS])
         {
                 std::cout << "Stairs process\n";
-        }
-        else if (pid == pids[STAIRS + 1])
-        {
-                std::cout << "Spawn passengers process\n";
+                stairs(semIDs[GATE], semIDs[PLANE_STAIRS]);
         }
         else
         {
