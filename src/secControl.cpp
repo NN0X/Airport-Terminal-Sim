@@ -107,6 +107,7 @@ struct ReceivePassengerArgs
 {
         std::vector<TypeInfo> *typeInfos;
         int semID;
+        int semIDReceive;
 };
 
 void *receivePassengerThread(void *arg) // receives pid and type from p + semID from s
@@ -127,11 +128,21 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
         ReceivePassengerArgs *args = (ReceivePassengerArgs *)arg;
         std::vector<TypeInfo> &typeInfos = *args->typeInfos;
 
+        int semID = args->semID;
+        int semIDReceive = args->semIDReceive;
+
         while (true)
         {
                 syncedCout("Receive passengers: waiting for passengers\n");
 
-                int semID = args->semID;
+                // decrement semaphore
+                sembuf dec = {0, -1, 0};
+                if (semop(semIDReceive, &dec, 1) == -1)
+                {
+                        perror("semop");
+                        exit(1);
+                }
+                syncedCout("Receive passengers: passenger entered security\n");
 
                 int fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_RDONLY);
                 if (fd == -1)
@@ -146,6 +157,7 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
                         perror("read");
                         exit(1);
                 }
+                close(fd);
                 // increment semaphore
                 typeInfos.push_back(typeInfo);
                 sembuf inc = {0, 1, 0};
@@ -158,7 +170,6 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
                 syncedCout("Waiting for " + std::to_string(SEC_GATE_DELAY) + " ms\n", BLUE);
                 usleep(SEC_GATE_DELAY * 1000);
         }
-        close(fd);
 }
 
 PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std::vector<GateInfo> &gateInfos)
@@ -192,7 +203,7 @@ PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std:
         return pair;
 }
 
-int secControl(int semID)
+int secControl(int semID, int semIDReceive)
 {
         // INFO: init phase
 
@@ -242,7 +253,7 @@ int secControl(int semID)
 
         std::vector<TypeInfo> typeInfos;
         typeInfos.reserve(100);
-        ReceivePassengerArgs typeInfosArgs = {&typeInfos, semID};
+        ReceivePassengerArgs typeInfosArgs = {&typeInfos, semID, semIDReceive};
         pthread_t receivePassenger;
         if (pthread_create(&receivePassenger, NULL, receivePassengerThread, (void *)&typeInfosArgs) != 0)
         {

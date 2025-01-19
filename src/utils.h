@@ -58,6 +58,7 @@ enum Semaphores
 {
         BAGGAGE_CTRL = 0, // INFO: tells passenger to enter baggage control [baggageControl -> passenger]
         SEC_RECEIVE, // INFO: tells secControl that passenger is waiting [secControlReceive -> secControl]
+        SEC_RECEIVE_PASSENGER // INFO: tells secControlReceive that passenger is waiting [passenger -> secControlReceive]
 };
 
 enum Signals
