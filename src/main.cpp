@@ -24,6 +24,9 @@
 
 // INFO: can use fifo and semaphores for totality of communication
 
+// TODO: fix secGate to allow two passengers at a time if same type
+// TODO: add vip passengers to secControl
+
 // TODO: send sigterm to all processes not just baggage control
 // TODO: cleanup baggage control and passenger
 
