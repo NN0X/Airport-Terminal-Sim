@@ -32,24 +32,6 @@ void secControlSignalHandler(int signum)
         }
 }
 
-// p = passenger
-// b = baggage control
-// s = security control
-// g = gate
-// st = stairs
-//
-// p released from b
-// p sends pid and type to s [continuous and async] - receivePassengerThread
-// s selects first p that fits free g [g occupancy == 0 or g type == p type and g occupancy < 2]
-// s sends gateNum to p
-// s increments g occupancy and if g occupancy == 0, changes g type
-// p sends pid and isBaggageDangerous to g
-// g checks if p baggage is dangerous
-// g signals s if baggage is dangerous
-// g decrements g occupancy
-// p waits for st
-// repeat
-
 struct GateInfo
 {
         int num;
@@ -110,10 +92,8 @@ struct ReceivePassengerArgs
         int semIDReceive;
 };
 
-void *receivePassengerThread(void *arg) // receives pid and type from p + semID from s
+void *receivePassengerThread(void *arg)
 {
-        // get typeInfo from passengers
-
         syncedCout("Receive passengers thread\n");
 
         if (access(fifoNames[SEC_RECEIVE_FIFO].c_str(), F_OK) == -1)
@@ -131,6 +111,13 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
         int semID = args->semID;
         int semIDReceive = args->semIDReceive;
 
+        int fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_RDONLY);
+        if (fd == -1)
+        {
+                perror("open");
+                exit(1);
+        }
+
         while (true)
         {
                 syncedCout("Receive passengers: waiting for passengers\n");
@@ -144,20 +131,12 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
                 }
                 syncedCout("Receive passengers: passenger entered security\n");
 
-                int fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_RDONLY);
-                if (fd == -1)
-                {
-                        perror("open");
-                        exit(1);
-                }
-
                 TypeInfo typeInfo;
                 if (read(fd, &typeInfo, sizeof(typeInfo)) == -1)
                 {
                         perror("read");
                         exit(1);
                 }
-                close(fd);
                 // increment semaphore
                 typeInfos.push_back(typeInfo);
                 sembuf inc = {0, 1, 0};
@@ -170,15 +149,11 @@ void *receivePassengerThread(void *arg) // receives pid and type from p + semID 
                 syncedCout("Waiting for " + std::to_string(SEC_GATE_DELAY) + " ms\n", BLUE);
                 usleep(SEC_GATE_DELAY * 1000);
         }
+        close(fd);
 }
 
 PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std::vector<GateInfo> &gateInfos)
 {
-        // check like this:
-        // check if typeInfos[0] fits in any gate
-        // if not, check if typeInfos[1] fits in any gate
-        // if not, return
-        // if yes, return pair
         PassengerGatePair pair;
         for (size_t i = 0; i < 3; i++)
         {
@@ -205,8 +180,6 @@ PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std:
 
 int secControl(int semID, int semIDReceive)
 {
-        // INFO: init phase
-
         syncedCout("Security control process\n");
         if (access(fifoNames[SEC_CONTROL_FIFO].c_str(), F_OK) == -1)
         {
@@ -217,7 +190,6 @@ int secControl(int semID, int semIDReceive)
                 }
         }
 
-        // INFO: set signal handler
         struct sigaction sa;
         sa.sa_handler = secControlSignalHandler;
         sigemptyset(&sa.sa_mask);
@@ -233,7 +205,6 @@ int secControl(int semID, int semIDReceive)
                 exit(1);
         }
 
-        // INFO: create thread for each gate
         std::vector<GateInfo> gateInfos(3);
         for (size_t i = 0; i < 3; i++)
         {
@@ -260,8 +231,6 @@ int secControl(int semID, int semIDReceive)
                 perror("pthread_create");
                 exit(1);
         }
-
-        // INFO: runtime
 
         PassengerGatePair passengerGatePair;
         while (true)
@@ -306,9 +275,6 @@ int secControl(int semID, int semIDReceive)
         }
         syncedCout("Security control: Exiting\n");
 
-        // INFO: cleanup
-
-        // INFO: join threads
         for (size_t i = 0; i < 3; i++)
         {
                 if (pthread_join(gateThreads[i], NULL) != 0)
