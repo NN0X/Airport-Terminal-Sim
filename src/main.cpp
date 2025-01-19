@@ -24,6 +24,9 @@
 
 // INFO: can use fifo and semaphores for totality of communication
 
+// TODO: fix secGate to allow two passengers at a time if same type
+// TODO: add vip passengers to secControl
+
 // TODO: send sigterm to all processes not just baggage control
 // TODO: cleanup baggage control and passenger
 
@@ -98,7 +101,7 @@ int main(int argc, char* argv[])
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != pids[MAIN])
                 {
-                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], 0, 0); // WARNING: 0 is a temporary solution
+                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_RECEIVE_PASSENGER], 0); // WARNING: 0 is a temporary solution
                 }
 
                 while (true)
@@ -140,7 +143,7 @@ int main(int argc, char* argv[])
         else if (currPid == pids[SEC_CONTROL])
         {
                 std::cout << "Security control process\n";
-                secControl(semIDs[SEC_RECEIVE]);
+                secControl(semIDs[SEC_RECEIVE], semIDs[SEC_RECEIVE_PASSENGER]);
         }
         else if (currPid == pids[DISPATCHER])
         {

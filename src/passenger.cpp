@@ -34,7 +34,7 @@ void passengerSignalHandler(int signum)
 }
 
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int semIDGate)
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int semIDGate)
 {
         syncedCout("Passenger process: " + std::to_string(id) + "\n");
 
@@ -97,6 +97,14 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int sem
         typeInfo.mPid = getpid();
         typeInfo.mType = passenger.getType();
         syncedCout("Passenger: waiting for security control\n");
+        // increment semaphore
+        sembuf inc = {0, 1, 0};
+        if (semop(semIDSecReceive, &inc, 1) == -1)
+        {
+                perror("semop");
+                exit(1);
+        }
+
         // send pid and type to secControl receive fifo
         fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_WRONLY);
         if (fd == -1)
