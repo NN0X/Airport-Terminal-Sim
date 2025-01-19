@@ -8,6 +8,7 @@
 
 #include <cstdint>
 #include <sys/types.h>
+#include <vector>
 
 #include "plane.h"
 
@@ -18,6 +19,24 @@ struct BaggageInfo
 {
         pid_t mPid;
         uint64_t mBaggageWeight;
+};
+
+struct PassengerGatePair
+{
+        int pid;
+        int gateNum;
+};
+
+struct TypeInfo
+{
+        pid_t mPid;
+        bool mType;
+};
+
+struct BaggageDangerInfo
+{
+        pid_t mPid;
+        bool mHasDangerousBaggage;
 };
 
 class Passenger

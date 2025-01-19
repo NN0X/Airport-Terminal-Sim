@@ -5,6 +5,28 @@
 #include <string>
 #include <sys/types.h>
 #include <signal.h>
+#include <cstdint>
+
+enum Colors
+{
+        NONE = 0,
+        RED,
+        GREEN,
+        YELLOW,
+        BLUE,
+        MAGENTA,
+        CYAN,
+};
+
+const std::string colors[] = {
+        "\033[0m",
+        "\033[31m",
+        "\033[32m",
+        "\033[33m",
+        "\033[34m",
+        "\033[35m",
+        "\033[36m",
+};
 
 enum ProcessTypes
 {
@@ -15,34 +37,40 @@ enum ProcessTypes
         STAIRS,
 };
 
+enum FIFOs
+{
+        BAGGAGE_CONTROL_FIFO = 0,
+        SEC_CONTROL_FIFO,
+        SEC_GATE_FIFO,
+        SEC_RECEIVE_FIFO = 5, // skip SEC_GATE2_FIFO and SEC_GATE3_FIFO
+};
+
+const std::string fifoNames[] = {
+        "baggageControlFIFO",
+        "secControlFIFO",
+        "secGate1FIFO",
+        "secGate2FIFO",
+        "secGate3FIFO",
+        "secReceiveFIFO",
+};
+
 enum Semaphores
 {
         BAGGAGE_CTRL = 0, // INFO: tells passenger to enter baggage control [baggageControl -> passenger]
-        SEC_GATE, // INFO: tells passenger to enter security control [secControl -> passenger]
-        GATE, // INFO: tells passengers enter stairs [stairs -> passenger]
-        PLANE_STAIRS, // INFO: tells plane to wait for passengers [stairs -> plane]
+        SEC_RECEIVE, // INFO: tells secControl that passenger is waiting [secControlReceive -> secControl]
 };
 
 enum Signals
 {
-        BAGGAGE_CTRL_OPEN = 35, // INFO: opens baggage control [dispatcher -> baggageControl]
-        BAGGAGE_CTRL_CLOSE, // INFO: closes baggage control [dispatcher -> baggageControl]
-        SEC_GATE_OPEN, // INFO: opens security gate [dispatcher -> secControl]
-        SEC_GATE_CLOSE, // INFO: closes security gate [dispatcher -> secControl]
-        PLANE_GATE_OPEN, // INFO: opens plane gate [dispatcher -> stairs]
-        PLANE_GATE_CLOSE, // INFO: closes plane gate [dispatcher -> stairs]
-        PLANE_READY, // INFO: plane is ready to board passengers [plane -> dispatcher]
-        PLANE_DEPART, // INFO: signals plane to depart [dispatcher -> plane]
-        PLANE_FULL, // INFO: signals plane that it is full [plane -> dispatcher]
-        PASSENGER_IS_VIP_SEC, // INFO: signals security control that passenger is VIP [passenger -> secControl]
-        PASSENGER_IS_OVERWEIGHT, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
-        PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [baggageControl -> passenger]
+        PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
+        PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
+        SEC_CONTROL_PASSENGER_WAITING, // INFO: signals secControl that passenger is waiting [secControlReceive -> secControl]
         SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
 };
 
 enum EventSignals
 {
-        TRIGGER_AGRESSIVE = 0, // INFO: signals event handler that passenger is aggressive [passenger -> eventHandler]
+        TRIGGER_AGRESSIVE = SIGNAL_OK + 1, // INFO: signals event handler that passenger is aggressive [passenger -> eventHandler]
         TRIGGER_DANGEROUS, // INFO: signals event handler that passenger has dangerous baggage [secControl -> eventHandler]
         TRIGGER_OVERWEIGHT, // INFO: signals event handler that passenger is overweight [baggageControl -> eventHandler]
 
@@ -51,8 +79,8 @@ enum EventSignals
 
 std::vector<int> initSemaphores(int permissions);
 void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max);
-void vCout(const std::string &msg);
-void syncedCout(const std::string &msg);
+void vCout(const std::string &msg, int color = 0);
+void syncedCout(const std::string &msg, int color = 0);
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names);
 
 #endif // UTILS_H

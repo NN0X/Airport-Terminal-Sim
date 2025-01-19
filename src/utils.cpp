@@ -17,9 +17,11 @@ std::mutex coutMutex;
 #define VERBOSE 1
 #define SEM_INIT_VALUE 0
 
+#define NUM_SEMAPHORES 1
+
 std::vector<int> initSemaphores(int permissions)
 {
-        std::vector<int> ids(PLANE_STAIRS + 1);
+        std::vector<int> ids(NUM_SEMAPHORES);
 
         std::vector<unsigned int> values(ids.size(), SEM_INIT_VALUE);
 
@@ -53,17 +55,19 @@ void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max)
         }
 }
 
-void vCout(const std::string &msg)
+void vCout(const std::string &msg, int color)
 {
         if (VERBOSE == 0)
                 return;
+        std::cout << colors[color];
         std::cout << msg;
+        std::cout << colors[NONE];
 }
 
-void syncedCout(const std::string &msg)
+void syncedCout(const std::string &msg, int color)
 {
         std::lock_guard<std::mutex> lock(coutMutex);
-        vCout(msg);
+        vCout(msg, color);
 }
 
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names)

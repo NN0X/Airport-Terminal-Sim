@@ -24,6 +24,9 @@ void passengerSignalHandler(int signum)
                 case PASSENGER_IS_OVERWEIGHT:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n");
                         exit(0);
+                case PASSENGER_IS_DANGEROUS:
+                        syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n");
+                        exit(0);
                 default:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received unknown signal\n");
                         break;
@@ -55,6 +58,8 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int sem
 
         // TODO: run passenger tasks here
 
+        // INFO: passenger goes through baggage control
+
         // decrement semaphore
         syncedCout("Passenger: decrementing semaphore\n");
         sembuf dec = {0, -1, 0};
@@ -67,7 +72,7 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int sem
         BaggageInfo baggageInfo;
         baggageInfo.mPid = getpid();
         baggageInfo.mBaggageWeight = passenger.getBaggageWeight();
-        int fd = open("baggageControlFIFO", O_WRONLY);
+        int fd = open(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), O_WRONLY);
         if (fd == -1)
         {
                 perror("open");
@@ -80,9 +85,78 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int sem
         }
         close(fd);
 
+        syncedCout("Passenger: waiting for signal from baggage control\n");
+        pause(); // wait for signal from baggage control
+
         syncedCout("Passenger released from baggage control\n");
 
-        // INFO: passenger waits for security control to be free
+        // INFO: passenger goes through security control
+
+        PassengerGatePair passengerGatePair;
+        TypeInfo typeInfo;
+        typeInfo.mPid = getpid();
+        typeInfo.mType = passenger.getType();
+        syncedCout("Passenger: waiting for security control\n");
+        // send pid and type to secControl receive fifo
+        fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_WRONLY);
+        if (fd == -1)
+        {
+                perror("open");
+                exit(1);
+        }
+        if (write(fd, &typeInfo, sizeof(typeInfo)) == -1)
+        {
+                perror("write");
+                exit(1);
+        }
+        close(fd);
+
+        // wait for signal from secControl
+        syncedCout("Passenger: waiting for signal from security control\n");
+        pause();
+
+        // read from secControl fifo
+        fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_RDONLY);
+        if (fd == -1)
+        {
+                perror("open");
+                exit(1);
+        }
+        if (read(fd, &passengerGatePair, sizeof(passengerGatePair)) == -1)
+        {
+                perror("read");
+                exit(1);
+        }
+        close(fd);
+        if (passengerGatePair.pid != getpid())
+        {
+                syncedCout("Passenger: received wrong pid\n");
+                exit(1);
+        }
+
+        syncedCout("Passenger: entering security gate " + std::to_string(passengerGatePair.gateNum) + "\n");
+        BaggageDangerInfo baggageDangerInfo;
+        baggageDangerInfo.mPid = getpid();
+        baggageDangerInfo.mHasDangerousBaggage = passenger.getHasDangerousBaggage();
+        fd = open(fifoNames[SEC_GATE_FIFO + passengerGatePair.gateNum].c_str(), O_WRONLY);
+        if (fd == -1)
+        {
+                perror("open");
+                exit(1);
+        }
+        if (write(fd, &baggageDangerInfo, sizeof(baggageDangerInfo)) == -1)
+        {
+                perror("write");
+                exit(1);
+        }
+        close(fd);
+
+        syncedCout("Passenger: waiting for signal from security gate\n");
+        pause(); // wait for signal from secControl
+
+        syncedCout("Passenger released from security control\n");
+
+
         // INFO: passenger waits for plane to be ready
         // INFO: passenger thread ends
 }
