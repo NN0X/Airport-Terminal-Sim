@@ -11,7 +11,9 @@
 #include "passenger.h"
 #include "utils.h"
 
-#define SEC_GATE_DELAY 1000 // in ms
+#define SEC_RECEIVER_DELAY 100 // in ms
+#define SEC_GATE_MAX_DELAY 500 // in ms
+#define SEC_GATE_MIN_DELAY 200 // in ms
 
 void secControlSignalHandler(int signum)
 {
@@ -37,6 +39,7 @@ struct GateInfo
         int num;
         int occupancy;
         bool type;
+        int semID;
 };
 
 void *secGateThread(void *arg)
@@ -57,6 +60,13 @@ void *secGateThread(void *arg)
         while (true)
         {
                 syncedCout("Gate " + std::to_string(gateInfo->num) + ": waiting for passenger\n");
+                // increment semaphore
+                sembuf inc = {0, 1, 0};
+                if (semop(gateInfo->semID, &inc, 1) == -1)
+                {
+                        perror("semop");
+                        exit(1);
+                }
                 int fd = open(fifoNames[SEC_GATE_FIFO + gateInfo->num].c_str(), O_RDONLY);
                 if (fd == -1)
                 {
@@ -81,6 +91,10 @@ void *secGateThread(void *arg)
                         kill(baggageDangerInfo.mPid, SIGNAL_OK);
                         gateInfo->occupancy--;
                 }
+                std::vector<uint64_t> delays(1);
+                genRandomVector(delays, SEC_GATE_MIN_DELAY, SEC_GATE_MAX_DELAY);
+                syncedCout("Waiting for " + std::to_string(delays[0]) + " ms\n", BLUE);
+                usleep(delays[0] * 1000);
         }
 
 }
@@ -146,8 +160,8 @@ void *receivePassengerThread(void *arg)
                         exit(1);
                 }
                 syncedCout("Receive passengers: passenger " + std::to_string(typeInfo.mPid) + " received\n", RED);
-                syncedCout("Waiting for " + std::to_string(SEC_GATE_DELAY) + " ms\n", BLUE);
-                usleep(SEC_GATE_DELAY * 1000);
+                syncedCout("Waiting for " + std::to_string(SEC_RECEIVER_DELAY) + " ms\n", BLUE);
+                usleep(SEC_RECEIVER_DELAY * 1000);
         }
         close(fd);
 }
@@ -178,7 +192,7 @@ PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std:
         return pair;
 }
 
-int secControl(int semID, int semIDReceive)
+int secControl(int semID, int semIDReceive, int semIDGate1, int semIDGate2, int semIDGate3)
 {
         syncedCout("Security control process\n");
         if (access(fifoNames[SEC_CONTROL_FIFO].c_str(), F_OK) == -1)
@@ -212,6 +226,9 @@ int secControl(int semID, int semIDReceive)
                 gateInfos[i].occupancy = 0;
                 gateInfos[i].type = false;
         }
+        gateInfos[0].semID = semIDGate1;
+        gateInfos[1].semID = semIDGate2;
+        gateInfos[2].semID = semIDGate3;
         pthread_t gateThreads[3];
         for (size_t i = 0; i < 3; i++)
         {

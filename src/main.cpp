@@ -24,7 +24,7 @@
 
 // INFO: can use fifo and semaphores for totality of communication
 
-// TODO: fix secGate to allow two passengers at a time if same type
+// TODO: fix secControl for bigger number of passengers
 // TODO: add vip passengers to secControl
 
 // TODO: send sigterm to all processes not just baggage control
@@ -57,10 +57,6 @@ int stairs(int semIDGate, int semIDPlaneStairs)
 
 int main(int argc, char* argv[])
 {
-        // TODO: consider dynamic addition of semaphores based on number of passengers and planes
-        // TODO: check system limits for threads
-        // TODO: consider rewriting to std threads
-
         if (argc != 3)
         {
                 std::cerr << "Usage: " << argv[0] << " <numPassengers> <numPlanes>\n";
@@ -101,7 +97,7 @@ int main(int argc, char* argv[])
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != pids[MAIN])
                 {
-                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_RECEIVE_PASSENGER], 0); // WARNING: 0 is a temporary solution
+                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_RECEIVE_PASSENGER], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2], semIDs[SEC_GATE_3]);
                 }
 
                 while (true)
@@ -143,7 +139,7 @@ int main(int argc, char* argv[])
         else if (currPid == pids[SEC_CONTROL])
         {
                 std::cout << "Security control process\n";
-                secControl(semIDs[SEC_RECEIVE], semIDs[SEC_RECEIVE_PASSENGER]);
+                secControl(semIDs[SEC_RECEIVE], semIDs[SEC_RECEIVE_PASSENGER], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2], semIDs[SEC_GATE_3]);
         }
         else if (currPid == pids[DISPATCHER])
         {

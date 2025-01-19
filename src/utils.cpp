@@ -17,7 +17,7 @@ std::mutex coutMutex;
 #define VERBOSE 1
 #define SEM_INIT_VALUE 0
 
-#define NUM_SEMAPHORES 3
+#define NUM_SEMAPHORES 6
 
 std::vector<int> initSemaphores(int permissions)
 {
