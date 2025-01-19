@@ -39,7 +39,8 @@ struct GateInfo
         int num;
         int occupancy;
         bool type;
-        int semID;
+        int semID1;
+        int semID2;
 };
 
 void *secGateThread(void *arg)
@@ -62,11 +63,21 @@ void *secGateThread(void *arg)
                 syncedCout("Gate " + std::to_string(gateInfo->num) + ": waiting for passenger\n");
                 // increment semaphore
                 sembuf inc = {0, 1, 0};
-                if (semop(gateInfo->semID, &inc, 1) == -1)
+                if (semop(gateInfo->semID1, &inc, 1) == -1)
                 {
                         perror("semop");
                         exit(1);
                 }
+
+                sembuf dec = {0, -1, 0};
+                if (semop(gateInfo->semID2, &dec, 1) == -1)
+                {
+                        perror("semop");
+                        exit(1);
+                }
+
+                syncedCout("Gate " + std::to_string(gateInfo->num) + ": passenger entered\n");
+
                 int fd = open(fifoNames[SEC_GATE_FIFO + gateInfo->num].c_str(), O_RDONLY);
                 if (fd == -1)
                 {
@@ -84,6 +95,7 @@ void *secGateThread(void *arg)
                 {
                         syncedCout("Gate " + std::to_string(gateInfo->num) + ": Passenger " + std::to_string(baggageDangerInfo.mPid) + " has dangerous baggage\n");
                         kill(baggageDangerInfo.mPid, PASSENGER_IS_DANGEROUS);
+                        gateInfo->occupancy--;
                 }
                 else
                 {
@@ -192,7 +204,7 @@ PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std:
         return pair;
 }
 
-int secControl(int semID, int semIDReceive, int semIDGate1, int semIDGate2, int semIDGate3)
+int secControl(int semID, int semIDReceive, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
 {
         syncedCout("Security control process\n");
         if (access(fifoNames[SEC_CONTROL_FIFO].c_str(), F_OK) == -1)
@@ -226,9 +238,12 @@ int secControl(int semID, int semIDReceive, int semIDGate1, int semIDGate2, int 
                 gateInfos[i].occupancy = 0;
                 gateInfos[i].type = false;
         }
-        gateInfos[0].semID = semIDGate1;
-        gateInfos[1].semID = semIDGate2;
-        gateInfos[2].semID = semIDGate3;
+        gateInfos[0].semID1 = semIDsGate1[0];
+        gateInfos[1].semID1 = semIDsGate2[0];
+        gateInfos[2].semID1 = semIDsGate3[0];
+        gateInfos[0].semID2 = semIDsGate1[1];
+        gateInfos[1].semID2 = semIDsGate2[1];
+        gateInfos[2].semID2 = semIDsGate3[1];
         pthread_t gateThreads[3];
         for (size_t i = 0; i < 3; i++)
         {
@@ -266,6 +281,11 @@ int secControl(int semID, int semIDReceive, int semIDGate1, int semIDGate2, int 
                 {
                         continue;
                 }
+                if(gateInfos[passengerGatePair.gateNum].occupancy == 0)
+                {
+                        gateInfos[passengerGatePair.gateNum].type = typeInfos[0].mType;
+                }
+                gateInfos[passengerGatePair.gateNum].occupancy++;
                 // signal passenger to read from fifo
                 syncedCout("Security control: signaling passenger " + std::to_string(passengerGatePair.pid) + "\n");
                 kill(passengerGatePair.pid, SIGNAL_OK);
@@ -283,12 +303,6 @@ int secControl(int semID, int semIDReceive, int semIDGate1, int semIDGate2, int 
                         exit(1);
                 }
                 close(fd);
-
-                if(gateInfos[passengerGatePair.gateNum].occupancy == 0)
-                {
-                        gateInfos[passengerGatePair.gateNum].type = typeInfos[0].mType;
-                }
-                gateInfos[passengerGatePair.gateNum].occupancy++;
         }
         syncedCout("Security control: Exiting\n");
 

@@ -34,7 +34,7 @@ void passengerSignalHandler(int signum)
 }
 
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int semIDGate1, int semIDGate2, int semIDGate3)
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
 {
         syncedCout("Passenger process: " + std::to_string(id) + "\n");
 
@@ -145,24 +145,42 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int 
         switch (passengerGatePair.gateNum)
         {
                 case 0:
-                        syncedCout("Passenger: entering security gate 1\n");
-                        if (semop(semIDGate1, &dec, 1) == -1)
+                        syncedCout("Passenger: entering security gate 0\n");
+                        if (semop(semIDsGate1[0], &dec, 1) == -1)
+                        {
+                                perror("semop");
+                                exit(1);
+                        }
+                        syncedCout("Passenger: waiting for security gate 0\n");
+                        if (semop(semIDsGate1[1], &inc, 1) == -1)
                         {
                                 perror("semop");
                                 exit(1);
                         }
                         break;
                 case 1:
-                        syncedCout("Passenger: entering security gate 2\n");
-                        if (semop(semIDGate2, &dec, 1) == -1)
+                        syncedCout("Passenger: entering security gate 1\n");
+                        if (semop(semIDsGate2[0], &dec, 1) == -1)
+                        {
+                                perror("semop");
+                                exit(1);
+                        }
+                        syncedCout("Passenger: waiting for security gate 1\n");
+                        if (semop(semIDsGate2[1], &inc, 1) == -1)
                         {
                                 perror("semop");
                                 exit(1);
                         }
                         break;
                 case 2:
-                        syncedCout("Passenger: entering security gate 3\n");
-                        if (semop(semIDGate3, &dec, 1) == -1)
+                        syncedCout("Passenger: entering security gate 2\n");
+                        if (semop(semIDsGate3[0], &dec, 1) == -1)
+                        {
+                                perror("semop");
+                                exit(1);
+                        }
+                        syncedCout("Passenger: waiting for security gate 2\n");
+                        if (semop(semIDsGate3[1], &inc, 1) == -1)
                         {
                                 perror("semop");
                                 exit(1);
@@ -200,7 +218,7 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int 
         // INFO: passenger thread ends
 }
 
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int semIDGate1, int semIDGate2, int semIDGate3)
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
 {
         pid_t pid = getpid();
         syncedCout("Spawn passengers\n");
@@ -211,7 +229,7 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDB
                 createSubprocesses(1, pids, {"passenger"});
                 if (getpid() != pid)
                 {
-                        passengerProcess(i, semIDBaggageCtrl, semIDSecGate, semIDGate1, semIDGate2, semIDGate3);
+                        passengerProcess(i, semIDBaggageCtrl, semIDSecGate, semIDsGate1, semIDsGate2, semIDsGate3);
                         exit(0);
                 }
                 syncedCout("Waiting for " + std::to_string(delays[i]) + " ms\n");

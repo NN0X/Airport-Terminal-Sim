@@ -12,8 +12,8 @@
 
 #include "plane.h"
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int semIDGate1, int semIDGate2, int semIDGate3);
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int semIDGate1, int semIDGate2, int semIDGate3);
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3);
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3);
 
 struct BaggageInfo
 {
