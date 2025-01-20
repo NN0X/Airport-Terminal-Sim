@@ -20,37 +20,13 @@
 #include "baggageControl.h"
 #include "secControl.h"
 #include "events.h"
+#include "dispatcher.h"
+#include "stairs.h"
 #include "utils.h"
 
-// INFO: can use fifo and semaphores for totality of communication
-
+// TODO: change spawnPassengers and initPlanes to return pid_t
+// FIX: initPlanes (creates wrong number of planes)
 // TODO: send sigterm to all processes not just baggage control
-// TODO: cleanup baggage control and passenger
-
-int dispatcher()
-{
-        while (true)
-        {
-                // INFO: signal plane to go to terminal
-                // INFO: signal plane to wait for passengers if queue is not empty
-                // INFO: signal gate to let passengers board
-                // INFO: signal plane when passengers are on board (on stairs)
-                // INFO: repeat until signal to exit
-        }
-}
-
-int stairs(int semIDGate, int semIDPlaneStairs)
-{
-        while (true)
-        {
-                // INFO: queue of passengers waiting to board
-                // INFO: wait for signal to let passengers board and open gate
-                // INFO: signal dispatcher when N passengers are pass the gate and close gate
-                // INFO: max passengers on stairs is lower than max passengers on plane
-                // INFO: sends queue from gate to plane
-                // INFO: repeat until signal to exit
-        }
-}
 
 int main(int argc, char* argv[])
 {
@@ -76,10 +52,10 @@ int main(int argc, char* argv[])
 
         std::vector<int> semIDs = initSemaphores(0666);
 
-        initPlanes(numPlanes, 0); // WARNING: 0 is a temporary solution
-
         std::vector<std::string> names = {"baggageControl", "secControl", "dispatcher", "stairs"};
         createSubprocesses(4, pids, names);
+
+        initPlanes(numPlanes, semIDs[PLANE_STAIRS], pids[STAIRS], pids[DISPATCHER]);
 
         pid_t currPid = getpid();
 
@@ -141,12 +117,12 @@ int main(int argc, char* argv[])
         else if (currPid == pids[DISPATCHER])
         {
                 std::cout << "Dispatcher process\n";
-                dispatcher();
+                dispatcher({}, pids[STAIRS]);
         }
         else if (currPid == pids[STAIRS])
         {
                 std::cout << "Stairs process\n";
-                stairs(0, 0); // WARNING: 0 is a temporary solution
+                stairs(semIDs[STAIRS_QUEUE]);
         }
         else
         {

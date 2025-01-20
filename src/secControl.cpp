@@ -276,7 +276,7 @@ void gateThreadTasks(int gate, int semID)
                 if (dangerInfo.mHasDangerousBaggage)
                 {
                         syncedCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.mPid) + " has dangerous baggage\n");
-                        kill(dangerInfo.mPid, PASSENGER_IS_DANGEROUS);
+                        kill(dangerInfo.mPid, SIGNAL_PASSENGER_IS_DANGEROUS);
                 }
                 else
                 {

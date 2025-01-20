@@ -21,10 +21,10 @@ void passengerSignalHandler(int signum)
                 case SIGNAL_OK:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal OK\n");
                         break;
-                case PASSENGER_IS_OVERWEIGHT:
+                case SIGNAL_PASSENGER_IS_OVERWEIGHT:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n");
                         exit(0);
-                case PASSENGER_IS_DANGEROUS:
+                case SIGNAL_PASSENGER_IS_DANGEROUS:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n");
                         exit(0);
                 default:
@@ -50,7 +50,7 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecCtrl, std::ve
                 perror("sigaction");
                 exit(1);
         }
-        if (sigaction(PASSENGER_IS_OVERWEIGHT, &sa, NULL) == -1)
+        if (sigaction(SIGNAL_PASSENGER_IS_OVERWEIGHT, &sa, NULL) == -1)
         {
                 perror("sigaction");
                 exit(1);

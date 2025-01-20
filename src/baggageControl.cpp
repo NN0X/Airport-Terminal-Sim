@@ -88,7 +88,7 @@ int baggageControl(int semID)
                 if (baggageInfo.mBaggageWeight > MAX_ALLOWED_BAGGAGE_WEIGHT)
                 {
                         syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is overweight\n");
-                        kill(baggageInfo.mPid, PASSENGER_IS_OVERWEIGHT);
+                        kill(baggageInfo.mPid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
                         // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
                         // and then event handler sending signal to passenger
                 }

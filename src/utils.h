@@ -63,12 +63,21 @@ enum Semaphores
         SEC_GATE_0, // INFO: 
         SEC_GATE_1, // INFO: 
         SEC_GATE_2, // INFO: 
+        STAIRS_QUEUE, // INFO:
+        PLANE_STAIRS, // INFO:
 };
 
 enum Signals
 {
-        PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
-        PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
+        SIGNAL_PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
+        SIGNAL_PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
+        SIGNAL_PASSENGER_LEFT_STAIRS, // INFO: signals stairs that passenger left stairs [stairs -> stairs]
+        SIGNAL_STAIRS_OPEN, // INFO: signals stairs that stairs are open [dispatcher -> stairs]
+        SIGNAL_STAIRS_CLOSE, // INFO: signals stairs that stairs are closed [dispatcher -> stairs]
+        SIGNAL_PLANE_RECEIVE, // INFO: signals plane that it can receive passengers [dispatcher -> plane]
+        SIGNAL_PLANE_GO, // INFO: signals plane that it can go to terminal [dispatcher -> plane]
+        SIGNAL_PLANE_READY, // INFO: signals dispatcher that plane is ready to receive passengers [plane -> dispatcher]
+        SIGNAL_PLANE_READY_DEPART, // INFO: signals plane that it can depart [plane -> dispatcher]
         SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
 };
 

@@ -2,14 +2,16 @@
 #define PLANE_H
 
 #include <cstdint>
+#include <unistd.h>
+#include <sys/types.h>
 
 #define PLANE_PLACES 100
 #define MIN_TIME 10 // in sec
 #define MAX_TIME 1000 // in sec
 #define MAX_ALLOWED_BAGGAGE_WEIGHT 75 // kg
 
-void planeProcess(size_t id, int semIDPlaneStairs);
-void initPlanes(size_t num, int semIDPlaneStairs);
+void planeProcess(size_t id, int semIDPlaneStairs, pid_t stairsPid, pid_t dispatcherPid);
+void initPlanes(size_t num, int semIDPlaneStairs, pid_t stairsPid, pid_t dispatcherPid);
 
 class Plane
 {
