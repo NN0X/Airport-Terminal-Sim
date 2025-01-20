@@ -60,8 +60,8 @@ int baggageControl(int semID)
 
         while (true)
         {
-                // increment semaphore
-                syncedCout("Baggage control: incrementing semaphore\n");
+                // wait for passenger
+                syncedCout("Baggage control: waiting for passenger\n");
                 sembuf inc = {0, 1, 0};
                 if (semop(semID, &inc, 1) == -1)
                 {

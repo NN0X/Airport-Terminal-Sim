@@ -12,8 +12,8 @@
 
 #include "plane.h"
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3);
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3);
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates);
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates);
 
 struct BaggageInfo
 {
@@ -21,22 +21,23 @@ struct BaggageInfo
         uint64_t mBaggageWeight;
 };
 
-struct PassengerGatePair
-{
-        int pid;
-        int gateNum;
-};
-
 struct TypeInfo
 {
         pid_t mPid;
         bool mType;
+        bool mIsVip;
 };
 
-struct BaggageDangerInfo
+struct DangerInfo
 {
         pid_t mPid;
         bool mHasDangerousBaggage;
+};
+
+struct SelectedPair
+{
+        int passenger;
+        int gate;
 };
 
 class Passenger

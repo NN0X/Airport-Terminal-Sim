@@ -7,13 +7,44 @@
 #include <fcntl.h> // O_RDONLY, O_WRONLY
 #include <sys/stat.h> // mkfifo
 #include <unistd.h>
+#include <array>
+#include <vector>
+#include <mutex>
+#include <signal.h>
 
 #include "passenger.h"
 #include "utils.h"
 
-#define SEC_RECEIVER_DELAY 100 // in ms
+#define SEC_SELECTOR_DELAY 100 // in ms
 #define SEC_GATE_MAX_DELAY 500 // in ms
 #define SEC_GATE_MIN_DELAY 200 // in ms
+
+struct GateInfo
+{
+        int gate;
+        int occupancy;
+        bool type;
+};
+
+std::mutex secControlToGateSelectorMutex;
+std::mutex secControlToGateMutex;
+
+std::vector<TypeInfo> secControlQueue;
+std::array<GateInfo, 3> secControlGates = {
+        GateInfo{0, 0, false},
+        GateInfo{1, 0, false},
+        GateInfo{2, 0, false},
+};
+
+struct SelectorArgs
+{
+        int semID;
+};
+
+struct GateArgs
+{
+        int semID;
+};
 
 void secControlSignalHandler(int signum)
 {
@@ -21,9 +52,6 @@ void secControlSignalHandler(int signum)
         {
                 case SIGNAL_OK:
                         syncedCout("Security control: Received signal OK\n");
-                        break;
-                case SEC_CONTROL_PASSENGER_WAITING:
-                        syncedCout("Security control: Received signal PASSENGER_WAITING\n");
                         break;
                 case SIGTERM:
                         syncedCout("Security control: Received signal SIGTERM\n");
@@ -34,188 +62,260 @@ void secControlSignalHandler(int signum)
         }
 }
 
-struct GateInfo
+SelectedPair selectVIPPair()
 {
-        int num;
-        int occupancy;
-        bool type;
-        int semID1;
-        int semID2;
-};
-
-void *secGateThread(void *arg)
-{
-        GateInfo *gateInfo = (GateInfo *)arg;
-
-        syncedCout("Gate " + std::to_string(gateInfo->num) + " thread\n");
-
-        if (access(fifoNames[SEC_GATE_FIFO + gateInfo->num].c_str(), F_OK) == -1)
+        secControlToGateSelectorMutex.lock();
+        secControlToGateMutex.lock();
+        if (secControlQueue.empty())
         {
-                if (mkfifo(fifoNames[SEC_GATE_FIFO + gateInfo->num].c_str(), 0666) == -1)
+                secControlToGateMutex.unlock();
+                secControlToGateSelectorMutex.unlock();
+                return SelectedPair{-1, -1};
+        }
+        std::vector<int> vips;
+        std::vector<bool> checked;
+        for (size_t i = 0; i < secControlQueue.size(); i++)
+        {
+                if (secControlQueue[i].mIsVip)
                 {
-                        perror("mkfifo");
-                        exit(1);
+                        vips.push_back(i);
+                        checked.push_back(false);
                 }
         }
 
+        for (size_t i = 0; i < vips.size(); i++)
+        {
+                if (checked[i])
+                {
+                        continue;
+                }
+                for (size_t j = 0; j < secControlGates.size(); j++)
+                {
+                        if (secControlGates[j].occupancy == 0)
+                        {
+                                secControlGates[j].occupancy++;
+                                secControlGates[j].type = secControlQueue[vips[i]].mType;
+                                secControlToGateMutex.unlock();
+                                secControlToGateSelectorMutex.unlock();
+                                return SelectedPair{vips[i], (int)j};
+                        }
+                        else if (secControlGates[j].type == secControlQueue[vips[i]].mType && secControlGates[j].occupancy == 1)
+                        {
+                                secControlGates[j].occupancy++;
+                                secControlToGateMutex.unlock();
+                                secControlToGateSelectorMutex.unlock();
+                                return SelectedPair{vips[i], (int)j};
+                        }
+                }
+        }
+
+        secControlToGateMutex.unlock();
+        secControlToGateSelectorMutex.unlock();
+        return SelectedPair{-1, -1};
+}
+
+SelectedPair selectPair()
+{
+        secControlToGateSelectorMutex.lock();
+        secControlToGateMutex.lock();
+        if (secControlQueue.empty())
+        {
+                secControlToGateMutex.unlock();
+                secControlToGateSelectorMutex.unlock();
+                return SelectedPair{-1, -1};
+        }
+        std::vector<int> nonVips;
+        std::vector<bool> checked;
+        for (size_t i = 0; i < secControlQueue.size(); i++)
+        {
+                if (!secControlQueue[i].mIsVip)
+                {
+                        nonVips.push_back(i);
+                        checked.push_back(false);
+                }
+        }
+        for (size_t i = 0; i < nonVips.size(); i++)
+        {
+                if (checked[i])
+                {
+                        continue;
+                }
+                for (size_t j = 0; j < secControlGates.size(); j++)
+                {
+                        if (secControlGates[j].occupancy == 0)
+                        {
+                                secControlGates[j].occupancy++;
+                                secControlGates[j].type = secControlQueue[nonVips[i]].mType;
+                                secControlToGateMutex.unlock();
+                                secControlToGateSelectorMutex.unlock();
+                                return SelectedPair{nonVips[i], (int)j};
+                        }
+                        else if (secControlGates[j].type == secControlQueue[nonVips[i]].mType && secControlGates[j].occupancy == 1)
+                        {
+                                secControlGates[j].occupancy++;
+                                secControlToGateMutex.unlock();
+                                secControlToGateSelectorMutex.unlock();
+                                return SelectedPair{nonVips[i], (int)j};
+                        }
+                }
+        }
+
+        secControlToGateMutex.unlock();
+        secControlToGateSelectorMutex.unlock();
+        return SelectedPair{-1, -1};
+}
+
+void signalSkipped(int selected)
+{
+        secControlToGateSelectorMutex.lock();
+        for (size_t i = 0; i < selected; i++)
+        {
+                syncedCout("Security control: Passenger " + std::to_string(secControlQueue[i].mPid) + " skipped\n");
+                // send signal to passenger
+        }
+        secControlToGateSelectorMutex.unlock();
+}
+
+void *gateSelectorThread(void *args)
+{
         while (true)
         {
-                syncedCout("Gate " + std::to_string(gateInfo->num) + ": waiting for passenger\n");
-                // increment semaphore
-                sembuf inc = {0, 1, 0};
-                if (semop(gateInfo->semID1, &inc, 1) == -1)
+                // select passenger from queue and send him to gate
+                // rules of selection:
+                // 1. vip passengers have priority
+                // 2. each gate can have 2 same type passengers at the same time and can't have 2 passengers of different types
+                // 3. if passenger is skipped because of rule 2, signal him
+                // 4. if passenger is allowed to enter, send him the gate number (there are 3 gates)
+                // 5. repeat until signal to exit
+
+                SelectedPair selectedPair = selectVIPPair();
+                if (selectedPair.passenger == -1)
                 {
-                        perror("semop");
-                        exit(1);
+                        selectedPair = selectPair();
                 }
-
-                sembuf dec = {0, -1, 0};
-                if (semop(gateInfo->semID2, &dec, 1) == -1)
+                if (selectedPair.passenger == -1)
                 {
-                        perror("semop");
-                        exit(1);
+                        usleep(SEC_SELECTOR_DELAY * 1000);
+                        continue;
                 }
+                syncedCout("Security selector: Selected passenger " + std::to_string(secControlQueue[selectedPair.passenger].mPid) + " for gate " + std::to_string(selectedPair.gate) + "\n");
+                signalSkipped(selectedPair.passenger);
 
-                syncedCout("Gate " + std::to_string(gateInfo->num) + ": passenger entered\n");
+                // signal selected passenger
+                secControlToGateSelectorMutex.lock();
+                TypeInfo typeInfo = secControlQueue[selectedPair.passenger];
+                secControlQueue.erase(secControlQueue.begin() + selectedPair.passenger);
+                secControlToGateSelectorMutex.unlock();
 
-                int fd = open(fifoNames[SEC_GATE_FIFO + gateInfo->num].c_str(), O_RDONLY);
+                syncedCout("Security selector: Sending signal OK to passenger\n");
+                // send signal SIGNAL_OK to passenger
+                kill(typeInfo.mPid, SIGNAL_OK);
+
+                syncedCout("Security selector: Waiting for passenger to read from fifo\n");
+                int fd = open(fifoNames[SEC_SELECTOR_FIFO].c_str(), O_WRONLY);
                 if (fd == -1)
                 {
                         perror("open");
                         exit(1);
                 }
-                BaggageDangerInfo baggageDangerInfo;
-                if (read(fd, &baggageDangerInfo, sizeof(baggageDangerInfo)) == -1)
+                if (write(fd, &selectedPair.gate, sizeof(selectedPair.gate)) == -1)
                 {
-                        perror("read");
+                        perror("write");
                         exit(1);
                 }
                 close(fd);
-                if (baggageDangerInfo.mHasDangerousBaggage)
-                {
-                        syncedCout("Gate " + std::to_string(gateInfo->num) + ": Passenger " + std::to_string(baggageDangerInfo.mPid) + " has dangerous baggage\n");
-                        kill(baggageDangerInfo.mPid, PASSENGER_IS_DANGEROUS);
-                        gateInfo->occupancy--;
-                }
-                else
-                {
-                        syncedCout("Gate " + std::to_string(gateInfo->num) + ": Passenger " + std::to_string(baggageDangerInfo.mPid) + " has no dangerous baggage\n");
-                        kill(baggageDangerInfo.mPid, SIGNAL_OK);
-                        gateInfo->occupancy--;
-                }
-                std::vector<uint64_t> delays(1);
-                genRandomVector(delays, SEC_GATE_MIN_DELAY, SEC_GATE_MAX_DELAY);
-                syncedCout("Waiting for " + std::to_string(delays[0]) + " ms\n", BLUE);
-                usleep(delays[0] * 1000);
-        }
 
+                syncedCout("Security selector: waiting " + std::to_string(SEC_SELECTOR_DELAY) + " ms\n");
+                usleep(SEC_SELECTOR_DELAY * 1000);
+        }
 }
 
-struct ReceivePassengerArgs
+void gateThreadTasks(int gate, int semID)
 {
-        std::vector<TypeInfo> *typeInfos;
-        int semID;
-        int semIDReceive;
-};
-
-void *receivePassengerThread(void *arg)
-{
-        syncedCout("Receive passengers thread\n");
-
-        if (access(fifoNames[SEC_RECEIVE_FIFO].c_str(), F_OK) == -1)
+        DangerInfo dangerInfo;
+        int fifo;
+        switch (gate)
         {
-                if (mkfifo(fifoNames[SEC_RECEIVE_FIFO].c_str(), 0666) == -1)
-                {
-                        perror("mkfifo");
-                        exit(1);
-                }
-        }
-
-        ReceivePassengerArgs *args = (ReceivePassengerArgs *)arg;
-        std::vector<TypeInfo> &typeInfos = *args->typeInfos;
-
-        int semID = args->semID;
-        int semIDReceive = args->semIDReceive;
-
-        int fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_RDONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
+                case 0:
+                        fifo = SEC_GATE_0_FIFO;
+                        break;
+                case 1:
+                        fifo = SEC_GATE_1_FIFO;
+                        break;
+                case 2:
+                        fifo = SEC_GATE_2_FIFO;
+                        break;
+                default:
+                        return;
         }
 
         while (true)
         {
-                syncedCout("Receive passengers: waiting for passengers\n");
-
-                // decrement semaphore
-                sembuf dec = {0, -1, 0};
-                if (semop(semIDReceive, &dec, 1) == -1)
-                {
-                        perror("semop");
-                        exit(1);
-                }
-                syncedCout("Receive passengers: passenger entered security\n");
-
-                TypeInfo typeInfo;
-                if (read(fd, &typeInfo, sizeof(typeInfo)) == -1)
-                {
-                        perror("read");
-                        exit(1);
-                }
-                // increment semaphore
-                typeInfos.push_back(typeInfo);
+                // tell passenger to be enter
                 sembuf inc = {0, 1, 0};
                 if (semop(semID, &inc, 1) == -1)
                 {
                         perror("semop");
                         exit(1);
                 }
-                syncedCout("Receive passengers: passenger " + std::to_string(typeInfo.mPid) + " received\n", RED);
-                syncedCout("Waiting for " + std::to_string(SEC_RECEIVER_DELAY) + " ms\n", BLUE);
-                usleep(SEC_RECEIVER_DELAY * 1000);
-        }
-        close(fd);
-}
-
-PassengerGatePair pairPassengerGate(std::vector<TypeInfo> &typeInfos, const std::vector<GateInfo> &gateInfos)
-{
-        PassengerGatePair pair;
-        for (size_t i = 0; i < 3; i++)
-        {
-                if (gateInfos[i].occupancy == 0 || (gateInfos[i].type == typeInfos[0].mType && gateInfos[i].occupancy < 2))
+                syncedCout("Security gate " + std::to_string(gate) + ": Waiting for passenger\n");
+                int fd = open(fifoNames[fifo].c_str(), O_RDONLY);
+                if (fd == -1)
                 {
-                        pair.pid = typeInfos[0].mPid;
-                        pair.gateNum = i;
-                        typeInfos.erase(typeInfos.begin());
-                        syncedCout("Pairing passenger " + std::to_string(pair.pid) + " with gate " + std::to_string(pair.gateNum) + "\n");
-                        return pair;
-                }
-                else if (typeInfos.size() > 1 && (gateInfos[i].occupancy == 0 || (gateInfos[i].type == typeInfos[1].mType && gateInfos[i].occupancy < 2)))
-                {
-                        pair.pid = typeInfos[1].mPid;
-                        pair.gateNum = i;
-                        typeInfos.erase(typeInfos.begin() + 1);
-                        syncedCout("Pairing passenger " + std::to_string(pair.pid) + " with gate " + std::to_string(pair.gateNum) + "\n");
-                        return pair;
-                }
-        }
-        syncedCout("No pairing found\n", RED);
-        return pair;
-}
-
-int secControl(int semID, int semIDReceive, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
-{
-        syncedCout("Security control process\n");
-        if (access(fifoNames[SEC_CONTROL_FIFO].c_str(), F_OK) == -1)
-        {
-                if (mkfifo(fifoNames[SEC_CONTROL_FIFO].c_str(), 0666) == -1)
-                {
-                        perror("mkfifo");
+                        perror("open");
                         exit(1);
                 }
+                if (read(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
+                {
+                        perror("read");
+                        exit(1);
+                }
+                close(fd);
+
+                // send signal to passenger
+                if (dangerInfo.mHasDangerousBaggage)
+                {
+                        syncedCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.mPid) + " has dangerous baggage\n");
+                        kill(dangerInfo.mPid, PASSENGER_IS_DANGEROUS);
+                }
+                else
+                {
+                        syncedCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.mPid) + " has no dangerous baggage\n");
+                        kill(dangerInfo.mPid, SIGNAL_OK);
+                }
+                secControlToGateMutex.lock();
+                secControlGates[gate].occupancy--;
+                secControlToGateMutex.unlock();
+
+                std::vector<uint64_t> delay(1);
+                genRandomVector(delay, SEC_GATE_MIN_DELAY, SEC_GATE_MAX_DELAY);
+                syncedCout("Security gate " + std::to_string(gate) + ": waiting " + std::to_string(delay[0]) + " ms\n");
+                usleep(delay[0] * 1000);
         }
 
+}
+
+void *gate0Thread(void *args)
+{
+        GateArgs *gateArgs = (GateArgs *)args;
+        gateThreadTasks(0, gateArgs->semID);
+}
+
+void *gate1Thread(void *args)
+{
+        GateArgs *gateArgs = (GateArgs *)args;
+        gateThreadTasks(1, gateArgs->semID);
+}
+
+void *gate2Thread(void *args)
+{
+        GateArgs *gateArgs = (GateArgs *)args;
+        gateThreadTasks(2, gateArgs->semID);
+}
+
+int secControl(int semIDSecControl, int semIDGate0, int semIDGate1, int semIDGate2)
+{
+        // attach handler to signals
         struct sigaction sa;
         sa.sa_handler = secControlSignalHandler;
         sigemptyset(&sa.sa_mask);
@@ -231,94 +331,115 @@ int secControl(int semID, int semIDReceive, int *semIDsGate1, int *semIDsGate2, 
                 exit(1);
         }
 
-        std::vector<GateInfo> gateInfos(3);
-        for (size_t i = 0; i < 3; i++)
+        // create fifo for communication with passengers
+        if (access(fifoNames[SEC_CONTROL_FIFO].c_str(), F_OK) == -1)
         {
-                gateInfos[i].num = i;
-                gateInfos[i].occupancy = 0;
-                gateInfos[i].type = false;
-        }
-        gateInfos[0].semID1 = semIDsGate1[0];
-        gateInfos[1].semID1 = semIDsGate2[0];
-        gateInfos[2].semID1 = semIDsGate3[0];
-        gateInfos[0].semID2 = semIDsGate1[1];
-        gateInfos[1].semID2 = semIDsGate2[1];
-        gateInfos[2].semID2 = semIDsGate3[1];
-        pthread_t gateThreads[3];
-        for (size_t i = 0; i < 3; i++)
-        {
-                if (pthread_create(&gateThreads[i], NULL, secGateThread, (void *)&gateInfos[i]) != 0)
+                if (mkfifo(fifoNames[SEC_CONTROL_FIFO].c_str(), 0666) == -1)
                 {
-                        perror("pthread_create");
+                        perror("mkfifo");
                         exit(1);
                 }
         }
 
-        std::vector<TypeInfo> typeInfos;
-        typeInfos.reserve(100);
-        ReceivePassengerArgs typeInfosArgs = {&typeInfos, semID, semIDReceive};
-        pthread_t receivePassenger;
-        if (pthread_create(&receivePassenger, NULL, receivePassengerThread, (void *)&typeInfosArgs) != 0)
+        if (access(fifoNames[SEC_SELECTOR_FIFO].c_str(), F_OK) == -1)
+        {
+                if (mkfifo(fifoNames[SEC_SELECTOR_FIFO].c_str(), 0666) == -1)
+                {
+                        perror("mkfifo");
+                        exit(1);
+                }
+        }
+
+        if (access(fifoNames[SEC_GATE_0_FIFO].c_str(), F_OK) == -1)
+        {
+                if (mkfifo(fifoNames[SEC_GATE_0_FIFO].c_str(), 0666) == -1)
+                {
+                        perror("mkfifo");
+                        exit(1);
+                }
+        }
+
+        if (access(fifoNames[SEC_GATE_1_FIFO].c_str(), F_OK) == -1)
+        {
+                if (mkfifo(fifoNames[SEC_GATE_1_FIFO].c_str(), 0666) == -1)
+                {
+                        perror("mkfifo");
+                        exit(1);
+                }
+        }
+
+        if (access(fifoNames[SEC_GATE_2_FIFO].c_str(), F_OK) == -1)
+        {
+                if (mkfifo(fifoNames[SEC_GATE_2_FIFO].c_str(), 0666) == -1)
+                {
+                        perror("mkfifo");
+                        exit(1);
+                }
+        }
+
+        // create thread for gate selector
+        pthread_t gateSelector;
+
+        if (pthread_create(&gateSelector, NULL, gateSelectorThread, NULL) != 0)
         {
                 perror("pthread_create");
                 exit(1);
         }
 
-        PassengerGatePair passengerGatePair;
+        pthread_t gate0;
+        pthread_t gate1;
+        pthread_t gate2;
+        GateArgs gateArgs0 = {semIDGate0};
+        GateArgs gateArgs1 = {semIDGate1};
+        GateArgs gateArgs2 = {semIDGate2};
+
+        if (pthread_create(&gate0, NULL, gate0Thread, &gateArgs0) != 0)
+        {
+                perror("pthread_create");
+                exit(1);
+        }
+        if (pthread_create(&gate1, NULL, gate1Thread, &gateArgs1) != 0)
+        {
+                perror("pthread_create");
+                exit(1);
+        }
+        if (pthread_create(&gate2, NULL, gate2Thread, &gateArgs2) != 0)
+        {
+                perror("pthread_create");
+                exit(1);
+        }
+
         while (true)
         {
-                syncedCout("Security control: waiting for passengers\n", GREEN);
-                // decrement semaphore
-                sembuf dec = {0, -1, 0};
-                if (semop(semID, &dec, 1) == -1)
+                // receive passengers and add them to gateSelector queue
+
+                // tell passenger to enter
+                sembuf inc = {0, 1, 0};
+                if (semop(semIDSecControl, &inc, 1) == -1)
                 {
                         perror("semop");
                         exit(1);
                 }
-                syncedCout("Security control: received passengers\n");
-                passengerGatePair = pairPassengerGate(typeInfos, gateInfos);
-                if (passengerGatePair.pid == -1)
-                {
-                        continue;
-                }
-                if(gateInfos[passengerGatePair.gateNum].occupancy == 0)
-                {
-                        gateInfos[passengerGatePair.gateNum].type = typeInfos[0].mType;
-                }
-                gateInfos[passengerGatePair.gateNum].occupancy++;
-                // signal passenger to read from fifo
-                syncedCout("Security control: signaling passenger " + std::to_string(passengerGatePair.pid) + "\n");
-                kill(passengerGatePair.pid, SIGNAL_OK);
-
-                syncedCout("Security control: sending gate number to passenger " + std::to_string(passengerGatePair.pid) + "\n");
-                int fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_WRONLY);
+                syncedCout("Security control: waiting for passenger\n");
+                int fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_RDONLY);
                 if (fd == -1)
                 {
                         perror("open");
                         exit(1);
                 }
-                if (write(fd, &passengerGatePair, sizeof(passengerGatePair)) == -1)
+                TypeInfo typeInfo;
+                if (read(fd, &typeInfo, sizeof(typeInfo)) == -1)
                 {
-                        perror("write");
+                        perror("read");
                         exit(1);
                 }
                 close(fd);
-        }
-        syncedCout("Security control: Exiting\n");
 
-        for (size_t i = 0; i < 3; i++)
-        {
-                if (pthread_join(gateThreads[i], NULL) != 0)
-                {
-                        perror("pthread_join");
-                        exit(1);
-                }
-        }
-        if (pthread_join(receivePassenger, NULL) != 0)
-        {
-                perror("pthread_join");
-                exit(1);
-        }
+                syncedCout("Security control: Received passenger " + std::to_string(typeInfo.mPid) + "\n");
 
-        return 0;
+                // add passenger to queue
+                secControlToGateSelectorMutex.lock();
+                secControlQueue.push_back(typeInfo);
+                secControlToGateSelectorMutex.unlock();
+        }
 }

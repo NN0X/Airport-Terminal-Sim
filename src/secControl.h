@@ -1,6 +1,6 @@
 #ifndef SEC_CONTROL_H
 #define SEC_CONTROL_H
 
-int secControl(int semID, int semIDReceive, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3);
+int secControl(int semIDSecControl, int semIDGate0, int semIDGate1, int semIDGate2);
 
 #endif // SEC_CONTROL_H

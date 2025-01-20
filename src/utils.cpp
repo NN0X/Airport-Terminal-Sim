@@ -17,7 +17,7 @@ std::mutex coutMutex;
 #define VERBOSE 1
 #define SEM_INIT_VALUE 0
 
-#define NUM_SEMAPHORES 9
+#define NUM_SEMAPHORES 5
 
 std::vector<int> initSemaphores(int permissions)
 {
@@ -66,7 +66,7 @@ void vCout(const std::string &msg, int color)
 
 void syncedCout(const std::string &msg, int color)
 {
-        std::lock_guard<std::mutex> lock(coutMutex);
+        //std::lock_guard<std::mutex> lock(coutMutex);
         vCout(msg, color);
 }
 

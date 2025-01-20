@@ -34,7 +34,7 @@ void passengerSignalHandler(int signum)
 }
 
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
+void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates)
 {
         syncedCout("Passenger process: " + std::to_string(id) + "\n");
 
@@ -60,8 +60,8 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int 
 
         // INFO: passenger goes through baggage control
 
-        // decrement semaphore
-        syncedCout("Passenger: decrementing semaphore\n");
+        // wait for baggage control to be ready
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for baggage control\n");
         sembuf dec = {0, -1, 0};
         if (semop(semIDBaggageCtrl, &dec, 1) == -1)
         {
@@ -85,28 +85,26 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int 
         }
         close(fd);
 
-        syncedCout("Passenger: waiting for signal from baggage control\n");
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for signal from baggage control\n");
         pause(); // wait for signal from baggage control
 
-        syncedCout("Passenger released from baggage control\n");
+        syncedCout("Passenger: " + std::to_string(getpid()) + " released from baggage control\n");
 
         // INFO: passenger goes through security control
 
-        PassengerGatePair passengerGatePair;
-        TypeInfo typeInfo;
-        typeInfo.mPid = getpid();
-        typeInfo.mType = passenger.getType();
-        syncedCout("Passenger: waiting for security control\n");
-        // increment semaphore
-        sembuf inc = {0, 1, 0};
-        if (semop(semIDSecReceive, &inc, 1) == -1)
+        // wait for security control to be ready
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for security control\n");
+        if (semop(semIDSecCtrl, &dec, 1) == -1)
         {
                 perror("semop");
                 exit(1);
         }
 
-        // send pid and type to secControl receive fifo
-        fd = open(fifoNames[SEC_RECEIVE_FIFO].c_str(), O_WRONLY);
+        TypeInfo typeInfo;
+        typeInfo.mPid = getpid();
+        typeInfo.mType = passenger.getType();
+        typeInfo.mIsVip = passenger.getIsVip();
+        fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_WRONLY);
         if (fd == -1)
         {
                 perror("open");
@@ -119,106 +117,56 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecReceive, int 
         }
         close(fd);
 
-        // wait for signal from secControl
-        syncedCout("Passenger: waiting for signal from security control\n");
-        pause();
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for signal from security control\n");
+        pause(); // wait for signal from security control
 
-        // read from secControl fifo
-        fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_RDONLY);
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for security selector\n");
+        SelectedPair selectedPair;
+        fd = open(fifoNames[SEC_SELECTOR_FIFO].c_str(), O_RDONLY);
         if (fd == -1)
         {
                 perror("open");
                 exit(1);
         }
-        if (read(fd, &passengerGatePair, sizeof(passengerGatePair)) == -1)
+        if (read(fd, &selectedPair.gate, sizeof(selectedPair.gate)) == -1)
         {
                 perror("read");
                 exit(1);
         }
         close(fd);
-        if (passengerGatePair.pid != getpid())
+
+        syncedCout("Passenger: " + std::to_string(getpid()) + " selected gate: " + std::to_string(selectedPair.gate) + "\n");
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for gate " + std::to_string(selectedPair.gate) + "\n");
+
+        if (semop(semIDGates[selectedPair.gate], &dec, 1) == -1)
         {
-                syncedCout("Passenger: received wrong pid\n");
+                perror("semop");
                 exit(1);
         }
 
-        switch (passengerGatePair.gateNum)
-        {
-                case 0:
-                        syncedCout("Passenger: entering security gate 0\n");
-                        if (semop(semIDsGate1[0], &dec, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        syncedCout("Passenger: waiting for security gate 0\n");
-                        if (semop(semIDsGate1[1], &inc, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        break;
-                case 1:
-                        syncedCout("Passenger: entering security gate 1\n");
-                        if (semop(semIDsGate2[0], &dec, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        syncedCout("Passenger: waiting for security gate 1\n");
-                        if (semop(semIDsGate2[1], &inc, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        break;
-                case 2:
-                        syncedCout("Passenger: entering security gate 2\n");
-                        if (semop(semIDsGate3[0], &dec, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        syncedCout("Passenger: waiting for security gate 2\n");
-                        if (semop(semIDsGate3[1], &inc, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                        break;
-                default:
-                        syncedCout("Passenger: received wrong gate number\n");
-                        exit(1);
-        }
-
-        syncedCout("Passenger: entering security gate " + std::to_string(passengerGatePair.gateNum) + "\n");
-        BaggageDangerInfo baggageDangerInfo;
-        baggageDangerInfo.mPid = getpid();
-        baggageDangerInfo.mHasDangerousBaggage = passenger.getHasDangerousBaggage();
-        fd = open(fifoNames[SEC_GATE_FIFO + passengerGatePair.gateNum].c_str(), O_WRONLY);
+        DangerInfo dangerInfo;
+        dangerInfo.mPid = getpid();
+        dangerInfo.mHasDangerousBaggage = passenger.getHasDangerousBaggage();
+        fd = open(fifoNames[SEC_GATE_0_FIFO + selectedPair.gate].c_str(), O_WRONLY);
         if (fd == -1)
         {
                 perror("open");
                 exit(1);
         }
-        if (write(fd, &baggageDangerInfo, sizeof(baggageDangerInfo)) == -1)
+        if (write(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
         {
                 perror("write");
                 exit(1);
         }
         close(fd);
 
-        syncedCout("Passenger: waiting for signal from security gate\n");
-        pause(); // wait for signal from secControl
-
-        syncedCout("Passenger released from security control\n");
-
-
         // INFO: passenger waits for plane to be ready
+
+
         // INFO: passenger thread ends
 }
 
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecGate, int *semIDsGate1, int *semIDsGate2, int *semIDsGate3)
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates)
 {
         pid_t pid = getpid();
         syncedCout("Spawn passengers\n");
@@ -229,7 +177,7 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDB
                 createSubprocesses(1, pids, {"passenger"});
                 if (getpid() != pid)
                 {
-                        passengerProcess(i, semIDBaggageCtrl, semIDSecGate, semIDsGate1, semIDsGate2, semIDsGate3);
+                        passengerProcess(i, semIDBaggageCtrl, semIDSecCtrl, semIDGates);
                         exit(0);
                 }
                 syncedCout("Waiting for " + std::to_string(delays[i]) + " ms\n");
@@ -240,7 +188,6 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDB
 
         exit(0); // WARNING: this is a temporary solution
 }
-
 
 Passenger::Passenger(uint64_t id)
         : mID(id), mIsAggressive(false)

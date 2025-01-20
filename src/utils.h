@@ -41,37 +41,34 @@ enum FIFOs
 {
         BAGGAGE_CONTROL_FIFO = 0,
         SEC_CONTROL_FIFO,
-        SEC_GATE_FIFO,
-        SEC_RECEIVE_FIFO = 5, // skip SEC_GATE2_FIFO and SEC_GATE3_FIFO
+        SEC_SELECTOR_FIFO,
+        SEC_GATE_0_FIFO,
+        SEC_GATE_1_FIFO,
+        SEC_GATE_2_FIFO,
 };
 
 const std::string fifoNames[] = {
         "baggageControlFIFO",
         "secControlFIFO",
+        "secSelectorFIFO",
+        "secGate0FIFO",
         "secGate1FIFO",
         "secGate2FIFO",
-        "secGate3FIFO",
-        "secReceiveFIFO",
 };
 
 enum Semaphores
 {
-        BAGGAGE_CTRL = 0, // INFO: tells passenger to enter baggage control [baggageControl -> passenger]
-        SEC_RECEIVE, // INFO: tells secControl that passenger is waiting [secControlReceive -> secControl]
-        SEC_RECEIVE_PASSENGER, // INFO: tells secControlReceive that passenger is waiting [passenger -> secControlReceive]
-        SEC_GATE_1_1, // INFO: tells passengers waiting at gate 1 to enter [secGate1 -> passenger]
-        SEC_GATE_1_2,
-        SEC_GATE_2_1, // INFO: tells passengers waiting at gate 2 to enter [secGate2 -> passenger]
-        SEC_GATE_2_2,
-        SEC_GATE_3_1, // INFO: tells passengers waiting at gate 3 to enter [secGate3 -> passenger]
-        SEC_GATE_3_2,
+        BAGGAGE_CTRL = 0, // INFO: 
+        SEC_CTRL, // INFO: 
+        SEC_GATE_0, // INFO: 
+        SEC_GATE_1, // INFO: 
+        SEC_GATE_2, // INFO: 
 };
 
 enum Signals
 {
         PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
         PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
-        SEC_CONTROL_PASSENGER_WAITING, // INFO: signals secControl that passenger is waiting [secControlReceive -> secControl]
         SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
 };
 

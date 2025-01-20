@@ -24,13 +24,6 @@
 
 // INFO: can use fifo and semaphores for totality of communication
 
-// TODO: fix secControl for bigger number(>14) of passengers:
-//      Security control: signaling passenger -505822032
-//      Security control: sending gate number to passenger -505822032
-// based on logs, probably a problem with receive thread
-//
-// TODO: add vip passengers to secControl
-
 // TODO: send sigterm to all processes not just baggage control
 // TODO: cleanup baggage control and passenger
 
@@ -83,10 +76,6 @@ int main(int argc, char* argv[])
 
         std::vector<int> semIDs = initSemaphores(0666);
 
-        int semIDsGate1[2] = {semIDs[SEC_GATE_1_1], semIDs[SEC_GATE_1_2]};
-        int semIDsGate2[2] = {semIDs[SEC_GATE_2_1], semIDs[SEC_GATE_2_2]};
-        int semIDsGate3[2] = {semIDs[SEC_GATE_3_1], semIDs[SEC_GATE_3_2]};
-
         initPlanes(numPlanes, 0); // WARNING: 0 is a temporary solution
 
         std::vector<std::string> names = {"baggageControl", "secControl", "dispatcher", "stairs"};
@@ -105,7 +94,7 @@ int main(int argc, char* argv[])
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != pids[MAIN])
                 {
-                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_RECEIVE_PASSENGER], semIDsGate1, semIDsGate2, semIDsGate3);
+                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_CTRL], {semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]});
                 }
 
                 while (true)
@@ -147,7 +136,7 @@ int main(int argc, char* argv[])
         else if (currPid == pids[SEC_CONTROL])
         {
                 std::cout << "Security control process\n";
-                secControl(semIDs[SEC_RECEIVE], semIDs[SEC_RECEIVE_PASSENGER], semIDsGate1, semIDsGate2, semIDsGate3);
+                secControl(semIDs[SEC_CTRL], semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]);
         }
         else if (currPid == pids[DISPATCHER])
         {
