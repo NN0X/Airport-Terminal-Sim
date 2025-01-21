@@ -27,6 +27,7 @@
 // TODO: send sigterm to all processes not just baggage control
 
 // TODO: change counter from signal to semaphore (PASSENGER_LEFT)
+// TODO: change while loop isOK in passenger to semaphore
 
 int totalPassengers;
 
