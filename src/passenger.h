@@ -1,37 +1,78 @@
 #ifndef PASSENGER_H
 #define PASSENGER_H
 
+#define VIP_PROBABILITY 0.1
+#define MAX_BAGGAGE_WEIGHT 100
+#define DANGEROUS_BAGGAGE_PROBABILITY 0.05
+#define MAX_PASSENGER_DELAY 100 // in ms
+
 #include <cstdint>
+#include <sys/types.h>
+#include <vector>
 
 #include "plane.h"
+
+void passengerProcess(size_t id, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2);
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2);
+
+struct BaggageInfo
+{
+        pid_t mPid;
+        uint64_t mBaggageWeight;
+};
+
+struct TypeInfo
+{
+        pid_t mPid;
+        bool mType;
+        bool mIsVip;
+};
+
+struct DangerInfo
+{
+        pid_t mPid;
+        bool mHasDangerousBaggage;
+};
+
+struct SelectedPair
+{
+        int passenger;
+        int gate;
+};
 
 class Passenger
 {
 public: // temporary
-	uint64_t id;
-	bool isVip;
-	bool type; // each gate can have 2 same type passengers at the same time
-	uint64_t baggageWeight; // in arbitrary units
-	bool isAggressive; // causes random negative events
-        bool hasDangerousBaggage; // causes event at security control
+        uint64_t mID;
+        bool mIsVip;
+        bool mType; // each gate can have 2 same type passengers at the same time
+        uint64_t mBaggageWeight; // kg
+        uint64_t mPersonalBaggageWeight; // kg
+        bool mIsAggressive; // causes random negative events
+        bool mHasDangerousBaggage; // causes event at security control
 
 public:
-        Passenger();
-	Passenger(uint64_t id, bool isVip, bool type, uint64_t baggageWeight);
-	uint64_t getId() const;
-	bool getIsVip() const;
-	bool getType() const;
-	uint64_t getBaggageWeight() const;
+        Passenger(uint64_t id);
+        Passenger(uint64_t id, bool isVip, bool type, uint64_t baggageWeight, bool hasDangerousBaggage);
+        uint64_t getID() const;
+        bool getIsVip() const;
+        bool getType() const;
+        uint64_t getBaggageWeight() const;
+        bool getIsAggressive() const;
+        bool getHasDangerousBaggage() const;
 };
 
-inline bool isSameType(const Passenger& p1, const Passenger& p2)
+namespace PaUtils
 {
-	return p1.getType() == p2.getType();
-}
+        inline bool isSameType(const Passenger& p1, const Passenger& p2)
+        {
+                return p1.getType() == p2.getType();
+        }
 
-inline bool isBaggageOverweight(const Passenger& p, const Plane& plane)
-{
-	return p.getBaggageWeight() > plane.getMaxBaggageWeight();
-}
+        inline bool isBaggageOverweight(const Passenger& p, const Plane& plane)
+        {
+                return p.getBaggageWeight() > plane.getMaxBaggageWeight();
+        }
+};
 
 #endif // PASSENGER_H

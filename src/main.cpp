@@ -5,231 +5,49 @@
 #include <sys/types.h>
 #include <sys/sem.h>
 #include <sys/wait.h>
+#include <sys/prctl.h>
 #include <errno.h>
 #include <pthread.h>
 #include <mutex>
+#include <random>
+#include <string>
+#include <fcntl.h> // O_RDONLY, O_WRONLY
+#include <sys/stat.h> // mkfifo
+#include <signal.h>
 
 #include "plane.h"
 #include "passenger.h"
+#include "baggageControl.h"
+#include "secControl.h"
+#include "events.h"
+#include "dispatcher.h"
+#include "stairs.h"
+#include "utils.h"
 
-struct ThreadArgs
-{
-        uint64_t id;
-        int semIDs[2];
-};
+// TODO: send sigterm to all processes not just baggage control
 
-std::mutex coutMutex;
+// FIX: for large number of passengers, (~1000) some passangers are getting lost who knows where
 
-#define VERBOSE 1
+int totalPassengers;
 
-void syncedCout(std::string msg)
-{
-        if (VERBOSE == 0)
-                return;
-        std::lock_guard<std::mutex> lock(coutMutex);
-        std::cout << msg;
-}
-
-void *passengerThread(void *arg)
-{
-        ThreadArgs *args = (ThreadArgs *)arg;
-
-        syncedCout("Passenger thread: " + std::to_string(args->id) + "\n");
-
-        // decrement semaphore value by 1
-        sembuf buf = {0, -1, 0};
-        if (semop(args->semIDs[0], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Semaphore decremented\nPassenger thread: " + std::to_string(args->id) + " waiting for semaphore 1\n");
-        // wait for semaphore 1 to be incremented by 1
-        if (semop(args->semIDs[1], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Passenger thread: " + std::to_string(args->id) + " released\n");
-
-        // TODO: run passenger tasks here
-
-        // TODO: passenger waits for security control to be free
-        // TODO: passenger waits for plane to be ready
-        // TODO: passenger thread ends
-
-        pthread_exit(NULL);
-}
-
-std::vector<pthread_t> initPassengers(size_t num, int *semIDs)
-{
-        std::vector<pthread_t> threads(num);
-        for (size_t i = 0; i < num; i++)
-        {
-                ThreadArgs *args = new ThreadArgs;
-                args->id = i;
-                args->semIDs[0] = semIDs[0];
-                args->semIDs[1] = semIDs[1];
-
-                if (pthread_create(&threads[i], NULL, passengerThread, args) != 0)
-                {
-                        perror("pthread_create");
-                        exit(1);
-                }
-        }
-
-        return threads;
-}
-
-void *planeThread(void *arg)
-{
-        ThreadArgs *args = (ThreadArgs *)arg;
-
-        syncedCout("Plane thread: " + std::to_string(args->id) + "\n");
-
-        // decrement semaphore value by 1
-        sembuf buf = {0, -1, 0};
-        if (semop(args->semIDs[0], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Semaphore decremented\nPlane thread: " + std::to_string(args->id) + " waiting for semaphore 1\n");
-        // wait for semaphore 1 to be incremented by 1
-        if (semop(args->semIDs[1], &buf, 1) == -1)
-        {
-                perror("semop");
-                pthread_exit(NULL);
-        }
-        syncedCout("Plane thread: " + std::to_string(args->id) + " released\n");
-
-        // TODO: run plane tasks here
-
-        // TODO: plane waits for terminal to be free
-        // TODO: plane waits for passengers to board
-        // TODO: plane waits x time
-        // TODO: repeat until signal to exit
-
-        pthread_exit(NULL);
-}
-
-std::vector<pthread_t> initPlanes(size_t num, int *semIDs)
-{
-        std::vector<pthread_t> threads(num);
-        for (size_t i = 0; i < num; i++)
-        {
-                ThreadArgs *args = new ThreadArgs;
-                args->id = i;
-                args->semIDs[0] = semIDs[0];
-                args->semIDs[1] = semIDs[1];
-
-                if (pthread_create(&threads[i], NULL, planeThread, args) != 0)
-                {
-                        perror("pthread_create");
-                        exit(1);
-                }
-        }
-
-        return threads;
-}
-
-int baggageControl()
-{
-        while (true)
-        {
-        }
-}
-
-int secControl()
-{
-        while (true)
-        {
-                // TODO: routes passengers to 3 different gates from one queue
-                // TODO: max 2 passengers per gate (same gender)
-                // TODO: count passengers passing through each gate and when N passengers pass through, signal dispatcher
-                // TODO: repeat until queue is empty
-        }
-}
-
-int dispatcher()
-{
-        while (true)
-        {
-                // TODO: signal plane to go to terminal
-                // TODO: signal plane to wait for passengers if queue is not empty
-                // TODO: signal gate to let passengers board
-                // TODO: signal plane when passengers are on board (on stairs)
-                // TODO: repeat until signal to exit
-        }
-}
-
-int gate()
-{
-        while (true)
-        {
-                // TODO: queue of passengers waiting to board
-                // TODO: wait for signal to let passengers board and open gate
-                // TODO: signal dispatcher when N passengers are pass the gate and close gate
-                // TODO: repeat until signal to exit
-        }
-}
-
-int stairs()
-{
-        while (true)
-        {
-                // TODO: this is only a complication point for simulating communication delays between dispatcher and plane
-                // TODO: sends queue from gate to plane
-                // TODO: repeat until signal to exit
-        }
-}
-
-int eventGenerator()
-{
-        while (true)
-        {
-                // INFO: generates random events without input from other processes
-                // INFO: sends signals to eventHandler
-        }
-}
-
-int randomEvent(uint8_t category)
-{
-        while (true)
-        {
-                // INFO: generates random events
-        }
-}
-
-int eventHandler()
-{
-        while (true)
-        {
-                // INFO: receives signals from other processes and threads
-                // INFO: based on signal, it generates random event of a specific category
-                // INFO: sends signals to other processes and threads based on event
-        }
-}
+static std::vector<pid_t> pids(1);
 
 int main(int argc, char* argv[])
 {
-        // TODO: consider dynamic addition of semaphores based on number of passengers and planes
-        // TODO: check system limits for threads
-        // TODO: consider rewriting to std threads
-
         if (argc != 3)
         {
                 std::cerr << "Usage: " << argv[0] << " <numPassengers> <numPlanes>\n";
                 return 1;
         }
 
-        std::vector<pid_t> pids(3);
-        pids[0] = getpid();
+        pids[MAIN] = getpid();
 
         // main + secControl + dispatcher + n passengers + n planes
 
         size_t numPassengers = std::stoul(argv[1]);
         size_t numPlanes = std::stoul(argv[2]);
+
+        totalPassengers = numPassengers;
 
         if (numPassengers > 32767 || numPlanes > 32767)
         {
@@ -237,134 +55,87 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        int semIDsPassengers[2];
-        int semIDsPlanes[2];
+        std::vector<int> semIDs = initSemaphores(0666);
 
-        semIDsPassengers[0] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
-        semIDsPassengers[1] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
-        semIDsPlanes[0] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
-        semIDsPlanes[1] = semget(IPC_PRIVATE, 1, IPC_CREAT | 0666);
+        std::vector<std::string> names = {"baggageControl", "secControl", "stairs", "dispatcher"};
 
-        if (semIDsPassengers[0] == -1 || semIDsPassengers[1] == -1 || semIDsPlanes[0] == -1 || semIDsPlanes[1] == -1)
+        createSubprocesses(4, pids, names);
+
+        pid_t currPid = getpid();
+
+        if (currPid == pids[MAIN])
         {
-                perror("semget");
-                exit(1);
-        }
-
-        semctl(semIDsPassengers[0], 0, SETVAL, numPassengers);
-        semctl(semIDsPassengers[1], 0, SETVAL, 0);
-        semctl(semIDsPlanes[0], 0, SETVAL, numPlanes);
-        semctl(semIDsPlanes[1], 0, SETVAL, 0);
-
-        std::vector<pthread_t> passengerThreads = initPassengers(numPassengers, semIDsPassengers);
-        std::vector<pthread_t> planeThreads = initPlanes(numPlanes, semIDsPlanes);
-
-        fork();
-        pid_t pid = getpid();
-        if (pid != pids[0])
-        {
-                pids[1] = pid;
-                fork();
-                pid = getpid();
-                if (pid != pids[0] && pid != pids[1])
-                {
-                        pids[2] = pid;
-                }
-        }
-
-        if (pid == pids[0])
-        {
-                syncedCout("Main process: " + std::to_string(getpid()) + " waiting for passengers to init\n");
-                sembuf buf = {0, 0, 0};
-                if (semop(semIDsPassengers[0], &buf, 1) == -1)
-                {
-                        perror("semop");
-                        exit(1);
-                }
-                syncedCout("Main process: " + std::to_string(getpid()) + " waiting for planes to init\n");
-
-                if (semop(semIDsPlanes[0], &buf, 1) == -1)
-                {
-                        perror("semop");
-                        exit(1);
-                }
-
-                // increment semaphore 1 by 1 * numPassengers
-                for (size_t i = 0; i < numPassengers; i++)
-                {
-                        sembuf buf = {0, 1, 0};
-                        if (semop(semIDsPassengers[1], &buf, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                }
-
-                // increment semaphore 3 by 1 * numPlanes
-                for (size_t i = 0; i < numPlanes; i++)
-                {
-                        sembuf buf = {0, 1, 0};
-                        if (semop(semIDsPlanes[1], &buf, 1) == -1)
-                        {
-                                perror("semop");
-                                exit(1);
-                        }
-                }
-
-                syncedCout("Main process: " + std::to_string(getpid()) + " released\n");
-
+                std::cout << "Main process: " << getpid() << "\n";
                 // TODO: runtime
 
+                std::vector<uint64_t> delays(numPassengers);
+                genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
 
-                // cleanup
+                initPlanes(numPlanes, semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2], pids[STAIRS], pids[DISPATCHER]);
 
-                for (pthread_t thread : passengerThreads)
+                createSubprocesses(1, pids, {"spawnPassengers"});
+                if (getpid() != pids[MAIN])
                 {
-                        if (pthread_join(thread, NULL) != 0)
+                        spawnPassengers(numPassengers, delays, pids[DISPATCHER], semIDs[BAGGAGE_CTRL], semIDs[SEC_CTRL], {semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]}, semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2], semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2]);
+                }
+
+                while (true)
+                {
+                        // INFO: wait for signal to exit
+                        if (getc(stdin) == 'q')
                         {
-                                perror("pthread_join");
+                                for (size_t i = 1; i < pids.size(); i++)
+                                {
+                                        kill(pids[i], SIGTERM);
+                                }
+                                break;
+                        }
+                }
+                // INFO: cleanup
+
+                // delete semaphores
+                for (size_t i = 0; i < semIDs.size(); i++)
+                {
+                        if (semctl(semIDs[i], 0, IPC_RMID) == -1)
+                        {
+                                perror("semctl");
                                 exit(1);
                         }
                 }
-                for (pthread_t thread : planeThreads)
+                // delete fifo
+                if (unlink("baggageControlFIFO") == -1)
                 {
-                        if (pthread_join(thread, NULL) != 0)
-                        {
-                                perror("pthread_join");
-                                exit(1);
-                        }
-                }
-
-                if (semctl(semIDsPassengers[0], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
+                        perror("unlink");
                         exit(1);
                 }
-                if (semctl(semIDsPassengers[1], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
-                        exit(1);
-                }
-                if (semctl(semIDsPlanes[0], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
-                        exit(1);
-                }
-                if (semctl(semIDsPlanes[1], 0, IPC_RMID) == -1)
-                {
-                        perror("semctl");
-                        exit(1);
-                }
+                vCout("Main process: Exiting\n");
         }
-
-
-        // testing
-        if (getpid() == pids[0])
-                std::cout << "Main process: " << getpid() << std::endl;
-        else if (getpid() == pids[1])
-                std::cout << "SecControl process: " << getpid() << std::endl;
-        else if (getpid() == pids[2])
-                std::cout << "Dispatcher process: " << getpid() << std::endl;
+        else if (currPid == pids[BAGGAGE_CONTROL])
+        {
+                std::cout << "Baggage control process: " << getpid() << "\n";
+                baggageControl(semIDs[BAGGAGE_CTRL]);
+        }
+        else if (currPid == pids[SEC_CONTROL])
+        {
+                std::cout << "Security control process: " << getpid() << "\n";
+                secControl(semIDs[SEC_CTRL], semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]);
+        }
+        else if (currPid == pids[STAIRS])
+        {
+                std::cout << "Stairs process: " << getpid() << "\n";
+                stairs(semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2]);
+        }
+        else if (currPid == pids[DISPATCHER])
+        {
+                std::cout << "Dispatcher process: " << getpid() << "\n";
+                dispatcher(pids[STAIRS]);
+        }
+        else
+        {
+                std::cerr << "Unknown process\n";
+        }
 
         return 0;
 }
+
+
