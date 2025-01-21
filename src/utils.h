@@ -67,6 +67,8 @@ enum Semaphores
         STAIRS_QUEUE_2, // INFO:
         PLANE_STAIRS_1, // INFO:
         PLANE_STAIRS_2, // INFO:
+        PLANE_COUNTER, // INFO:
+        STAIRS_COUNTER, // INFO:
 };
 
 enum Signals

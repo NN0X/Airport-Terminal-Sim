@@ -12,11 +12,6 @@
 #include "utils.h"
 #include "plane.h"
 
-std::mutex planeStairsMutex;
-int passengersOnBoard = 0;
-
-extern int stairsOccupancy;
-
 void planeSignalHandler(int signum)
 {
         switch (signum)
@@ -40,7 +35,7 @@ void planeSignalHandler(int signum)
         }
 }
 
-void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid)
+void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid, int semIDStairsCounter, int semIDPlaneCounter)
 {
         syncedCout("Plane process: " + std::to_string(id) + "\n");
 
@@ -114,25 +109,63 @@ void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t
                                 perror("semop");
                                 exit(1);
                         }
-                        planeStairsMutex.lock();
-                        passengersOnBoard++;
-                        stairsOccupancy--;
                         kill(stairsPid, SIGNAL_PASSENGER_LEFT_STAIRS);
+
+                        while (semop(semIDStairsCounter, &dec, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
+
+                        while (semop(semIDPlaneCounter, &inc, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
+
+                        int passengersOnBoard;
+                        while ((passengersOnBoard = semctl(semIDPlaneCounter, 0, GETVAL)) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semctl");
+                                exit(1);
+                        }
+
                         if (passengersOnBoard == plane.getMaxPassengers())
                         {
                                 syncedCout("Plane: Plane is full\n");
                                 sigqueue(dispatcherPid, SIGNAL_PLANE_READY_DEPART, sig);
+                                // set counter to 0
+                                while (semctl(semIDPlaneCounter, 0, SETVAL, 0) == -1)
+                                {
+                                        if (errno == EINTR)
+                                        {
+                                                continue;
+                                        }
+                                        perror("semctl");
+                                        exit(1);
+                                }
                                 pause(); // wait for signal PLANE_GO
                                 break;
                         }
-                        planeStairsMutex.unlock();
                 }
                 syncedCout("Plane " + std::to_string(getpid()) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n");
                 usleep(plane.getTimeOfCycle() * 1000);
         }
 }
 
-std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid)
+std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid, int semIDStairsCounter, int semIDPlaneCounter)
 {
         pid_t pid = getpid();
         std::vector<pid_t> pids(1);
@@ -143,7 +176,7 @@ std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneS
                 createSubprocesses(1, pids, {"plane"});
                 if (getpid() != pid)
                 {
-                        planeProcess(i, semIDPlaneStairs1, semIDPlaneStairs2, stairsPid, dispatcherPid);
+                        planeProcess(i, semIDPlaneStairs1, semIDPlaneStairs2, stairsPid, dispatcherPid, semIDStairsCounter, semIDPlaneCounter);
                         exit(0);
                 }
         }

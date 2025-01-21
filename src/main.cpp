@@ -26,7 +26,7 @@
 
 // TODO: send sigterm to all processes not just baggage control
 
-// FIX: for large number of passengers, (~1000) some passangers are getting lost who knows where
+// TODO: change counter from signal to semaphore (PASSENGER_LEFT)
 
 int totalPassengers;
 
@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
                 std::vector<uint64_t> delays(numPassengers);
                 genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
 
-                initPlanes(numPlanes, semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2], pids[STAIRS], pids[DISPATCHER]);
+                initPlanes(numPlanes, semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2], pids[STAIRS], pids[DISPATCHER], semIDs[STAIRS_COUNTER], semIDs[PLANE_COUNTER]);
 
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != pids[MAIN])
@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
         else if (currPid == pids[STAIRS])
         {
                 std::cout << "Stairs process: " << getpid() << "\n";
-                stairs(semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2]);
+                stairs(semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2], semIDs[STAIRS_COUNTER], semIDs[PLANE_COUNTER]);
         }
         else if (currPid == pids[DISPATCHER])
         {

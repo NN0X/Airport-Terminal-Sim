@@ -11,11 +11,7 @@
 
 #define MAX_ALLOWED_OCCUPANCY PLANE_PLACES / 2
 
-int stairsOccupancy = 0;
 static bool stairsOpen = false;
-
-extern std::mutex planeStairsMutex;
-extern int passengersOnBoard;
 
 void stairsSignalHandler(int signum)
 {
@@ -45,7 +41,7 @@ void stairsSignalHandler(int signum)
         }
 }
 
-int stairs(int semID1, int semID2)
+int stairs(int semID1, int semID2, int semStairsCounter, int semPlaneCounter)
 {
         // attach handler to signals
         struct sigaction sa;
@@ -115,11 +111,52 @@ int stairs(int semID1, int semID2)
                                 perror("semop");
                                 exit(1);
                         }
-                        planeStairsMutex.lock();
-                        stairsOccupancy++;
+
+                        while (semop(semStairsCounter, &inc, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
+
+                        int stairsOccupancy;
+                        // get occupancy from semaphore
+                        while ((stairsOccupancy = semctl(semStairsCounter, 0, GETVAL)) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semctl");
+                                exit(1);
+                        }
+                        int passengersOnBoard;
+                        while ((passengersOnBoard = semctl(semPlaneCounter, 0, GETVAL)) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semctl");
+                                exit(1);
+                        }
+
                         if (stairsOccupancy + passengersOnBoard == PLANE_PLACES)
                         {
                                 syncedCout("Stairs: Plane is full\n");
+                                // set semaphore to 0
+                                while (semctl(semStairsCounter, 0, SETVAL, 0) == -1)
+                                {
+                                        if (errno == EINTR)
+                                        {
+                                                continue;
+                                        }
+                                        perror("semctl");
+                                        exit(1);
+                                }
                                 break;
                         }
                         if (stairsOccupancy == MAX_ALLOWED_OCCUPANCY)
@@ -127,7 +164,6 @@ int stairs(int semID1, int semID2)
                                 syncedCout("Stairs: Waiting for passengers to leave\n");
                                 pause(); // wait for signal PASSENGER_LEFT_STAIRS
                         }
-                        planeStairsMutex.unlock();
                 }
         }
 }

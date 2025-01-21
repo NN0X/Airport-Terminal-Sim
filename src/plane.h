@@ -6,13 +6,13 @@
 #include <vector>
 #include <sys/types.h>
 
-#define PLANE_PLACES 100
+#define PLANE_PLACES 10
 #define MIN_TIME 10 // in sec
 #define MAX_TIME 1000 // in sec
 #define MAX_ALLOWED_BAGGAGE_WEIGHT 75 // kg
 
-void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid);
-std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid);
+void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid, int semIDStairsCounter, int semIDPlaneCounter);
+std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid, int semIDStairsCounter, int semIDPlaneCounter);
 
 class Plane
 {
