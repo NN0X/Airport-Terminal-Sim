@@ -14,18 +14,24 @@
 #include "utils.h"
 #include "passenger.h"
 
+static bool isOK = false;
+static pid_t dispatcherPID;
+
 void passengerSignalHandler(int signum)
 {
         switch (signum)
         {
                 case SIGNAL_OK:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal OK\n");
+                        isOK = true;
                         break;
                 case SIGNAL_PASSENGER_IS_OVERWEIGHT:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n");
+                        kill(dispatcherPID, SIGNAL_PASSENGER_LEFT);
                         exit(0);
                 case SIGNAL_PASSENGER_IS_DANGEROUS:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n");
+                        kill(dispatcherPID, SIGNAL_PASSENGER_LEFT);
                         exit(0);
                 default:
                         syncedCout("Passenger " + std::to_string(getpid()) + ": Received unknown signal\n");
@@ -34,10 +40,11 @@ void passengerSignalHandler(int signum)
 }
 
 
-void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates)
+void passengerProcess(size_t id, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2)
 {
         syncedCout("Passenger process: " + std::to_string(id) + "\n");
 
+        dispatcherPID = pidDispatcher;
         Passenger passenger(id);
 
         // set signal handler
@@ -160,24 +167,72 @@ void passengerProcess(size_t id, int semIDBaggageCtrl, int semIDSecCtrl, std::ve
         }
         close(fd);
 
+        while (!isOK)
+        {
+                usleep(100); // wait for signal from gate
+        }
+
         // INFO: passenger waits for plane to be ready
 
+        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting at stairs\n");
+        sembuf inc = {0, 1, 0};
+        while (semop(semIDStairs1, &inc, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+        while (semop(semIDStairs2, &dec, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
 
-        // INFO: passenger thread ends
+        syncedCout("Passenger: " + std::to_string(getpid()) + " entering plane\n");
+        while (semop(semIDPlane1, &inc, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+        while (semop(semIDPlane2, &dec, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+        syncedCout("Passenger: " + std::to_string(getpid()) + " entered plane\n");
+
+        kill(pidDispatcher, SIGNAL_PASSENGER_LEFT);
+
+        exit(0);
 }
 
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates)
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2)
 {
         pid_t pid = getpid();
+        std::vector<pid_t> pids(1);
+        pids[0] = pid;
         syncedCout("Spawn passengers\n");
         for (size_t i = 0; i < num; i++)
         {
-                std::vector<pid_t> pids(1);
-                pids[0] = pid;
                 createSubprocesses(1, pids, {"passenger"});
                 if (getpid() != pid)
                 {
-                        passengerProcess(i, semIDBaggageCtrl, semIDSecCtrl, semIDGates);
+                        passengerProcess(i, pidDispatcher, semIDBaggageCtrl, semIDSecCtrl, semIDGates, semIDStairs1, semIDStairs2, semIDPlane1, semIDPlane2);
                         exit(0);
                 }
                 syncedCout("Waiting for " + std::to_string(delays[i]) + " ms\n");
@@ -186,7 +241,7 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, int semIDB
 
         syncedCout("All passengers created\n");
 
-        exit(0); // WARNING: this is a temporary solution
+        exit(0);
 }
 
 Passenger::Passenger(uint64_t id)

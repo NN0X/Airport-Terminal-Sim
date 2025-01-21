@@ -40,7 +40,7 @@ void planeSignalHandler(int signum)
         }
 }
 
-void planeProcess(size_t id, int semIDPlaneStairs, pid_t stairsPid, pid_t dispatcherPid)
+void planeProcess(size_t id, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid)
 {
         syncedCout("Plane process: " + std::to_string(id) + "\n");
 
@@ -84,17 +84,33 @@ void planeProcess(size_t id, int semIDPlaneStairs, pid_t stairsPid, pid_t dispat
         // 7. simulate delay
         // 8. repeat until signal SIGTERM
 
+        sigval sig;
+        sig.sival_int = getpid();
+
         while (true)
         {
-                syncedCout("Plane " + std::to_string(id) + ": waiting for signal PLANE_RECEIVE\n");
+                sigqueue(dispatcherPid, SIGNAL_PLANE_READY, sig);
                 pause(); // wait for signal PLANE_RECEIVE
-                kill(dispatcherPid, SIGNAL_PLANE_READY);
                 while (true)
                 {
-                        syncedCout("Plane " + std::to_string(id) + ": waiting for passenger\n");
+                        syncedCout("Plane " + std::to_string(getpid()) + ": waiting for passenger\n");
                         sembuf dec = {0, -1, 0};
-                        if (semop(semIDPlaneStairs, &dec, 1) == -1)
+                        while (semop(semIDPlaneStairs1, &dec, 1) == -1)
                         {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
+                        sembuf inc = {0, 1, 0};
+                        while (semop(semIDPlaneStairs2, &inc, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
                                 perror("semop");
                                 exit(1);
                         }
@@ -105,33 +121,36 @@ void planeProcess(size_t id, int semIDPlaneStairs, pid_t stairsPid, pid_t dispat
                         if (passengersOnBoard == plane.getMaxPassengers())
                         {
                                 syncedCout("Plane: Plane is full\n");
-                                kill(dispatcherPid, SIGNAL_PLANE_READY_DEPART);
+                                sigqueue(dispatcherPid, SIGNAL_PLANE_READY_DEPART, sig);
                                 pause(); // wait for signal PLANE_GO
                                 break;
                         }
                         planeStairsMutex.unlock();
                 }
-                syncedCout("Plane " + std::to_string(id) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n");
+                syncedCout("Plane " + std::to_string(getpid()) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n");
                 usleep(plane.getTimeOfCycle() * 1000);
         }
 }
 
-void initPlanes(size_t num, int semIDPlaneStairs, pid_t stairsPid, pid_t dispatcherPid)
+std::vector<pid_t> initPlanes(size_t num, int semIDPlaneStairs1, int semIDPlaneStairs2, pid_t stairsPid, pid_t dispatcherPid)
 {
         pid_t pid = getpid();
+        std::vector<pid_t> pids(1);
+        pids[0] = pid;
+        syncedCout("Init planes\n");
         for (size_t i = 0; i < num; i++)
         {
-                std::vector<pid_t> pids(1);
-                pids[0] = pid;
                 createSubprocesses(1, pids, {"plane"});
-                if (getpid() != pids[0])
+                if (getpid() != pid)
                 {
-                        planeProcess(i, semIDPlaneStairs, stairsPid, dispatcherPid);
+                        planeProcess(i, semIDPlaneStairs1, semIDPlaneStairs2, stairsPid, dispatcherPid);
                         exit(0);
                 }
         }
 
         syncedCout("All planes created\n");
+
+        return std::vector<pid_t>(pids.begin() + 1, pids.end());
 }
 
 Plane::Plane(uint64_t id)

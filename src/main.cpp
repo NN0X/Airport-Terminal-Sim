@@ -24,9 +24,13 @@
 #include "stairs.h"
 #include "utils.h"
 
-// TODO: change spawnPassengers and initPlanes to return pid_t
-// FIX: initPlanes (creates wrong number of planes)
 // TODO: send sigterm to all processes not just baggage control
+
+// FIX: for large number of passengers, (~1000) some passangers are getting lost who knows where
+
+int totalPassengers;
+
+static std::vector<pid_t> pids(1);
 
 int main(int argc, char* argv[])
 {
@@ -36,13 +40,14 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        std::vector<pid_t> pids(1);
         pids[MAIN] = getpid();
 
         // main + secControl + dispatcher + n passengers + n planes
 
         size_t numPassengers = std::stoul(argv[1]);
         size_t numPlanes = std::stoul(argv[2]);
+
+        totalPassengers = numPassengers;
 
         if (numPassengers > 32767 || numPlanes > 32767)
         {
@@ -52,25 +57,26 @@ int main(int argc, char* argv[])
 
         std::vector<int> semIDs = initSemaphores(0666);
 
-        std::vector<std::string> names = {"baggageControl", "secControl", "dispatcher", "stairs"};
-        createSubprocesses(4, pids, names);
+        std::vector<std::string> names = {"baggageControl", "secControl", "stairs", "dispatcher"};
 
-        initPlanes(numPlanes, semIDs[PLANE_STAIRS], pids[STAIRS], pids[DISPATCHER]);
+        createSubprocesses(4, pids, names);
 
         pid_t currPid = getpid();
 
         if (currPid == pids[MAIN])
         {
-                std::cout << "Main process\n";
+                std::cout << "Main process: " << getpid() << "\n";
                 // TODO: runtime
 
                 std::vector<uint64_t> delays(numPassengers);
                 genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
 
+                initPlanes(numPlanes, semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2], pids[STAIRS], pids[DISPATCHER]);
+
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != pids[MAIN])
                 {
-                        spawnPassengers(numPassengers, delays, semIDs[BAGGAGE_CTRL], semIDs[SEC_CTRL], {semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]});
+                        spawnPassengers(numPassengers, delays, pids[DISPATCHER], semIDs[BAGGAGE_CTRL], semIDs[SEC_CTRL], {semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]}, semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2], semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2]);
                 }
 
                 while (true)
@@ -106,23 +112,23 @@ int main(int argc, char* argv[])
         }
         else if (currPid == pids[BAGGAGE_CONTROL])
         {
-                std::cout << "Baggage control process\n";
+                std::cout << "Baggage control process: " << getpid() << "\n";
                 baggageControl(semIDs[BAGGAGE_CTRL]);
         }
         else if (currPid == pids[SEC_CONTROL])
         {
-                std::cout << "Security control process\n";
+                std::cout << "Security control process: " << getpid() << "\n";
                 secControl(semIDs[SEC_CTRL], semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]);
-        }
-        else if (currPid == pids[DISPATCHER])
-        {
-                std::cout << "Dispatcher process\n";
-                dispatcher({}, pids[STAIRS]);
         }
         else if (currPid == pids[STAIRS])
         {
-                std::cout << "Stairs process\n";
-                stairs(semIDs[STAIRS_QUEUE]);
+                std::cout << "Stairs process: " << getpid() << "\n";
+                stairs(semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2]);
+        }
+        else if (currPid == pids[DISPATCHER])
+        {
+                std::cout << "Dispatcher process: " << getpid() << "\n";
+                dispatcher(pids[STAIRS]);
         }
         else
         {

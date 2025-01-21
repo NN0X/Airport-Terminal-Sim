@@ -45,7 +45,7 @@ void stairsSignalHandler(int signum)
         }
 }
 
-int stairs(int semID)
+int stairs(int semID1, int semID2)
 {
         // attach handler to signals
         struct sigaction sa;
@@ -96,8 +96,22 @@ int stairs(int semID)
                 while (stairsOpen)
                 {
                         sembuf inc = {0, 1, 0};
-                        if (semop(semID, &inc, 1) == -1)
+                        sembuf dec = {0, -1, 0};
+                        while (semop(semID1, &dec, 1) == -1)
                         {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
+                        while (semop(semID2, &inc, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
                                 perror("semop");
                                 exit(1);
                         }
@@ -113,6 +127,7 @@ int stairs(int semID)
                                 syncedCout("Stairs: Waiting for passengers to leave\n");
                                 pause(); // wait for signal PASSENGER_LEFT_STAIRS
                         }
+                        planeStairsMutex.unlock();
                 }
         }
 }

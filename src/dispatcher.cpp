@@ -9,8 +9,17 @@
 
 #include "utils.h"
 
-void dispatcherSignalHandler(int signum)
+static pid_t stairsPID;
+static bool planeAlreadyInTerminal = false;
+static std::vector<pid_t> planesWaiting;
+
+int totalPassengersLeft = 0;
+
+extern int totalPassengers;
+
+void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
 {
+        pid_t pid;
         switch (signum)
         {
         case SIGNAL_OK:
@@ -18,9 +27,43 @@ void dispatcherSignalHandler(int signum)
                 break;
         case SIGNAL_PLANE_READY:
                 syncedCout("Dispatcher: Received signal PLANE_READY\n");
+                pid = info->si_value.sival_int;
+                if (planeAlreadyInTerminal)
+                {
+                        syncedCout("Dispatcher: Plane is already in terminal\n");
+                        planesWaiting.push_back(pid);
+                        break;
+                }
+                syncedCout("Dispatcher: Plane " + std::to_string(pid) + " is ready\n");
+                kill(pid, SIGNAL_PLANE_RECEIVE);
+                kill(stairsPID, SIGNAL_STAIRS_OPEN);
+                planeAlreadyInTerminal = true;
                 break;
         case SIGNAL_PLANE_READY_DEPART:
                 syncedCout("Dispatcher: Received signal PLANE_READY_DEPART\n");
+                pid = info->si_value.sival_int;
+                syncedCout("Dispatcher: Plane " + std::to_string(pid) + " is ready to depart\n");
+                kill(pid, SIGNAL_PLANE_GO);
+                planeAlreadyInTerminal = false;
+                if (!planesWaiting.empty())
+                {
+                        pid_t nextPlane = planesWaiting.front();
+                        planesWaiting.erase(planesWaiting.begin());
+                        syncedCout("Dispatcher: Plane " + std::to_string(nextPlane) + " is ready\n");
+                        kill(nextPlane, SIGNAL_PLANE_RECEIVE);
+                        kill(stairsPID, SIGNAL_STAIRS_OPEN);
+                        planeAlreadyInTerminal = true;
+                }
+                break;
+        case SIGNAL_PASSENGER_LEFT:
+                syncedCout("Dispatcher: Received signal PASSENGER_LEFT\n");
+                totalPassengersLeft++;
+                if (totalPassengersLeft == totalPassengers)
+                {
+                        syncedCout("Dispatcher: All passengers left\n");
+                        // send signal to main to exit all processes
+                        totalPassengersLeft = 0;
+                }
                 break;
         case SIGTERM:
                 syncedCout("Dispatcher: Received signal SIGTERM\n");
@@ -32,13 +75,14 @@ void dispatcherSignalHandler(int signum)
         }
 }
 
-int dispatcher(std::vector<pid_t> planePids, pid_t stairsPid)
+int dispatcher(pid_t stairsPid)
 {
+        stairsPID = stairsPid;
         // attach handler to signals
         struct sigaction sa;
-        sa.sa_handler = dispatcherSignalHandler;
+        sa.sa_sigaction = dispatcherSignalHandler;
         sigemptyset(&sa.sa_mask);
-        sa.sa_flags = 0;
+        sa.sa_flags = SA_SIGINFO;
         if (sigaction(SIGNAL_OK, &sa, NULL) == -1)
         {
                 perror("sigaction");
@@ -54,28 +98,19 @@ int dispatcher(std::vector<pid_t> planePids, pid_t stairsPid)
                 perror("sigaction");
                 exit(1);
         }
+        if (sigaction(SIGNAL_PASSENGER_LEFT, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
         if (sigaction(SIGTERM, &sa, NULL) == -1)
         {
                 perror("sigaction");
                 exit(1);
         }
 
-        int currentPlane = 0;
-        int readyPlanes = planePids.size();
         while (true)
         {
-                // INFO: signal plane to go to terminal
-                // INFO: signal plane to wait for passengers if queue is not empty
-                // INFO: signal gate to let passengers board
-                // INFO: signal plane when passengers are on board (on stairs)
-                // INFO: repeat until signal to exit
-
-                pause(); // wait for signal PLANE_READY
-                kill(planePids[currentPlane], SIGNAL_PLANE_RECEIVE);
-                kill(stairsPid, SIGNAL_STAIRS_OPEN);
-
-                pause(); // wait for signal PLANE_READY_DEPART
-                kill(planePids[currentPlane], SIGNAL_PLANE_GO);
-                currentPlane = (currentPlane + 1) % readyPlanes;
+                pause();
         }
 }

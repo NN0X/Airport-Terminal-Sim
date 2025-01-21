@@ -33,8 +33,8 @@ enum ProcessTypes
         MAIN,
         BAGGAGE_CONTROL,
         SEC_CONTROL,
-        DISPATCHER,
         STAIRS,
+        DISPATCHER,
 };
 
 enum FIFOs
@@ -63,8 +63,10 @@ enum Semaphores
         SEC_GATE_0, // INFO: 
         SEC_GATE_1, // INFO: 
         SEC_GATE_2, // INFO: 
-        STAIRS_QUEUE, // INFO:
-        PLANE_STAIRS, // INFO:
+        STAIRS_QUEUE_1, // INFO:
+        STAIRS_QUEUE_2, // INFO:
+        PLANE_STAIRS_1, // INFO:
+        PLANE_STAIRS_2, // INFO:
 };
 
 enum Signals
@@ -78,6 +80,7 @@ enum Signals
         SIGNAL_PLANE_GO, // INFO: signals plane that it can go to terminal [dispatcher -> plane]
         SIGNAL_PLANE_READY, // INFO: signals dispatcher that plane is ready to receive passengers [plane -> dispatcher]
         SIGNAL_PLANE_READY_DEPART, // INFO: signals plane that it can depart [plane -> dispatcher]
+        SIGNAL_PASSENGER_LEFT, // INFO: signals dispatcher that passenger left [passenger -> dispatcher]
         SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
 };
 
@@ -86,8 +89,6 @@ enum EventSignals
         TRIGGER_AGRESSIVE = SIGNAL_OK + 1, // INFO: signals event handler that passenger is aggressive [passenger -> eventHandler]
         TRIGGER_DANGEROUS, // INFO: signals event handler that passenger has dangerous baggage [secControl -> eventHandler]
         TRIGGER_OVERWEIGHT, // INFO: signals event handler that passenger is overweight [baggageControl -> eventHandler]
-
-        EVENT_KILL, // INFO: signals passenger process to exit [eventHandler -> passenger]
 };
 
 std::vector<int> initSemaphores(int permissions);

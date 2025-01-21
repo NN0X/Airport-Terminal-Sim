@@ -9,6 +9,6 @@
 #include <mutex>
 #include <signal.h>
 
-int stairs(int semID);
+int stairs(int semID1, int semID2);
 
 #endif // STAIRS_H
