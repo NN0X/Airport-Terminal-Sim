@@ -167,7 +167,7 @@ void *gateSelectorThread(void *args)
                 }
                 if (selectedPair.passengerIndex == -1)
                 {
-                        //usleep(SEC_SELECTOR_DELAY * 1000);
+                        usleep(SECURITY_SELECTOR_DELAY * 1000);
                         continue;
                 }
                 vCout("Security selector: Selected passenger " + std::to_string(secControlQueue[selectedPair.passengerIndex].id) + " for gate " + std::to_string(selectedPair.gateIndex) + "\n");
@@ -207,7 +207,7 @@ void *gateSelectorThread(void *args)
                 close(fd);
 
                 vCout("Security selector: waiting " + std::to_string(SECURITY_SELECTOR_DELAY) + " ms\n");
-                //usleep(SEC_SELECTOR_DELAY * 1000);
+                usleep(SECURITY_SELECTOR_DELAY * 1000);
         }
 }
 
@@ -265,7 +265,7 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
                 uint64_t delay;
                 genRandom(delay, SECURITY_GATE_MIN_DELAY, SECURITY_GATE_MAX_DELAY);
                 vCout("Security gate " + std::to_string(gate) + ": waiting " + std::to_string(delay) + " ms\n");
-                //usleep(delay[0] * 1000);
+                usleep(delay * 1000);
         }
 
 }

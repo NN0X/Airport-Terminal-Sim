@@ -285,7 +285,7 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerP
                         exit(0);
                 }
                 vCout("Waiting for " + std::to_string(delays[i]) + " ms\n");
-                //usleep(delays[i] * 1000);
+                usleep(delays[i] * 1000);
         }
 
         vCout("All passengers created\n");

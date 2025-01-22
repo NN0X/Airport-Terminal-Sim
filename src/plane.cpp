@@ -157,7 +157,7 @@ void planeProcess(PlaneProcessArgs args)
                         }
                 }
                 vCout("Plane " + std::to_string(args.id) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n");
-                //usleep(plane.getTimeOfCycle() * 1000);
+                usleep(plane.getTimeOfCycle() * 1000);
         }
 }
 
