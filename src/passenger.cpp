@@ -157,8 +157,6 @@ void passengerProcess(PassengerProcessArgs args)
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting for security control selector\n");
 
-        exit(0); // BUG: below this point some processes hang for unknown reason
-
         // wait until semIDSecurityControlSelector semaphore number args.id is 1
         sembuf decreaseNthSemaphore = {(uint16_t)args.id, -1, 0};
         while (semop(args.semIDSecurityControlSelector, &decreaseNthSemaphore, 1) == -1)
@@ -232,6 +230,9 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("semop");
                 exit(1);
         }
+
+        //exit(0); // BUG: under this point some processes get stuck
+
         vCout("Passenger: " + std::to_string(args.id) + " waiting at stairs\n");
         while (semop(args.semIDStairsPassengerWait, &DEC_SEM, 1) == -1)
         {

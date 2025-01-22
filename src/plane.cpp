@@ -83,6 +83,7 @@ void planeProcess(PlaneProcessArgs args)
 
                 while (true)
                 {
+                        usleep(1000); // WARNING: test
                         std::cout << "Plane " << args.id << ": waiting for passenger\n";
                         vCout("Plane " + std::to_string(args.id) + ": waiting for passenger\n");
                         while (semop(args.semIDPlanePassengerIn, &DEC_SEM, 1) == -1)

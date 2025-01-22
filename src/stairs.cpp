@@ -80,6 +80,7 @@ int stairs(StairsArgs args)
                 }
                 while (stairsOpen)
                 {
+                        usleep(1000); // WARNING: test
                         std::cout << "Stairs: Waiting for passengers\n";
                         while (semop(args.semIDStairsPassengerIn, &DEC_SEM, 1) == -1)
                         {
