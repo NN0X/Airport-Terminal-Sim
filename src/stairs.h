@@ -9,6 +9,6 @@
 #include <mutex>
 #include <signal.h>
 
-int stairs(int semID1, int semID2, int semStairsCounter, int semPlaneCounter);
+int stairs(StairsArgs args);
 
 #endif // STAIRS_H

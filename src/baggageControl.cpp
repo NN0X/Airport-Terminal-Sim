@@ -10,32 +10,35 @@
 #include "passenger.h"
 #include "utils.h"
 
+extern sembuf INC_SEM;
+extern sembuf DEC_SEM;
+
 void baggageControlSignalHandler(int signum)
 {
         switch (signum)
         {
                 case SIGNAL_OK:
-                        syncedCout("Baggage control: Received signal OK\n");
+                        vCout("Baggage control: Received signal OK\n");
                         break;
                 case SIGTERM:
-                        syncedCout("Baggage control: Received signal SIGTERM\n");
+                        vCout("Baggage control: Received signal SIGTERM\n");
                         exit(0);
                 default:
-                        syncedCout("Baggage control: Received unknown signal\n");
+                        vCout("Baggage control: Received unknown signal\n");
                         break;
         }
 }
 
-int baggageControl(int semID)
+int baggageControl(BaggageControlArgs args)
 {
         // INFO: check if passenger baggage weight is within limits
         // INFO: if not, signal event handler
         // INFO: repeat until signal to exit
 
         // check if fifo exists
-        if (access(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), F_OK) == -1)
+        if (access(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), F_OK) == -1)
         {
-                if (mkfifo(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), 0666) == -1)
+                if (mkfifo(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), 0666) == -1)
                 {
                         perror("mkfifo");
                         exit(1);
@@ -60,15 +63,19 @@ int baggageControl(int semID)
 
         while (true)
         {
-                // wait for passenger
-                syncedCout("Baggage control: waiting for passenger\n");
-                sembuf inc = {0, 1, 0};
-                if (semop(semID, &inc, 1) == -1)
+                // tell passenger to enter
+                while (semop(args.semIDBaggageControlEntrance, &INC_SEM, 1) == -1)
                 {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
                         perror("semop");
                         exit(1);
                 }
-                int fd = open(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), O_RDONLY);
+
+                vCout("Baggage control: waiting for passenger\n");
+                int fd = open(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), O_RDONLY);
                 if (fd == -1)
                 {
                         perror("open");
@@ -83,20 +90,27 @@ int baggageControl(int semID)
                         exit(1);
                 }
                 close(fd);
-                syncedCout("Baggage control: received baggage info\n");
+                vCout("Baggage control: received baggage info\n");
 
-                if (baggageInfo.mBaggageWeight > MAX_ALLOWED_BAGGAGE_WEIGHT)
+                if (baggageInfo.weight > PLANE_MAX_ALLOWED_BAGGAGE_WEIGHT)
                 {
-                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is overweight\n");
-                        kill(baggageInfo.mPid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n");
+                        kill(baggageInfo.pid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
                         // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
                         // and then event handler sending signal to passenger
                 }
                 else
                 {
-                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is not overweight\n");
-                        // send empty signal to unblock passenger
-                        kill(baggageInfo.mPid, SIGNAL_OK);
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is not overweight\n");
+                        while (semop(args.semIDBaggageControlOut, &INC_SEM, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
                 }
         }
 }

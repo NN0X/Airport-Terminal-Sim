@@ -12,20 +12,16 @@
 
 #include "utils.h"
 
-std::mutex coutMutex;
+sembuf INC_SEM = {0, 1, 0};
+sembuf DEC_SEM = {0, -1, 0};
 
-#define VERBOSE 1
-#define SEM_INIT_VALUE 0
-
-#define NUM_SEMAPHORES 11
-
-std::vector<int> initSemaphores(int permissions)
+std::vector<int> initSemaphores(int permissions, size_t numPassengers)
 {
-        std::vector<int> ids(NUM_SEMAPHORES);
+        std::vector<int> ids(SEM_NUMBER);
 
         std::vector<unsigned int> values(ids.size(), SEM_INIT_VALUE);
 
-        for (size_t i = 0; i < ids.size(); i++)
+        for (size_t i = 0; i < ids.size() - 1; i++)
         {
                 ids[i] = semget(IPC_PRIVATE, 1, permissions);
                 if (ids[i] == -1)
@@ -38,6 +34,20 @@ std::vector<int> initSemaphores(int permissions)
                         perror("semctl");
                         exit(1);
                 }
+        }
+        ids[SEM_SECURITY_CONTROL_SELECTOR] = semget(IPC_PRIVATE, numPassengers, permissions);
+        if (ids[SEM_SECURITY_CONTROL_SELECTOR] == -1)
+        {
+                perror("semget");
+                exit(1);
+        }
+
+        std::vector<uint16_t> initial(numPassengers, SEM_INIT_VALUE);
+
+        if (semctl(ids[SEM_SECURITY_CONTROL_SELECTOR], 0, SETALL, initial.data()) == -1)
+        {
+                perror("semctl");
+                exit(1);
         }
 
         return ids;
@@ -55,19 +65,22 @@ void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max)
         }
 }
 
+void genRandom(uint64_t &val, uint64_t min, uint64_t max)
+{
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<uint64_t> dis(min, max);
+
+        val = dis(gen);
+}
+
 void vCout(const std::string &msg, int color)
 {
         if (VERBOSE == 0)
                 return;
         std::cout << colors[color];
         std::cout << msg;
-        std::cout << colors[NONE];
-}
-
-void syncedCout(const std::string &msg, int color)
-{
-        //std::lock_guard<std::mutex> lock(coutMutex);
-        vCout(msg, color);
+        std::cout << colors[COLOR_NONE];
 }
 
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names)
@@ -84,7 +97,7 @@ void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<st
         for (size_t i = offset; i < n + offset; i++)
         {
                 pids[i] = fork();
-                if (getpid() == pids[MAIN])
+                if (getpid() == pids[PROCESS_MAIN])
                 {
                         continue;
                 }
@@ -108,3 +121,22 @@ void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<st
         }
 }
 
+void createSubprocess(pid_t &pid, const std::string &name)
+{
+        pid = fork();
+        if (pid == -1)
+        {
+                perror("fork");
+                exit(1);
+        }
+        if (pid != 0)
+        {
+                if (name != "" && prctl(PR_SET_NAME, name.c_str()) == -1)
+                {
+                        perror("prctl");
+                        exit(1);
+                }
+                vCout("Created process: " + std::to_string(pid) + "\n");
+                vCout("Process name: " + name + "\n");
+        }
+}

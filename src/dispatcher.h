@@ -6,6 +6,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-int dispatcher(pid_t stairsPid);
+#include "args.h"
+
+int dispatcher(DispatcherArgs args);
 
 #endif // DISPATCHER_H

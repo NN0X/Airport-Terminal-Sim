@@ -11,33 +11,34 @@
 #include <vector>
 
 #include "plane.h"
+#include "args.h"
 
-void passengerProcess(size_t id, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2);
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2);
+void passengerProcess(PassengerProcessArgs args);
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerProcessArgs args);
 
 struct BaggageInfo
 {
-        pid_t mPid;
-        uint64_t mBaggageWeight;
+        pid_t pid;
+        uint64_t weight;
 };
 
 struct TypeInfo
 {
-        pid_t mPid;
-        bool mType;
-        bool mIsVip;
+        pid_t id;
+        bool type;
+        bool isVIP;
 };
 
 struct DangerInfo
 {
-        pid_t mPid;
-        bool mHasDangerousBaggage;
+        pid_t pid;
+        bool hasDangerousBaggage;
 };
 
 struct SelectedPair
 {
-        int passenger;
-        int gate;
+        int passengerIndex;
+        int gateIndex;
 };
 
 class Passenger
