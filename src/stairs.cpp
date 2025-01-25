@@ -12,22 +12,25 @@
 extern sembuf INC_SEM;
 extern sembuf DEC_SEM;
 
+static bool leaveEarly = false;
+
 void stairsSignalHandler(int signum)
 {
         switch (signum)
         {
         case SIGNAL_OK:
-                vCout("Stairs: Received signal OK\n");
+                vCout("Stairs: Received signal OK\n", MAGENTA, LOG_STAIRS);
                 break;
-        case SIGNAL_PASSENGER_LEFT_STAIRS:
-                vCout("Stairs: Received signal PASSENGER_LEFT_STAIRS\n");
+        case SIGNAL_STAIRS_CLOSE:
+                vCout("Stairs: Received signal STAIRS_CLOSE\n", MAGENTA, LOG_STAIRS);
+                leaveEarly = true;
                 break;
         case SIGTERM:
-                vCout("Stairs: Received signal SIGTERM\n");
+                vCout("Stairs: Received signal SIGTERM\n", MAGENTA, LOG_STAIRS);
                 exit(0);
                 break;
         default:
-                vCout("Stairs: Received unknown signal\n");
+                vCout("Stairs: Received unknown signal\n", MAGENTA, LOG_STAIRS);
                 break;
         }
 }
@@ -44,7 +47,7 @@ int stairs(StairsArgs args)
                 perror("sigaction");
                 exit(1);
         }
-        if (sigaction(SIGNAL_PASSENGER_LEFT_STAIRS, &sa, NULL) == -1)
+        if (sigaction(SIGNAL_STAIRS_CLOSE, &sa, NULL) == -1)
         {
                 perror("sigaction");
                 exit(1);
@@ -57,28 +60,28 @@ int stairs(StairsArgs args)
 
         while (true)
         {
+                leaveEarly = false;
                 safeSemop(args.semIDStairsWait, &DEC_SEM, 1);
                 while (true)
                 {
-                        //usleep(1000); // WARNING: test
                         safeSemop(args.semIDStairsPassengerIn, &DEC_SEM, 1);
                         safeSemop(args.semIDStairsPassengerWait, &INC_SEM, 1);
 
-                        safeSemop(args.semIDStairsCounter, &INC_SEM, 1);
+                        safeSemop(args.semIDStairsCounter, &DEC_SEM, 1);
 
-                        int stairsOccupancy = safeGetSemVal(args.semIDStairsCounter, 0);
-                        // get occupancy from semaphore
+                        int stairsOccupancy = STAIRS_MAX_ALLOWED_OCCUPANCY - safeGetSemVal(args.semIDStairsCounter, 0);
+
                         int passengersOnBoard = safeGetSemVal(args.semIDPlaneCounter, 0);
 
                         if (stairsOccupancy + passengersOnBoard == PLANE_PLACES)
                         {
-                                vCout("Stairs: Plane is full\n");
+                                vCout("Stairs: Plane is full\n", MAGENTA, LOG_STAIRS);
                                 break;
                         }
-                        if (stairsOccupancy == STAIRS_MAX_ALLOWED_OCCUPANCY)
+                        if (leaveEarly)
                         {
-                                vCout("Stairs: Waiting for passengers to leave\n");
-                                pause();
+                                vCout("Stairs: Plane left early\n", MAGENTA, LOG_STAIRS);
+                                break;
                         }
                 }
         }

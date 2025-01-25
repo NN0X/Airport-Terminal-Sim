@@ -34,6 +34,7 @@ struct PlaneProcessArgs
         int semIDPlaneWait;
         int semIDPlanePassengerIn;
         int semIDPlanePassengerWait;
+        int semIDPlaneDepart;
         pid_t pidStairs;
         pid_t pidDispatcher;
         int semIDStairsCounter;
@@ -86,6 +87,7 @@ struct StairsArgs
 struct DispatcherArgs
 {
         int semIDPlaneWait;
+        int semIDPlaneDepart;
         int semIDStairsWait;
         int semIDPassengerCounter;
 };

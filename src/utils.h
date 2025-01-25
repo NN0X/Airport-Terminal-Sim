@@ -7,9 +7,7 @@
 #include <signal.h>
 #include <cstdint>
 
-//#define usleep(x) ;
-
-#define VERBOSE 0
+#define VERBOSE 1
 
 #define PLANE_PLACES 10
 #define PLANE_MIN_TIME 10 // in sec
@@ -23,17 +21,17 @@
 #define STAIRS_MAX_ALLOWED_OCCUPANCY PLANE_PLACES / 2
 
 #define SEM_INIT_VALUE 0
-#define SEM_NUMBER 23
+#define SEM_NUMBER 24
 
 enum Colors
 {
-        COLOR_NONE = 0,
-        COLOR_RED,
-        COLOR_GREEN,
-        COLOR_YELLOW,
-        COLOR_BLUE,
-        COLOR_MAGENTA,
-        COLOR_CYAN,
+        NONE = 0,
+        RED,
+        GREEN,
+        YELLOW,
+        BLUE,
+        MAGENTA,
+        CYAN,
 };
 
 const std::string colors[] = {
@@ -98,22 +96,33 @@ enum Semaphores
         SEM_PASSENGER_COUNTER,
         SEM_PLANE_WAIT,
         SEM_STAIRS_WAIT,
+        SEM_PLANE_DEPART,
         SEM_SECURITY_CONTROL_SELECTOR,
 };
 
 enum Signals
 {
-        SIGNAL_PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
-        SIGNAL_PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
-        SIGNAL_PASSENGER_LEFT_STAIRS, // INFO: signals stairs that passenger left stairs [stairs -> stairs]
-        SIGNAL_PASSENGER_SKIPPED, // INFO: signals passenger that he was skipped [secControl -> passenger]
-        SIGNAL_STAIRS_OPEN, // INFO: signals stairs that stairs are open [dispatcher -> stairs]
-        SIGNAL_STAIRS_CLOSE, // INFO: signals stairs that stairs are closed [dispatcher -> stairs]
-        SIGNAL_PLANE_RECEIVE, // INFO: signals plane that it can receive passengers [dispatcher -> plane]
-        SIGNAL_PLANE_GO, // INFO: signals plane that it can go to terminal [dispatcher -> plane]
-        SIGNAL_PLANE_READY, // INFO: signals dispatcher that plane is ready to receive passengers [plane -> dispatcher]
-        SIGNAL_PLANE_READY_DEPART, // INFO: signals plane that it can depart [plane -> dispatcher]
-        SIGNAL_OK, // INFO: signals that everything is ok [any -> any]
+        SIGNAL_PASSENGER_IS_OVERWEIGHT = 35,
+        SIGNAL_PASSENGER_IS_DANGEROUS,
+        SIGNAL_PASSENGER_SKIPPED,
+        SIGNAL_STAIRS_CLOSE,
+        SIGNAL_PLANE_GO,
+        SIGNAL_PLANE_READY,
+        SIGNAL_PLANE_READY_DEPART,
+        SIGNAL_DISPATCHER_PLANE_FORCED_DEPART,
+        SIGNAL_OK,
+};
+
+enum LOGS
+{
+        LOG_NONE = 0,
+        LOG_PASSENGER,
+        LOG_BAGGAGE_CONTROL,
+        LOG_SECURITY_CONTROL,
+        LOG_STAIRS,
+        LOG_DISPATCHER,
+        LOG_PLANE,
+        LOG_MAIN,
 };
 
 enum EventSignals
@@ -128,7 +137,7 @@ std::vector<int> initSemaphores(int permissions, size_t numPassengers);
 void genRandomVector(std::vector<uint64_t> &vec, uint64_t min, uint64_t max);
 void genRandom(uint64_t &val, uint64_t min, uint64_t max);
 
-void vCout(const std::string &msg, int color = 0);
+void vCout(const std::string &msg, int color = 0, int log = 0);
 
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names);
 void createSubprocess(pid_t &pid, const std::string &name);

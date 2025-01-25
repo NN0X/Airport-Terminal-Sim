@@ -15,29 +15,32 @@
 extern sembuf INC_SEM;
 extern sembuf DEC_SEM;
 
+static bool leaveEarly = false;
+
 void planeSignalHandler(int signum)
 {
         switch (signum)
         {
         case SIGNAL_OK:
-                vCout("Plane: Received signal OK\n");
+                vCout("Plane: Received signal OK\n", CYAN, LOG_PLANE);
                 break;
         case SIGNAL_PLANE_GO:
-                vCout("Plane: Received signal PLANE_GO\n");
+                vCout("Plane: Received signal PLANE_GO\n", CYAN, LOG_PLANE);
+                leaveEarly = true;
                 break;
         case SIGTERM:
-                vCout("Plane: Received signal SIGTERM\n");
+                vCout("Plane: Received signal SIGTERM\n", CYAN, LOG_PLANE);
                 exit(0);
                 break;
         default:
-                vCout("Plane: Received unknown signal\n");
+                vCout("Plane: Received unknown signal\n", CYAN, LOG_PLANE);
                 break;
         }
 }
 
 void planeProcess(PlaneProcessArgs args)
 {
-        vCout("Plane process: " + std::to_string(args.id) + "\n");
+        vCout("Plane process: " + std::to_string(args.id) + "\n", CYAN, LOG_PLANE);
 
         Plane plane(args.id);
 
@@ -62,17 +65,14 @@ void planeProcess(PlaneProcessArgs args)
                 exit(1);
         }
 
-        // TODO: run plane tasks here
-
         sigval sig;
         sig.sival_int = args.pid;
 
         while (true)
         {
                 sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY, sig);
-
+                leaveEarly = false;
                 safeSemop(args.semIDPlaneWait, &DEC_SEM, 1);
-
                 while (true)
                 {
                         vCout("Plane " + std::to_string(args.id) + ": waiting for passenger\n");
@@ -81,7 +81,7 @@ void planeProcess(PlaneProcessArgs args)
 
                         // occupancy --
 
-                        safeSemop(args.semIDStairsCounter, &DEC_SEM, 1);
+                        safeSemop(args.semIDStairsCounter, &INC_SEM, 1);
 
                         safeSemop(args.semIDPlaneCounter, &INC_SEM, 1);
 
@@ -91,14 +91,23 @@ void planeProcess(PlaneProcessArgs args)
                                 vCout("Plane: Plane is full\n");
                                 // set counter to 0
                                 safeSetSemVal(args.semIDPlaneCounter, 0, 0);
-                                safeSetSemVal(args.semIDStairsCounter, 0, 0);
+                                safeSemop(args.semIDStairsCounter, &INC_SEM, 1);
+                                safeSetSemVal(args.semIDStairsCounter, 0, STAIRS_MAX_ALLOWED_OCCUPANCY);
                                 sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY_DEPART, sig);
-
-                                pause(); // wait for signal to go
+                                safeSemop(args.semIDPlaneDepart, &DEC_SEM, 1);
+                                break;
+                        }
+                        if (leaveEarly && safeGetSemVal(args.semIDStairsCounter, 0) == STAIRS_MAX_ALLOWED_OCCUPANCY)
+                        {
+                                vCout("Plane " + std::to_string(args.id) + ": leaving early\n");
+                                safeSemop(args.semIDStairsCounter, &INC_SEM, 1);
+                                safeSetSemVal(args.semIDStairsCounter, 0, STAIRS_MAX_ALLOWED_OCCUPANCY);
+                                sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY_DEPART, sig);
+                                safeSemop(args.semIDPlaneDepart, &DEC_SEM, 1);
                                 break;
                         }
                 }
-                vCout("Plane " + std::to_string(args.id) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n");
+                vCout("Plane " + std::to_string(args.id) + ": leaving for " + std::to_string(plane.getTimeOfCycle()) + " sec\n", CYAN, LOG_PLANE);
                 usleep(plane.getTimeOfCycle() * 1000);
         }
 }
@@ -106,7 +115,7 @@ void planeProcess(PlaneProcessArgs args)
 void initPlanes(size_t num, PlaneProcessArgs args)
 {
         pid_t oldPID = getpid();
-        vCout("Init planes\n");
+        vCout("Init planes\n", NONE, LOG_MAIN);
         for (size_t i = 0; i < num; i++)
         {
                 pid_t newPID;
@@ -120,7 +129,7 @@ void initPlanes(size_t num, PlaneProcessArgs args)
                 }
         }
 
-        vCout("All planes created\n");
+        vCout("All planes created\n", NONE, LOG_MAIN);
 }
 
 Plane::Plane(uint64_t id)
@@ -131,19 +140,19 @@ Plane::Plane(uint64_t id)
         std::uniform_int_distribution<uint64_t> disTime(PLANE_MIN_TIME, PLANE_MAX_TIME);
         mTimeOfCycle = disTime(gen);
 
-        vCout("Plane " + std::to_string(mID) + " created with the following properties:\n");
-        vCout("Max passengers: " + std::to_string(mMaxPassengers) + "\n");
-        vCout("Max baggage weight: " + std::to_string(mMaxBaggageWeight) + "\n");
-        vCout("Time of cycle: " + std::to_string(mTimeOfCycle) + "\n");
+        vCout("Plane " + std::to_string(mID) + " created with the following properties:\n", CYAN, LOG_PLANE);
+        vCout("Max passengers: " + std::to_string(mMaxPassengers) + "\n", CYAN, LOG_PLANE);
+        vCout("Max baggage weight: " + std::to_string(mMaxBaggageWeight) + "\n", CYAN, LOG_PLANE);
+        vCout("Time of cycle: " + std::to_string(mTimeOfCycle) + "\n", CYAN, LOG_PLANE);
 }
 
 Plane::Plane(uint64_t id, uint64_t maxPassengers, uint64_t maxBaggageWeight, uint64_t timeOfCycle)
         : mID(id), mMaxPassengers(maxPassengers), mMaxBaggageWeight(maxBaggageWeight), mTimeOfCycle(timeOfCycle)
 {
-        vCout("Plane " + std::to_string(mID) + " created with the following properties:\n");
-        vCout("Max passengers: " + std::to_string(mMaxPassengers) + "\n");
-        vCout("Max baggage weight: " + std::to_string(mMaxBaggageWeight) + "\n");
-        vCout("Time of cycle: " + std::to_string(mTimeOfCycle) + "\n");
+        vCout("Plane " + std::to_string(mID) + " created with the following properties:\n", CYAN, LOG_PLANE);
+        vCout("Max passengers: " + std::to_string(mMaxPassengers) + "\n", CYAN, LOG_PLANE);
+        vCout("Max baggage weight: " + std::to_string(mMaxBaggageWeight) + "\n", CYAN, LOG_PLANE);
+        vCout("Time of cycle: " + std::to_string(mTimeOfCycle) + "\n", CYAN, LOG_PLANE);
 }
 
 uint64_t Plane::getID() const

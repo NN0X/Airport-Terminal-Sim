@@ -83,6 +83,7 @@ int main(int argc, char* argv[])
 
         DispatcherArgs dispatcherArgs;
         dispatcherArgs.semIDPlaneWait = semIDs[SEM_PLANE_WAIT];
+        dispatcherArgs.semIDPlaneDepart = semIDs[SEM_PLANE_DEPART];
         dispatcherArgs.semIDStairsWait = semIDs[SEM_STAIRS_WAIT];
         dispatcherArgs.semIDPassengerCounter = semIDs[SEM_PASSENGER_COUNTER];
 
@@ -94,9 +95,7 @@ int main(int argc, char* argv[])
 
         if (currentPID == pids[PROCESS_MAIN])
         {
-                std::cout << "Main process: " << currentPID << "\n";
-                // TODO: runtime
-
+                vCout("Main process: " + std::to_string(currentPID) + "\n", NONE, LOG_MAIN);
 
                 PassengerProcessArgs passengerArgs;
                 passengerArgs.pidDispatcher = pids[PROCESS_DISPATCHER];
@@ -124,6 +123,7 @@ int main(int argc, char* argv[])
 
                 PlaneProcessArgs planeArgs;
                 planeArgs.semIDPlaneWait = semIDs[SEM_PLANE_WAIT];
+                planeArgs.semIDPlaneDepart = semIDs[SEM_PLANE_DEPART];
                 planeArgs.semIDPlanePassengerIn = semIDs[SEM_PLANE_PASSANGER_IN];
                 planeArgs.semIDPlanePassengerWait = semIDs[SEM_PLANE_PASSANGER_WAIT];
                 planeArgs.pidStairs = pids[PROCESS_STAIRS];
@@ -145,13 +145,19 @@ int main(int argc, char* argv[])
                 while (true)
                 {
                         // INFO: wait for signal to exit
-                        if (getc(stdin) == 'q')
+                        char c = getc(stdin);
+                        if (c == 'q')
                         {
                                 for (size_t i = 1; i < pids.size(); i++)
                                 {
                                         kill(pids[i], SIGTERM);
                                 }
                                 break;
+                        }
+                        else if (c == 'p')
+                        {
+                                kill(pids[PROCESS_DISPATCHER], SIGNAL_DISPATCHER_PLANE_FORCED_DEPART);
+                                vCout("Main process: Forced plane depart\n", NONE, LOG_MAIN);
                         }
                 }
                 // INFO: cleanup
@@ -171,31 +177,31 @@ int main(int argc, char* argv[])
                         perror("unlink");
                         exit(1);
                 }
-                vCout("Main process: Exiting\n");
+                vCout("Main process: Exiting\n", NONE, LOG_MAIN);
         }
         else if (currentPID == pids[PROCESS_BAGGAGE_CONTROL])
         {
-                std::cout << "Baggage control process: " << getpid() << "\n";
+                vCout("Baggage control: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
                 baggageControl(baggageControlArgs);
         }
         else if (currentPID == pids[PROCESS_SECURITY_CONTROL])
         {
-                std::cout << "Security control process: " << getpid() << "\n";
+                vCout("Security control process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
                 secControl(securityControlArgs);
         }
         else if (currentPID == pids[PROCESS_STAIRS])
         {
-                std::cout << "Stairs process: " << getpid() << "\n";
+                vCout("Stairs process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
                 stairs(stairsArgs);
         }
         else if (currentPID == pids[PROCESS_DISPATCHER])
         {
-                std::cout << "Dispatcher process: " << getpid() << "\n";
+                vCout("Dispatcher process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
                 dispatcher(dispatcherArgs);
         }
         else
         {
-                std::cerr << "Unknown process\n";
+                vCout("Unknown process\n", NONE, LOG_MAIN);
         }
 
         return 0;

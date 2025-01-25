@@ -18,13 +18,13 @@ void baggageControlSignalHandler(int signum)
         switch (signum)
         {
                 case SIGNAL_OK:
-                        vCout("Baggage control: Received signal OK\n");
+                        vCout("Baggage control: Received signal OK\n", BLUE, LOG_BAGGAGE_CONTROL);
                         break;
                 case SIGTERM:
-                        vCout("Baggage control: Received signal SIGTERM\n");
+                        vCout("Baggage control: Received signal SIGTERM\n", BLUE, LOG_BAGGAGE_CONTROL);
                         exit(0);
                 default:
-                        vCout("Baggage control: Received unknown signal\n");
+                        vCout("Baggage control: Received unknown signal\n", BLUE, LOG_BAGGAGE_CONTROL);
                         break;
         }
 }
@@ -66,7 +66,7 @@ int baggageControl(BaggageControlArgs args)
                 // tell passenger to enter
                 safeSemop(args.semIDBaggageControlEntrance, &INC_SEM, 1);
 
-                vCout("Baggage control: waiting for passenger\n");
+                vCout("Baggage control: waiting for passenger\n", BLUE, LOG_BAGGAGE_CONTROL);
                 int fd;
                 safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_RDONLY);
 
@@ -74,11 +74,11 @@ int baggageControl(BaggageControlArgs args)
                 BaggageInfo baggageInfo;
                 safeFIFORead(fd, &baggageInfo, sizeof(baggageInfo));
                 close(fd);
-                vCout("Baggage control: received baggage info\n");
+                vCout("Baggage control: received baggage info\n", BLUE, LOG_BAGGAGE_CONTROL);
 
                 if (baggageInfo.weight > PLANE_MAX_ALLOWED_BAGGAGE_WEIGHT)
                 {
-                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n");
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n", BLUE, LOG_BAGGAGE_CONTROL);
                         kill(baggageInfo.pid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
                         safeSemop(args.semIDBaggageControlOut, &INC_SEM, 1);
                         // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
@@ -86,7 +86,7 @@ int baggageControl(BaggageControlArgs args)
                 }
                 else
                 {
-                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is not overweight\n");
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is not overweight\n", BLUE, LOG_BAGGAGE_CONTROL);
                         safeSemop(args.semIDBaggageControlOut, &INC_SEM, 1);
                 }
         }

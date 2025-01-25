@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <cstdint>
 #include <unistd.h>
@@ -23,6 +24,8 @@ std::vector<int> initSemaphores(int permissions, size_t numPassengers)
         std::vector<int> ids(SEM_NUMBER);
 
         std::vector<unsigned int> values(ids.size(), SEM_INIT_VALUE);
+
+        values[SEM_STAIRS_COUNTER] = STAIRS_MAX_ALLOWED_OCCUPANCY;
 
         for (size_t i = 0; i < ids.size() - 1; i++)
         {
@@ -78,13 +81,47 @@ void genRandom(uint64_t &val, uint64_t min, uint64_t max)
         val = dis(gen);
 }
 
-void vCout(const std::string &msg, int color)
+void appendToLog(const std::string &msg, const std::string &log)
+{
+        std::ofstream file;
+        file.open(log, std::ios_base::app);
+        file << msg;
+        file.close();
+}
+
+void vCout(const std::string &msg, int color, int log)
 {
         if (VERBOSE == 0)
                 return;
         std::cout << colors[color];
         std::cout << msg;
-        std::cout << colors[COLOR_NONE];
+        std::cout << colors[NONE];
+        switch (log)
+        {
+                case LOG_PASSENGER:
+                        appendToLog(msg, "passenger.log");
+                        break;
+                case LOG_BAGGAGE_CONTROL:
+                        appendToLog(msg, "baggageControl.log");
+                        break;
+                case LOG_SECURITY_CONTROL:
+                        appendToLog(msg, "securityControl.log");
+                        break;
+                case LOG_STAIRS:
+                        appendToLog(msg, "stairs.log");
+                        break;
+                case LOG_DISPATCHER:
+                        appendToLog(msg, "dispatcher.log");
+                        break;
+                case LOG_PLANE:
+                        appendToLog(msg, "plane.log");
+                        break;
+                case LOG_MAIN:
+                        appendToLog(msg, "main.log");
+                        break;
+                default:
+                        break;
+        }
 }
 
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names)
