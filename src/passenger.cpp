@@ -51,11 +51,7 @@ static int semIDPassengerCounterGlobal;
 
 void atExitPassenger()
 {
-        if (semop(semIDPassengerCounterGlobal, &INC_SEM, 1) == -1)
-        {
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(semIDPassengerCounterGlobal, &INC_SEM, 1);
 }
 
 void passengerProcess(PassengerProcessArgs args)
@@ -109,39 +105,18 @@ void passengerProcess(PassengerProcessArgs args)
         // wait for baggage control to be ready
         vCout("Passenger: " + std::to_string(args.id) + " waiting for baggage control\n");
 
-        while (semop(args.semIDBaggageControlEntrance, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDBaggageControlEntrance, &DEC_SEM, 1);
 
         BaggageInfo baggageInfo;
         baggageInfo.pid = args.pid;
         baggageInfo.weight = passenger.getBaggageWeight();
         int fd;
         safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_WRONLY);
-        if (write(fd, &baggageInfo, sizeof(baggageInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
-        close(fd);
+        safeFIFOWrite(fd, &baggageInfo, sizeof(baggageInfo));
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting for signal from baggage control\n");
 
-        while (semop(args.semIDBaggageControlOut, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDBaggageControlOut, &DEC_SEM, 1);
 
         if (failedBaggageControl)
         {
@@ -153,44 +128,20 @@ void passengerProcess(PassengerProcessArgs args)
 
         // INFO: passenger goes through security control
 
-        // FIX: UNDER THIS THERE IS A BUG
         vCout("Passenger: " + std::to_string(args.id) + " waiting for security control\n");
-        while(semop(args.semIDSecurityControlEntrance, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+
+        safeSemop(args.semIDSecurityControlEntrance, &DEC_SEM, 1);
 
         TypeInfo typeInfo;
         typeInfo.id = args.id;
         typeInfo.pid = args.pid;
         typeInfo.type = passenger.getType();
         typeInfo.isVIP = passenger.getIsVip();
-        fd = open(fifoNames[FIFO_SECURITY_CONTROL].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (write(fd, &typeInfo, sizeof(typeInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
 
-        while (semop(args.semIDSecurityControlEntranceWait, &INC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_CONTROL], O_WRONLY);
+        safeFIFOWrite(fd, &typeInfo, sizeof(typeInfo));
+
+        safeSemop(args.semIDSecurityControlEntranceWait, &INC_SEM, 1);
 
         close(fd);
 
@@ -198,101 +149,35 @@ void passengerProcess(PassengerProcessArgs args)
 
         // wait until semIDSecurityControlSelector semaphore number args.id is 1
         sembuf decreaseNthSemaphore = {(uint16_t)args.id, -1, 0};
-        while (semop(args.semIDSecurityControlSelector, &decreaseNthSemaphore, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDSecurityControlSelector, &decreaseNthSemaphore, 1);
 
-        while (semop(args.semIDSecurityControlSelectorEntranceWait, &INC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDSecurityControlSelectorEntranceWait, &INC_SEM, 1);
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting for security selector\n");
         SelectedPair selectedPair;
-        fd = open(fifoNames[FIFO_SECURITY_SELECTOR].c_str(), O_RDONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_SELECTOR], O_RDONLY);
 
-        while (semop(args.semIDSecurityControlSelectorWait, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDSecurityControlSelectorWait, &DEC_SEM, 1);
 
-        if (read(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex)) == -1)
-        {
-                perror("read");
-                exit(1);
-        }
+        safeFIFORead(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex));
         close(fd);
 
         vCout("Passenger: " + std::to_string(args.id) + " selected gate: " + std::to_string(selectedPair.gateIndex) + "\n");
         vCout("Passenger: " + std::to_string(args.id) + " waiting for gate " + std::to_string(selectedPair.gateIndex) + "\n");
 
-        if (semop(args.semIDSecurityGates[selectedPair.gateIndex], &DEC_SEM, 1) == -1)
-        {
-                perror("semop");
-                exit(1);
-        }
-
-        // FIX: ABOVE THERE IS A BUG
+        safeSemop(args.semIDSecurityGates[selectedPair.gateIndex], &DEC_SEM, 1);
 
         DangerInfo dangerInfo;
         dangerInfo.pid = args.pid;
         dangerInfo.hasDangerousBaggage = passenger.getHasDangerousBaggage();
-        fd = open(fifoNames[FIFO_SECURITY_GATE_0 + selectedPair.gateIndex].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (write(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
 
-        while (semop(args.semIDSecurityGatesWait[selectedPair.gateIndex], &INC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_GATE_0 + selectedPair.gateIndex], O_WRONLY);
+        safeFIFOWrite(fd, &dangerInfo, sizeof(dangerInfo));
 
+        safeSemop(args.semIDSecurityGatesWait[selectedPair.gateIndex], &INC_SEM, 1);
         close(fd);
 
-        while (semop(args.semIDSecurityControlOut, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
-
-        // FIX: ABOVE THERE IS A BUG
+        safeSemop(args.semIDSecurityControlOut, &DEC_SEM, 1);
 
         if (failedSecurityControl)
         {
@@ -302,46 +187,18 @@ void passengerProcess(PassengerProcessArgs args)
 
         // INFO: passenger waits for plane to be ready
 
-        while (semop(args.semIDStairsPassengerIn, &INC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDStairsPassengerIn, &INC_SEM, 1);
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting at stairs\n");
-        while (semop(args.semIDStairsPassengerWait, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+
+        safeSemop(args.semIDStairsPassengerWait, &DEC_SEM, 1);
 
         vCout("Passenger: " + std::to_string(args.id) + " entering plane\n");
-        while (semop(args.semIDPlanePassengerIn, &INC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
-        while (semop(args.semIDPlanePassengerWait, &DEC_SEM, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+
+        safeSemop(args.semIDPlanePassengerIn, &INC_SEM, 1);
+
+        safeSemop(args.semIDPlanePassengerWait, &DEC_SEM, 1);
+
         vCout("Passenger: " + std::to_string(args.id) + " entered plane\n");
 
         kill(args.pidStairs, SIGNAL_PASSENGER_LEFT_STAIRS);

@@ -41,24 +41,8 @@ void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
                                 break;
                         }
                         vCout("Dispatcher: Plane " + std::to_string(pid) + " is ready\n");
-                        while (semop(semIDPlaneWait, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
-                        while (semop(semIDStairsWait, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(semIDPlaneWait, &INC_SEM, 1);
+                        safeSemop(semIDStairsWait, &INC_SEM, 1);
                         planeAlreadyInTerminal = true;
                         break;
                 case SIGNAL_PLANE_READY_DEPART:
@@ -72,24 +56,8 @@ void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
                                 pid_t nextPlane = planesWaiting.front();
                                 planesWaiting.erase(planesWaiting.begin());
                                 vCout("Dispatcher: Plane " + std::to_string(nextPlane) + " is ready\n");
-                                while (semop(semIDPlaneWait, &INC_SEM, 1) == -1)
-                                {
-                                        if (errno == EINTR)
-                                        {
-                                                continue;
-                                        }
-                                        perror("semop");
-                                        exit(1);
-                                }
-                                while (semop(semIDStairsWait, &INC_SEM, 1) == -1)
-                                {
-                                        if (errno == EINTR)
-                                        {
-                                                continue;
-                                        }
-                                        perror("semop");
-                                        exit(1);
-                                }
+                                safeSemop(semIDPlaneWait, &INC_SEM, 1);
+                                safeSemop(semIDStairsWait, &INC_SEM, 1);
                                 planeAlreadyInTerminal = true;
                         }
                         break;
@@ -109,15 +77,7 @@ void *passengerCounterThread(void *arg)
         int totalPassengersLeft = 0;
         while (true)
         {
-                while (semop(semIDPassengerCounter, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(semIDPassengerCounter, &DEC_SEM, 1);
                 totalPassengersLeft++;
                 std::cout << "Passengers left: " << totalPassengersLeft << " of " << totalPassengers << "\n";
                 if (totalPassengersLeft == totalPassengers)

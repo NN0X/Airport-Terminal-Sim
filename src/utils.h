@@ -139,6 +139,7 @@ void safeFIFORead(int fd, void *buf, size_t size);
 void safeFIFOClose(int fd);
 
 void safeSemop(int semID, struct sembuf *sops, size_t nsops);
-void safeSemctl(int semID, int semnum, int cmd, union semun arg);
+int safeGetSemVal(int semID, int semnum);
+void safeSetSemVal(int semID, int semnum, int val);
 
 #endif // UTILS_H

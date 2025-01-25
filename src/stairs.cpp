@@ -69,68 +69,18 @@ int stairs(StairsArgs args)
         while (true)
         {
                 stairsOpen = true;
-                while (semop(args.semIDStairsWait, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(args.semIDStairsWait, &DEC_SEM, 1);
                 while (stairsOpen)
                 {
                         usleep(1000); // WARNING: test
-                        while (semop(args.semIDStairsPassengerIn, &DEC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
-                        while (semop(args.semIDStairsPassengerWait, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDStairsPassengerIn, &DEC_SEM, 1);
+                        safeSemop(args.semIDStairsPassengerWait, &INC_SEM, 1);
 
-                        while (semop(args.semIDStairsCounter, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDStairsCounter, &INC_SEM, 1);
 
-                        int stairsOccupancy;
+                        int stairsOccupancy = safeGetSemVal(args.semIDStairsCounter, 0);
                         // get occupancy from semaphore
-                        while ((stairsOccupancy = semctl(args.semIDStairsCounter, 0, GETVAL)) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semctl");
-                                exit(1);
-                        }
-                        int passengersOnBoard;
-                        while ((passengersOnBoard = semctl(args.semIDPlaneCounter, 0, GETVAL)) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semctl");
-                                exit(1);
-                        }
+                        int passengersOnBoard = safeGetSemVal(args.semIDPlaneCounter, 0);
 
                         if (stairsOccupancy + passengersOnBoard == PLANE_PLACES)
                         {

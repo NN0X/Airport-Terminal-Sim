@@ -149,7 +149,6 @@ void signalSkipped(int selected)
         for (size_t i = 0; i < selected; i++)
         {
                 vCout("Security control: Passenger " + std::to_string(secControlQueue[i].id) + " skipped\n");
-                // send signal to passenger
                 kill(secControlQueue[i].pid, SIGNAL_PASSENGER_SKIPPED);
         }
         secControlMutex.unlock();
@@ -186,54 +185,19 @@ void *gateSelectorThread(void *args)
                 vCout("Security selector: informing passenger\n");
                 // increment semaphore typeInfo.id in semIDSecurityControlSelector
                 sembuf incNthSemaphore = {(uint16_t)typeInfo.id, 1, 0};
-                while (semop(semIDSecuritySelector, &incNthSemaphore, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(semIDSecuritySelector, &incNthSemaphore, 1);
 
-                while (semop(semIDSecuritySelectorEntranceWait, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(semIDSecuritySelectorEntranceWait, &DEC_SEM, 1);
 
                 vCout("Security selector: Waiting for passenger to read from fifo\n");
-                int fd = open(fifoNames[FIFO_SECURITY_SELECTOR].c_str(), O_WRONLY);
-                if (fd == -1)
-                {
-                        perror("open");
-                        exit(1);
-                }
-                if (write(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex)) == -1)
-                {
-                        perror("write");
-                        exit(1);
-                }
-                while (semop(semIDSecuritySelectorWait, &INC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+
+                int fd;
+                safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_SELECTOR], O_WRONLY);
+                safeFIFOWrite(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex));
+
+                safeSemop(semIDSecuritySelectorWait, &INC_SEM, 1);
 
                 close(fd);
-
-                std::cout << "Security selector: Passenger " << typeInfo.id << " selected gate " << selectedPair.gateIndex << "\n";
-                secControlMutex.lock();
-                std::cout << "Security selector: Queue size: " << secControlQueue.size() << "\n";
-                secControlMutex.unlock();
 
                 vCout("Security selector: waiting " + std::to_string(SECURITY_SELECTOR_DELAY) + " ms\n");
                 usleep(SECURITY_SELECTOR_DELAY * 1000);
@@ -248,38 +212,15 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
         while (true)
         {
                 // tell passenger to enter
-                while (semop(args.semIDSecurityGate, &INC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+
+                safeSemop(args.semIDSecurityGate, &INC_SEM, 1);
                 vCout("Security gate " + std::to_string(gate) + ": Waiting for passenger\n");
-                int fd = open(fifoNames[fifo].c_str(), O_RDONLY);
-                if (fd == -1)
-                {
-                        perror("open");
-                        exit(1);
-                }
+                int fd;
+                safeFIFOOpen(fd, fifoNames[fifo], O_RDONLY);
 
-                while (semop(args.semIDSecurityGateWait, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(args.semIDSecurityGateWait, &DEC_SEM, 1);
 
-                if (read(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
-                {
-                        perror("read");
-                        exit(1);
-                }
+                safeFIFORead(fd, &dangerInfo, sizeof(dangerInfo));
                 close(fd);
 
                 // send signal to passenger
@@ -287,28 +228,12 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
                 {
                         vCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.pid) + " has dangerous baggage\n");
                         kill(dangerInfo.pid, SIGNAL_PASSENGER_IS_DANGEROUS);
-                        while (semop(args.semIDSecurityControlOut, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDSecurityControlOut, &INC_SEM, 1);
                 }
                 else
                 {
                         vCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.pid) + " has no dangerous baggage\n");
-                        while (semop(args.semIDSecurityControlOut, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDSecurityControlOut, &INC_SEM, 1);
                 }
 
                 secControlMutex.lock();
@@ -443,38 +368,14 @@ int secControl(SecurityControlArgs args)
         {
                 // receive passengers and add them to gateSelector queue
                 // tell passenger to enter
-                while (semop(args.semIDSecurityControlEntrance, &INC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(args.semIDSecurityControlEntrance, &INC_SEM, 1);
                 vCout("Security control: waiting for passenger\n");
-                int fd = open(fifoNames[FIFO_SECURITY_CONTROL].c_str(), O_RDONLY);
-                if (fd == -1)
-                {
-                        perror("open");
-                        exit(1);
-                }
+                int fd;
+                safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_CONTROL], O_RDONLY);
                 TypeInfo typeInfo;
-                while (semop(args.semIDSecurityControlEntranceWait, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(args.semIDSecurityControlEntranceWait, &DEC_SEM, 1);
 
-                if (read(fd, &typeInfo, sizeof(typeInfo)) == -1)
-                {
-                        perror("read");
-                        exit(1);
-                }
+                safeFIFORead(fd, &typeInfo, sizeof(typeInfo));
                 close(fd);
 
                 vCout("Security control: Received passenger " + std::to_string(typeInfo.id) + "\n");

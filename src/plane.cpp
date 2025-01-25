@@ -71,92 +71,27 @@ void planeProcess(PlaneProcessArgs args)
         {
                 sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY, sig);
 
-                while(semop(args.semIDPlaneWait, &DEC_SEM, 1) == -1)
-                {
-                        if (errno == EINTR)
-                        {
-                                continue;
-                        }
-                        perror("semop");
-                        exit(1);
-                }
+                safeSemop(args.semIDPlaneWait, &DEC_SEM, 1);
 
                 while (true)
                 {
                         vCout("Plane " + std::to_string(args.id) + ": waiting for passenger\n");
-                        while (semop(args.semIDPlanePassengerIn, &DEC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
-                        while (semop(args.semIDPlanePassengerWait, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDPlanePassengerIn, &DEC_SEM, 1);
+                        safeSemop(args.semIDPlanePassengerWait, &INC_SEM, 1);
 
                         // occupancy --
 
-                        while (semop(args.semIDStairsCounter, &DEC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDStairsCounter, &DEC_SEM, 1);
 
-                        while (semop(args.semIDPlaneCounter, &INC_SEM, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
+                        safeSemop(args.semIDPlaneCounter, &INC_SEM, 1);
 
-                        int passengersOnBoard;
-                        while ((passengersOnBoard = semctl(args.semIDPlaneCounter, 0, GETVAL)) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semctl");
-                                exit(1);
-                        }
+                        int passengersOnBoard = safeGetSemVal(args.semIDPlaneCounter, 0);
                         if (passengersOnBoard == plane.getMaxPassengers())
                         {
                                 vCout("Plane: Plane is full\n");
                                 // set counter to 0
-                                while (semctl(args.semIDPlaneCounter, 0, SETVAL, 0) == -1)
-                                {
-                                        if (errno == EINTR)
-                                        {
-                                                continue;
-                                        }
-                                        perror("semctl");
-                                        exit(1);
-                                }
-                                while (semctl(args.semIDStairsCounter, 0, SETVAL, 0) == -1)
-                                {
-                                        if (errno == EINTR)
-                                        {
-                                                continue;
-                                        }
-                                        perror("semctl");
-                                        exit(1);
-                                }
+                                safeSetSemVal(args.semIDPlaneCounter, 0, 0);
+                                safeSetSemVal(args.semIDStairsCounter, 0, 0);
                                 sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY_DEPART, sig);
 
                                 pause(); // wait for signal to go

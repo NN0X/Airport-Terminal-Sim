@@ -10,6 +10,8 @@
 #include <random>
 #include <sys/sem.h>
 #include <fcntl.h> // O_RDONLY, O_WRONLY
+#include <sys/stat.h> // mkfifo
+#include <signal.h>
 
 #include "utils.h"
 
@@ -44,6 +46,7 @@ std::vector<int> initSemaphores(int permissions, size_t numPassengers)
         }
 
         std::vector<uint16_t> initial(numPassengers, SEM_INIT_VALUE);
+
 
         if (semctl(ids[SEM_SECURITY_CONTROL_SELECTOR], 0, SETALL, initial.data()) == -1)
         {
@@ -154,6 +157,104 @@ void safeFIFOOpen(int &fd, const std::string &name, int flags)
                 else
                 {
                         perror("open");
+                        exit(1);
+                }
+        }
+}
+
+void safeFIFOWrite(int fd, const void *buf, size_t size)
+{
+        if (write(fd, buf, size) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeFIFOWrite(fd, buf, size);
+                }
+                else
+                {
+                        perror("write");
+                        exit(1);
+                }
+        }
+}
+
+void safeFIFORead(int fd, void *buf, size_t size)
+{
+        if (read(fd, buf, size) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeFIFORead(fd, buf, size);
+                }
+                else
+                {
+                        perror("read");
+                        exit(1);
+                }
+        }
+}
+
+void safeFIFOClose(int fd)
+{
+        if (close(fd) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeFIFOClose(fd);
+                }
+                else
+                {
+                        perror("close");
+                        exit(1);
+                }
+        }
+}
+
+void safeSemop(int semID, sembuf *sops, size_t nsops)
+{
+       if (semop(semID, sops, nsops) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeSemop(semID, sops, nsops);
+                }
+                else
+                {
+                        perror("semop");
+                        exit(1);
+                }
+        }
+}
+
+int safeGetSemVal(int semID, int semnum)
+{
+        int val;
+        if ((val = semctl(semID, semnum, GETVAL)) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        return safeGetSemVal(semID, semnum);
+                }
+                else
+                {
+                        perror("semctl");
+                        exit(1);
+                }
+        }
+        return val;
+}
+
+void safeSetSemVal(int semID, int semnum, int val)
+{
+        if (semctl(semID, semnum, SETVAL, val) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeSetSemVal(semID, semnum, val);
+                }
+                else
+                {
+                        perror("semctl");
                         exit(1);
                 }
         }
