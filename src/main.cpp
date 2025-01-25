@@ -66,6 +66,23 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
+        size_t numPassengers = std::stoul(argv[1]);
+        size_t numPlanes = std::stoul(argv[2]);
+
+        totalPassengers = numPassengers;
+
+        if (numPassengers < 1 || numPlanes < 1)
+        {
+                std::cerr << "Number of passengers and planes must be greater than 0\n";
+                return 1;
+        }
+
+        if (numPassengers > 30000 || numPlanes > 30000)
+        {
+                std::cerr << "Maximum values: <numPassengers> = 30000, <numPlanes> = 30000\n";
+                return 1;
+        }
+
         struct sigaction sa;
         sa.sa_handler = mainSignalHandler;
         sigemptyset(&sa.sa_mask);
@@ -88,18 +105,7 @@ int main(int argc, char* argv[])
 
         pids[PROCESS_MAIN] = getpid();
 
-        size_t numPassengers = std::stoul(argv[1]);
-        size_t numPlanes = std::stoul(argv[2]);
-
-        totalPassengers = numPassengers;
-
-        if (numPassengers > 30000 || numPlanes > 30000)
-        {
-                std::cerr << "Maximum values: <numPassengers> = 30000, <numPlanes> = 30000\n";
-                return 1;
-        }
-
-        std::vector<int> semIDs = initSemaphores(0666, numPassengers);
+        std::vector<int> semIDs = initSemaphores(0600, numPassengers);
 
         BaggageControlArgs baggageControlArgs;
         baggageControlArgs.semIDBaggageControlEntrance = semIDs[SEM_BAGGAGE_CONTROL_ENTRANCE];

@@ -8,6 +8,9 @@
 
 #include "args.h"
 
+/*
+* main function of dispatcher process
+*/
 int dispatcher(DispatcherArgs args);
 
 #endif // DISPATCHER_H

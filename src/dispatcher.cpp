@@ -101,6 +101,7 @@ void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
         }
 }
 
+// thread counting passengers left
 void *passengerCounterThread(void *arg)
 {
         int *args = (int *)arg;

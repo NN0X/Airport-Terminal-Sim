@@ -2,155 +2,339 @@ Plane process: 0
 Plane 0 created with the following properties:
 Max passengers: 10
 Max baggage weight: 75
-Time of cycle: 16
-Plane process: 1
-Plane 1 created with the following properties:
+Time of cycle: 74
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 74 sec
+Plane process: 0
+Plane 0 created with the following properties:
 Max passengers: 10
 Max baggage weight: 75
-Time of cycle: 22
-Plane process: 2
-Plane 2 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 95
-Plane process: 3
-Plane 3 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 68
-Plane process: 4
-Plane 4 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 57
-Plane process: 5
-Plane 5 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 75
-Plane process: 6
-Plane 6 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 51
-Plane process: 7
-Plane 7 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 34
-Plane process: 8
-Plane 8 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 59
-Plane process: 9
-Plane 9 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 26
+Time of cycle: 35
 Plane: Received signal PLANE_GO
-Plane 0: leaving for 16 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 1: leaving for 22 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 2: leaving for 95 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 3: leaving for 68 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 4: leaving for 57 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 5: leaving for 75 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 6: leaving for 51 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 7: leaving for 34 sec
+Plane 0: leaving for 35 sec
 Plane: Received signal PLANE_GO
-Plane 8: leaving for 59 sec
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 35 sec
 Plane: Received signal SIGTERM
 Plane process: 0
 Plane 0 created with the following properties:
 Max passengers: 10
 Max baggage weight: 75
-Time of cycle: 94
-Plane process: 1
-Plane 1 created with the following properties:
+Time of cycle: 66
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 66 sec
+Plane: Received signal SIGTERM
+Plane process: 0
+Plane 0 created with the following properties:
 Max passengers: 10
 Max baggage weight: 75
-Time of cycle: 81
-Plane process: 2
-Plane 2 created with the following properties:
+Time of cycle: 75
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 75 sec
+Plane process: 0
+Plane 0 created with the following properties:
 Max passengers: 10
 Max baggage weight: 75
-Time of cycle: 18
-Plane process: 3
-Plane 3 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 63
-Plane process: 4
-Plane 4 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 41
-Plane process: 5
-Plane 5 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 17
-Plane process: 6
-Plane 6 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 47
-Plane process: 7
-Plane 7 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 42
-Plane process: 8
-Plane 8 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 79
-Plane process: 9
-Plane 9 created with the following properties:
-Max passengers: 10
-Max baggage weight: 75
-Time of cycle: 13
+Time of cycle: 40
 Plane: Received signal PLANE_GO
-Plane 0: leaving for 94 sec
-Plane: Received signal PLANE_GO
-Plane 1: leaving for 81 sec
-Plane: Received signal PLANE_GO
-Plane 2: leaving for 18 sec
-Plane: Received signal PLANE_GO
-Plane 3: leaving for 63 sec
-Plane: Received signal PLANE_GO
-Plane 4: leaving for 41 sec
-Plane: Received signal PLANE_GO
-Plane 5: leaving for 17 sec
-Plane: Received signal PLANE_GO
-Plane 6: leaving for 47 sec
-Plane: Received signal PLANE_GO
-Plane 7: leaving for 42 sec
-Plane: Received signal PLANE_GO
-Plane 8: leaving for 79 sec
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
-Plane: Received signal SIGTERM
+Plane 0: leaving for 40 sec
 Plane: Received signal SIGTERM

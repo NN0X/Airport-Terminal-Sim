@@ -13,15 +13,29 @@
 #include "plane.h"
 #include "args.h"
 
+/*
+* main function of passenger process
+*/
 void passengerProcess(PassengerProcessArgs args);
+
+/*
+* main function of spawnPassengers process
+*/
 void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerProcessArgs args);
 
+/*
+* Structure for fifo between baggage control and passenger
+*/
 struct BaggageInfo
 {
         pid_t pid;
         uint64_t weight;
 };
 
+
+/*
+* Structure for fifo between security control and passenger
+*/
 struct TypeInfo
 {
         int id;
@@ -30,21 +44,30 @@ struct TypeInfo
         bool isVIP;
 };
 
+/*
+* Structure for fifo between security gate threads and passenger
+*/
 struct DangerInfo
 {
         pid_t pid;
         bool hasDangerousBaggage;
 };
 
+/*
+* Structure for fifo between security selector thread and passenger
+*/
 struct SelectedPair
 {
         int passengerIndex;
         int gateIndex;
 };
 
+/*
+* class for passenger
+*/
 class Passenger
 {
-public: // temporary
+public:
         uint64_t mID;
         bool mIsVip;
         bool mType; // each gate can have 2 same type passengers at the same time
