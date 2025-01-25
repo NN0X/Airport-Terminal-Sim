@@ -1,0 +1,204 @@
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 2296965 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 1/100
+Dispatcher: Passengers left: 2/100
+Dispatcher: Passengers left: 3/100
+Dispatcher: Passengers left: 4/100
+Dispatcher: Passengers left: 5/100
+Dispatcher: Passengers left: 6/100
+Dispatcher: Passengers left: 7/100
+Dispatcher: Passengers left: 8/100
+Dispatcher: Received signal DISPATCHER_PLANE_FORCED_DEPART
+Dispatcher: Plane 0 is forced to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 2312199 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 1/100
+Dispatcher: Passengers left: 2/100
+Dispatcher: Passengers left: 3/100
+Dispatcher: Passengers left: 4/100
+Dispatcher: Passengers left: 5/100
+Dispatcher: Passengers left: 6/100
+Dispatcher: Passengers left: 7/100
+Dispatcher: Passengers left: 8/100
+Dispatcher: Passengers left: 9/100
+Dispatcher: Passengers left: 10/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 11/100
+Dispatcher: Plane 2312199 is ready to depart
+Dispatcher: Plane 2312201 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 12/100
+Dispatcher: Passengers left: 13/100
+Dispatcher: Passengers left: 14/100
+Dispatcher: Passengers left: 15/100
+Dispatcher: Passengers left: 16/100
+Dispatcher: Received signal DISPATCHER_PLANE_FORCED_DEPART
+Dispatcher: Plane 2312201 is forced to depart
+Dispatcher: Plane 2312202 is ready
+Dispatcher: Passengers left: 17/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 18/100
+Dispatcher: Plane 2312201 is ready to depart
+Dispatcher: Plane 2312203 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 19/100
+Dispatcher: Passengers left: 20/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 2312202 is ready to depart
+Dispatcher: Passengers left: 21/100
+Dispatcher: Plane 2312204 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 22/100
+Dispatcher: Passengers left: 23/100
+Dispatcher: Passengers left: 24/100
+Dispatcher: Passengers left: 25/100
+Dispatcher: Passengers left: 26/100
+Dispatcher: Passengers left: 27/100
+Dispatcher: Passengers left: 28/100
+Dispatcher: Passengers left: 29/100
+Dispatcher: Passengers left: 30/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 31/100
+Dispatcher: Plane 2312204 is ready to depart
+Dispatcher: Plane 2312205 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 32/100
+Dispatcher: Passengers left: 33/100
+Dispatcher: Passengers left: 34/100
+Dispatcher: Passengers left: 35/100
+Dispatcher: Passengers left: 36/100
+Dispatcher: Passengers left: 37/100
+Dispatcher: Passengers left: 38/100
+Dispatcher: Passengers left: 39/100
+Dispatcher: Passengers left: 40/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 41/100
+Dispatcher: Plane 2312205 is ready to depart
+Dispatcher: Plane 2312206 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 42/100
+Dispatcher: Passengers left: 43/100
+Dispatcher: Passengers left: 44/100
+Dispatcher: Passengers left: 45/100
+Dispatcher: Passengers left: 46/100
+Dispatcher: Passengers left: 47/100
+Dispatcher: Passengers left: 48/100
+Dispatcher: Passengers left: 49/100
+Dispatcher: Passengers left: 50/100
+Dispatcher: Passengers left: 51/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 52/100
+Dispatcher: Plane 2312206 is ready to depart
+Dispatcher: Plane 2312208 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 53/100
+Dispatcher: Passengers left: 54/100
+Dispatcher: Passengers left: 55/100
+Dispatcher: Passengers left: 56/100
+Dispatcher: Passengers left: 57/100
+Dispatcher: Passengers left: 58/100
+Dispatcher: Passengers left: 59/100
+Dispatcher: Passengers left: 60/100
+Dispatcher: Passengers left: 61/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 62/100
+Dispatcher: Plane 2312208 is ready to depart
+Dispatcher: Plane 2312207 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 63/100
+Dispatcher: Passengers left: 64/100
+Dispatcher: Passengers left: 65/100
+Dispatcher: Passengers left: 66/100
+Dispatcher: Passengers left: 67/100
+Dispatcher: Passengers left: 68/100
+Dispatcher: Passengers left: 69/100
+Dispatcher: Passengers left: 70/100
+Dispatcher: Passengers left: 71/100
+Dispatcher: Passengers left: 72/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 2312207 is ready to depart
+Dispatcher: Plane 2312209 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 73/100
+Dispatcher: Passengers left: 74/100
+Dispatcher: Passengers left: 75/100
+Dispatcher: Passengers left: 76/100
+Dispatcher: Passengers left: 77/100
+Dispatcher: Passengers left: 78/100
+Dispatcher: Passengers left: 79/100
+Dispatcher: Passengers left: 80/100
+Dispatcher: Passengers left: 81/100
+Dispatcher: Passengers left: 82/100
+Dispatcher: Passengers left: 83/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 84/100
+Dispatcher: Plane 2312209 is ready to depart
+Dispatcher: Plane 2312199 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 85/100
+Dispatcher: Passengers left: 86/100
+Dispatcher: Passengers left: 87/100
+Dispatcher: Passengers left: 88/100
+Dispatcher: Passengers left: 89/100
+Dispatcher: Passengers left: 90/100
+Dispatcher: Passengers left: 91/100
+Dispatcher: Passengers left: 92/100
+Dispatcher: Passengers left: 93/100
+Dispatcher: Passengers left: 94/100
+Dispatcher: Passengers left: 95/100
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 96/100
+Dispatcher: Plane 2312199 is ready to depart
+Dispatcher: Plane 2312201 is ready
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane is already in terminal
+Dispatcher: Passengers left: 97/100
+Dispatcher: Passengers left: 98/100
+Dispatcher: Passengers left: 99/100
+Dispatcher: Passengers left: 100/100
+Dispatcher: All passengers left

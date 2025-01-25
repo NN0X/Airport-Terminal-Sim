@@ -6,78 +6,124 @@
 #include <errno.h>
 #include <mutex>
 #include <signal.h>
+#include <pthread.h>
+#include <sys/sem.h>
 
 #include "utils.h"
+#include "args.h"
 
-static pid_t stairsPID;
 static bool planeAlreadyInTerminal = false;
 static std::vector<pid_t> planesWaiting;
+static pid_t planeInTerminal;
 
-int totalPassengersLeft = 0;
+static int semIDStairsWait;
+static int semIDPlaneWait;
+static int semIDPlaneDepart;
 
 extern int totalPassengers;
+
+extern sembuf INC_SEM;
+extern sembuf DEC_SEM;
+
+std::mutex dispatcherMutex;
 
 void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
 {
         pid_t pid;
         switch (signum)
         {
-        case SIGNAL_OK:
-                syncedCout("Dispatcher: Received signal OK\n");
-                break;
-        case SIGNAL_PLANE_READY:
-                syncedCout("Dispatcher: Received signal PLANE_READY\n");
-                pid = info->si_value.sival_int;
-                if (planeAlreadyInTerminal)
-                {
-                        syncedCout("Dispatcher: Plane is already in terminal\n");
-                        planesWaiting.push_back(pid);
+                case SIGNAL_OK:
+                        vCout("Dispatcher: Received signal OK\n", RED, LOG_DISPATCHER);
                         break;
-                }
-                syncedCout("Dispatcher: Plane " + std::to_string(pid) + " is ready\n");
-                kill(pid, SIGNAL_PLANE_RECEIVE);
-                kill(stairsPID, SIGNAL_STAIRS_OPEN);
-                planeAlreadyInTerminal = true;
-                break;
-        case SIGNAL_PLANE_READY_DEPART:
-                syncedCout("Dispatcher: Received signal PLANE_READY_DEPART\n");
-                pid = info->si_value.sival_int;
-                syncedCout("Dispatcher: Plane " + std::to_string(pid) + " is ready to depart\n");
-                kill(pid, SIGNAL_PLANE_GO);
-                planeAlreadyInTerminal = false;
-                if (!planesWaiting.empty())
-                {
-                        pid_t nextPlane = planesWaiting.front();
-                        planesWaiting.erase(planesWaiting.begin());
-                        syncedCout("Dispatcher: Plane " + std::to_string(nextPlane) + " is ready\n");
-                        kill(nextPlane, SIGNAL_PLANE_RECEIVE);
-                        kill(stairsPID, SIGNAL_STAIRS_OPEN);
+                case SIGNAL_PLANE_READY:
+                        vCout("Dispatcher: Received signal PLANE_READY\n", RED, LOG_DISPATCHER);
+                        pid = info->si_value.sival_int;
+                        dispatcherMutex.lock();
+                        if (planeAlreadyInTerminal)
+                        {
+                                vCout("Dispatcher: Plane is already in terminal\n", RED, LOG_DISPATCHER);
+                                planesWaiting.push_back(pid);
+                                dispatcherMutex.unlock();
+                                break;
+                        }
+                        vCout("Dispatcher: Plane " + std::to_string(pid) + " is ready\n", RED, LOG_DISPATCHER);
+                        safeSemop(semIDPlaneWait, &INC_SEM, 1);
+                        safeSemop(semIDStairsWait, &INC_SEM, 1);
                         planeAlreadyInTerminal = true;
-                }
-                break;
-        case SIGNAL_PASSENGER_LEFT:
-                syncedCout("Dispatcher: Received signal PASSENGER_LEFT\n");
-                totalPassengersLeft++;
-                if (totalPassengersLeft == totalPassengers)
-                {
-                        syncedCout("Dispatcher: All passengers left\n");
-                        // send signal to main to exit all processes
-                        totalPassengersLeft = 0;
-                }
-                break;
-        case SIGTERM:
-                syncedCout("Dispatcher: Received signal SIGTERM\n");
-                exit(0);
-                break;
-        default:
-                syncedCout("Dispatcher: Received unknown signal\n");
-                break;
+                        planeInTerminal = pid;
+                        dispatcherMutex.unlock();
+                        break;
+                case SIGNAL_PLANE_READY_DEPART:
+                        vCout("Dispatcher: Received signal PLANE_READY_DEPART\n", RED, LOG_DISPATCHER);
+                        pid = info->si_value.sival_int;
+                        vCout("Dispatcher: Plane " + std::to_string(pid) + " is ready to depart\n", RED, LOG_DISPATCHER);
+                        kill(pid, SIGNAL_PLANE_GO);
+                        dispatcherMutex.lock();
+                        planeAlreadyInTerminal = false;
+                        if (!planesWaiting.empty())
+                        {
+                                pid_t nextPlane = planesWaiting.front();
+                                planesWaiting.erase(planesWaiting.begin());
+                                vCout("Dispatcher: Plane " + std::to_string(nextPlane) + " is ready\n", RED, LOG_DISPATCHER);
+                                safeSemop(semIDPlaneWait, &INC_SEM, 1);
+                                safeSemop(semIDStairsWait, &INC_SEM, 1);
+                                planeAlreadyInTerminal = true;
+                                planeInTerminal = nextPlane;
+                        }
+                        safeSemop(semIDPlaneDepart, &INC_SEM, 1);
+                        dispatcherMutex.unlock();
+                        break;
+                case SIGNAL_DISPATCHER_PLANE_FORCED_DEPART:
+                        vCout("Dispatcher: Received signal DISPATCHER_PLANE_FORCED_DEPART\n", RED, LOG_DISPATCHER);
+                        dispatcherMutex.lock();
+                        vCout("Dispatcher: Plane " + std::to_string(planeInTerminal) + " is forced to depart\n", RED, LOG_DISPATCHER);
+                        kill(planeInTerminal, SIGNAL_PLANE_GO);
+                        planeAlreadyInTerminal = false;
+                        if (!planesWaiting.empty())
+                        {
+                                pid_t nextPlane = planesWaiting.front();
+                                planesWaiting.erase(planesWaiting.begin());
+                                vCout("Dispatcher: Plane " + std::to_string(nextPlane) + " is ready\n", RED, LOG_DISPATCHER);
+                                safeSemop(semIDPlaneWait, &INC_SEM, 1);
+                                safeSemop(semIDStairsWait, &INC_SEM, 1);
+                                planeAlreadyInTerminal = true;
+                        }
+                        safeSemop(semIDPlaneDepart, &INC_SEM, 1);
+                        dispatcherMutex.unlock();
+                        break;
+                case SIGTERM:
+                        vCout("Dispatcher: Received signal SIGTERM\n", RED, LOG_DISPATCHER);
+                        exit(0);
+                        break;
+                default:
+                        vCout("Dispatcher: Received unknown signal\n", RED, LOG_DISPATCHER);
+                        break;
         }
 }
 
-int dispatcher(pid_t stairsPid)
+void *passengerCounterThread(void *arg)
 {
-        stairsPID = stairsPid;
+        int semIDPassengerCounter = *((int *)arg);
+        int totalPassengersLeft = 0;
+        while (true)
+        {
+                safeSemop(semIDPassengerCounter, &DEC_SEM, 1);
+                totalPassengersLeft++;
+                vCout("Dispatcher: Passengers left: " + std::to_string(totalPassengersLeft) + "/" + std::to_string(totalPassengers) + "\n", RED, LOG_DISPATCHER);
+                if (totalPassengersLeft == totalPassengers)
+                {
+                        vCout("Dispatcher: All passengers left\n", RED, LOG_DISPATCHER);
+                        // TODO: send signal to main to exit all processes
+                        exit(0);
+                }
+        }
+}
+
+int dispatcher(DispatcherArgs args)
+{
+        semIDPlaneWait = args.semIDPlaneWait;
+        semIDStairsWait = args.semIDStairsWait;
+        semIDPlaneDepart = args.semIDPlaneDepart;
         // attach handler to signals
         struct sigaction sa;
         sa.sa_sigaction = dispatcherSignalHandler;
@@ -98,7 +144,7 @@ int dispatcher(pid_t stairsPid)
                 perror("sigaction");
                 exit(1);
         }
-        if (sigaction(SIGNAL_PASSENGER_LEFT, &sa, NULL) == -1)
+        if (sigaction(SIGNAL_DISPATCHER_PLANE_FORCED_DEPART, &sa, NULL) == -1)
         {
                 perror("sigaction");
                 exit(1);
@@ -106,6 +152,13 @@ int dispatcher(pid_t stairsPid)
         if (sigaction(SIGTERM, &sa, NULL) == -1)
         {
                 perror("sigaction");
+                exit(1);
+        }
+
+        pthread_t passengerCounter;
+        if (pthread_create(&passengerCounter, NULL, passengerCounterThread, (void *)&args.semIDPassengerCounter) != 0)
+        {
+                perror("pthread_create");
                 exit(1);
         }
 

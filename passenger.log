@@ -1,0 +1,1965 @@
+Passenger process: 0
+Passenger 0 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 37
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 0 waiting for baggage control
+Passenger: 0 waiting for signal from baggage control
+Passenger: 0 released from baggage control
+Passenger: 0 waiting for security control
+Passenger: 0 waiting for security control selector
+Passenger: 0 selected gate: 0
+Passenger: 0 waiting for gate 0
+Passenger: 0 waiting at stairs
+Passenger: 0 entering plane
+Passenger: 0 entered plane
+Passenger: 2296976 exiting
+Passenger process: 1
+Passenger 1 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 88
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 1 waiting for baggage control
+Passenger: 1 waiting for signal from baggage control
+Passenger: 1 released from baggage control
+Passenger: 1 waiting for security control
+Passenger 2296977: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 1 waiting for security control selector
+Passenger: 1 selected gate: 0
+Passenger: 1 waiting for gate 0
+Passenger: 1 waiting at stairs
+Passenger: 1 entering plane
+Passenger: 1 entered plane
+Passenger: 2296977 exiting
+Passenger process: 2
+Passenger 2 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 2
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 2 waiting for baggage control
+Passenger: 2 waiting for signal from baggage control
+Passenger: 2 released from baggage control
+Passenger: 2 waiting for security control
+Passenger: 2 waiting for security control selector
+Passenger: 2 selected gate: 0
+Passenger: 2 waiting for gate 0
+Passenger: 2 waiting at stairs
+Passenger: 2 entering plane
+Passenger: 2 entered plane
+Passenger: 2296978 exiting
+Passenger process: 3
+Passenger 3 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 22
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 3 waiting for baggage control
+Passenger: 3 waiting for signal from baggage control
+Passenger: 3 released from baggage control
+Passenger: 3 waiting for security control
+Passenger: 3 waiting for security control selector
+Passenger: 3 selected gate: 0
+Passenger: 3 waiting for gate 0
+Passenger: 3 waiting at stairs
+Passenger: 3 entering plane
+Passenger: 3 entered plane
+Passenger: 2296985 exiting
+Passenger process: 4
+Passenger 4 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 61
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 4 waiting for baggage control
+Passenger: 4 waiting for signal from baggage control
+Passenger: 4 released from baggage control
+Passenger: 4 waiting for security control
+Passenger: 4 waiting for security control selector
+Passenger: 4 selected gate: 0
+Passenger: 4 waiting for gate 0
+Passenger: 4 waiting at stairs
+Passenger: 4 entering plane
+Passenger: 4 entered plane
+Passenger: 2296986 exiting
+Passenger process: 5
+Passenger 5 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 98
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 5 waiting for baggage control
+Passenger: 5 waiting for signal from baggage control
+Passenger: 5 released from baggage control
+Passenger: 5 waiting for security control
+Passenger 2296987: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 5 waiting for security control selector
+Passenger: 5 selected gate: 0
+Passenger: 5 waiting for gate 0
+Passenger: 5 waiting at stairs
+Passenger: 5 entering plane
+Passenger: 5 entered plane
+Passenger: 2296987 exiting
+Passenger process: 6
+Passenger 6 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 21
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 6 waiting for baggage control
+Passenger: 6 waiting for signal from baggage control
+Passenger: 6 released from baggage control
+Passenger: 6 waiting for security control
+Passenger: 6 waiting for security control selector
+Passenger: 6 selected gate: 0
+Passenger: 6 waiting for gate 0
+Passenger: 6 waiting at stairs
+Passenger: 6 entering plane
+Passenger: 6 entered plane
+Passenger: 2296988 exiting
+Passenger process: 7
+Passenger 7 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 21
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 7 waiting for baggage control
+Passenger: 7 waiting for signal from baggage control
+Passenger: 7 released from baggage control
+Passenger: 7 waiting for security control
+Passenger: 7 waiting for security control selector
+Passenger: 7 selected gate: 0
+Passenger: 7 waiting for gate 0
+Passenger 2296989: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 7 failed security control
+Passenger: 2296989 exiting
+Passenger process: 0
+Passenger 0 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 37
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 0 waiting for baggage control
+Passenger: 0 waiting for signal from baggage control
+Passenger: 0 released from baggage control
+Passenger: 0 waiting for security control
+Passenger: 0 waiting for security control selector
+Passenger: 0 selected gate: 0
+Passenger: 0 waiting for gate 0
+Passenger: 0 waiting at stairs
+Passenger: 0 entering plane
+Passenger: 0 entered plane
+Passenger: 2312211 exiting
+Passenger process: 1
+Passenger 1 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 90
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 1 waiting for baggage control
+Passenger: 1 waiting for signal from baggage control
+Passenger: 1 released from baggage control
+Passenger: 1 waiting for security control
+Passenger: 1 waiting for security control selector
+Passenger 2312212: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 1 selected gate: 0
+Passenger: 1 waiting for gate 0
+Passenger: 1 waiting at stairs
+Passenger: 1 entering plane
+Passenger: 1 entered plane
+Passenger: 2312212 exiting
+Passenger process: 2
+Passenger 2 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 9
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 2 waiting for baggage control
+Passenger: 2 waiting for signal from baggage control
+Passenger: 2 released from baggage control
+Passenger: 2 waiting for security control
+Passenger: 2 waiting for security control selector
+Passenger: 2 selected gate: 0
+Passenger: 2 waiting for gate 0
+Passenger: 2 waiting at stairs
+Passenger: 2 entering plane
+Passenger: 2 entered plane
+Passenger: 2312213 exiting
+Passenger process: 3
+Passenger 3 created with the following properties:
+VIP: 1
+Type: 0
+Baggage weight: 70
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 3 waiting for baggage control
+Passenger: 3 waiting for signal from baggage control
+Passenger: 3 released from baggage control
+Passenger: 3 waiting for security control
+Passenger: 3 waiting for security control selector
+Passenger: 3 selected gate: 0
+Passenger: 3 waiting for gate 0
+Passenger: 3 waiting at stairs
+Passenger: 3 entering plane
+Passenger: 3 entered plane
+Passenger: 2312214 exiting
+Passenger process: 4
+Passenger 4 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 99
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 4 waiting for baggage control
+Passenger: 4 waiting for signal from baggage control
+Passenger: 4 released from baggage control
+Passenger: 4 waiting for security control
+Passenger: 4 waiting for security control selector
+Passenger 2312222: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 4 selected gate: 0
+Passenger: 4 waiting for gate 0
+Passenger: 4 waiting at stairs
+Passenger: 4 entering plane
+Passenger: 4 entered plane
+Passenger: 2312222 exiting
+Passenger process: 5
+Passenger 5 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 21
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 5 waiting for baggage control
+Passenger: 5 waiting for signal from baggage control
+Passenger: 5 released from baggage control
+Passenger: 5 waiting for security control
+Passenger: 5 waiting for security control selector
+Passenger: 5 selected gate: 0
+Passenger: 5 waiting for gate 0
+Passenger: 5 waiting at stairs
+Passenger: 5 entering plane
+Passenger: 5 entered plane
+Passenger: 2312271 exiting
+Passenger process: 6
+Passenger 6 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 52
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 6 waiting for baggage control
+Passenger: 6 waiting for signal from baggage control
+Passenger: 6 released from baggage control
+Passenger: 6 waiting for security control
+Passenger: 6 waiting for security control selector
+Passenger: 6 selected gate: 0
+Passenger: 6 waiting for gate 0
+Passenger: 6 waiting at stairs
+Passenger: 6 entering plane
+Passenger: 6 entered plane
+Passenger: 2312286 exiting
+Passenger process: 7
+Passenger 7 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 65
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 7 waiting for baggage control
+Passenger: 7 waiting for signal from baggage control
+Passenger: 7 released from baggage control
+Passenger: 7 waiting for security control
+Passenger: 7 waiting for security control selector
+Passenger: 7 selected gate: 0
+Passenger: 7 waiting for gate 0
+Passenger 2312287: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 7 failed security control
+Passenger: 2312287 exiting
+Passenger process: 8
+Passenger 8 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 43
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 8 waiting for baggage control
+Passenger: 8 waiting for signal from baggage control
+Passenger: 8 released from baggage control
+Passenger: 8 waiting for security control
+Passenger: 8 waiting for security control selector
+Passenger: 8 selected gate: 0
+Passenger: 8 waiting for gate 0
+Passenger: 8 waiting at stairs
+Passenger: 8 entering plane
+Passenger: 8 entered plane
+Passenger: 2312288 exiting
+Passenger process: 9
+Passenger 9 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 9
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 9 waiting for baggage control
+Passenger: 9 waiting for signal from baggage control
+Passenger: 9 released from baggage control
+Passenger: 9 waiting for security control
+Passenger: 9 waiting for security control selector
+Passenger: 9 selected gate: 0
+Passenger: 9 waiting for gate 0
+Passenger: 9 waiting at stairs
+Passenger: 9 entering plane
+Passenger: 9 entered plane
+Passenger: 2312289 exiting
+Passenger process: 10
+Passenger 10 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 33
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 10 waiting for baggage control
+Passenger: 10 waiting for signal from baggage control
+Passenger: 10 released from baggage control
+Passenger: 10 waiting for security control
+Passenger: 10 waiting for security control selector
+Passenger process: 11
+Passenger 11 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 83
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 11 waiting for baggage control
+Passenger: 11 waiting for signal from baggage control
+Passenger: 11 released from baggage control
+Passenger: 11 waiting for security control
+Passenger: 11 waiting for security control selector
+Passenger 2312291: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 10 selected gate: 0
+Passenger: 10 waiting for gate 0
+Passenger: 10 waiting at stairs
+Passenger: 10 entering plane
+Passenger: 10 entered plane
+Passenger: 2312290 exiting
+Passenger: 11 selected gate: 0
+Passenger: 11 waiting for gate 0
+Passenger process: 12
+Passenger 12 created with the following properties:
+VIP: 1
+Type: 1
+Baggage weight: 20
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 12 waiting for baggage control
+Passenger: 12 waiting for signal from baggage control
+Passenger: 12 released from baggage control
+Passenger: 12 waiting for security control
+Passenger: 12 waiting for security control selector
+Passenger: 11 waiting at stairs
+Passenger: 11 entering plane
+Passenger: 11 entered plane
+Passenger: 2312291 exiting
+Passenger: 12 selected gate: 0
+Passenger: 12 waiting for gate 0
+Passenger: 12 waiting at stairs
+Passenger: 12 entering plane
+Passenger: 12 entered plane
+Passenger: 2312292 exiting
+Passenger process: 13
+Passenger 13 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 82
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 13 waiting for baggage control
+Passenger: 13 waiting for signal from baggage control
+Passenger: 13 released from baggage control
+Passenger: 13 waiting for security control
+Passenger 2312293: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 13 waiting for security control selector
+Passenger: 13 selected gate: 0
+Passenger: 13 waiting for gate 0
+Passenger: 13 waiting at stairs
+Passenger: 13 entering plane
+Passenger: 13 entered plane
+Passenger: 2312293 exiting
+Passenger process: 14
+Passenger 14 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 35
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 14 waiting for baggage control
+Passenger: 14 waiting for signal from baggage control
+Passenger: 14 released from baggage control
+Passenger: 14 waiting for security control
+Passenger: 14 waiting for security control selector
+Passenger: 14 selected gate: 0
+Passenger: 14 waiting for gate 0
+Passenger: 14 waiting at stairs
+Passenger: 14 entering plane
+Passenger: 14 entered plane
+Passenger: 2312294 exiting
+Passenger process: 15
+Passenger 15 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 94
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 15 waiting for baggage control
+Passenger: 15 waiting for signal from baggage control
+Passenger: 15 released from baggage control
+Passenger: 15 waiting for security control
+Passenger: 15 waiting for security control selector
+Passenger 2312301: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 15 selected gate: 0
+Passenger: 15 waiting for gate 0
+Passenger: 15 waiting at stairs
+Passenger: 15 entering plane
+Passenger: 15 entered plane
+Passenger: 2312301 exiting
+Passenger process: 16
+Passenger 16 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 59
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 16 waiting for baggage control
+Passenger: 16 waiting for signal from baggage control
+Passenger: 16 released from baggage control
+Passenger: 16 waiting for security control
+Passenger: 16 waiting for security control selector
+Passenger: 16 selected gate: 0
+Passenger: 16 waiting for gate 0
+Passenger: 16 waiting at stairs
+Passenger: 16 entering plane
+Passenger: 16 entered plane
+Passenger: 2312302 exiting
+Passenger process: 17
+Passenger 17 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 74
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 17 waiting for baggage control
+Passenger: 17 waiting for signal from baggage control
+Passenger: 17 released from baggage control
+Passenger: 17 waiting for security control
+Passenger: 17 waiting for security control selector
+Passenger: 17 selected gate: 0
+Passenger: 17 waiting for gate 0
+Passenger: 17 waiting at stairs
+Passenger: 17 entering plane
+Passenger: 17 entered plane
+Passenger: 2312303 exiting
+Passenger process: 18
+Passenger 18 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 15
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 18 waiting for baggage control
+Passenger: 18 waiting for signal from baggage control
+Passenger: 18 released from baggage control
+Passenger: 18 waiting for security control
+Passenger: 18 waiting for security control selector
+Passenger: 18 selected gate: 0
+Passenger: 18 waiting for gate 0
+Passenger: 18 waiting at stairs
+Passenger: 18 entering plane
+Passenger: 18 entered plane
+Passenger: 2312304 exiting
+Passenger process: 19
+Passenger 19 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 1
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 19 waiting for baggage control
+Passenger: 19 waiting for signal from baggage control
+Passenger: 19 released from baggage control
+Passenger: 19 waiting for security control
+Passenger: 19 waiting for security control selector
+Passenger: 19 selected gate: 0
+Passenger: 19 waiting for gate 0
+Passenger: 19 waiting at stairs
+Passenger: 19 entering plane
+Passenger: 19 entered plane
+Passenger: 2312305 exiting
+Passenger process: 20
+Passenger 20 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 74
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 20 waiting for baggage control
+Passenger: 20 waiting for signal from baggage control
+Passenger: 20 released from baggage control
+Passenger: 20 waiting for security control
+Passenger: 20 waiting for security control selector
+Passenger: 20 selected gate: 0
+Passenger: 20 waiting for gate 0
+Passenger: 20 waiting at stairs
+Passenger: 20 entering plane
+Passenger: 20 entered plane
+Passenger: 2312306 exiting
+Passenger process: 21
+Passenger 21 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 82
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 21 waiting for baggage control
+Passenger: 21 waiting for signal from baggage control
+Passenger: 21 released from baggage control
+Passenger: 21 waiting for security control
+Passenger: 21 waiting for security control selector
+Passenger 2312313: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 21 selected gate: 0
+Passenger: 21 waiting for gate 0
+Passenger: 21 waiting at stairs
+Passenger: 21 entering plane
+Passenger: 21 entered plane
+Passenger: 2312313 exiting
+Passenger process: 22
+Passenger 22 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 93
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 22 waiting for baggage control
+Passenger: 22 waiting for signal from baggage control
+Passenger: 22 released from baggage control
+Passenger: 22 waiting for security control
+Passenger 2312314: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 22 waiting for security control selector
+Passenger: 22 selected gate: 0
+Passenger: 22 waiting for gate 0
+Passenger: 22 waiting at stairs
+Passenger: 22 entering plane
+Passenger: 22 entered plane
+Passenger: 2312314 exiting
+Passenger process: 23
+Passenger 23 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 13
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 23 waiting for baggage control
+Passenger: 23 waiting for signal from baggage control
+Passenger: 23 released from baggage control
+Passenger: 23 waiting for security control
+Passenger: 23 waiting for security control selector
+Passenger: 23 selected gate: 0
+Passenger: 23 waiting for gate 0
+Passenger: 23 waiting at stairs
+Passenger: 23 entering plane
+Passenger: 23 entered plane
+Passenger: 2312376 exiting
+Passenger process: 24
+Passenger 24 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 37
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 24 waiting for baggage control
+Passenger: 24 waiting for signal from baggage control
+Passenger: 24 released from baggage control
+Passenger: 24 waiting for security control
+Passenger: 24 waiting for security control selector
+Passenger: 24 selected gate: 0
+Passenger: 24 waiting for gate 0
+Passenger: 24 waiting at stairs
+Passenger: 24 entering plane
+Passenger: 24 entered plane
+Passenger: 2312379 exiting
+Passenger process: 25
+Passenger 25 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 74
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 25 waiting for baggage control
+Passenger: 25 waiting for signal from baggage control
+Passenger: 25 released from baggage control
+Passenger: 25 waiting for security control
+Passenger: 25 waiting for security control selector
+Passenger: 25 selected gate: 0
+Passenger: 25 waiting for gate 0
+Passenger: 25 waiting at stairs
+Passenger: 25 entering plane
+Passenger: 25 entered plane
+Passenger: 2312380 exiting
+Passenger process: 26
+Passenger 26 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 72
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 26 waiting for baggage control
+Passenger: 26 waiting for signal from baggage control
+Passenger: 26 released from baggage control
+Passenger: 26 waiting for security control
+Passenger: 26 waiting for security control selector
+Passenger: 26 selected gate: 0
+Passenger: 26 waiting for gate 0
+Passenger: 26 waiting at stairs
+Passenger: 26 entering plane
+Passenger: 26 entered plane
+Passenger: 2312387 exiting
+Passenger process: 27
+Passenger 27 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 78
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 27 waiting for baggage control
+Passenger: 27 waiting for signal from baggage control
+Passenger: 27 released from baggage control
+Passenger: 27 waiting for security control
+Passenger 2312388: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 27 waiting for security control selector
+Passenger: 27 selected gate: 0
+Passenger: 27 waiting for gate 0
+Passenger: 27 waiting at stairs
+Passenger: 27 entering plane
+Passenger: 27 entered plane
+Passenger: 2312388 exiting
+Passenger process: 28
+Passenger 28 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 59
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 28 waiting for baggage control
+Passenger: 28 waiting for signal from baggage control
+Passenger: 28 released from baggage control
+Passenger: 28 waiting for security control
+Passenger: 28 waiting for security control selector
+Passenger: 28 selected gate: 0
+Passenger: 28 waiting for gate 0
+Passenger: 28 waiting at stairs
+Passenger: 28 entering plane
+Passenger: 28 entered plane
+Passenger: 2312389 exiting
+Passenger process: 29
+Passenger 29 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 98
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 29 waiting for baggage control
+Passenger: 29 waiting for signal from baggage control
+Passenger: 29 released from baggage control
+Passenger: 29 waiting for security control
+Passenger 2312390: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 29 waiting for security control selector
+Passenger: 29 selected gate: 0
+Passenger: 29 waiting for gate 0
+Passenger: 29 waiting at stairs
+Passenger: 29 entering plane
+Passenger: 29 entered plane
+Passenger: 2312390 exiting
+Passenger process: 30
+Passenger 30 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 81
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 30 waiting for baggage control
+Passenger: 30 waiting for signal from baggage control
+Passenger: 30 released from baggage control
+Passenger: 30 waiting for security control
+Passenger: 30 waiting for security control selector
+Passenger 2312391: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 30 selected gate: 0
+Passenger: 30 waiting for gate 0
+Passenger: 30 waiting at stairs
+Passenger: 30 entering plane
+Passenger: 30 entered plane
+Passenger: 2312391 exiting
+Passenger process: 31
+Passenger 31 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 20
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 31 waiting for baggage control
+Passenger: 31 waiting for signal from baggage control
+Passenger: 31 released from baggage control
+Passenger: 31 waiting for security control
+Passenger: 31 waiting for security control selector
+Passenger: 31 selected gate: 0
+Passenger: 31 waiting for gate 0
+Passenger process: 32
+Passenger 32 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 62
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 32 waiting for baggage control
+Passenger: 32 waiting for signal from baggage control
+Passenger: 32 released from baggage control
+Passenger: 32 waiting for security control
+Passenger: 32 waiting for security control selector
+Passenger: 31 waiting at stairs
+Passenger: 31 entering plane
+Passenger: 31 entered plane
+Passenger: 2312392 exiting
+Passenger: 32 selected gate: 0
+Passenger: 32 waiting for gate 0
+Passenger: 32 waiting at stairs
+Passenger: 32 entering plane
+Passenger: 32 entered plane
+Passenger: 2312393 exiting
+Passenger process: 33
+Passenger 33 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 90
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 33 waiting for baggage control
+Passenger: 33 waiting for signal from baggage control
+Passenger: 33 released from baggage control
+Passenger: 33 waiting for security control
+Passenger 2312394: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 33 waiting for security control selector
+Passenger: 33 selected gate: 0
+Passenger: 33 waiting for gate 0
+Passenger: 33 waiting at stairs
+Passenger: 33 entering plane
+Passenger: 33 entered plane
+Passenger: 2312394 exiting
+Passenger process: 34
+Passenger 34 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 97
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 34 waiting for baggage control
+Passenger: 34 waiting for signal from baggage control
+Passenger: 34 released from baggage control
+Passenger: 34 waiting for security control
+Passenger: 34 waiting for security control selector
+Passenger 2312395: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 34 selected gate: 0
+Passenger: 34 waiting for gate 0
+Passenger: 34 waiting at stairs
+Passenger: 34 entering plane
+Passenger: 34 entered plane
+Passenger: 2312395 exiting
+Passenger process: 35
+Passenger 35 created with the following properties:
+VIP: 1
+Type: 0
+Baggage weight: 32
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 35 waiting for baggage control
+Passenger: 35 waiting for signal from baggage control
+Passenger: 35 released from baggage control
+Passenger: 35 waiting for security control
+Passenger: 35 waiting for security control selector
+Passenger: 35 selected gate: 0
+Passenger: 35 waiting for gate 0
+Passenger: 35 waiting at stairs
+Passenger: 35 entering plane
+Passenger: 35 entered plane
+Passenger: 2312402 exiting
+Passenger process: 36
+Passenger 36 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 9
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 36 waiting for baggage control
+Passenger: 36 waiting for signal from baggage control
+Passenger: 36 released from baggage control
+Passenger: 36 waiting for security control
+Passenger: 36 waiting for security control selector
+Passenger: 36 selected gate: 0
+Passenger: 36 waiting for gate 0
+Passenger: 36 waiting at stairs
+Passenger: 36 entering plane
+Passenger: 36 entered plane
+Passenger: 2312403 exiting
+Passenger process: 37
+Passenger 37 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 61
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 37 waiting for baggage control
+Passenger: 37 waiting for signal from baggage control
+Passenger: 37 released from baggage control
+Passenger: 37 waiting for security control
+Passenger: 37 waiting for security control selector
+Passenger: 37 selected gate: 0
+Passenger: 37 waiting for gate 0
+Passenger: 37 waiting at stairs
+Passenger: 37 entering plane
+Passenger: 37 entered plane
+Passenger: 2312404 exiting
+Passenger process: 38
+Passenger 38 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 77
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 38 waiting for baggage control
+Passenger: 38 waiting for signal from baggage control
+Passenger: 38 released from baggage control
+Passenger: 38 waiting for security control
+Passenger: 38 waiting for security control selector
+Passenger 2312405: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 38 selected gate: 0
+Passenger: 38 waiting for gate 0
+Passenger: 38 waiting at stairs
+Passenger: 38 entering plane
+Passenger: 38 entered plane
+Passenger: 2312405 exiting
+Passenger process: 39
+Passenger 39 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 22
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 39 waiting for baggage control
+Passenger: 39 waiting for signal from baggage control
+Passenger: 39 released from baggage control
+Passenger: 39 waiting for security control
+Passenger: 39 waiting for security control selector
+Passenger: 39 selected gate: 0
+Passenger: 39 waiting for gate 0
+Passenger: 39 waiting at stairs
+Passenger: 39 entering plane
+Passenger: 39 entered plane
+Passenger: 2312406 exiting
+Passenger process: 40
+Passenger 40 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 16
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 40 waiting for baggage control
+Passenger: 40 waiting for signal from baggage control
+Passenger: 40 released from baggage control
+Passenger: 40 waiting for security control
+Passenger: 40 waiting for security control selector
+Passenger: 40 selected gate: 0
+Passenger: 40 waiting for gate 0
+Passenger: 40 waiting at stairs
+Passenger: 40 entering plane
+Passenger: 40 entered plane
+Passenger: 2312407 exiting
+Passenger process: 41
+Passenger 41 created with the following properties:
+VIP: 1
+Type: 1
+Baggage weight: 2
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 41 waiting for baggage control
+Passenger: 41 waiting for signal from baggage control
+Passenger: 41 released from baggage control
+Passenger: 41 waiting for security control
+Passenger: 41 waiting for security control selector
+Passenger: 41 selected gate: 0
+Passenger: 41 waiting for gate 0
+Passenger 2312436: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 41 failed security control
+Passenger: 2312436 exiting
+Passenger process: 42
+Passenger 42 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 75
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 42 waiting for baggage control
+Passenger: 42 waiting for signal from baggage control
+Passenger: 42 released from baggage control
+Passenger: 42 waiting for security control
+Passenger: 42 waiting for security control selector
+Passenger: 42 selected gate: 0
+Passenger: 42 waiting for gate 0
+Passenger: 42 waiting at stairs
+Passenger: 42 entering plane
+Passenger: 42 entered plane
+Passenger: 2312478 exiting
+Passenger process: 43
+Passenger 43 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 7
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 43 waiting for baggage control
+Passenger: 43 waiting for signal from baggage control
+Passenger: 43 released from baggage control
+Passenger: 43 waiting for security control
+Passenger: 43 waiting for security control selector
+Passenger: 43 selected gate: 0
+Passenger: 43 waiting for gate 0
+Passenger: 43 waiting at stairs
+Passenger: 43 entering plane
+Passenger: 43 entered plane
+Passenger: 2312479 exiting
+Passenger process: 44
+Passenger 44 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 74
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 44 waiting for baggage control
+Passenger: 44 waiting for signal from baggage control
+Passenger: 44 released from baggage control
+Passenger: 44 waiting for security control
+Passenger: 44 waiting for security control selector
+Passenger: 44 selected gate: 0
+Passenger: 44 waiting for gate 0
+Passenger process: 45
+Passenger 45 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 49
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 45 waiting for baggage control
+Passenger: 45 waiting for signal from baggage control
+Passenger: 45 released from baggage control
+Passenger: 45 waiting for security control
+Passenger: 45 waiting for security control selector
+Passenger: 45 selected gate: 0
+Passenger: 45 waiting for gate 0
+Passenger: 44 waiting at stairs
+Passenger: 44 entering plane
+Passenger: 44 entered plane
+Passenger: 2312480 exiting
+Passenger: 45 waiting at stairs
+Passenger: 45 entering plane
+Passenger: 45 entered plane
+Passenger: 2312481 exiting
+Passenger process: 46
+Passenger 46 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 94
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 46 waiting for baggage control
+Passenger: 46 waiting for signal from baggage control
+Passenger: 46 released from baggage control
+Passenger: 46 waiting for security control
+Passenger: 46 waiting for security control selector
+Passenger 2312482: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 46 selected gate: 0
+Passenger: 46 waiting for gate 0
+Passenger: 46 waiting at stairs
+Passenger: 46 entering plane
+Passenger: 46 entered plane
+Passenger: 2312482 exiting
+Passenger process: 47
+Passenger 47 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 28
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 47 waiting for baggage control
+Passenger: 47 waiting for signal from baggage control
+Passenger: 47 released from baggage control
+Passenger: 47 waiting for security control
+Passenger: 47 waiting for security control selector
+Passenger: 47 selected gate: 0
+Passenger: 47 waiting for gate 0
+Passenger: 47 waiting at stairs
+Passenger: 47 entering plane
+Passenger: 47 entered plane
+Passenger: 2312483 exiting
+Passenger process: 48
+Passenger 48 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 94
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 48 waiting for baggage control
+Passenger: 48 waiting for signal from baggage control
+Passenger: 48 released from baggage control
+Passenger: 48 waiting for security control
+Passenger 2312484: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 48 waiting for security control selector
+Passenger: 48 selected gate: 0
+Passenger: 48 waiting for gate 0
+Passenger: 48 waiting at stairs
+Passenger: 48 entering plane
+Passenger: 48 entered plane
+Passenger: 2312484 exiting
+Passenger process: 49
+Passenger 49 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 41
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 49 waiting for baggage control
+Passenger: 49 waiting for signal from baggage control
+Passenger: 49 released from baggage control
+Passenger: 49 waiting for security control
+Passenger: 49 waiting for security control selector
+Passenger: 49 selected gate: 0
+Passenger: 49 waiting for gate 0
+Passenger: 49 waiting at stairs
+Passenger: 49 entering plane
+Passenger: 49 entered plane
+Passenger: 2312485 exiting
+Passenger process: 50
+Passenger 50 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 84
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 50 waiting for baggage control
+Passenger: 50 waiting for signal from baggage control
+Passenger: 50 released from baggage control
+Passenger: 50 waiting for security control
+Passenger 2312486: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 50 waiting for security control selector
+Passenger: 50 selected gate: 0
+Passenger: 50 waiting for gate 0
+Passenger: 50 waiting at stairs
+Passenger: 50 entering plane
+Passenger: 50 entered plane
+Passenger: 2312486 exiting
+Passenger process: 51
+Passenger 51 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 58
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 51 waiting for baggage control
+Passenger: 51 waiting for signal from baggage control
+Passenger: 51 released from baggage control
+Passenger: 51 waiting for security control
+Passenger: 51 waiting for security control selector
+Passenger: 51 selected gate: 0
+Passenger: 51 waiting for gate 0
+Passenger: 51 waiting at stairs
+Passenger: 51 entering plane
+Passenger: 51 entered plane
+Passenger: 2312493 exiting
+Passenger process: 52
+Passenger 52 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 63
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 52 waiting for baggage control
+Passenger: 52 waiting for signal from baggage control
+Passenger: 52 released from baggage control
+Passenger: 52 waiting for security control
+Passenger: 52 waiting for security control selector
+Passenger: 52 selected gate: 0
+Passenger: 52 waiting for gate 0
+Passenger: 52 waiting at stairs
+Passenger: 52 entering plane
+Passenger: 52 entered plane
+Passenger: 2312494 exiting
+Passenger process: 53
+Passenger 53 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 88
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 53 waiting for baggage control
+Passenger: 53 waiting for signal from baggage control
+Passenger: 53 released from baggage control
+Passenger: 53 waiting for security control
+Passenger 2312495: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 53 waiting for security control selector
+Passenger: 53 selected gate: 0
+Passenger: 53 waiting for gate 0
+Passenger: 53 waiting at stairs
+Passenger: 53 entering plane
+Passenger: 53 entered plane
+Passenger: 2312495 exiting
+Passenger process: 54
+Passenger 54 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 36
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 54 waiting for baggage control
+Passenger: 54 waiting for signal from baggage control
+Passenger: 54 released from baggage control
+Passenger: 54 waiting for security control
+Passenger: 54 waiting for security control selector
+Passenger: 54 selected gate: 0
+Passenger: 54 waiting for gate 0
+Passenger: 54 waiting at stairs
+Passenger: 54 entering plane
+Passenger: 54 entered plane
+Passenger: 2312496 exiting
+Passenger process: 55
+Passenger 55 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 37
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 55 waiting for baggage control
+Passenger: 55 waiting for signal from baggage control
+Passenger: 55 released from baggage control
+Passenger: 55 waiting for security control
+Passenger: 55 waiting for security control selector
+Passenger: 55 selected gate: 0
+Passenger: 55 waiting for gate 0
+Passenger: 55 waiting at stairs
+Passenger: 55 entering plane
+Passenger: 55 entered plane
+Passenger: 2312497 exiting
+Passenger process: 56
+Passenger 56 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 18
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 56 waiting for baggage control
+Passenger: 56 waiting for signal from baggage control
+Passenger: 56 released from baggage control
+Passenger: 56 waiting for security control
+Passenger: 56 waiting for security control selector
+Passenger: 56 selected gate: 0
+Passenger: 56 waiting for gate 0
+Passenger: 56 waiting at stairs
+Passenger: 56 entering plane
+Passenger: 56 entered plane
+Passenger: 2312498 exiting
+Passenger process: 57
+Passenger 57 created with the following properties:
+VIP: 1
+Type: 0
+Baggage weight: 53
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 57 waiting for baggage control
+Passenger: 57 waiting for signal from baggage control
+Passenger: 57 released from baggage control
+Passenger: 57 waiting for security control
+Passenger: 57 waiting for security control selector
+Passenger: 57 selected gate: 0
+Passenger: 57 waiting for gate 0
+Passenger: 57 waiting at stairs
+Passenger: 57 entering plane
+Passenger: 57 entered plane
+Passenger: 2312499 exiting
+Passenger process: 58
+Passenger 58 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 17
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 58 waiting for baggage control
+Passenger: 58 waiting for signal from baggage control
+Passenger: 58 released from baggage control
+Passenger: 58 waiting for security control
+Passenger: 58 waiting for security control selector
+Passenger: 58 selected gate: 0
+Passenger: 58 waiting for gate 0
+Passenger: 58 waiting at stairs
+Passenger: 58 entering plane
+Passenger: 58 entered plane
+Passenger: 2312506 exiting
+Passenger process: 59
+Passenger 59 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 72
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 59 waiting for baggage control
+Passenger: 59 waiting for signal from baggage control
+Passenger: 59 released from baggage control
+Passenger: 59 waiting for security control
+Passenger: 59 waiting for security control selector
+Passenger: 59 selected gate: 0
+Passenger: 59 waiting for gate 0
+Passenger: 59 waiting at stairs
+Passenger: 59 entering plane
+Passenger: 59 entered plane
+Passenger: 2312553 exiting
+Passenger process: 60
+Passenger 60 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 40
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 60 waiting for baggage control
+Passenger: 60 waiting for signal from baggage control
+Passenger: 60 released from baggage control
+Passenger: 60 waiting for security control
+Passenger: 60 waiting for security control selector
+Passenger: 60 selected gate: 0
+Passenger: 60 waiting for gate 0
+Passenger: 60 waiting at stairs
+Passenger: 60 entering plane
+Passenger: 60 entered plane
+Passenger: 2312571 exiting
+Passenger process: 61
+Passenger 61 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 25
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 61 waiting for baggage control
+Passenger: 61 waiting for signal from baggage control
+Passenger: 61 released from baggage control
+Passenger: 61 waiting for security control
+Passenger: 61 waiting for security control selector
+Passenger: 61 selected gate: 0
+Passenger: 61 waiting for gate 0
+Passenger: 61 waiting at stairs
+Passenger: 61 entering plane
+Passenger: 61 entered plane
+Passenger: 2312572 exiting
+Passenger process: 62
+Passenger 62 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 56
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 62 waiting for baggage control
+Passenger: 62 waiting for signal from baggage control
+Passenger: 62 released from baggage control
+Passenger: 62 waiting for security control
+Passenger: 62 waiting for security control selector
+Passenger: 62 selected gate: 0
+Passenger: 62 waiting for gate 0
+Passenger: 62 waiting at stairs
+Passenger: 62 entering plane
+Passenger: 62 entered plane
+Passenger: 2312573 exiting
+Passenger process: 63
+Passenger 63 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 16
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 63 waiting for baggage control
+Passenger: 63 waiting for signal from baggage control
+Passenger: 63 released from baggage control
+Passenger: 63 waiting for security control
+Passenger: 63 waiting for security control selector
+Passenger: 63 selected gate: 0
+Passenger: 63 waiting for gate 0
+Passenger: 63 waiting at stairs
+Passenger: 63 entering plane
+Passenger: 63 entered plane
+Passenger: 2312574 exiting
+Passenger process: 64
+Passenger 64 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 34
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 64 waiting for baggage control
+Passenger: 64 waiting for signal from baggage control
+Passenger: 64 released from baggage control
+Passenger: 64 waiting for security control
+Passenger: 64 waiting for security control selector
+Passenger: 64 selected gate: 0
+Passenger: 64 waiting for gate 0
+Passenger: 64 waiting at stairs
+Passenger: 64 entering plane
+Passenger: 64 entered plane
+Passenger: 2312581 exiting
+Passenger process: 65
+Passenger 65 created with the following properties:
+VIP: 1
+Type: 1
+Baggage weight: 14
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 65 waiting for baggage control
+Passenger: 65 waiting for signal from baggage control
+Passenger: 65 released from baggage control
+Passenger: 65 waiting for security control
+Passenger: 65 waiting for security control selector
+Passenger: 65 selected gate: 0
+Passenger: 65 waiting for gate 0
+Passenger: 65 waiting at stairs
+Passenger: 65 entering plane
+Passenger: 65 entered plane
+Passenger: 2312582 exiting
+Passenger process: 66
+Passenger 66 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 92
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 66 waiting for baggage control
+Passenger: 66 waiting for signal from baggage control
+Passenger: 66 released from baggage control
+Passenger: 66 waiting for security control
+Passenger: 66 waiting for security control selector
+Passenger 2312583: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 66 selected gate: 0
+Passenger: 66 waiting for gate 0
+Passenger: 66 waiting at stairs
+Passenger: 66 entering plane
+Passenger: 66 entered plane
+Passenger: 2312583 exiting
+Passenger process: 67
+Passenger 67 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 81
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 67 waiting for baggage control
+Passenger: 67 waiting for signal from baggage control
+Passenger: 67 released from baggage control
+Passenger: 67 waiting for security control
+Passenger: 67 waiting for security control selector
+Passenger 2312584: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 67 selected gate: 0
+Passenger: 67 waiting for gate 0
+Passenger: 67 waiting at stairs
+Passenger: 67 entering plane
+Passenger: 67 entered plane
+Passenger: 2312584 exiting
+Passenger process: 68
+Passenger 68 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 39
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 68 waiting for baggage control
+Passenger: 68 waiting for signal from baggage control
+Passenger: 68 released from baggage control
+Passenger: 68 waiting for security control
+Passenger: 68 waiting for security control selector
+Passenger: 68 selected gate: 0
+Passenger: 68 waiting for gate 0
+Passenger: 68 waiting at stairs
+Passenger: 68 entering plane
+Passenger: 68 entered plane
+Passenger: 2312585 exiting
+Passenger process: 69
+Passenger 69 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 41
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 69 waiting for baggage control
+Passenger: 69 waiting for signal from baggage control
+Passenger: 69 released from baggage control
+Passenger: 69 waiting for security control
+Passenger: 69 waiting for security control selector
+Passenger: 69 selected gate: 0
+Passenger: 69 waiting for gate 0
+Passenger: 69 waiting at stairs
+Passenger: 69 entering plane
+Passenger: 69 entered plane
+Passenger: 2312586 exiting
+Passenger process: 70
+Passenger 70 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 96
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 70 waiting for baggage control
+Passenger: 70 waiting for signal from baggage control
+Passenger: 70 released from baggage control
+Passenger: 70 waiting for security control
+Passenger: 70 waiting for security control selector
+Passenger 2312593: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger process: 71
+Passenger 71 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 13
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 71 waiting for baggage control
+Passenger: 71 waiting for signal from baggage control
+Passenger: 71 released from baggage control
+Passenger: 71 waiting for security control
+Passenger: 71 waiting for security control selector
+Passenger: 70 selected gate: 0
+Passenger: 70 waiting for gate 0
+Passenger: 70 waiting at stairs
+Passenger: 70 entering plane
+Passenger: 70 entered plane
+Passenger: 2312593 exiting
+Passenger: 71 selected gate: 0
+Passenger: 71 waiting for gate 0
+Passenger: 71 waiting at stairs
+Passenger: 71 entering plane
+Passenger: 71 entered plane
+Passenger: 2312594 exiting
+Passenger process: 72
+Passenger 72 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 81
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 72 waiting for baggage control
+Passenger: 72 waiting for signal from baggage control
+Passenger: 72 released from baggage control
+Passenger: 72 waiting for security control
+Passenger 2312595: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 72 waiting for security control selector
+Passenger: 72 selected gate: 0
+Passenger: 72 waiting for gate 0
+Passenger: 72 waiting at stairs
+Passenger: 72 entering plane
+Passenger: 72 entered plane
+Passenger: 2312595 exiting
+Passenger process: 73
+Passenger 73 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 54
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 73 waiting for baggage control
+Passenger: 73 waiting for signal from baggage control
+Passenger: 73 released from baggage control
+Passenger: 73 waiting for security control
+Passenger: 73 waiting for security control selector
+Passenger: 73 selected gate: 0
+Passenger: 73 waiting for gate 0
+Passenger: 73 waiting at stairs
+Passenger: 73 entering plane
+Passenger: 73 entered plane
+Passenger: 2312596 exiting
+Passenger process: 74
+Passenger 74 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 67
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 74 waiting for baggage control
+Passenger: 74 waiting for signal from baggage control
+Passenger: 74 released from baggage control
+Passenger: 74 waiting for security control
+Passenger: 74 waiting for security control selector
+Passenger: 74 selected gate: 0
+Passenger: 74 waiting for gate 0
+Passenger: 74 waiting at stairs
+Passenger: 74 entering plane
+Passenger: 74 entered plane
+Passenger: 2312597 exiting
+Passenger process: 75
+Passenger 75 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 48
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 75 waiting for baggage control
+Passenger: 75 waiting for signal from baggage control
+Passenger: 75 released from baggage control
+Passenger: 75 waiting for security control
+Passenger: 75 waiting for security control selector
+Passenger: 75 selected gate: 0
+Passenger: 75 waiting for gate 0
+Passenger 2312598: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 75 failed security control
+Passenger: 2312598 exiting
+Passenger process: 76
+Passenger 76 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 26
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 76 waiting for baggage control
+Passenger: 76 waiting for signal from baggage control
+Passenger: 76 released from baggage control
+Passenger: 76 waiting for security control
+Passenger: 76 waiting for security control selector
+Passenger: 76 selected gate: 0
+Passenger: 76 waiting for gate 0
+Passenger: 76 waiting at stairs
+Passenger: 76 entering plane
+Passenger: 76 entered plane
+Passenger: 2312662 exiting
+Passenger process: 77
+Passenger 77 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 57
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 77 waiting for baggage control
+Passenger: 77 waiting for signal from baggage control
+Passenger: 77 released from baggage control
+Passenger: 77 waiting for security control
+Passenger: 77 waiting for security control selector
+Passenger: 77 selected gate: 0
+Passenger: 77 waiting for gate 0
+Passenger 2312669: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 77 failed security control
+Passenger: 2312669 exiting
+Passenger process: 78
+Passenger 78 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 3
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 78 waiting for baggage control
+Passenger: 78 waiting for signal from baggage control
+Passenger: 78 released from baggage control
+Passenger: 78 waiting for security control
+Passenger: 78 waiting for security control selector
+Passenger: 78 selected gate: 0
+Passenger: 78 waiting for gate 0
+Passenger: 78 waiting at stairs
+Passenger: 78 entering plane
+Passenger: 78 entered plane
+Passenger: 2312670 exiting
+Passenger process: 79
+Passenger 79 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 13
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 79 waiting for baggage control
+Passenger: 79 waiting for signal from baggage control
+Passenger: 79 released from baggage control
+Passenger: 79 waiting for security control
+Passenger: 79 waiting for security control selector
+Passenger: 79 selected gate: 0
+Passenger: 79 waiting for gate 0
+Passenger: 79 waiting at stairs
+Passenger: 79 entering plane
+Passenger: 79 entered plane
+Passenger: 2312671 exiting
+Passenger process: 80
+Passenger 80 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 21
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 80 waiting for baggage control
+Passenger: 80 waiting for signal from baggage control
+Passenger: 80 released from baggage control
+Passenger: 80 waiting for security control
+Passenger: 80 waiting for security control selector
+Passenger: 80 selected gate: 0
+Passenger: 80 waiting for gate 0
+Passenger: 80 waiting at stairs
+Passenger: 80 entering plane
+Passenger: 80 entered plane
+Passenger: 2312672 exiting
+Passenger process: 81
+Passenger 81 created with the following properties:
+VIP: 1
+Type: 0
+Baggage weight: 62
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 81 waiting for baggage control
+Passenger: 81 waiting for signal from baggage control
+Passenger: 81 released from baggage control
+Passenger: 81 waiting for security control
+Passenger: 81 waiting for security control selector
+Passenger: 81 selected gate: 0
+Passenger: 81 waiting for gate 0
+Passenger process: 82
+Passenger 82 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 71
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 82 waiting for baggage control
+Passenger: 82 waiting for signal from baggage control
+Passenger: 82 released from baggage control
+Passenger: 82 waiting for security control
+Passenger: 82 waiting for security control selector
+Passenger: 81 waiting at stairs
+Passenger: 81 entering plane
+Passenger: 81 entered plane
+Passenger: 2312673 exiting
+Passenger: 82 selected gate: 0
+Passenger: 82 waiting for gate 0
+Passenger: 82 waiting at stairs
+Passenger: 82 entering plane
+Passenger: 82 entered plane
+Passenger: 2312674 exiting
+Passenger process: 83
+Passenger 83 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 7
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 83 waiting for baggage control
+Passenger: 83 waiting for signal from baggage control
+Passenger: 83 released from baggage control
+Passenger: 83 waiting for security control
+Passenger: 83 waiting for security control selector
+Passenger: 83 selected gate: 0
+Passenger: 83 waiting for gate 0
+Passenger: 83 waiting at stairs
+Passenger: 83 entering plane
+Passenger: 83 entered plane
+Passenger: 2312675 exiting
+Passenger process: 84
+Passenger 84 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 52
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 84 waiting for baggage control
+Passenger: 84 waiting for signal from baggage control
+Passenger: 84 released from baggage control
+Passenger: 84 waiting for security control
+Passenger: 84 waiting for security control selector
+Passenger: 84 selected gate: 0
+Passenger: 84 waiting for gate 0
+Passenger: 84 waiting at stairs
+Passenger: 84 entering plane
+Passenger: 84 entered plane
+Passenger: 2312676 exiting
+Passenger process: 85
+Passenger 85 created with the following properties:
+VIP: 1
+Type: 0
+Baggage weight: 33
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 85 waiting for baggage control
+Passenger: 85 waiting for signal from baggage control
+Passenger: 85 released from baggage control
+Passenger: 85 waiting for security control
+Passenger: 85 waiting for security control selector
+Passenger: 85 selected gate: 0
+Passenger: 85 waiting for gate 0
+Passenger 2312683: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 85 failed security control
+Passenger: 2312683 exiting
+Passenger process: 86
+Passenger 86 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 97
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 86 waiting for baggage control
+Passenger: 86 waiting for signal from baggage control
+Passenger: 86 released from baggage control
+Passenger: 86 waiting for security control
+Passenger: 86 waiting for security control selector
+Passenger 2312684: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 86 selected gate: 0
+Passenger: 86 waiting for gate 0
+Passenger: 86 waiting at stairs
+Passenger: 86 entering plane
+Passenger: 86 entered plane
+Passenger: 2312684 exiting
+Passenger process: 87
+Passenger 87 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 14
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 87 waiting for baggage control
+Passenger: 87 waiting for signal from baggage control
+Passenger: 87 released from baggage control
+Passenger: 87 waiting for security control
+Passenger: 87 waiting for security control selector
+Passenger: 87 selected gate: 0
+Passenger: 87 waiting for gate 0
+Passenger: 87 waiting at stairs
+Passenger: 87 entering plane
+Passenger: 87 entered plane
+Passenger: 2312685 exiting
+Passenger process: 88
+Passenger 88 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 87
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 88 waiting for baggage control
+Passenger: 88 waiting for signal from baggage control
+Passenger: 88 released from baggage control
+Passenger: 88 waiting for security control
+Passenger 2312686: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 88 waiting for security control selector
+Passenger: 88 selected gate: 0
+Passenger: 88 waiting for gate 0
+Passenger process: 89
+Passenger 89 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 28
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 89 waiting for baggage control
+Passenger: 89 waiting for signal from baggage control
+Passenger: 89 released from baggage control
+Passenger: 89 waiting for security control
+Passenger: 89 waiting for security control selector
+Passenger: 89 selected gate: 1
+Passenger: 89 waiting for gate 1
+Passenger: 89 waiting at stairs
+Passenger: 89 entering plane
+Passenger: 89 entered plane
+Passenger: 2312687 exiting
+Passenger: 88 waiting at stairs
+Passenger: 88 entering plane
+Passenger: 88 entered plane
+Passenger: 2312686 exiting
+Passenger process: 90
+Passenger 90 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 79
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 90 waiting for baggage control
+Passenger: 90 waiting for signal from baggage control
+Passenger: 90 released from baggage control
+Passenger: 90 waiting for security control
+Passenger: 90 waiting for security control selector
+Passenger 2312688: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 90 selected gate: 0
+Passenger: 90 waiting for gate 0
+Passenger: 90 waiting at stairs
+Passenger: 90 entering plane
+Passenger: 90 entered plane
+Passenger: 2312688 exiting
+Passenger process: 91
+Passenger 91 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 37
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 91 waiting for baggage control
+Passenger: 91 waiting for signal from baggage control
+Passenger: 91 released from baggage control
+Passenger: 91 waiting for security control
+Passenger: 91 waiting for security control selector
+Passenger: 91 selected gate: 0
+Passenger: 91 waiting for gate 0
+Passenger: 91 waiting at stairs
+Passenger: 91 entering plane
+Passenger: 91 entered plane
+Passenger: 2312689 exiting
+Passenger process: 92
+Passenger 92 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 76
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 92 waiting for baggage control
+Passenger: 92 waiting for signal from baggage control
+Passenger: 92 released from baggage control
+Passenger: 92 waiting for security control
+Passenger 2312690: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 92 waiting for security control selector
+Passenger: 92 selected gate: 0
+Passenger: 92 waiting for gate 0
+Passenger: 92 waiting at stairs
+Passenger: 92 entering plane
+Passenger: 92 entered plane
+Passenger: 2312690 exiting
+Passenger process: 93
+Passenger 93 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 65
+Aggressive: 0
+Dangerous baggage: 1
+Passenger: 93 waiting for baggage control
+Passenger: 93 waiting for signal from baggage control
+Passenger: 93 released from baggage control
+Passenger: 93 waiting for security control
+Passenger: 93 waiting for security control selector
+Passenger process: 94
+Passenger 94 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 44
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 94 waiting for baggage control
+Passenger: 94 waiting for signal from baggage control
+Passenger: 94 released from baggage control
+Passenger: 94 waiting for security control
+Passenger: 94 waiting for security control selector
+Passenger: 93 selected gate: 0
+Passenger: 93 waiting for gate 0
+Passenger 2312691: Received signal PASSENGER_IS_DANGEROUS
+Passenger: 93 failed security control
+Passenger: 2312691 exiting
+Passenger: 94 selected gate: 0
+Passenger: 94 waiting for gate 0
+Passenger: 94 waiting at stairs
+Passenger: 94 entering plane
+Passenger: 94 entered plane
+Passenger: 2312692 exiting
+Passenger process: 95
+Passenger 95 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 53
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 95 waiting for baggage control
+Passenger: 95 waiting for signal from baggage control
+Passenger: 95 released from baggage control
+Passenger: 95 waiting for security control
+Passenger: 95 waiting for security control selector
+Passenger: 95 selected gate: 0
+Passenger: 95 waiting for gate 0
+Passenger: 95 waiting at stairs
+Passenger: 95 entering plane
+Passenger: 95 entered plane
+Passenger: 2312693 exiting
+Passenger process: 96
+Passenger 96 created with the following properties:
+VIP: 0
+Type: 0
+Baggage weight: 92
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 96 waiting for baggage control
+Passenger: 96 waiting for signal from baggage control
+Passenger: 96 released from baggage control
+Passenger: 96 waiting for security control
+Passenger: 96 waiting for security control selector
+Passenger 2312694: Received signal PASSENGER_IS_OVERWEIGHT
+Passenger: 96 selected gate: 0
+Passenger: 96 waiting for gate 0
+Passenger process: 97
+Passenger 97 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 53
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 97 waiting for baggage control
+Passenger: 97 waiting for signal from baggage control
+Passenger: 97 released from baggage control
+Passenger: 97 waiting for security control
+Passenger: 97 waiting for security control selector
+Passenger: 97 selected gate: 1
+Passenger: 97 waiting for gate 1
+Passenger: 97 waiting at stairs
+Passenger: 97 entering plane
+Passenger: 97 entered plane
+Passenger: 2312701 exiting
+Passenger: 96 waiting at stairs
+Passenger: 96 entering plane
+Passenger: 96 entered plane
+Passenger: 2312694 exiting
+Passenger process: 98
+Passenger 98 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 16
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 98 waiting for baggage control
+Passenger: 98 waiting for signal from baggage control
+Passenger: 98 released from baggage control
+Passenger: 98 waiting for security control
+Passenger: 98 waiting for security control selector
+Passenger: 98 selected gate: 0
+Passenger: 98 waiting for gate 0
+Passenger: 98 waiting at stairs
+Passenger: 98 entering plane
+Passenger: 98 entered plane
+Passenger: 2312702 exiting
+Passenger process: 99
+Passenger 99 created with the following properties:
+VIP: 0
+Type: 1
+Baggage weight: 29
+Aggressive: 0
+Dangerous baggage: 0
+Passenger: 99 waiting for baggage control
+Passenger: 99 waiting for signal from baggage control
+Passenger: 99 released from baggage control
+Passenger: 99 waiting for security control
+Passenger: 99 waiting for security control selector
+Passenger: 99 selected gate: 0
+Passenger: 99 waiting for gate 0
+Passenger: 99 waiting at stairs
+Passenger: 99 entering plane
+Passenger: 99 entered plane
+Passenger: 2312749 exiting

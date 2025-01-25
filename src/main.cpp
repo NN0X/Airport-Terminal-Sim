@@ -23,10 +23,9 @@
 #include "dispatcher.h"
 #include "stairs.h"
 #include "utils.h"
+#include "args.h"
 
 // TODO: send sigterm to all processes not just baggage control
-
-// FIX: for large number of passengers, (~1000) some passangers are getting lost who knows where
 
 int totalPassengers;
 
@@ -40,7 +39,7 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        pids[MAIN] = getpid();
+        pids[PROCESS_MAIN] = getpid();
 
         // main + secControl + dispatcher + n passengers + n planes
 
@@ -49,46 +48,116 @@ int main(int argc, char* argv[])
 
         totalPassengers = numPassengers;
 
-        if (numPassengers > 32767 || numPlanes > 32767)
+        if (numPassengers > 30000 || numPlanes > 30000)
         {
-                std::cerr << "Maximum values: <numPassengers> = 32767, <numPlanes> = 32767\n";
+                std::cerr << "Maximum values: <numPassengers> = 30000, <numPlanes> = 30000\n";
                 return 1;
         }
 
-        std::vector<int> semIDs = initSemaphores(0666);
+        std::vector<int> semIDs = initSemaphores(0666, numPassengers);
+
+        BaggageControlArgs baggageControlArgs;
+        baggageControlArgs.semIDBaggageControlEntrance = semIDs[SEM_BAGGAGE_CONTROL_ENTRANCE];
+        baggageControlArgs.semIDBaggageControlOut = semIDs[SEM_BAGGAGE_CONTROL_OUT];
+
+        SecurityControlArgs securityControlArgs;
+        securityControlArgs.semIDSecurityControlEntrance = semIDs[SEM_SECURITY_CONTROL_ENTRANCE];
+        securityControlArgs.semIDSecurityControlEntranceWait = semIDs[SEM_SECURITY_CONTROL_ENTRANCE_WAIT];
+        securityControlArgs.semIDSecurityControlSelector = semIDs[SEM_SECURITY_CONTROL_SELECTOR];
+        securityControlArgs.semIDSecurityControlSelectorEntranceWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_ENTRANCE_WAIT];
+        securityControlArgs.semIDSecurityControlSelectorWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_WAIT];
+        securityControlArgs.semIDSecurityGate0 = semIDs[SEM_SECURITY_GATE_0];
+        securityControlArgs.semIDSecurityGate1 = semIDs[SEM_SECURITY_GATE_1];
+        securityControlArgs.semIDSecurityGate2 = semIDs[SEM_SECURITY_GATE_2];
+        securityControlArgs.semIDSecurityGate0Wait = semIDs[SEM_SECURITY_GATE_0_WAIT];
+        securityControlArgs.semIDSecurityGate1Wait = semIDs[SEM_SECURITY_GATE_1_WAIT];
+        securityControlArgs.semIDSecurityGate2Wait = semIDs[SEM_SECURITY_GATE_2_WAIT];
+        securityControlArgs.semIDSecurityControlOut = semIDs[SEM_SECURITY_CONTROL_OUT];
+
+        StairsArgs stairsArgs;
+        stairsArgs.semIDStairsWait = semIDs[SEM_STAIRS_WAIT];
+        stairsArgs.semIDStairsPassengerIn = semIDs[SEM_STAIRS_PASSENGER_IN];
+        stairsArgs.semIDStairsPassengerWait = semIDs[SEM_STAIRS_PASSENGER_WAIT];
+        stairsArgs.semIDStairsCounter = semIDs[SEM_STAIRS_COUNTER];
+        stairsArgs.semIDPlaneCounter = semIDs[SEM_PLANE_COUNTER];
+
+        DispatcherArgs dispatcherArgs;
+        dispatcherArgs.semIDPlaneWait = semIDs[SEM_PLANE_WAIT];
+        dispatcherArgs.semIDPlaneDepart = semIDs[SEM_PLANE_DEPART];
+        dispatcherArgs.semIDStairsWait = semIDs[SEM_STAIRS_WAIT];
+        dispatcherArgs.semIDPassengerCounter = semIDs[SEM_PASSENGER_COUNTER];
 
         std::vector<std::string> names = {"baggageControl", "secControl", "stairs", "dispatcher"};
 
         createSubprocesses(4, pids, names);
 
-        pid_t currPid = getpid();
+        pid_t currentPID = getpid();
 
-        if (currPid == pids[MAIN])
+        if (currentPID == pids[PROCESS_MAIN])
         {
-                std::cout << "Main process: " << getpid() << "\n";
-                // TODO: runtime
+                vCout("Main process: " + std::to_string(currentPID) + "\n", NONE, LOG_MAIN);
+
+                PassengerProcessArgs passengerArgs;
+                passengerArgs.pidDispatcher = pids[PROCESS_DISPATCHER];
+                passengerArgs.pidStairs = pids[PROCESS_STAIRS];
+                passengerArgs.pidSecurityControl = pids[PROCESS_SECURITY_CONTROL];
+                passengerArgs.semIDBaggageControlEntrance = semIDs[SEM_BAGGAGE_CONTROL_ENTRANCE];
+                passengerArgs.semIDBaggageControlOut = semIDs[SEM_BAGGAGE_CONTROL_OUT];
+                passengerArgs.semIDSecurityControlEntrance = semIDs[SEM_SECURITY_CONTROL_ENTRANCE];
+                passengerArgs.semIDSecurityControlEntranceWait = semIDs[SEM_SECURITY_CONTROL_ENTRANCE_WAIT];
+                passengerArgs.semIDSecurityControlSelector = semIDs[SEM_SECURITY_CONTROL_SELECTOR];
+                passengerArgs.semIDSecurityControlSelectorEntranceWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_ENTRANCE_WAIT];
+                passengerArgs.semIDSecurityControlSelectorWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_WAIT];
+                passengerArgs.semIDSecurityGates[0] = semIDs[SEM_SECURITY_GATE_0];
+                passengerArgs.semIDSecurityGates[1] = semIDs[SEM_SECURITY_GATE_1];
+                passengerArgs.semIDSecurityGates[2] = semIDs[SEM_SECURITY_GATE_2];
+                passengerArgs.semIDSecurityGatesWait[0] = semIDs[SEM_SECURITY_GATE_0_WAIT];
+                passengerArgs.semIDSecurityGatesWait[1] = semIDs[SEM_SECURITY_GATE_1_WAIT];
+                passengerArgs.semIDSecurityGatesWait[2] = semIDs[SEM_SECURITY_GATE_2_WAIT];
+                passengerArgs.semIDSecurityControlOut = semIDs[SEM_SECURITY_CONTROL_OUT];
+                passengerArgs.semIDStairsPassengerIn = semIDs[SEM_STAIRS_PASSENGER_IN];
+                passengerArgs.semIDStairsPassengerWait = semIDs[SEM_STAIRS_PASSENGER_WAIT];
+                passengerArgs.semIDPlanePassengerIn = semIDs[SEM_PLANE_PASSANGER_IN];
+                passengerArgs.semIDPlanePassengerWait = semIDs[SEM_PLANE_PASSANGER_WAIT];
+                passengerArgs.semIDPassengerCounter = semIDs[SEM_PASSENGER_COUNTER];
+
+                PlaneProcessArgs planeArgs;
+                planeArgs.semIDPlaneWait = semIDs[SEM_PLANE_WAIT];
+                planeArgs.semIDPlaneDepart = semIDs[SEM_PLANE_DEPART];
+                planeArgs.semIDPlanePassengerIn = semIDs[SEM_PLANE_PASSANGER_IN];
+                planeArgs.semIDPlanePassengerWait = semIDs[SEM_PLANE_PASSANGER_WAIT];
+                planeArgs.pidStairs = pids[PROCESS_STAIRS];
+                planeArgs.pidDispatcher = pids[PROCESS_DISPATCHER];
+                planeArgs.semIDStairsCounter = semIDs[SEM_STAIRS_COUNTER];
+                planeArgs.semIDPlaneCounter = semIDs[SEM_PLANE_COUNTER];
 
                 std::vector<uint64_t> delays(numPassengers);
                 genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
 
-                initPlanes(numPlanes, semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2], pids[STAIRS], pids[DISPATCHER]);
+                initPlanes(numPlanes, planeArgs);
 
                 createSubprocesses(1, pids, {"spawnPassengers"});
-                if (getpid() != pids[MAIN])
+                if (getpid() != currentPID)
                 {
-                        spawnPassengers(numPassengers, delays, pids[DISPATCHER], semIDs[BAGGAGE_CTRL], semIDs[SEC_CTRL], {semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]}, semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2], semIDs[PLANE_STAIRS_1], semIDs[PLANE_STAIRS_2]);
+                        spawnPassengers(numPassengers, delays, passengerArgs);
                 }
 
                 while (true)
                 {
                         // INFO: wait for signal to exit
-                        if (getc(stdin) == 'q')
+                        char c = getc(stdin);
+                        if (c == 'q')
                         {
                                 for (size_t i = 1; i < pids.size(); i++)
                                 {
                                         kill(pids[i], SIGTERM);
                                 }
                                 break;
+                        }
+                        else if (c == 'p')
+                        {
+                                kill(pids[PROCESS_DISPATCHER], SIGNAL_DISPATCHER_PLANE_FORCED_DEPART);
+                                vCout("Main process: Forced plane depart\n", NONE, LOG_MAIN);
                         }
                 }
                 // INFO: cleanup
@@ -108,31 +177,31 @@ int main(int argc, char* argv[])
                         perror("unlink");
                         exit(1);
                 }
-                vCout("Main process: Exiting\n");
+                vCout("Main process: Exiting\n", NONE, LOG_MAIN);
         }
-        else if (currPid == pids[BAGGAGE_CONTROL])
+        else if (currentPID == pids[PROCESS_BAGGAGE_CONTROL])
         {
-                std::cout << "Baggage control process: " << getpid() << "\n";
-                baggageControl(semIDs[BAGGAGE_CTRL]);
+                vCout("Baggage control: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
+                baggageControl(baggageControlArgs);
         }
-        else if (currPid == pids[SEC_CONTROL])
+        else if (currentPID == pids[PROCESS_SECURITY_CONTROL])
         {
-                std::cout << "Security control process: " << getpid() << "\n";
-                secControl(semIDs[SEC_CTRL], semIDs[SEC_GATE_0], semIDs[SEC_GATE_1], semIDs[SEC_GATE_2]);
+                vCout("Security control process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
+                secControl(securityControlArgs);
         }
-        else if (currPid == pids[STAIRS])
+        else if (currentPID == pids[PROCESS_STAIRS])
         {
-                std::cout << "Stairs process: " << getpid() << "\n";
-                stairs(semIDs[STAIRS_QUEUE_1], semIDs[STAIRS_QUEUE_2]);
+                vCout("Stairs process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
+                stairs(stairsArgs);
         }
-        else if (currPid == pids[DISPATCHER])
+        else if (currentPID == pids[PROCESS_DISPATCHER])
         {
-                std::cout << "Dispatcher process: " << getpid() << "\n";
-                dispatcher(pids[STAIRS]);
+                vCout("Dispatcher process: " + std::to_string(getpid()) + "\n", NONE, LOG_MAIN);
+                dispatcher(dispatcherArgs);
         }
         else
         {
-                std::cerr << "Unknown process\n";
+                vCout("Unknown process\n", NONE, LOG_MAIN);
         }
 
         return 0;

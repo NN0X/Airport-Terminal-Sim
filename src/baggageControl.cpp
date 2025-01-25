@@ -10,32 +10,35 @@
 #include "passenger.h"
 #include "utils.h"
 
+extern sembuf INC_SEM;
+extern sembuf DEC_SEM;
+
 void baggageControlSignalHandler(int signum)
 {
         switch (signum)
         {
                 case SIGNAL_OK:
-                        syncedCout("Baggage control: Received signal OK\n");
+                        vCout("Baggage control: Received signal OK\n", BLUE, LOG_BAGGAGE_CONTROL);
                         break;
                 case SIGTERM:
-                        syncedCout("Baggage control: Received signal SIGTERM\n");
+                        vCout("Baggage control: Received signal SIGTERM\n", BLUE, LOG_BAGGAGE_CONTROL);
                         exit(0);
                 default:
-                        syncedCout("Baggage control: Received unknown signal\n");
+                        vCout("Baggage control: Received unknown signal\n", BLUE, LOG_BAGGAGE_CONTROL);
                         break;
         }
 }
 
-int baggageControl(int semID)
+int baggageControl(BaggageControlArgs args)
 {
         // INFO: check if passenger baggage weight is within limits
         // INFO: if not, signal event handler
         // INFO: repeat until signal to exit
 
         // check if fifo exists
-        if (access(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), F_OK) == -1)
+        if (access(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), F_OK) == -1)
         {
-                if (mkfifo(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), 0666) == -1)
+                if (mkfifo(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), 0666) == -1)
                 {
                         perror("mkfifo");
                         exit(1);
@@ -60,43 +63,31 @@ int baggageControl(int semID)
 
         while (true)
         {
-                // wait for passenger
-                syncedCout("Baggage control: waiting for passenger\n");
-                sembuf inc = {0, 1, 0};
-                if (semop(semID, &inc, 1) == -1)
-                {
-                        perror("semop");
-                        exit(1);
-                }
-                int fd = open(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), O_RDONLY);
-                if (fd == -1)
-                {
-                        perror("open");
-                        exit(1);
-                }
+                // tell passenger to enter
+                safeSemop(args.semIDBaggageControlEntrance, &INC_SEM, 1);
+
+                vCout("Baggage control: waiting for passenger\n", BLUE, LOG_BAGGAGE_CONTROL);
+                int fd;
+                safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_RDONLY);
 
                 // read from fifo the passenger pid and baggage weight
                 BaggageInfo baggageInfo;
-                if (read(fd, &baggageInfo, sizeof(baggageInfo)) == -1)
-                {
-                        perror("read");
-                        exit(1);
-                }
+                safeFIFORead(fd, &baggageInfo, sizeof(baggageInfo));
                 close(fd);
-                syncedCout("Baggage control: received baggage info\n");
+                vCout("Baggage control: received baggage info\n", BLUE, LOG_BAGGAGE_CONTROL);
 
-                if (baggageInfo.mBaggageWeight > MAX_ALLOWED_BAGGAGE_WEIGHT)
+                if (baggageInfo.weight > PLANE_MAX_ALLOWED_BAGGAGE_WEIGHT)
                 {
-                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is overweight\n");
-                        kill(baggageInfo.mPid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n", BLUE, LOG_BAGGAGE_CONTROL);
+                        kill(baggageInfo.pid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
+                        safeSemop(args.semIDBaggageControlOut, &INC_SEM, 1);
                         // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
                         // and then event handler sending signal to passenger
                 }
                 else
                 {
-                        syncedCout("Baggage control: passenger " + std::to_string(baggageInfo.mPid) + " is not overweight\n");
-                        // send empty signal to unblock passenger
-                        kill(baggageInfo.mPid, SIGNAL_OK);
+                        vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is not overweight\n", BLUE, LOG_BAGGAGE_CONTROL);
+                        safeSemop(args.semIDBaggageControlOut, &INC_SEM, 1);
                 }
         }
 }

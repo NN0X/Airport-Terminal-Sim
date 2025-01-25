@@ -1,0 +1,140 @@
+Plane process: 0
+Plane 0 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 15
+Plane process: 1
+Plane 1 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 65
+Plane process: 2
+Plane 2 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 97
+Plane process: 3
+Plane 3 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Plane process: 4
+Time of cycle: 51
+Plane 4 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 11
+Plane process: 5
+Plane 5 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 19
+Plane process: 6
+Plane 6 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 99
+Plane process: 7
+Plane 7 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 83
+Plane process: 8
+Plane 8 created with the following properties:
+Plane process: 9
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 28
+Plane 9 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 98
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal PLANE_GO
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane: Received signal SIGTERM
+Plane process: 0
+Plane 0 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 21
+Plane process: 1
+Plane 1 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 15
+Plane process: 2
+Plane 2 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 16
+Plane process: 3
+Plane 3 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 41
+Plane process: 4
+Plane 4 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 69
+Plane process: 5
+Plane 5 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 21
+Plane process: 6
+Plane 6 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 36
+Plane process: 7
+Plane 7 created with the following properties:
+Plane process: 8
+Max passengers: 10
+Max baggage weight: 75
+Plane 8 created with the following properties:
+Max passengers: 10
+Time of cycle: 43
+Max baggage weight: 75
+Time of cycle: 37
+Plane process: 9
+Plane 9 created with the following properties:
+Max passengers: 10
+Max baggage weight: 75
+Time of cycle: 28
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 21 sec
+Plane: Received signal PLANE_GO
+Plane 1: leaving for 15 sec
+Plane: Received signal PLANE_GO
+Plane 2: leaving for 16 sec
+Plane: Received signal PLANE_GO
+Plane 4: leaving for 69 sec
+Plane: Received signal PLANE_GO
+Plane 5: leaving for 21 sec
+Plane: Received signal PLANE_GO
+Plane 6: leaving for 36 sec
+Plane: Received signal PLANE_GO
+Plane 8: leaving for 37 sec
+Plane: Received signal PLANE_GO
+Plane 7: leaving for 43 sec
+Plane: Received signal PLANE_GO
+Plane 9: leaving for 28 sec
+Plane: Received signal PLANE_GO
+Plane 0: leaving for 21 sec
+Plane: Received signal PLANE_GO

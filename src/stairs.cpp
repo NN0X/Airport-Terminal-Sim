@@ -9,43 +9,33 @@
 #include "plane.h"
 #include "utils.h"
 
-#define MAX_ALLOWED_OCCUPANCY PLANE_PLACES / 2
+extern sembuf INC_SEM;
+extern sembuf DEC_SEM;
 
-int stairsOccupancy = 0;
-static bool stairsOpen = false;
-
-extern std::mutex planeStairsMutex;
-extern int passengersOnBoard;
+static bool leaveEarly = false;
 
 void stairsSignalHandler(int signum)
 {
         switch (signum)
         {
         case SIGNAL_OK:
-                syncedCout("Stairs: Received signal OK\n");
-                break;
-        case SIGNAL_PASSENGER_LEFT_STAIRS:
-                syncedCout("Stairs: Received signal PASSENGER_LEFT_STAIRS\n");
-                break;
-        case SIGNAL_STAIRS_OPEN:
-                syncedCout("Stairs: Received signal STAIRS_OPEN\n");
-                stairsOpen = true;
+                vCout("Stairs: Received signal OK\n", MAGENTA, LOG_STAIRS);
                 break;
         case SIGNAL_STAIRS_CLOSE:
-                syncedCout("Stairs: Received signal STAIRS_CLOSE\n");
-                stairsOpen = false;
+                vCout("Stairs: Received signal STAIRS_CLOSE\n", MAGENTA, LOG_STAIRS);
+                leaveEarly = true;
                 break;
         case SIGTERM:
-                syncedCout("Stairs: Received signal SIGTERM\n");
+                vCout("Stairs: Received signal SIGTERM\n", MAGENTA, LOG_STAIRS);
                 exit(0);
                 break;
         default:
-                syncedCout("Stairs: Received unknown signal\n");
+                vCout("Stairs: Received unknown signal\n", MAGENTA, LOG_STAIRS);
                 break;
         }
 }
 
-int stairs(int semID1, int semID2)
+int stairs(StairsArgs args)
 {
         // attach handler to signals
         struct sigaction sa;
@@ -53,16 +43,6 @@ int stairs(int semID1, int semID2)
         sigemptyset(&sa.sa_mask);
         sa.sa_flags = 0;
         if (sigaction(SIGNAL_OK, &sa, NULL) == -1)
-        {
-                perror("sigaction");
-                exit(1);
-        }
-        if (sigaction(SIGNAL_PASSENGER_LEFT_STAIRS, &sa, NULL) == -1)
-        {
-                perror("sigaction");
-                exit(1);
-        }
-        if (sigaction(SIGNAL_STAIRS_OPEN, &sa, NULL) == -1)
         {
                 perror("sigaction");
                 exit(1);
@@ -78,56 +58,31 @@ int stairs(int semID1, int semID2)
                 exit(1);
         }
 
-        // 1. queue for stairs (semaphore)
-        // 2. stairs open (signal)
-        // 3. stairs let passenger in (semaphore) and increment occupancy
-        // 4. stairs check if inPlane passengers + onStairs passengers == maxPassengers
-        //      4.1. if true, behave like stairs close
-        //      4.2. if false, continue letting passengers in
-        // 5. stairs check if occupancy == MAX_ALLOWED_OCCUPANCY
-        //      5.1. if true, wait for signal SIGNAL_PASSENGER_LEFT_STAIRS
-        //      5.2. if false, continue letting passengers in
-        // 6. if signal SIGNAL_STAIRS_CLOSE, stop letting passengers in
-        // 7. repeat until SIGTERM
-
         while (true)
         {
-                pause(); // wait for signal STAIRS_OPEN
-                while (stairsOpen)
+                leaveEarly = false;
+                safeSemop(args.semIDStairsWait, &DEC_SEM, 1);
+                while (true)
                 {
-                        sembuf inc = {0, 1, 0};
-                        sembuf dec = {0, -1, 0};
-                        while (semop(semID1, &dec, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
-                        while (semop(semID2, &inc, 1) == -1)
-                        {
-                                if (errno == EINTR)
-                                {
-                                        continue;
-                                }
-                                perror("semop");
-                                exit(1);
-                        }
-                        planeStairsMutex.lock();
-                        stairsOccupancy++;
+                        safeSemop(args.semIDStairsPassengerIn, &DEC_SEM, 1);
+                        safeSemop(args.semIDStairsPassengerWait, &INC_SEM, 1);
+
+                        safeSemop(args.semIDStairsCounter, &DEC_SEM, 1);
+
+                        int stairsOccupancy = STAIRS_MAX_ALLOWED_OCCUPANCY - safeGetSemVal(args.semIDStairsCounter, 0);
+
+                        int passengersOnBoard = safeGetSemVal(args.semIDPlaneCounter, 0);
+
                         if (stairsOccupancy + passengersOnBoard == PLANE_PLACES)
                         {
-                                syncedCout("Stairs: Plane is full\n");
+                                vCout("Stairs: Plane is full\n", MAGENTA, LOG_STAIRS);
                                 break;
                         }
-                        if (stairsOccupancy == MAX_ALLOWED_OCCUPANCY)
+                        if (leaveEarly)
                         {
-                                syncedCout("Stairs: Waiting for passengers to leave\n");
-                                pause(); // wait for signal PASSENGER_LEFT_STAIRS
+                                vCout("Stairs: Plane left early\n", MAGENTA, LOG_STAIRS);
+                                break;
                         }
-                        planeStairsMutex.unlock();
                 }
         }
 }

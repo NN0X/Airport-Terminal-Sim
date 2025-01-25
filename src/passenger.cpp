@@ -14,38 +14,59 @@
 #include "utils.h"
 #include "passenger.h"
 
-static bool isOK = false;
-static pid_t dispatcherPID;
+extern sembuf INC_SEM;
+extern sembuf DEC_SEM;
+
+static bool failedBaggageControl = false;
+static bool failedSecurityControl = false;
 
 void passengerSignalHandler(int signum)
 {
         switch (signum)
         {
                 case SIGNAL_OK:
-                        syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal OK\n");
-                        isOK = true;
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal OK\n", GREEN, LOG_PASSENGER);
                         break;
                 case SIGNAL_PASSENGER_IS_OVERWEIGHT:
-                        syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n");
-                        kill(dispatcherPID, SIGNAL_PASSENGER_LEFT);
-                        exit(0);
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n", GREEN, LOG_PASSENGER);
+                        failedBaggageControl = true;
+                        break;
                 case SIGNAL_PASSENGER_IS_DANGEROUS:
-                        syncedCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n");
-                        kill(dispatcherPID, SIGNAL_PASSENGER_LEFT);
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n", GREEN, LOG_PASSENGER);
+                        failedSecurityControl = true;
+                        break;
+                case SIGNAL_PASSENGER_SKIPPED:
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_SKIPPED\n", GREEN, LOG_PASSENGER);
+                        break;
+                case SIGTERM:
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal SIGTERM\n", GREEN, LOG_PASSENGER);
                         exit(0);
                 default:
-                        syncedCout("Passenger " + std::to_string(getpid()) + ": Received unknown signal\n");
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received unknown signal\n", GREEN, LOG_PASSENGER);
                         break;
         }
 }
 
+static int semIDPassengerCounterGlobal;
 
-void passengerProcess(size_t id, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2)
+void atExitPassenger()
 {
-        syncedCout("Passenger process: " + std::to_string(id) + "\n");
+        vCout("Passenger: " + std::to_string(getpid()) + " exiting\n", GREEN, LOG_PASSENGER);
+        safeSemop(semIDPassengerCounterGlobal, &INC_SEM, 1);
+}
 
-        dispatcherPID = pidDispatcher;
-        Passenger passenger(id);
+void passengerProcess(PassengerProcessArgs args)
+{
+        vCout("Passenger process: " + std::to_string(args.id) + "\n", GREEN, LOG_PASSENGER);
+
+        Passenger passenger(args.id);
+        semIDPassengerCounterGlobal = args.semIDPassengerCounter;
+
+        if (atexit(atExitPassenger) != 0)
+        {
+                perror("atexit");
+                exit(1);
+        }
 
         // set signal handler
         struct sigaction sa;
@@ -62,184 +83,148 @@ void passengerProcess(size_t id, pid_t pidDispatcher, int semIDBaggageCtrl, int 
                 perror("sigaction");
                 exit(1);
         }
+        if (sigaction(SIGNAL_PASSENGER_IS_DANGEROUS, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGNAL_PASSENGER_SKIPPED, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGTERM, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
 
         // TODO: run passenger tasks here
 
         // INFO: passenger goes through baggage control
 
         // wait for baggage control to be ready
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for baggage control\n");
-        sembuf dec = {0, -1, 0};
-        if (semop(semIDBaggageCtrl, &dec, 1) == -1)
-        {
-                perror("semop");
-                exit(1);
-        }
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for baggage control\n", GREEN, LOG_PASSENGER);
+
+        safeSemop(args.semIDBaggageControlEntrance, &DEC_SEM, 1);
 
         BaggageInfo baggageInfo;
-        baggageInfo.mPid = getpid();
-        baggageInfo.mBaggageWeight = passenger.getBaggageWeight();
-        int fd = open(fifoNames[BAGGAGE_CONTROL_FIFO].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (write(fd, &baggageInfo, sizeof(baggageInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
-        close(fd);
+        baggageInfo.pid = args.pid;
+        baggageInfo.weight = passenger.getBaggageWeight();
+        int fd;
+        safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_WRONLY);
+        safeFIFOWrite(fd, &baggageInfo, sizeof(baggageInfo));
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for signal from baggage control\n");
-        pause(); // wait for signal from baggage control
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for signal from baggage control\n", GREEN, LOG_PASSENGER);
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " released from baggage control\n");
+        safeSemop(args.semIDBaggageControlOut, &DEC_SEM, 1);
+
+        if (failedBaggageControl)
+        {
+                vCout("Passenger: " + std::to_string(args.id) + " failed baggage control\n", GREEN, LOG_PASSENGER);
+                exit(0);
+        }
+
+        vCout("Passenger: " + std::to_string(args.id) + " released from baggage control\n", GREEN, LOG_PASSENGER);
 
         // INFO: passenger goes through security control
 
-        // wait for security control to be ready
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for security control\n");
-        if (semop(semIDSecCtrl, &dec, 1) == -1)
-        {
-                perror("semop");
-                exit(1);
-        }
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for security control\n", GREEN, LOG_PASSENGER);
+
+        safeSemop(args.semIDSecurityControlEntrance, &DEC_SEM, 1);
 
         TypeInfo typeInfo;
-        typeInfo.mPid = getpid();
-        typeInfo.mType = passenger.getType();
-        typeInfo.mIsVip = passenger.getIsVip();
-        fd = open(fifoNames[SEC_CONTROL_FIFO].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (write(fd, &typeInfo, sizeof(typeInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
+        typeInfo.id = args.id;
+        typeInfo.pid = args.pid;
+        typeInfo.type = passenger.getType();
+        typeInfo.isVIP = passenger.getIsVip();
+
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_CONTROL], O_WRONLY);
+        safeFIFOWrite(fd, &typeInfo, sizeof(typeInfo));
+
+        safeSemop(args.semIDSecurityControlEntranceWait, &INC_SEM, 1);
+
         close(fd);
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for signal from security control\n");
-        pause(); // wait for signal from security control
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for security control selector\n", GREEN, LOG_PASSENGER);
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for security selector\n");
+        // wait until semIDSecurityControlSelector semaphore number args.id is 1
+        sembuf decreaseNthSemaphore = {(uint16_t)args.id, -1, 0};
+        safeSemop(args.semIDSecurityControlSelector, &decreaseNthSemaphore, 1);
+
+        safeSemop(args.semIDSecurityControlSelectorEntranceWait, &INC_SEM, 1);
+
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for security selector\n");
         SelectedPair selectedPair;
-        fd = open(fifoNames[SEC_SELECTOR_FIFO].c_str(), O_RDONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (read(fd, &selectedPair.gate, sizeof(selectedPair.gate)) == -1)
-        {
-                perror("read");
-                exit(1);
-        }
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_SELECTOR], O_RDONLY);
+
+        safeSemop(args.semIDSecurityControlSelectorWait, &DEC_SEM, 1);
+
+        safeFIFORead(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex));
         close(fd);
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " selected gate: " + std::to_string(selectedPair.gate) + "\n");
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting for gate " + std::to_string(selectedPair.gate) + "\n");
+        vCout("Passenger: " + std::to_string(args.id) + " selected gate: " + std::to_string(selectedPair.gateIndex) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Passenger: " + std::to_string(args.id) + " waiting for gate " + std::to_string(selectedPair.gateIndex) + "\n", GREEN, LOG_PASSENGER);
 
-        if (semop(semIDGates[selectedPair.gate], &dec, 1) == -1)
-        {
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDSecurityGates[selectedPair.gateIndex], &DEC_SEM, 1);
 
         DangerInfo dangerInfo;
-        dangerInfo.mPid = getpid();
-        dangerInfo.mHasDangerousBaggage = passenger.getHasDangerousBaggage();
-        fd = open(fifoNames[SEC_GATE_0_FIFO + selectedPair.gate].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
-        if (write(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
-        {
-                perror("write");
-                exit(1);
-        }
+        dangerInfo.pid = args.pid;
+        dangerInfo.hasDangerousBaggage = passenger.getHasDangerousBaggage();
+
+        safeFIFOOpen(fd, fifoNames[FIFO_SECURITY_GATE_0 + selectedPair.gateIndex], O_WRONLY);
+        safeFIFOWrite(fd, &dangerInfo, sizeof(dangerInfo));
+
+        safeSemop(args.semIDSecurityGatesWait[selectedPair.gateIndex], &INC_SEM, 1);
         close(fd);
 
-        while (!isOK)
+        safeSemop(args.semIDSecurityControlOut, &DEC_SEM, 1);
+
+        if (failedSecurityControl)
         {
-                usleep(100); // wait for signal from gate
+                vCout("Passenger: " + std::to_string(args.id) + " failed security control\n", GREEN, LOG_PASSENGER);
+                exit(0);
         }
 
         // INFO: passenger waits for plane to be ready
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " waiting at stairs\n");
-        sembuf inc = {0, 1, 0};
-        while (semop(semIDStairs1, &inc, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
-        while (semop(semIDStairs2, &dec, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
+        safeSemop(args.semIDStairsPassengerIn, &INC_SEM, 1);
 
-        syncedCout("Passenger: " + std::to_string(getpid()) + " entering plane\n");
-        while (semop(semIDPlane1, &inc, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
-        while (semop(semIDPlane2, &dec, 1) == -1)
-        {
-                if (errno == EINTR)
-                {
-                        continue;
-                }
-                perror("semop");
-                exit(1);
-        }
-        syncedCout("Passenger: " + std::to_string(getpid()) + " entered plane\n");
+        vCout("Passenger: " + std::to_string(args.id) + " waiting at stairs\n", GREEN, LOG_PASSENGER);
 
-        kill(pidDispatcher, SIGNAL_PASSENGER_LEFT);
+        safeSemop(args.semIDStairsPassengerWait, &DEC_SEM, 1);
+
+        vCout("Passenger: " + std::to_string(args.id) + " entering plane\n", GREEN, LOG_PASSENGER);
+
+        safeSemop(args.semIDPlanePassengerIn, &INC_SEM, 1);
+
+        safeSemop(args.semIDPlanePassengerWait, &DEC_SEM, 1);
+
+        vCout("Passenger: " + std::to_string(args.id) + " entered plane\n", GREEN, LOG_PASSENGER);
 
         exit(0);
 }
 
-void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, pid_t pidDispatcher, int semIDBaggageCtrl, int semIDSecCtrl, std::vector<int> semIDGates, int semIDStairs1, int semIDStairs2, int semIDPlane1, int semIDPlane2)
+void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerProcessArgs args)
 {
-        pid_t pid = getpid();
-        std::vector<pid_t> pids(1);
-        pids[0] = pid;
-        syncedCout("Spawn passengers\n");
+        pid_t oldPID = getpid();
+        vCout("Spawn passengers\n", NONE, LOG_MAIN);
         for (size_t i = 0; i < num; i++)
         {
-                createSubprocesses(1, pids, {"passenger"});
-                if (getpid() != pid)
+                pid_t newPID;
+                createSubprocess(newPID, "passenger");
+                if (getpid() != oldPID)
                 {
-                        passengerProcess(i, pidDispatcher, semIDBaggageCtrl, semIDSecCtrl, semIDGates, semIDStairs1, semIDStairs2, semIDPlane1, semIDPlane2);
+                        args.id = i;
+                        args.pid = getpid();
+                        passengerProcess(args);
                         exit(0);
                 }
-                syncedCout("Waiting for " + std::to_string(delays[i]) + " ms\n");
+                vCout("Spawn passengers: Waiting for " + std::to_string(delays[i]) + " ms\n", NONE, LOG_MAIN);
                 usleep(delays[i] * 1000);
         }
 
-        syncedCout("All passengers created\n");
+        vCout("All passengers created\n", NONE, LOG_MAIN);
 
         exit(0);
 }
@@ -257,23 +242,23 @@ Passenger::Passenger(uint64_t id)
         mBaggageWeight = dis(gen) % MAX_BAGGAGE_WEIGHT;
         mHasDangerousBaggage = dis(gen) < DANGEROUS_BAGGAGE_PROBABILITY * UINT64_MAX;
 
-        vCout("Passenger " + std::to_string(mID) + " created with the following properties:\n");
-        vCout("VIP: " + std::to_string(mIsVip) + "\n");
-        vCout("Type: " + std::to_string(mType) + "\n");
-        vCout("Baggage weight: " + std::to_string(mBaggageWeight) + "\n");
-        vCout("Aggressive: " + std::to_string(mIsAggressive) + "\n");
-        vCout("Dangerous baggage: " + std::to_string(mHasDangerousBaggage) + "\n");
+        vCout("Passenger " + std::to_string(mID) + " created with the following properties:\n", GREEN, LOG_PASSENGER);
+        vCout("VIP: " + std::to_string(mIsVip) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Type: " + std::to_string(mType) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Baggage weight: " + std::to_string(mBaggageWeight) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Aggressive: " + std::to_string(mIsAggressive) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Dangerous baggage: " + std::to_string(mHasDangerousBaggage) + "\n", GREEN, LOG_PASSENGER);
 }
 
 Passenger::Passenger(uint64_t id, bool isVip, bool type, uint64_t baggageWeight, bool hasDangerousBaggage)
         : mID(id), mIsVip(isVip), mType(type), mBaggageWeight(baggageWeight), mIsAggressive(false), mHasDangerousBaggage(hasDangerousBaggage)
 {
-        vCout("Passenger " + std::to_string(mID) + " created with the following properties:\n");
-        vCout("VIP: " + std::to_string(mIsVip) + "\n");
-        vCout("Type: " + std::to_string(mType) + "\n");
-        vCout("Baggage weight: " + std::to_string(mBaggageWeight) + "\n");
-        vCout("Aggressive: " + std::to_string(mIsAggressive) + "\n");
-        vCout("Dangerous baggage: " + std::to_string(mHasDangerousBaggage) + "\n");
+        vCout("Passenger " + std::to_string(mID) + " created with the following properties:\n", GREEN, LOG_PASSENGER);
+        vCout("VIP: " + std::to_string(mIsVip) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Type: " + std::to_string(mType) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Baggage weight: " + std::to_string(mBaggageWeight) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Aggressive: " + std::to_string(mIsAggressive) + "\n", GREEN, LOG_PASSENGER);
+        vCout("Dangerous baggage: " + std::to_string(mHasDangerousBaggage) + "\n", GREEN, LOG_PASSENGER);
 }
 
 uint64_t Passenger::getID() const
