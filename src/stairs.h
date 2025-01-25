@@ -9,6 +9,9 @@
 #include <mutex>
 #include <signal.h>
 
+/*
+* main function of stairs process
+*/
 int stairs(StairsArgs args);
 
 #endif // STAIRS_H

@@ -5,7 +5,9 @@ OUT = main
 
 all:
 	rm -f -r build
+	rm -f -r logs
 	mkdir build
+	mkdir logs
 	$(CXX) $(CFLAGS) $(SRC)/*.cpp -o build/$(OUT) 2> build/make.log
 	cp LICENSE.md build/LICENSE.md
 	cp NOTICE.md build/NOTICE.md

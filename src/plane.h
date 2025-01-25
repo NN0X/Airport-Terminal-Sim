@@ -8,9 +8,19 @@
 
 #include "args.h"
 
+/*
+* main function of plane process
+*/
 void planeProcess(PlaneProcessArgs args);
+
+/*
+* Function initializing planes
+*/
 std::vector<pid_t> initPlanes(size_t num, PlaneProcessArgs args);
 
+/*
+* class for plane
+*/
 class Plane
 {
 private:

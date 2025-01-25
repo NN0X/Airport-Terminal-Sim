@@ -3,6 +3,9 @@
 
 #include <sys/types.h>
 
+/*
+*  Structure for the arguments of passenger process
+*/
 struct PassengerProcessArgs
 {
         size_t id;
@@ -28,6 +31,10 @@ struct PassengerProcessArgs
         int semIDPassengerCounter;
 };
 
+
+/*
+* Structure for the arguments of plane process
+*/
 struct PlaneProcessArgs
 {
         size_t id;
@@ -42,12 +49,18 @@ struct PlaneProcessArgs
         int semIDPlaneCounter;
 };
 
+/*
+* Structure for the arguments of baggage control process
+*/
 struct BaggageControlArgs
 {
         int semIDBaggageControlEntrance;
         int semIDBaggageControlOut;
 };
 
+/*
+* Structure for the arguments of security control process
+*/
 struct SecurityControlArgs
 {
         int semIDSecurityControlEntrance;
@@ -64,11 +77,17 @@ struct SecurityControlArgs
         int semIDSecurityControlOut;
 };
 
+/*
+* Structure for the arguments of security selector thread
+*/
 struct SecuritySelectorArgs
 {
         int semIDSecuritySelector;
 };
 
+/*
+* Structure for the arguments of security gate thread
+*/
 struct SecurityGateArgs
 {
         int semIDSecurityGate;
@@ -76,6 +95,9 @@ struct SecurityGateArgs
         int semIDSecurityControlOut;
 };
 
+/*
+* Structure for the arguments of stairs process
+*/
 struct StairsArgs
 {
         int semIDStairsWait;
@@ -85,6 +107,9 @@ struct StairsArgs
         int semIDPlaneCounter;
 };
 
+/*
+* Structure for the arguments of dispatcher process
+*/
 struct DispatcherArgs
 {
         pid_t pidMain;

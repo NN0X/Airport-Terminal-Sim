@@ -38,7 +38,7 @@ void passengerSignalHandler(int signum)
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n", GREEN, LOG_PASSENGER);
                         getsAggresiveToInt = PASSENGER_GETS_AGGRESSIVE_BAGGAGE_PROBABILITY * UINT64_MAX;
                         genRandom(val, 0, UINT64_MAX);
-                        if (val < getsAggresiveToInt)
+                        if (val < getsAggresiveToInt && WORST_CASE_SCENARIO)
                         {
                                 vCout("Passenger " + std::to_string(getpid()) + ": Passenger gets aggressive\n", GREEN, LOG_PASSENGER);
                                 kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
@@ -49,7 +49,7 @@ void passengerSignalHandler(int signum)
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n", GREEN, LOG_PASSENGER);
                         getsAggresiveToInt = PASSENGER_GETS_AGGRESSIVE_SECURITY_PROBABILITY * UINT64_MAX;
                         genRandom(val, 0, UINT64_MAX);
-                        if (val < getsAggresiveToInt)
+                        if (val < getsAggresiveToInt && WORST_CASE_SCENARIO)
                         {
                                 vCout("Passenger " + std::to_string(getpid()) + ": Passenger gets aggressive\n", GREEN, LOG_PASSENGER);
                                 kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
@@ -64,7 +64,7 @@ void passengerSignalHandler(int signum)
                                 vCout("Passenger " + std::to_string(getpid()) + ": Skipped 3 times\n", GREEN, LOG_PASSENGER);
                                 kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
                         }
-                        else if (skipped == PASSENGER_MAX_SKIPPED && !WORST_CASE_SCENARIO)
+                        else if (skipped == PASSENGER_MAX_SKIPPED)
                         {
                                 vCout("Passenger " + std::to_string(getpid()) + ": Skipped 3 times\n", GREEN, LOG_PASSENGER);
                                 exit(0);

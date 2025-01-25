@@ -1,336 +1,2310 @@
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane 24488 is ready
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 1/100
-Dispatcher: Passengers left: 2/100
-Dispatcher: Passengers left: 3/100
-Dispatcher: Passengers left: 4/100
-Dispatcher: Passengers left: 5/100
-Dispatcher: Passengers left: 6/100
-Dispatcher: Passengers left: 7/100
-Dispatcher: Passengers left: 8/100
-Dispatcher: Passengers left: 9/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 1/30000
+Dispatcher: Passengers left: 2/30000
+Dispatcher: Passengers left: 3/30000
+Dispatcher: Passengers left: 4/30000
+Dispatcher: Passengers left: 5/30000
+Dispatcher: Passengers left: 6/30000
+Dispatcher: Passengers left: 7/30000
+Dispatcher: Passengers left: 8/30000
+Dispatcher: Passengers left: 9/30000
+Dispatcher: Passengers left: 10/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 24488 is ready to depart
-Dispatcher: Passengers left: 10/100
-Dispatcher: Plane 24491 is ready
+Dispatcher: Passengers left: 11/30000
+Dispatcher: Plane 327279 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 11/100
-Dispatcher: Passengers left: 12/100
-Dispatcher: Passengers left: 13/100
-Dispatcher: Passengers left: 14/100
-Dispatcher: Passengers left: 15/100
-Dispatcher: Passengers left: 16/100
-Dispatcher: Passengers left: 17/100
-Dispatcher: Passengers left: 18/100
-Dispatcher: Passengers left: 19/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 12/30000
+Dispatcher: Passengers left: 13/30000
+Dispatcher: Passengers left: 14/30000
+Dispatcher: Passengers left: 15/30000
+Dispatcher: Passengers left: 16/30000
+Dispatcher: Passengers left: 17/30000
+Dispatcher: Passengers left: 18/30000
+Dispatcher: Passengers left: 19/30000
+Dispatcher: Passengers left: 20/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 20/100
-Dispatcher: Plane 24491 is ready to depart
-Dispatcher: Plane 24492 is ready
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 21/30000
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 21/100
-Dispatcher: Passengers left: 22/100
-Dispatcher: Passengers left: 23/100
-Dispatcher: Passengers left: 24/100
-Dispatcher: Passengers left: 25/100
-Dispatcher: Passengers left: 26/100
-Dispatcher: Passengers left: 27/100
-Dispatcher: Passengers left: 28/100
-Dispatcher: Passengers left: 29/100
-Dispatcher: Passengers left: 30/100
-Dispatcher: Passengers left: 31/100
-Dispatcher: Passengers left: 32/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 22/30000
+Dispatcher: Passengers left: 23/30000
+Dispatcher: Passengers left: 24/30000
+Dispatcher: Passengers left: 25/30000
+Dispatcher: Passengers left: 26/30000
+Dispatcher: Passengers left: 27/30000
+Dispatcher: Passengers left: 28/30000
+Dispatcher: Passengers left: 29/30000
+Dispatcher: Passengers left: 30/30000
+Dispatcher: Passengers left: 31/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 33/100
-Dispatcher: Plane 24492 is ready to depart
-Dispatcher: Plane 24493 is ready
-Dispatcher: Passengers left: 34/100
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 32/30000
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 35/100
-Dispatcher: Passengers left: 36/100
-Dispatcher: Passengers left: 37/100
-Dispatcher: Passengers left: 38/100
-Dispatcher: Passengers left: 39/100
-Dispatcher: Passengers left: 40/100
-Dispatcher: Passengers left: 41/100
-Dispatcher: Passengers left: 42/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 33/30000
+Dispatcher: Passengers left: 34/30000
+Dispatcher: Passengers left: 35/30000
+Dispatcher: Passengers left: 36/30000
+Dispatcher: Passengers left: 37/30000
+Dispatcher: Passengers left: 38/30000
+Dispatcher: Passengers left: 39/30000
+Dispatcher: Passengers left: 40/30000
+Dispatcher: Passengers left: 41/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 43/100
-Dispatcher: Plane 24493 is ready to depart
-Dispatcher: Plane 24494 is ready
-Dispatcher: Passengers left: 44/100
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 42/30000
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 45/100
-Dispatcher: Passengers left: 46/100
-Dispatcher: Passengers left: 47/100
-Dispatcher: Passengers left: 48/100
-Dispatcher: Passengers left: 49/100
-Dispatcher: Passengers left: 50/100
-Dispatcher: Passengers left: 51/100
-Dispatcher: Passengers left: 52/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 43/30000
+Dispatcher: Passengers left: 44/30000
+Dispatcher: Passengers left: 45/30000
+Dispatcher: Passengers left: 46/30000
+Dispatcher: Passengers left: 47/30000
+Dispatcher: Passengers left: 48/30000
+Dispatcher: Passengers left: 49/30000
+Dispatcher: Passengers left: 50/30000
+Dispatcher: Passengers left: 51/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 24494 is ready to depart
-Dispatcher: Passengers left: 53/100
-Dispatcher: Plane 24495 is ready
-Dispatcher: Passengers left: 54/100
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 52/30000
+Dispatcher: Passengers left: 53/30000
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 55/100
-Dispatcher: Passengers left: 56/100
-Dispatcher: Passengers left: 57/100
-Dispatcher: Passengers left: 58/100
-Dispatcher: Passengers left: 59/100
-Dispatcher: Passengers left: 60/100
-Dispatcher: Passengers left: 61/100
-Dispatcher: Passengers left: 62/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 54/30000
+Dispatcher: Passengers left: 55/30000
+Dispatcher: Passengers left: 56/30000
+Dispatcher: Passengers left: 57/30000
+Dispatcher: Passengers left: 58/30000
+Dispatcher: Passengers left: 59/30000
+Dispatcher: Passengers left: 60/30000
+Dispatcher: Passengers left: 61/30000
+Dispatcher: Passengers left: 62/30000
+Dispatcher: Passengers left: 63/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 24495 is ready to depart
-Dispatcher: Passengers left: 63/100
-Dispatcher: Plane 24496 is ready
-Dispatcher: Passengers left: 64/100
+Dispatcher: Passengers left: 64/30000
+Dispatcher: Plane 327279 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 65/100
-Dispatcher: Passengers left: 66/100
-Dispatcher: Passengers left: 67/100
-Dispatcher: Passengers left: 68/100
-Dispatcher: Passengers left: 69/100
-Dispatcher: Passengers left: 70/100
-Dispatcher: Passengers left: 71/100
-Dispatcher: Passengers left: 72/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 65/30000
+Dispatcher: Passengers left: 66/30000
+Dispatcher: Passengers left: 67/30000
+Dispatcher: Passengers left: 68/30000
+Dispatcher: Passengers left: 69/30000
+Dispatcher: Passengers left: 70/30000
+Dispatcher: Passengers left: 71/30000
+Dispatcher: Passengers left: 72/30000
+Dispatcher: Passengers left: 73/30000
+Dispatcher: Passengers left: 74/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 24496 is ready to depart
-Dispatcher: Plane 24497 is ready
-Dispatcher: Passengers left: 73/100
-Dispatcher: Passengers left: 74/100
+Dispatcher: Plane 327279 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 75/100
-Dispatcher: Passengers left: 76/100
-Dispatcher: Passengers left: 77/100
-Dispatcher: Passengers left: 78/100
-Dispatcher: Passengers left: 79/100
-Dispatcher: Passengers left: 80/100
-Dispatcher: Passengers left: 81/100
-Dispatcher: Passengers left: 82/100
-Dispatcher: Passengers left: 83/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 75/30000
+Dispatcher: Passengers left: 76/30000
+Dispatcher: Passengers left: 77/30000
+Dispatcher: Passengers left: 78/30000
+Dispatcher: Passengers left: 79/30000
+Dispatcher: Passengers left: 80/30000
+Dispatcher: Passengers left: 81/30000
+Dispatcher: Passengers left: 82/30000
+Dispatcher: Passengers left: 83/30000
+Dispatcher: Passengers left: 84/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 84/100
-Dispatcher: Plane 24497 is ready to depart
-Dispatcher: Plane 24498 is ready
+Dispatcher: Passengers left: 85/30000
+Dispatcher: Plane 327279 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 85/100
-Dispatcher: Passengers left: 86/100
-Dispatcher: Passengers left: 87/100
-Dispatcher: Passengers left: 88/100
-Dispatcher: Passengers left: 89/100
-Dispatcher: Passengers left: 90/100
-Dispatcher: Passengers left: 91/100
-Dispatcher: Passengers left: 92/100
-Dispatcher: Passengers left: 93/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 86/30000
+Dispatcher: Passengers left: 87/30000
+Dispatcher: Passengers left: 88/30000
+Dispatcher: Passengers left: 89/30000
+Dispatcher: Passengers left: 90/30000
+Dispatcher: Passengers left: 91/30000
+Dispatcher: Passengers left: 92/30000
+Dispatcher: Passengers left: 93/30000
+Dispatcher: Passengers left: 94/30000
+Dispatcher: Passengers left: 95/30000
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 94/100
-Dispatcher: Plane 24498 is ready to depart
-Dispatcher: Plane 24499 is ready
+Dispatcher: Passengers left: 96/30000
+Dispatcher: Plane 327279 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 95/100
-Dispatcher: Passengers left: 96/100
-Dispatcher: Passengers left: 97/100
-Dispatcher: Passengers left: 98/100
-Dispatcher: Passengers left: 99/100
-Dispatcher: Passengers left: 100/100
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 97/30000
+Dispatcher: Passengers left: 98/30000
+Dispatcher: Passengers left: 99/30000
+Dispatcher: Passengers left: 100/30000
+Dispatcher: Passengers left: 101/30000
+Dispatcher: Passengers left: 102/30000
+Dispatcher: Passengers left: 103/30000
+Dispatcher: Passengers left: 104/30000
+Dispatcher: Passengers left: 105/30000
+Dispatcher: Passengers left: 106/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 107/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 108/30000
+Dispatcher: Passengers left: 109/30000
+Dispatcher: Passengers left: 110/30000
+Dispatcher: Passengers left: 111/30000
+Dispatcher: Passengers left: 112/30000
+Dispatcher: Passengers left: 113/30000
+Dispatcher: Passengers left: 114/30000
+Dispatcher: Passengers left: 115/30000
+Dispatcher: Passengers left: 116/30000
+Dispatcher: Passengers left: 117/30000
+Dispatcher: Passengers left: 118/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 119/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 120/30000
+Dispatcher: Passengers left: 121/30000
+Dispatcher: Passengers left: 122/30000
+Dispatcher: Passengers left: 123/30000
+Dispatcher: Passengers left: 124/30000
+Dispatcher: Passengers left: 125/30000
+Dispatcher: Passengers left: 126/30000
+Dispatcher: Passengers left: 127/30000
+Dispatcher: Passengers left: 128/30000
+Dispatcher: Passengers left: 129/30000
+Dispatcher: Passengers left: 130/30000
+Dispatcher: Passengers left: 131/30000
+Dispatcher: Passengers left: 132/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 133/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 134/30000
+Dispatcher: Passengers left: 135/30000
+Dispatcher: Passengers left: 136/30000
+Dispatcher: Passengers left: 137/30000
+Dispatcher: Passengers left: 138/30000
+Dispatcher: Passengers left: 139/30000
+Dispatcher: Passengers left: 140/30000
+Dispatcher: Passengers left: 141/30000
+Dispatcher: Passengers left: 142/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 143/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 144/30000
+Dispatcher: Passengers left: 145/30000
+Dispatcher: Passengers left: 146/30000
+Dispatcher: Passengers left: 147/30000
+Dispatcher: Passengers left: 148/30000
+Dispatcher: Passengers left: 149/30000
+Dispatcher: Passengers left: 150/30000
+Dispatcher: Passengers left: 151/30000
+Dispatcher: Passengers left: 152/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 153/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 154/30000
+Dispatcher: Passengers left: 155/30000
+Dispatcher: Passengers left: 156/30000
+Dispatcher: Passengers left: 157/30000
+Dispatcher: Passengers left: 158/30000
+Dispatcher: Passengers left: 159/30000
+Dispatcher: Passengers left: 160/30000
+Dispatcher: Passengers left: 161/30000
+Dispatcher: Passengers left: 162/30000
+Dispatcher: Passengers left: 163/30000
+Dispatcher: Passengers left: 164/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 165/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 166/30000
+Dispatcher: Passengers left: 167/30000
+Dispatcher: Passengers left: 168/30000
+Dispatcher: Passengers left: 169/30000
+Dispatcher: Passengers left: 170/30000
+Dispatcher: Passengers left: 171/30000
+Dispatcher: Passengers left: 172/30000
+Dispatcher: Passengers left: 173/30000
+Dispatcher: Passengers left: 174/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 175/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 176/30000
+Dispatcher: Passengers left: 177/30000
+Dispatcher: Passengers left: 178/30000
+Dispatcher: Passengers left: 179/30000
+Dispatcher: Passengers left: 180/30000
+Dispatcher: Passengers left: 181/30000
+Dispatcher: Passengers left: 182/30000
+Dispatcher: Passengers left: 183/30000
+Dispatcher: Passengers left: 184/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 185/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 186/30000
+Dispatcher: Passengers left: 187/30000
+Dispatcher: Passengers left: 188/30000
+Dispatcher: Passengers left: 189/30000
+Dispatcher: Passengers left: 190/30000
+Dispatcher: Passengers left: 191/30000
+Dispatcher: Passengers left: 192/30000
+Dispatcher: Passengers left: 193/30000
+Dispatcher: Passengers left: 194/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 195/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 196/30000
+Dispatcher: Passengers left: 197/30000
+Dispatcher: Passengers left: 198/30000
+Dispatcher: Passengers left: 199/30000
+Dispatcher: Passengers left: 200/30000
+Dispatcher: Passengers left: 201/30000
+Dispatcher: Passengers left: 202/30000
+Dispatcher: Passengers left: 203/30000
+Dispatcher: Passengers left: 204/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 205/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 206/30000
+Dispatcher: Passengers left: 207/30000
+Dispatcher: Passengers left: 208/30000
+Dispatcher: Passengers left: 209/30000
+Dispatcher: Passengers left: 210/30000
+Dispatcher: Passengers left: 211/30000
+Dispatcher: Passengers left: 212/30000
+Dispatcher: Passengers left: 213/30000
+Dispatcher: Passengers left: 214/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 215/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 216/30000
+Dispatcher: Passengers left: 217/30000
+Dispatcher: Passengers left: 218/30000
+Dispatcher: Passengers left: 219/30000
+Dispatcher: Passengers left: 220/30000
+Dispatcher: Passengers left: 221/30000
+Dispatcher: Passengers left: 222/30000
+Dispatcher: Passengers left: 223/30000
+Dispatcher: Passengers left: 224/30000
+Dispatcher: Passengers left: 225/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 226/30000
+Dispatcher: Passengers left: 227/30000
+Dispatcher: Passengers left: 228/30000
+Dispatcher: Passengers left: 229/30000
+Dispatcher: Passengers left: 230/30000
+Dispatcher: Passengers left: 231/30000
+Dispatcher: Passengers left: 232/30000
+Dispatcher: Passengers left: 233/30000
+Dispatcher: Passengers left: 234/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 235/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 236/30000
+Dispatcher: Passengers left: 237/30000
+Dispatcher: Passengers left: 238/30000
+Dispatcher: Passengers left: 239/30000
+Dispatcher: Passengers left: 240/30000
+Dispatcher: Passengers left: 241/30000
+Dispatcher: Passengers left: 242/30000
+Dispatcher: Passengers left: 243/30000
+Dispatcher: Passengers left: 244/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 245/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 246/30000
+Dispatcher: Passengers left: 247/30000
+Dispatcher: Passengers left: 248/30000
+Dispatcher: Passengers left: 249/30000
+Dispatcher: Passengers left: 250/30000
+Dispatcher: Passengers left: 251/30000
+Dispatcher: Passengers left: 252/30000
+Dispatcher: Passengers left: 253/30000
+Dispatcher: Passengers left: 254/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 255/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 256/30000
+Dispatcher: Passengers left: 257/30000
+Dispatcher: Passengers left: 258/30000
+Dispatcher: Passengers left: 259/30000
+Dispatcher: Passengers left: 260/30000
+Dispatcher: Passengers left: 261/30000
+Dispatcher: Passengers left: 262/30000
+Dispatcher: Passengers left: 263/30000
+Dispatcher: Passengers left: 264/30000
+Dispatcher: Passengers left: 265/30000
+Dispatcher: Passengers left: 266/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 267/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 268/30000
+Dispatcher: Passengers left: 269/30000
+Dispatcher: Passengers left: 270/30000
+Dispatcher: Passengers left: 271/30000
+Dispatcher: Passengers left: 272/30000
+Dispatcher: Passengers left: 273/30000
+Dispatcher: Passengers left: 274/30000
+Dispatcher: Passengers left: 275/30000
+Dispatcher: Passengers left: 276/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 277/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 278/30000
+Dispatcher: Passengers left: 279/30000
+Dispatcher: Passengers left: 280/30000
+Dispatcher: Passengers left: 281/30000
+Dispatcher: Passengers left: 282/30000
+Dispatcher: Passengers left: 283/30000
+Dispatcher: Passengers left: 284/30000
+Dispatcher: Passengers left: 285/30000
+Dispatcher: Passengers left: 286/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 287/30000
+Dispatcher: Passengers left: 288/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 289/30000
+Dispatcher: Passengers left: 290/30000
+Dispatcher: Passengers left: 291/30000
+Dispatcher: Passengers left: 292/30000
+Dispatcher: Passengers left: 293/30000
+Dispatcher: Passengers left: 294/30000
+Dispatcher: Passengers left: 295/30000
+Dispatcher: Passengers left: 296/30000
+Dispatcher: Passengers left: 297/30000
+Dispatcher: Passengers left: 298/30000
+Dispatcher: Passengers left: 299/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 300/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 301/30000
+Dispatcher: Passengers left: 302/30000
+Dispatcher: Passengers left: 303/30000
+Dispatcher: Passengers left: 304/30000
+Dispatcher: Passengers left: 305/30000
+Dispatcher: Passengers left: 306/30000
+Dispatcher: Passengers left: 307/30000
+Dispatcher: Passengers left: 308/30000
+Dispatcher: Passengers left: 309/30000
+Dispatcher: Passengers left: 310/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 311/30000
+Dispatcher: Passengers left: 312/30000
+Dispatcher: Passengers left: 313/30000
+Dispatcher: Passengers left: 314/30000
+Dispatcher: Passengers left: 315/30000
+Dispatcher: Passengers left: 316/30000
+Dispatcher: Passengers left: 317/30000
+Dispatcher: Passengers left: 318/30000
+Dispatcher: Passengers left: 319/30000
+Dispatcher: Passengers left: 320/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 321/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 322/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 323/30000
+Dispatcher: Passengers left: 324/30000
+Dispatcher: Passengers left: 325/30000
+Dispatcher: Passengers left: 326/30000
+Dispatcher: Passengers left: 327/30000
+Dispatcher: Passengers left: 328/30000
+Dispatcher: Passengers left: 329/30000
+Dispatcher: Passengers left: 330/30000
+Dispatcher: Passengers left: 331/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 332/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 333/30000
+Dispatcher: Passengers left: 334/30000
+Dispatcher: Passengers left: 335/30000
+Dispatcher: Passengers left: 336/30000
+Dispatcher: Passengers left: 337/30000
+Dispatcher: Passengers left: 338/30000
+Dispatcher: Passengers left: 339/30000
+Dispatcher: Passengers left: 340/30000
+Dispatcher: Passengers left: 341/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 342/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 343/30000
+Dispatcher: Passengers left: 344/30000
+Dispatcher: Passengers left: 345/30000
+Dispatcher: Passengers left: 346/30000
+Dispatcher: Passengers left: 347/30000
+Dispatcher: Passengers left: 348/30000
+Dispatcher: Passengers left: 349/30000
+Dispatcher: Passengers left: 350/30000
+Dispatcher: Passengers left: 351/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 352/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 353/30000
+Dispatcher: Passengers left: 354/30000
+Dispatcher: Passengers left: 355/30000
+Dispatcher: Passengers left: 356/30000
+Dispatcher: Passengers left: 357/30000
+Dispatcher: Passengers left: 358/30000
+Dispatcher: Passengers left: 359/30000
+Dispatcher: Passengers left: 360/30000
+Dispatcher: Passengers left: 361/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 362/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 363/30000
+Dispatcher: Passengers left: 364/30000
+Dispatcher: Passengers left: 365/30000
+Dispatcher: Passengers left: 366/30000
+Dispatcher: Passengers left: 367/30000
+Dispatcher: Passengers left: 368/30000
+Dispatcher: Passengers left: 369/30000
+Dispatcher: Passengers left: 370/30000
+Dispatcher: Passengers left: 371/30000
+Dispatcher: Passengers left: 372/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 373/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 374/30000
+Dispatcher: Passengers left: 375/30000
+Dispatcher: Passengers left: 376/30000
+Dispatcher: Passengers left: 377/30000
+Dispatcher: Passengers left: 378/30000
+Dispatcher: Passengers left: 379/30000
+Dispatcher: Passengers left: 380/30000
+Dispatcher: Passengers left: 381/30000
+Dispatcher: Passengers left: 382/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 383/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 384/30000
+Dispatcher: Passengers left: 385/30000
+Dispatcher: Passengers left: 386/30000
+Dispatcher: Passengers left: 387/30000
+Dispatcher: Passengers left: 388/30000
+Dispatcher: Passengers left: 389/30000
+Dispatcher: Passengers left: 390/30000
+Dispatcher: Passengers left: 391/30000
+Dispatcher: Passengers left: 392/30000
+Dispatcher: Passengers left: 393/30000
+Dispatcher: Passengers left: 394/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 395/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 396/30000
+Dispatcher: Passengers left: 397/30000
+Dispatcher: Passengers left: 398/30000
+Dispatcher: Passengers left: 399/30000
+Dispatcher: Passengers left: 400/30000
+Dispatcher: Passengers left: 401/30000
+Dispatcher: Passengers left: 402/30000
+Dispatcher: Passengers left: 403/30000
+Dispatcher: Passengers left: 404/30000
+Dispatcher: Passengers left: 405/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 406/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 407/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 408/30000
+Dispatcher: Passengers left: 409/30000
+Dispatcher: Passengers left: 410/30000
+Dispatcher: Passengers left: 411/30000
+Dispatcher: Passengers left: 412/30000
+Dispatcher: Passengers left: 413/30000
+Dispatcher: Passengers left: 414/30000
+Dispatcher: Passengers left: 415/30000
+Dispatcher: Passengers left: 416/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 417/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 418/30000
+Dispatcher: Passengers left: 419/30000
+Dispatcher: Passengers left: 420/30000
+Dispatcher: Passengers left: 421/30000
+Dispatcher: Passengers left: 422/30000
+Dispatcher: Passengers left: 423/30000
+Dispatcher: Passengers left: 424/30000
+Dispatcher: Passengers left: 425/30000
+Dispatcher: Passengers left: 426/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 427/30000
+Dispatcher: Passengers left: 428/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 429/30000
+Dispatcher: Passengers left: 430/30000
+Dispatcher: Passengers left: 431/30000
+Dispatcher: Passengers left: 432/30000
+Dispatcher: Passengers left: 433/30000
+Dispatcher: Passengers left: 434/30000
+Dispatcher: Passengers left: 435/30000
+Dispatcher: Passengers left: 436/30000
+Dispatcher: Passengers left: 437/30000
+Dispatcher: Passengers left: 438/30000
+Dispatcher: Passengers left: 439/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 440/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 441/30000
+Dispatcher: Passengers left: 442/30000
+Dispatcher: Passengers left: 443/30000
+Dispatcher: Passengers left: 444/30000
+Dispatcher: Passengers left: 445/30000
+Dispatcher: Passengers left: 446/30000
+Dispatcher: Passengers left: 447/30000
+Dispatcher: Passengers left: 448/30000
+Dispatcher: Passengers left: 449/30000
+Dispatcher: Passengers left: 450/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 451/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 452/30000
+Dispatcher: Passengers left: 453/30000
+Dispatcher: Passengers left: 454/30000
+Dispatcher: Passengers left: 455/30000
+Dispatcher: Passengers left: 456/30000
+Dispatcher: Passengers left: 457/30000
+Dispatcher: Passengers left: 458/30000
+Dispatcher: Passengers left: 459/30000
+Dispatcher: Passengers left: 460/30000
+Dispatcher: Passengers left: 461/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 462/30000
+Dispatcher: Passengers left: 463/30000
+Dispatcher: Passengers left: 464/30000
+Dispatcher: Passengers left: 465/30000
+Dispatcher: Passengers left: 466/30000
+Dispatcher: Passengers left: 467/30000
+Dispatcher: Passengers left: 468/30000
+Dispatcher: Passengers left: 469/30000
+Dispatcher: Passengers left: 470/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 471/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 472/30000
+Dispatcher: Passengers left: 473/30000
+Dispatcher: Passengers left: 474/30000
+Dispatcher: Passengers left: 475/30000
+Dispatcher: Passengers left: 476/30000
+Dispatcher: Passengers left: 477/30000
+Dispatcher: Passengers left: 478/30000
+Dispatcher: Passengers left: 479/30000
+Dispatcher: Passengers left: 480/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 481/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 482/30000
+Dispatcher: Passengers left: 483/30000
+Dispatcher: Passengers left: 484/30000
+Dispatcher: Passengers left: 485/30000
+Dispatcher: Passengers left: 486/30000
+Dispatcher: Passengers left: 487/30000
+Dispatcher: Passengers left: 488/30000
+Dispatcher: Passengers left: 489/30000
+Dispatcher: Passengers left: 490/30000
+Dispatcher: Passengers left: 491/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 492/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 493/30000
+Dispatcher: Passengers left: 494/30000
+Dispatcher: Passengers left: 495/30000
+Dispatcher: Passengers left: 496/30000
+Dispatcher: Passengers left: 497/30000
+Dispatcher: Passengers left: 498/30000
+Dispatcher: Passengers left: 499/30000
+Dispatcher: Passengers left: 500/30000
+Dispatcher: Passengers left: 501/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 502/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 503/30000
+Dispatcher: Passengers left: 504/30000
+Dispatcher: Passengers left: 505/30000
+Dispatcher: Passengers left: 506/30000
+Dispatcher: Passengers left: 507/30000
+Dispatcher: Passengers left: 508/30000
+Dispatcher: Passengers left: 509/30000
+Dispatcher: Passengers left: 510/30000
+Dispatcher: Passengers left: 511/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 512/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 513/30000
+Dispatcher: Passengers left: 514/30000
+Dispatcher: Passengers left: 515/30000
+Dispatcher: Passengers left: 516/30000
+Dispatcher: Passengers left: 517/30000
+Dispatcher: Passengers left: 518/30000
+Dispatcher: Passengers left: 519/30000
+Dispatcher: Passengers left: 520/30000
+Dispatcher: Passengers left: 521/30000
+Dispatcher: Passengers left: 522/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 523/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 524/30000
+Dispatcher: Passengers left: 525/30000
+Dispatcher: Passengers left: 526/30000
+Dispatcher: Passengers left: 527/30000
+Dispatcher: Passengers left: 528/30000
+Dispatcher: Passengers left: 529/30000
+Dispatcher: Passengers left: 530/30000
+Dispatcher: Passengers left: 531/30000
+Dispatcher: Passengers left: 532/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 533/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 534/30000
+Dispatcher: Passengers left: 535/30000
+Dispatcher: Passengers left: 536/30000
+Dispatcher: Passengers left: 537/30000
+Dispatcher: Passengers left: 538/30000
+Dispatcher: Passengers left: 539/30000
+Dispatcher: Passengers left: 540/30000
+Dispatcher: Passengers left: 541/30000
+Dispatcher: Passengers left: 542/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 543/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 544/30000
+Dispatcher: Passengers left: 545/30000
+Dispatcher: Passengers left: 546/30000
+Dispatcher: Passengers left: 547/30000
+Dispatcher: Passengers left: 548/30000
+Dispatcher: Passengers left: 549/30000
+Dispatcher: Passengers left: 550/30000
+Dispatcher: Passengers left: 551/30000
+Dispatcher: Passengers left: 552/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 553/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 554/30000
+Dispatcher: Passengers left: 555/30000
+Dispatcher: Passengers left: 556/30000
+Dispatcher: Passengers left: 557/30000
+Dispatcher: Passengers left: 558/30000
+Dispatcher: Passengers left: 559/30000
+Dispatcher: Passengers left: 560/30000
+Dispatcher: Passengers left: 561/30000
+Dispatcher: Passengers left: 562/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Passengers left: 563/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 564/30000
+Dispatcher: Passengers left: 565/30000
+Dispatcher: Passengers left: 566/30000
+Dispatcher: Passengers left: 567/30000
+Dispatcher: Passengers left: 568/30000
+Dispatcher: Passengers left: 569/30000
+Dispatcher: Passengers left: 570/30000
+Dispatcher: Passengers left: 571/30000
+Dispatcher: Passengers left: 572/30000
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 573/30000
+Dispatcher: Plane 327279 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 327279 is ready
+Dispatcher: Passengers left: 574/30000
+Dispatcher: Passengers left: 575/30000
+Dispatcher: Passengers left: 576/30000
+Dispatcher: Passengers left: 577/30000
+Dispatcher: Passengers left: 578/30000
+Dispatcher: Passengers left: 579/30000
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 1/500
+Dispatcher: Passengers left: 2/500
+Dispatcher: Passengers left: 3/500
+Dispatcher: Passengers left: 4/500
+Dispatcher: Passengers left: 5/500
+Dispatcher: Passengers left: 6/500
+Dispatcher: Passengers left: 7/500
+Dispatcher: Passengers left: 8/500
+Dispatcher: Passengers left: 9/500
+Dispatcher: Passengers left: 10/500
+Dispatcher: Passengers left: 11/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 12/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 13/500
+Dispatcher: Passengers left: 14/500
+Dispatcher: Passengers left: 15/500
+Dispatcher: Passengers left: 16/500
+Dispatcher: Passengers left: 17/500
+Dispatcher: Passengers left: 18/500
+Dispatcher: Passengers left: 19/500
+Dispatcher: Passengers left: 20/500
+Dispatcher: Passengers left: 21/500
+Dispatcher: Passengers left: 22/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 23/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 24/500
+Dispatcher: Passengers left: 25/500
+Dispatcher: Passengers left: 26/500
+Dispatcher: Passengers left: 27/500
+Dispatcher: Passengers left: 28/500
+Dispatcher: Passengers left: 29/500
+Dispatcher: Passengers left: 30/500
+Dispatcher: Passengers left: 31/500
+Dispatcher: Passengers left: 32/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 33/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 34/500
+Dispatcher: Passengers left: 35/500
+Dispatcher: Passengers left: 36/500
+Dispatcher: Passengers left: 37/500
+Dispatcher: Passengers left: 38/500
+Dispatcher: Passengers left: 39/500
+Dispatcher: Passengers left: 40/500
+Dispatcher: Passengers left: 41/500
+Dispatcher: Passengers left: 42/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 43/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 44/500
+Dispatcher: Passengers left: 45/500
+Dispatcher: Passengers left: 46/500
+Dispatcher: Passengers left: 47/500
+Dispatcher: Passengers left: 48/500
+Dispatcher: Passengers left: 49/500
+Dispatcher: Passengers left: 50/500
+Dispatcher: Passengers left: 51/500
+Dispatcher: Passengers left: 52/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 53/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 54/500
+Dispatcher: Passengers left: 55/500
+Dispatcher: Passengers left: 56/500
+Dispatcher: Passengers left: 57/500
+Dispatcher: Passengers left: 58/500
+Dispatcher: Passengers left: 59/500
+Dispatcher: Passengers left: 60/500
+Dispatcher: Passengers left: 61/500
+Dispatcher: Passengers left: 62/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 63/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 64/500
+Dispatcher: Passengers left: 65/500
+Dispatcher: Passengers left: 66/500
+Dispatcher: Passengers left: 67/500
+Dispatcher: Passengers left: 68/500
+Dispatcher: Passengers left: 69/500
+Dispatcher: Passengers left: 70/500
+Dispatcher: Passengers left: 71/500
+Dispatcher: Passengers left: 72/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 73/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 74/500
+Dispatcher: Passengers left: 75/500
+Dispatcher: Passengers left: 76/500
+Dispatcher: Passengers left: 77/500
+Dispatcher: Passengers left: 78/500
+Dispatcher: Passengers left: 79/500
+Dispatcher: Passengers left: 80/500
+Dispatcher: Passengers left: 81/500
+Dispatcher: Passengers left: 82/500
+Dispatcher: Passengers left: 83/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 84/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 85/500
+Dispatcher: Passengers left: 86/500
+Dispatcher: Passengers left: 87/500
+Dispatcher: Passengers left: 88/500
+Dispatcher: Passengers left: 89/500
+Dispatcher: Passengers left: 90/500
+Dispatcher: Passengers left: 91/500
+Dispatcher: Passengers left: 92/500
+Dispatcher: Passengers left: 93/500
+Dispatcher: Passengers left: 94/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 95/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 96/500
+Dispatcher: Passengers left: 97/500
+Dispatcher: Passengers left: 98/500
+Dispatcher: Passengers left: 99/500
+Dispatcher: Passengers left: 100/500
+Dispatcher: Passengers left: 101/500
+Dispatcher: Passengers left: 102/500
+Dispatcher: Passengers left: 103/500
+Dispatcher: Passengers left: 104/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 105/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 106/500
+Dispatcher: Passengers left: 107/500
+Dispatcher: Passengers left: 108/500
+Dispatcher: Passengers left: 109/500
+Dispatcher: Passengers left: 110/500
+Dispatcher: Passengers left: 111/500
+Dispatcher: Passengers left: 112/500
+Dispatcher: Passengers left: 113/500
+Dispatcher: Passengers left: 114/500
+Dispatcher: Passengers left: 115/500
+Dispatcher: Passengers left: 116/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 117/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 118/500
+Dispatcher: Passengers left: 119/500
+Dispatcher: Passengers left: 120/500
+Dispatcher: Passengers left: 121/500
+Dispatcher: Passengers left: 122/500
+Dispatcher: Passengers left: 123/500
+Dispatcher: Passengers left: 124/500
+Dispatcher: Passengers left: 125/500
+Dispatcher: Passengers left: 126/500
+Dispatcher: Passengers left: 127/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 128/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 129/500
+Dispatcher: Passengers left: 130/500
+Dispatcher: Passengers left: 131/500
+Dispatcher: Passengers left: 132/500
+Dispatcher: Passengers left: 133/500
+Dispatcher: Passengers left: 134/500
+Dispatcher: Passengers left: 135/500
+Dispatcher: Passengers left: 136/500
+Dispatcher: Passengers left: 137/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 138/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 139/500
+Dispatcher: Passengers left: 140/500
+Dispatcher: Passengers left: 141/500
+Dispatcher: Passengers left: 142/500
+Dispatcher: Passengers left: 143/500
+Dispatcher: Passengers left: 144/500
+Dispatcher: Passengers left: 145/500
+Dispatcher: Passengers left: 146/500
+Dispatcher: Passengers left: 147/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 148/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 149/500
+Dispatcher: Passengers left: 150/500
+Dispatcher: Passengers left: 151/500
+Dispatcher: Passengers left: 152/500
+Dispatcher: Passengers left: 153/500
+Dispatcher: Passengers left: 154/500
+Dispatcher: Passengers left: 155/500
+Dispatcher: Passengers left: 156/500
+Dispatcher: Passengers left: 157/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 158/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 159/500
+Dispatcher: Passengers left: 160/500
+Dispatcher: Passengers left: 161/500
+Dispatcher: Passengers left: 162/500
+Dispatcher: Passengers left: 163/500
+Dispatcher: Passengers left: 164/500
+Dispatcher: Passengers left: 165/500
+Dispatcher: Passengers left: 166/500
+Dispatcher: Passengers left: 167/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 168/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 169/500
+Dispatcher: Passengers left: 170/500
+Dispatcher: Passengers left: 171/500
+Dispatcher: Passengers left: 172/500
+Dispatcher: Passengers left: 173/500
+Dispatcher: Passengers left: 174/500
+Dispatcher: Passengers left: 175/500
+Dispatcher: Passengers left: 176/500
+Dispatcher: Passengers left: 177/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 178/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 179/500
+Dispatcher: Passengers left: 180/500
+Dispatcher: Passengers left: 181/500
+Dispatcher: Passengers left: 182/500
+Dispatcher: Passengers left: 183/500
+Dispatcher: Passengers left: 184/500
+Dispatcher: Passengers left: 185/500
+Dispatcher: Passengers left: 186/500
+Dispatcher: Passengers left: 187/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 188/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 189/500
+Dispatcher: Passengers left: 190/500
+Dispatcher: Passengers left: 191/500
+Dispatcher: Passengers left: 192/500
+Dispatcher: Passengers left: 193/500
+Dispatcher: Passengers left: 194/500
+Dispatcher: Passengers left: 195/500
+Dispatcher: Passengers left: 196/500
+Dispatcher: Passengers left: 197/500
+Dispatcher: Passengers left: 198/500
+Dispatcher: Passengers left: 199/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 200/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 201/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 202/500
+Dispatcher: Passengers left: 203/500
+Dispatcher: Passengers left: 204/500
+Dispatcher: Passengers left: 205/500
+Dispatcher: Passengers left: 206/500
+Dispatcher: Passengers left: 207/500
+Dispatcher: Passengers left: 208/500
+Dispatcher: Passengers left: 209/500
+Dispatcher: Passengers left: 210/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 211/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 212/500
+Dispatcher: Passengers left: 213/500
+Dispatcher: Passengers left: 214/500
+Dispatcher: Passengers left: 215/500
+Dispatcher: Passengers left: 216/500
+Dispatcher: Passengers left: 217/500
+Dispatcher: Passengers left: 218/500
+Dispatcher: Passengers left: 219/500
+Dispatcher: Passengers left: 220/500
+Dispatcher: Passengers left: 221/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 222/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 223/500
+Dispatcher: Passengers left: 224/500
+Dispatcher: Passengers left: 225/500
+Dispatcher: Passengers left: 226/500
+Dispatcher: Passengers left: 227/500
+Dispatcher: Passengers left: 228/500
+Dispatcher: Passengers left: 229/500
+Dispatcher: Passengers left: 230/500
+Dispatcher: Passengers left: 231/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 232/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 233/500
+Dispatcher: Passengers left: 234/500
+Dispatcher: Passengers left: 235/500
+Dispatcher: Passengers left: 236/500
+Dispatcher: Passengers left: 237/500
+Dispatcher: Passengers left: 238/500
+Dispatcher: Passengers left: 239/500
+Dispatcher: Passengers left: 240/500
+Dispatcher: Passengers left: 241/500
+Dispatcher: Passengers left: 242/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 243/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 244/500
+Dispatcher: Passengers left: 245/500
+Dispatcher: Passengers left: 246/500
+Dispatcher: Passengers left: 247/500
+Dispatcher: Passengers left: 248/500
+Dispatcher: Passengers left: 249/500
+Dispatcher: Passengers left: 250/500
+Dispatcher: Passengers left: 251/500
+Dispatcher: Passengers left: 252/500
+Dispatcher: Passengers left: 253/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 254/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 255/500
+Dispatcher: Passengers left: 256/500
+Dispatcher: Passengers left: 257/500
+Dispatcher: Passengers left: 258/500
+Dispatcher: Passengers left: 259/500
+Dispatcher: Passengers left: 260/500
+Dispatcher: Passengers left: 261/500
+Dispatcher: Passengers left: 262/500
+Dispatcher: Passengers left: 263/500
+Dispatcher: Passengers left: 264/500
+Dispatcher: Passengers left: 265/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 266/500
+Dispatcher: Passengers left: 267/500
+Dispatcher: Passengers left: 268/500
+Dispatcher: Passengers left: 269/500
+Dispatcher: Passengers left: 270/500
+Dispatcher: Passengers left: 271/500
+Dispatcher: Passengers left: 272/500
+Dispatcher: Passengers left: 273/500
+Dispatcher: Passengers left: 274/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 275/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 276/500
+Dispatcher: Passengers left: 277/500
+Dispatcher: Passengers left: 278/500
+Dispatcher: Passengers left: 279/500
+Dispatcher: Passengers left: 280/500
+Dispatcher: Passengers left: 281/500
+Dispatcher: Passengers left: 282/500
+Dispatcher: Passengers left: 283/500
+Dispatcher: Passengers left: 284/500
+Dispatcher: Passengers left: 285/500
+Dispatcher: Passengers left: 286/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 287/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 288/500
+Dispatcher: Passengers left: 289/500
+Dispatcher: Passengers left: 290/500
+Dispatcher: Passengers left: 291/500
+Dispatcher: Passengers left: 292/500
+Dispatcher: Passengers left: 293/500
+Dispatcher: Passengers left: 294/500
+Dispatcher: Passengers left: 295/500
+Dispatcher: Passengers left: 296/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 297/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 298/500
+Dispatcher: Passengers left: 299/500
+Dispatcher: Passengers left: 300/500
+Dispatcher: Passengers left: 301/500
+Dispatcher: Passengers left: 302/500
+Dispatcher: Passengers left: 303/500
+Dispatcher: Passengers left: 304/500
+Dispatcher: Passengers left: 305/500
+Dispatcher: Passengers left: 306/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 307/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 308/500
+Dispatcher: Passengers left: 309/500
+Dispatcher: Passengers left: 310/500
+Dispatcher: Passengers left: 311/500
+Dispatcher: Passengers left: 312/500
+Dispatcher: Passengers left: 313/500
+Dispatcher: Passengers left: 314/500
+Dispatcher: Passengers left: 315/500
+Dispatcher: Passengers left: 316/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 317/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 318/500
+Dispatcher: Passengers left: 319/500
+Dispatcher: Passengers left: 320/500
+Dispatcher: Passengers left: 321/500
+Dispatcher: Passengers left: 322/500
+Dispatcher: Passengers left: 323/500
+Dispatcher: Passengers left: 324/500
+Dispatcher: Passengers left: 325/500
+Dispatcher: Passengers left: 326/500
+Dispatcher: Passengers left: 327/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 328/500
+Dispatcher: Passengers left: 329/500
+Dispatcher: Passengers left: 330/500
+Dispatcher: Passengers left: 331/500
+Dispatcher: Passengers left: 332/500
+Dispatcher: Passengers left: 333/500
+Dispatcher: Passengers left: 334/500
+Dispatcher: Passengers left: 335/500
+Dispatcher: Passengers left: 336/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 337/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 338/500
+Dispatcher: Passengers left: 339/500
+Dispatcher: Passengers left: 340/500
+Dispatcher: Passengers left: 341/500
+Dispatcher: Passengers left: 342/500
+Dispatcher: Passengers left: 343/500
+Dispatcher: Passengers left: 344/500
+Dispatcher: Passengers left: 345/500
+Dispatcher: Passengers left: 346/500
+Dispatcher: Passengers left: 347/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 348/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 349/500
+Dispatcher: Passengers left: 350/500
+Dispatcher: Passengers left: 351/500
+Dispatcher: Passengers left: 352/500
+Dispatcher: Passengers left: 353/500
+Dispatcher: Passengers left: 354/500
+Dispatcher: Passengers left: 355/500
+Dispatcher: Passengers left: 356/500
+Dispatcher: Passengers left: 357/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 358/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 359/500
+Dispatcher: Passengers left: 360/500
+Dispatcher: Passengers left: 361/500
+Dispatcher: Passengers left: 362/500
+Dispatcher: Passengers left: 363/500
+Dispatcher: Passengers left: 364/500
+Dispatcher: Passengers left: 365/500
+Dispatcher: Passengers left: 366/500
+Dispatcher: Passengers left: 367/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 368/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 369/500
+Dispatcher: Passengers left: 370/500
+Dispatcher: Passengers left: 371/500
+Dispatcher: Passengers left: 372/500
+Dispatcher: Passengers left: 373/500
+Dispatcher: Passengers left: 374/500
+Dispatcher: Passengers left: 375/500
+Dispatcher: Passengers left: 376/500
+Dispatcher: Passengers left: 377/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 378/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 379/500
+Dispatcher: Passengers left: 380/500
+Dispatcher: Passengers left: 381/500
+Dispatcher: Passengers left: 382/500
+Dispatcher: Passengers left: 383/500
+Dispatcher: Passengers left: 384/500
+Dispatcher: Passengers left: 385/500
+Dispatcher: Passengers left: 386/500
+Dispatcher: Passengers left: 387/500
+Dispatcher: Passengers left: 388/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 389/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 390/500
+Dispatcher: Passengers left: 391/500
+Dispatcher: Passengers left: 392/500
+Dispatcher: Passengers left: 393/500
+Dispatcher: Passengers left: 394/500
+Dispatcher: Passengers left: 395/500
+Dispatcher: Passengers left: 396/500
+Dispatcher: Passengers left: 397/500
+Dispatcher: Passengers left: 398/500
+Dispatcher: Passengers left: 399/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 400/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 401/500
+Dispatcher: Passengers left: 402/500
+Dispatcher: Passengers left: 403/500
+Dispatcher: Passengers left: 404/500
+Dispatcher: Passengers left: 405/500
+Dispatcher: Passengers left: 406/500
+Dispatcher: Passengers left: 407/500
+Dispatcher: Passengers left: 408/500
+Dispatcher: Passengers left: 409/500
+Dispatcher: Passengers left: 410/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 411/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 412/500
+Dispatcher: Passengers left: 413/500
+Dispatcher: Passengers left: 414/500
+Dispatcher: Passengers left: 415/500
+Dispatcher: Passengers left: 416/500
+Dispatcher: Passengers left: 417/500
+Dispatcher: Passengers left: 418/500
+Dispatcher: Passengers left: 419/500
+Dispatcher: Passengers left: 420/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 421/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 422/500
+Dispatcher: Passengers left: 423/500
+Dispatcher: Passengers left: 424/500
+Dispatcher: Passengers left: 425/500
+Dispatcher: Passengers left: 426/500
+Dispatcher: Passengers left: 427/500
+Dispatcher: Passengers left: 428/500
+Dispatcher: Passengers left: 429/500
+Dispatcher: Passengers left: 430/500
+Dispatcher: Passengers left: 431/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 432/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 433/500
+Dispatcher: Passengers left: 434/500
+Dispatcher: Passengers left: 435/500
+Dispatcher: Passengers left: 436/500
+Dispatcher: Passengers left: 437/500
+Dispatcher: Passengers left: 438/500
+Dispatcher: Passengers left: 439/500
+Dispatcher: Passengers left: 440/500
+Dispatcher: Passengers left: 441/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 442/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 443/500
+Dispatcher: Passengers left: 444/500
+Dispatcher: Passengers left: 445/500
+Dispatcher: Passengers left: 446/500
+Dispatcher: Passengers left: 447/500
+Dispatcher: Passengers left: 448/500
+Dispatcher: Passengers left: 449/500
+Dispatcher: Passengers left: 450/500
+Dispatcher: Passengers left: 451/500
+Dispatcher: Passengers left: 452/500
+Dispatcher: Passengers left: 453/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 454/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 455/500
+Dispatcher: Passengers left: 456/500
+Dispatcher: Passengers left: 457/500
+Dispatcher: Passengers left: 458/500
+Dispatcher: Passengers left: 459/500
+Dispatcher: Passengers left: 460/500
+Dispatcher: Passengers left: 461/500
+Dispatcher: Passengers left: 462/500
+Dispatcher: Passengers left: 463/500
+Dispatcher: Passengers left: 464/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 465/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 466/500
+Dispatcher: Passengers left: 467/500
+Dispatcher: Passengers left: 468/500
+Dispatcher: Passengers left: 469/500
+Dispatcher: Passengers left: 470/500
+Dispatcher: Passengers left: 471/500
+Dispatcher: Passengers left: 472/500
+Dispatcher: Passengers left: 473/500
+Dispatcher: Passengers left: 474/500
+Dispatcher: Passengers left: 475/500
+Dispatcher: Passengers left: 476/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 477/500
+Dispatcher: Passengers left: 478/500
+Dispatcher: Passengers left: 479/500
+Dispatcher: Passengers left: 480/500
+Dispatcher: Passengers left: 481/500
+Dispatcher: Passengers left: 482/500
+Dispatcher: Passengers left: 483/500
+Dispatcher: Passengers left: 484/500
+Dispatcher: Passengers left: 485/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 486/500
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 487/500
+Dispatcher: Passengers left: 488/500
+Dispatcher: Passengers left: 489/500
+Dispatcher: Passengers left: 490/500
+Dispatcher: Passengers left: 491/500
+Dispatcher: Passengers left: 492/500
+Dispatcher: Passengers left: 493/500
+Dispatcher: Passengers left: 494/500
+Dispatcher: Passengers left: 495/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 330535 is ready to depart
+Dispatcher: Passengers left: 496/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 330535 is ready
+Dispatcher: Passengers left: 497/500
+Dispatcher: Passengers left: 498/500
+Dispatcher: Passengers left: 499/500
+Dispatcher: Passengers left: 500/500
 Dispatcher: All passengers left
 Dispatcher: Received signal SIGTERM
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 1/500
+Dispatcher: Passengers left: 2/500
+Dispatcher: Passengers left: 3/500
+Dispatcher: Passengers left: 4/500
+Dispatcher: Passengers left: 5/500
+Dispatcher: Passengers left: 6/500
+Dispatcher: Passengers left: 7/500
+Dispatcher: Passengers left: 8/500
+Dispatcher: Passengers left: 9/500
+Dispatcher: Passengers left: 10/500
+Dispatcher: Passengers left: 11/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 12/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 13/500
+Dispatcher: Passengers left: 14/500
+Dispatcher: Passengers left: 15/500
+Dispatcher: Passengers left: 16/500
+Dispatcher: Passengers left: 17/500
+Dispatcher: Passengers left: 18/500
+Dispatcher: Passengers left: 19/500
+Dispatcher: Passengers left: 20/500
+Dispatcher: Passengers left: 21/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 22/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 23/500
+Dispatcher: Passengers left: 24/500
+Dispatcher: Passengers left: 25/500
+Dispatcher: Passengers left: 26/500
+Dispatcher: Passengers left: 27/500
+Dispatcher: Passengers left: 28/500
+Dispatcher: Passengers left: 29/500
+Dispatcher: Passengers left: 30/500
+Dispatcher: Passengers left: 31/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 32/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 33/500
+Dispatcher: Passengers left: 34/500
+Dispatcher: Passengers left: 35/500
+Dispatcher: Passengers left: 36/500
+Dispatcher: Passengers left: 37/500
+Dispatcher: Passengers left: 38/500
+Dispatcher: Passengers left: 39/500
+Dispatcher: Passengers left: 40/500
+Dispatcher: Passengers left: 41/500
+Dispatcher: Passengers left: 42/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 43/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 44/500
+Dispatcher: Passengers left: 45/500
+Dispatcher: Passengers left: 46/500
+Dispatcher: Passengers left: 47/500
+Dispatcher: Passengers left: 48/500
+Dispatcher: Passengers left: 49/500
+Dispatcher: Passengers left: 50/500
+Dispatcher: Passengers left: 51/500
+Dispatcher: Passengers left: 52/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 53/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 54/500
+Dispatcher: Passengers left: 55/500
+Dispatcher: Passengers left: 56/500
+Dispatcher: Passengers left: 57/500
+Dispatcher: Passengers left: 58/500
+Dispatcher: Passengers left: 59/500
+Dispatcher: Passengers left: 60/500
+Dispatcher: Passengers left: 61/500
+Dispatcher: Passengers left: 62/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 63/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 64/500
+Dispatcher: Passengers left: 65/500
+Dispatcher: Passengers left: 66/500
+Dispatcher: Passengers left: 67/500
+Dispatcher: Passengers left: 68/500
+Dispatcher: Passengers left: 69/500
+Dispatcher: Passengers left: 70/500
+Dispatcher: Passengers left: 71/500
+Dispatcher: Passengers left: 72/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 73/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 74/500
+Dispatcher: Passengers left: 75/500
+Dispatcher: Passengers left: 76/500
+Dispatcher: Passengers left: 77/500
+Dispatcher: Passengers left: 78/500
+Dispatcher: Passengers left: 79/500
+Dispatcher: Passengers left: 80/500
+Dispatcher: Passengers left: 81/500
+Dispatcher: Passengers left: 82/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 83/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 84/500
+Dispatcher: Passengers left: 85/500
+Dispatcher: Passengers left: 86/500
+Dispatcher: Passengers left: 87/500
+Dispatcher: Passengers left: 88/500
+Dispatcher: Passengers left: 89/500
+Dispatcher: Passengers left: 90/500
+Dispatcher: Passengers left: 91/500
+Dispatcher: Passengers left: 92/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 93/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 94/500
+Dispatcher: Passengers left: 95/500
+Dispatcher: Passengers left: 96/500
+Dispatcher: Passengers left: 97/500
+Dispatcher: Passengers left: 98/500
+Dispatcher: Passengers left: 99/500
+Dispatcher: Passengers left: 100/500
+Dispatcher: Passengers left: 101/500
+Dispatcher: Passengers left: 102/500
+Dispatcher: Passengers left: 103/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 104/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 105/500
+Dispatcher: Passengers left: 106/500
+Dispatcher: Passengers left: 107/500
+Dispatcher: Passengers left: 108/500
+Dispatcher: Passengers left: 109/500
+Dispatcher: Passengers left: 110/500
+Dispatcher: Passengers left: 111/500
+Dispatcher: Passengers left: 112/500
+Dispatcher: Passengers left: 113/500
+Dispatcher: Passengers left: 114/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 115/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 116/500
+Dispatcher: Passengers left: 117/500
+Dispatcher: Passengers left: 118/500
+Dispatcher: Passengers left: 119/500
+Dispatcher: Passengers left: 120/500
+Dispatcher: Passengers left: 121/500
+Dispatcher: Passengers left: 122/500
+Dispatcher: Passengers left: 123/500
+Dispatcher: Passengers left: 124/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 125/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 126/500
+Dispatcher: Passengers left: 127/500
+Dispatcher: Passengers left: 128/500
+Dispatcher: Passengers left: 129/500
+Dispatcher: Passengers left: 130/500
+Dispatcher: Passengers left: 131/500
+Dispatcher: Passengers left: 132/500
+Dispatcher: Passengers left: 133/500
+Dispatcher: Passengers left: 134/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 135/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 136/500
+Dispatcher: Passengers left: 137/500
+Dispatcher: Passengers left: 138/500
+Dispatcher: Passengers left: 139/500
+Dispatcher: Passengers left: 140/500
+Dispatcher: Passengers left: 141/500
+Dispatcher: Passengers left: 142/500
+Dispatcher: Passengers left: 143/500
+Dispatcher: Passengers left: 144/500
+Dispatcher: Passengers left: 145/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 146/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 147/500
+Dispatcher: Passengers left: 148/500
+Dispatcher: Passengers left: 149/500
+Dispatcher: Passengers left: 150/500
+Dispatcher: Passengers left: 151/500
+Dispatcher: Passengers left: 152/500
+Dispatcher: Passengers left: 153/500
+Dispatcher: Passengers left: 154/500
+Dispatcher: Passengers left: 155/500
+Dispatcher: Passengers left: 156/500
+Dispatcher: Passengers left: 157/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 158/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 159/500
+Dispatcher: Passengers left: 160/500
+Dispatcher: Passengers left: 161/500
+Dispatcher: Passengers left: 162/500
+Dispatcher: Passengers left: 163/500
+Dispatcher: Passengers left: 164/500
+Dispatcher: Passengers left: 165/500
+Dispatcher: Passengers left: 166/500
+Dispatcher: Passengers left: 167/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 168/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 169/500
+Dispatcher: Passengers left: 170/500
+Dispatcher: Passengers left: 171/500
+Dispatcher: Passengers left: 172/500
+Dispatcher: Passengers left: 173/500
+Dispatcher: Passengers left: 174/500
+Dispatcher: Passengers left: 175/500
+Dispatcher: Passengers left: 176/500
+Dispatcher: Passengers left: 177/500
+Dispatcher: Passengers left: 178/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 179/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 180/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 181/500
+Dispatcher: Passengers left: 182/500
+Dispatcher: Passengers left: 183/500
+Dispatcher: Passengers left: 184/500
+Dispatcher: Passengers left: 185/500
+Dispatcher: Passengers left: 186/500
+Dispatcher: Passengers left: 187/500
+Dispatcher: Passengers left: 188/500
+Dispatcher: Passengers left: 189/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 190/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 191/500
+Dispatcher: Passengers left: 192/500
+Dispatcher: Passengers left: 193/500
+Dispatcher: Passengers left: 194/500
+Dispatcher: Passengers left: 195/500
+Dispatcher: Passengers left: 196/500
+Dispatcher: Passengers left: 197/500
+Dispatcher: Passengers left: 198/500
+Dispatcher: Passengers left: 199/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 200/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 201/500
+Dispatcher: Passengers left: 202/500
+Dispatcher: Passengers left: 203/500
+Dispatcher: Passengers left: 204/500
+Dispatcher: Passengers left: 205/500
+Dispatcher: Passengers left: 206/500
+Dispatcher: Passengers left: 207/500
+Dispatcher: Passengers left: 208/500
+Dispatcher: Passengers left: 209/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 210/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 211/500
+Dispatcher: Passengers left: 212/500
+Dispatcher: Passengers left: 213/500
+Dispatcher: Passengers left: 214/500
+Dispatcher: Passengers left: 215/500
+Dispatcher: Passengers left: 216/500
+Dispatcher: Passengers left: 217/500
+Dispatcher: Passengers left: 218/500
+Dispatcher: Passengers left: 219/500
+Dispatcher: Passengers left: 220/500
+Dispatcher: Passengers left: 221/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 222/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 223/500
+Dispatcher: Passengers left: 224/500
+Dispatcher: Passengers left: 225/500
+Dispatcher: Passengers left: 226/500
+Dispatcher: Passengers left: 227/500
+Dispatcher: Passengers left: 228/500
+Dispatcher: Passengers left: 229/500
+Dispatcher: Passengers left: 230/500
+Dispatcher: Passengers left: 231/500
+Dispatcher: Passengers left: 232/500
+Dispatcher: Passengers left: 233/500
+Dispatcher: Passengers left: 234/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 235/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 236/500
+Dispatcher: Passengers left: 237/500
+Dispatcher: Passengers left: 238/500
+Dispatcher: Passengers left: 239/500
+Dispatcher: Passengers left: 240/500
+Dispatcher: Passengers left: 241/500
+Dispatcher: Passengers left: 242/500
+Dispatcher: Passengers left: 243/500
+Dispatcher: Passengers left: 244/500
+Dispatcher: Passengers left: 245/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 246/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 247/500
+Dispatcher: Passengers left: 248/500
+Dispatcher: Passengers left: 249/500
+Dispatcher: Passengers left: 250/500
+Dispatcher: Passengers left: 251/500
+Dispatcher: Passengers left: 252/500
+Dispatcher: Passengers left: 253/500
+Dispatcher: Passengers left: 254/500
+Dispatcher: Passengers left: 255/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 256/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 257/500
+Dispatcher: Passengers left: 258/500
+Dispatcher: Passengers left: 259/500
+Dispatcher: Passengers left: 260/500
+Dispatcher: Passengers left: 261/500
+Dispatcher: Passengers left: 262/500
+Dispatcher: Passengers left: 263/500
+Dispatcher: Passengers left: 264/500
+Dispatcher: Passengers left: 265/500
+Dispatcher: Passengers left: 266/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 267/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 268/500
+Dispatcher: Passengers left: 269/500
+Dispatcher: Passengers left: 270/500
+Dispatcher: Passengers left: 271/500
+Dispatcher: Passengers left: 272/500
+Dispatcher: Passengers left: 273/500
+Dispatcher: Passengers left: 274/500
+Dispatcher: Passengers left: 275/500
+Dispatcher: Passengers left: 276/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 277/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 278/500
+Dispatcher: Passengers left: 279/500
+Dispatcher: Passengers left: 280/500
+Dispatcher: Passengers left: 281/500
+Dispatcher: Passengers left: 282/500
+Dispatcher: Passengers left: 283/500
+Dispatcher: Passengers left: 284/500
+Dispatcher: Passengers left: 285/500
+Dispatcher: Passengers left: 286/500
+Dispatcher: Passengers left: 287/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 288/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 289/500
+Dispatcher: Passengers left: 290/500
+Dispatcher: Passengers left: 291/500
+Dispatcher: Passengers left: 292/500
+Dispatcher: Passengers left: 293/500
+Dispatcher: Passengers left: 294/500
+Dispatcher: Passengers left: 295/500
+Dispatcher: Passengers left: 296/500
+Dispatcher: Passengers left: 297/500
+Dispatcher: Passengers left: 298/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 299/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 300/500
+Dispatcher: Passengers left: 301/500
+Dispatcher: Passengers left: 302/500
+Dispatcher: Passengers left: 303/500
+Dispatcher: Passengers left: 304/500
+Dispatcher: Passengers left: 305/500
+Dispatcher: Passengers left: 306/500
+Dispatcher: Passengers left: 307/500
+Dispatcher: Passengers left: 308/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 309/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 310/500
+Dispatcher: Passengers left: 311/500
+Dispatcher: Passengers left: 312/500
+Dispatcher: Passengers left: 313/500
+Dispatcher: Passengers left: 314/500
+Dispatcher: Passengers left: 315/500
+Dispatcher: Passengers left: 316/500
+Dispatcher: Passengers left: 317/500
+Dispatcher: Passengers left: 318/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 319/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 320/500
+Dispatcher: Passengers left: 321/500
+Dispatcher: Passengers left: 322/500
+Dispatcher: Passengers left: 323/500
+Dispatcher: Passengers left: 324/500
+Dispatcher: Passengers left: 325/500
+Dispatcher: Passengers left: 326/500
+Dispatcher: Passengers left: 327/500
+Dispatcher: Passengers left: 328/500
+Dispatcher: Passengers left: 329/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 330/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 331/500
+Dispatcher: Passengers left: 332/500
+Dispatcher: Passengers left: 333/500
+Dispatcher: Passengers left: 334/500
+Dispatcher: Passengers left: 335/500
+Dispatcher: Passengers left: 336/500
+Dispatcher: Passengers left: 337/500
+Dispatcher: Passengers left: 338/500
+Dispatcher: Passengers left: 339/500
+Dispatcher: Passengers left: 340/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 341/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 342/500
+Dispatcher: Passengers left: 343/500
+Dispatcher: Passengers left: 344/500
+Dispatcher: Passengers left: 345/500
+Dispatcher: Passengers left: 346/500
+Dispatcher: Passengers left: 347/500
+Dispatcher: Passengers left: 348/500
+Dispatcher: Passengers left: 349/500
+Dispatcher: Passengers left: 350/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 351/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 352/500
+Dispatcher: Passengers left: 353/500
+Dispatcher: Passengers left: 354/500
+Dispatcher: Passengers left: 355/500
+Dispatcher: Passengers left: 356/500
+Dispatcher: Passengers left: 357/500
+Dispatcher: Passengers left: 358/500
+Dispatcher: Passengers left: 359/500
+Dispatcher: Passengers left: 360/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 361/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 362/500
+Dispatcher: Passengers left: 363/500
+Dispatcher: Passengers left: 364/500
+Dispatcher: Passengers left: 365/500
+Dispatcher: Passengers left: 366/500
+Dispatcher: Passengers left: 367/500
+Dispatcher: Passengers left: 368/500
+Dispatcher: Passengers left: 369/500
+Dispatcher: Passengers left: 370/500
+Dispatcher: Passengers left: 371/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 372/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 373/500
+Dispatcher: Passengers left: 374/500
+Dispatcher: Passengers left: 375/500
+Dispatcher: Passengers left: 376/500
+Dispatcher: Passengers left: 377/500
+Dispatcher: Passengers left: 378/500
+Dispatcher: Passengers left: 379/500
+Dispatcher: Passengers left: 380/500
+Dispatcher: Passengers left: 381/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 382/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 383/500
+Dispatcher: Passengers left: 384/500
+Dispatcher: Passengers left: 385/500
+Dispatcher: Passengers left: 386/500
+Dispatcher: Passengers left: 387/500
+Dispatcher: Passengers left: 388/500
+Dispatcher: Passengers left: 389/500
+Dispatcher: Passengers left: 390/500
+Dispatcher: Passengers left: 391/500
+Dispatcher: Passengers left: 392/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 393/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 394/500
+Dispatcher: Passengers left: 395/500
+Dispatcher: Passengers left: 396/500
+Dispatcher: Passengers left: 397/500
+Dispatcher: Passengers left: 398/500
+Dispatcher: Passengers left: 399/500
+Dispatcher: Passengers left: 400/500
+Dispatcher: Passengers left: 401/500
+Dispatcher: Passengers left: 402/500
+Dispatcher: Passengers left: 403/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 404/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 405/500
+Dispatcher: Passengers left: 406/500
+Dispatcher: Passengers left: 407/500
+Dispatcher: Passengers left: 408/500
+Dispatcher: Passengers left: 409/500
+Dispatcher: Passengers left: 410/500
+Dispatcher: Passengers left: 411/500
+Dispatcher: Passengers left: 412/500
+Dispatcher: Passengers left: 413/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 414/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 415/500
+Dispatcher: Passengers left: 416/500
+Dispatcher: Passengers left: 417/500
+Dispatcher: Passengers left: 418/500
+Dispatcher: Passengers left: 419/500
+Dispatcher: Passengers left: 420/500
+Dispatcher: Passengers left: 421/500
+Dispatcher: Passengers left: 422/500
+Dispatcher: Passengers left: 423/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 424/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 425/500
+Dispatcher: Passengers left: 426/500
+Dispatcher: Passengers left: 427/500
+Dispatcher: Passengers left: 428/500
+Dispatcher: Passengers left: 429/500
+Dispatcher: Passengers left: 430/500
+Dispatcher: Passengers left: 431/500
+Dispatcher: Passengers left: 432/500
+Dispatcher: Passengers left: 433/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 434/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 435/500
+Dispatcher: Passengers left: 436/500
+Dispatcher: Passengers left: 437/500
+Dispatcher: Passengers left: 438/500
+Dispatcher: Passengers left: 439/500
+Dispatcher: Passengers left: 440/500
+Dispatcher: Passengers left: 441/500
+Dispatcher: Passengers left: 442/500
+Dispatcher: Passengers left: 443/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 444/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 445/500
+Dispatcher: Passengers left: 446/500
+Dispatcher: Passengers left: 447/500
+Dispatcher: Passengers left: 448/500
+Dispatcher: Passengers left: 449/500
+Dispatcher: Passengers left: 450/500
+Dispatcher: Passengers left: 451/500
+Dispatcher: Passengers left: 452/500
+Dispatcher: Passengers left: 453/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 454/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 455/500
+Dispatcher: Passengers left: 456/500
+Dispatcher: Passengers left: 457/500
+Dispatcher: Passengers left: 458/500
+Dispatcher: Passengers left: 459/500
+Dispatcher: Passengers left: 460/500
+Dispatcher: Passengers left: 461/500
+Dispatcher: Passengers left: 462/500
+Dispatcher: Passengers left: 463/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 464/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 465/500
+Dispatcher: Passengers left: 466/500
+Dispatcher: Passengers left: 467/500
+Dispatcher: Passengers left: 468/500
+Dispatcher: Passengers left: 469/500
+Dispatcher: Passengers left: 470/500
+Dispatcher: Passengers left: 471/500
+Dispatcher: Passengers left: 472/500
+Dispatcher: Passengers left: 473/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 474/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 475/500
+Dispatcher: Passengers left: 476/500
+Dispatcher: Passengers left: 477/500
+Dispatcher: Passengers left: 478/500
+Dispatcher: Passengers left: 479/500
+Dispatcher: Passengers left: 480/500
+Dispatcher: Passengers left: 481/500
+Dispatcher: Passengers left: 482/500
+Dispatcher: Passengers left: 483/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 484/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 485/500
+Dispatcher: Passengers left: 486/500
+Dispatcher: Passengers left: 487/500
+Dispatcher: Passengers left: 488/500
+Dispatcher: Passengers left: 489/500
+Dispatcher: Passengers left: 490/500
+Dispatcher: Passengers left: 491/500
+Dispatcher: Passengers left: 492/500
+Dispatcher: Passengers left: 493/500
+Dispatcher: Received signal PLANE_READY_DEPART
+Dispatcher: Passengers left: 494/500
+Dispatcher: Plane 336538 is ready to depart
+Dispatcher: Passengers left: 495/500
+Dispatcher: Received signal PLANE_READY
+Dispatcher: Plane 336538 is ready
+Dispatcher: Passengers left: 496/500
+Dispatcher: Passengers left: 497/500
+Dispatcher: Passengers left: 498/500
+Dispatcher: Passengers left: 499/500
+Dispatcher: Passengers left: 500/500
+Dispatcher: All passengers left
 Dispatcher: Received signal SIGTERM
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane 29822 is ready
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 1/100
-Dispatcher: Passengers left: 2/100
-Dispatcher: Passengers left: 3/100
-Dispatcher: Passengers left: 4/100
-Dispatcher: Passengers left: 5/100
-Dispatcher: Passengers left: 6/100
-Dispatcher: Passengers left: 7/100
-Dispatcher: Passengers left: 8/100
-Dispatcher: Passengers left: 9/100
-Dispatcher: Passengers left: 10/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 1/500
+Dispatcher: Passengers left: 2/500
+Dispatcher: Passengers left: 3/500
+Dispatcher: Passengers left: 4/500
+Dispatcher: Passengers left: 5/500
+Dispatcher: Passengers left: 6/500
+Dispatcher: Passengers left: 7/500
+Dispatcher: Passengers left: 8/500
+Dispatcher: Passengers left: 9/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 11/100
-Dispatcher: Plane 29822 is ready to depart
-Dispatcher: Plane 29823 is ready
+Dispatcher: Plane 343409 is ready to depart
+Dispatcher: Passengers left: 10/500
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 12/100
-Dispatcher: Passengers left: 13/100
-Dispatcher: Passengers left: 14/100
-Dispatcher: Passengers left: 15/100
-Dispatcher: Passengers left: 16/100
-Dispatcher: Passengers left: 17/100
-Dispatcher: Passengers left: 18/100
-Dispatcher: Passengers left: 19/100
-Dispatcher: Passengers left: 20/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 11/500
+Dispatcher: Passengers left: 12/500
+Dispatcher: Passengers left: 13/500
+Dispatcher: Passengers left: 14/500
+Dispatcher: Passengers left: 15/500
+Dispatcher: Passengers left: 16/500
+Dispatcher: Passengers left: 17/500
+Dispatcher: Passengers left: 18/500
+Dispatcher: Passengers left: 19/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 21/100
-Dispatcher: Plane 29823 is ready to depart
-Dispatcher: Plane 29824 is ready
-Dispatcher: Passengers left: 22/100
-Dispatcher: Passengers left: 23/100
-Dispatcher: Passengers left: 24/100
-Dispatcher: Passengers left: 25/100
+Dispatcher: Plane 343409 is ready to depart
+Dispatcher: Passengers left: 20/500
+Dispatcher: Passengers left: 21/500
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 26/100
-Dispatcher: Passengers left: 27/100
-Dispatcher: Passengers left: 28/100
-Dispatcher: Passengers left: 29/100
-Dispatcher: Passengers left: 30/100
-Dispatcher: Passengers left: 31/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 22/500
+Dispatcher: Passengers left: 23/500
+Dispatcher: Passengers left: 24/500
+Dispatcher: Passengers left: 25/500
+Dispatcher: Passengers left: 26/500
+Dispatcher: Passengers left: 27/500
+Dispatcher: Passengers left: 28/500
+Dispatcher: Passengers left: 29/500
+Dispatcher: Passengers left: 30/500
+Dispatcher: Passengers left: 31/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 29824 is ready to depart
-Dispatcher: Plane 29825 is ready
-Dispatcher: Passengers left: 32/100
+Dispatcher: Passengers left: 32/500
+Dispatcher: Plane 343409 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 33/100
-Dispatcher: Passengers left: 34/100
-Dispatcher: Passengers left: 35/100
-Dispatcher: Passengers left: 36/100
-Dispatcher: Passengers left: 37/100
-Dispatcher: Passengers left: 38/100
-Dispatcher: Passengers left: 39/100
-Dispatcher: Passengers left: 40/100
-Dispatcher: Passengers left: 41/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 33/500
+Dispatcher: Passengers left: 34/500
+Dispatcher: Passengers left: 35/500
+Dispatcher: Passengers left: 36/500
+Dispatcher: Passengers left: 37/500
+Dispatcher: Passengers left: 38/500
+Dispatcher: Passengers left: 39/500
+Dispatcher: Passengers left: 40/500
+Dispatcher: Passengers left: 41/500
+Dispatcher: Passengers left: 42/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 42/100
-Dispatcher: Plane 29825 is ready to depart
-Dispatcher: Plane 29826 is ready
-Dispatcher: Passengers left: 43/100
-Dispatcher: Passengers left: 44/100
+Dispatcher: Passengers left: 43/500
+Dispatcher: Plane 343409 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 45/100
-Dispatcher: Passengers left: 46/100
-Dispatcher: Passengers left: 47/100
-Dispatcher: Passengers left: 48/100
-Dispatcher: Passengers left: 49/100
-Dispatcher: Passengers left: 50/100
-Dispatcher: Passengers left: 51/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 44/500
+Dispatcher: Passengers left: 45/500
+Dispatcher: Passengers left: 46/500
+Dispatcher: Passengers left: 47/500
+Dispatcher: Passengers left: 48/500
+Dispatcher: Passengers left: 49/500
+Dispatcher: Passengers left: 50/500
+Dispatcher: Passengers left: 51/500
+Dispatcher: Passengers left: 52/500
+Dispatcher: Passengers left: 53/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 29826 is ready to depart
-Dispatcher: Passengers left: 52/100
-Dispatcher: Plane 29827 is ready
+Dispatcher: Plane 343409 is ready to depart
+Dispatcher: Passengers left: 54/500
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 53/100
-Dispatcher: Passengers left: 54/100
-Dispatcher: Passengers left: 55/100
-Dispatcher: Passengers left: 56/100
-Dispatcher: Passengers left: 57/100
-Dispatcher: Passengers left: 58/100
-Dispatcher: Passengers left: 59/100
-Dispatcher: Passengers left: 60/100
-Dispatcher: Passengers left: 61/100
-Dispatcher: Passengers left: 62/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 55/500
+Dispatcher: Passengers left: 56/500
+Dispatcher: Passengers left: 57/500
+Dispatcher: Passengers left: 58/500
+Dispatcher: Passengers left: 59/500
+Dispatcher: Passengers left: 60/500
+Dispatcher: Passengers left: 61/500
+Dispatcher: Passengers left: 62/500
+Dispatcher: Passengers left: 63/500
+Dispatcher: Passengers left: 64/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Plane 29827 is ready to depart
-Dispatcher: Passengers left: 63/100
-Dispatcher: Plane 29828 is ready
+Dispatcher: Plane 343409 is ready to depart
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 64/100
-Dispatcher: Passengers left: 65/100
-Dispatcher: Passengers left: 66/100
-Dispatcher: Passengers left: 67/100
-Dispatcher: Passengers left: 68/100
-Dispatcher: Passengers left: 69/100
-Dispatcher: Passengers left: 70/100
-Dispatcher: Passengers left: 71/100
-Dispatcher: Passengers left: 72/100
-Dispatcher: Passengers left: 73/100
+Dispatcher: Plane 343409 is ready
+Dispatcher: Passengers left: 65/500
+Dispatcher: Passengers left: 66/500
+Dispatcher: Passengers left: 67/500
+Dispatcher: Passengers left: 68/500
+Dispatcher: Passengers left: 69/500
+Dispatcher: Passengers left: 70/500
+Dispatcher: Passengers left: 71/500
+Dispatcher: Passengers left: 72/500
+Dispatcher: Passengers left: 73/500
+Dispatcher: Passengers left: 74/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 74/100
-Dispatcher: Plane 29828 is ready to depart
-Dispatcher: Plane 29829 is ready
+Dispatcher: Passengers left: 75/500
+Dispatcher: Plane 343409 is ready to depart
+Dispatcher: Received signal SIGTERM
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 75/100
-Dispatcher: Passengers left: 76/100
-Dispatcher: Passengers left: 77/100
-Dispatcher: Passengers left: 78/100
-Dispatcher: Passengers left: 79/100
-Dispatcher: Passengers left: 80/100
-Dispatcher: Passengers left: 81/100
-Dispatcher: Passengers left: 82/100
-Dispatcher: Passengers left: 83/100
-Dispatcher: Passengers left: 84/100
+Dispatcher: Plane 358340 is ready
+Dispatcher: Passengers left: 1/500
+Dispatcher: Passengers left: 2/500
+Dispatcher: Passengers left: 3/500
+Dispatcher: Passengers left: 4/500
+Dispatcher: Passengers left: 5/500
+Dispatcher: Passengers left: 6/500
+Dispatcher: Passengers left: 7/500
+Dispatcher: Passengers left: 8/500
+Dispatcher: Passengers left: 9/500
+Dispatcher: Passengers left: 10/500
 Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 85/100
-Dispatcher: Plane 29829 is ready to depart
-Dispatcher: Plane 29830 is ready
+Dispatcher: Plane 358340 is ready to depart
+Dispatcher: Passengers left: 11/500
 Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 86/100
-Dispatcher: Passengers left: 87/100
-Dispatcher: Passengers left: 88/100
-Dispatcher: Passengers left: 89/100
-Dispatcher: Passengers left: 90/100
-Dispatcher: Passengers left: 91/100
-Dispatcher: Passengers left: 92/100
-Dispatcher: Passengers left: 93/100
-Dispatcher: Passengers left: 94/100
-Dispatcher: Received signal PLANE_READY_DEPART
-Dispatcher: Passengers left: 95/100
-Dispatcher: Plane 29830 is ready to depart
-Dispatcher: Plane 29831 is ready
-Dispatcher: Received signal PLANE_READY
-Dispatcher: Plane is already in terminal
-Dispatcher: Passengers left: 96/100
-Dispatcher: Passengers left: 97/100
-Dispatcher: Passengers left: 98/100
-Dispatcher: Passengers left: 99/100
-Dispatcher: Passengers left: 100/100
-Dispatcher: All passengers left
+Dispatcher: Plane 358340 is ready
+Dispatcher: Passengers left: 12/500
+Dispatcher: Passengers left: 13/500
+Dispatcher: Passengers left: 14/500
+Dispatcher: Passengers left: 15/500
+Dispatcher: Passengers left: 16/500
+Dispatcher: Passengers left: 17/500
 Dispatcher: Received signal SIGTERM
 Dispatcher: Received signal SIGTERM
