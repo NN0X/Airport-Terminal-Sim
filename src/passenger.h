@@ -24,7 +24,8 @@ struct BaggageInfo
 
 struct TypeInfo
 {
-        pid_t id;
+        int id;
+        pid_t pid;
         bool type;
         bool isVIP;
 };

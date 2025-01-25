@@ -65,7 +65,7 @@ void planeProcess(PlaneProcessArgs args)
         // TODO: run plane tasks here
 
         sigval sig;
-        sig.sival_int = args.id;
+        sig.sival_int = args.pid;
 
         while (true)
         {
@@ -83,8 +83,6 @@ void planeProcess(PlaneProcessArgs args)
 
                 while (true)
                 {
-                        usleep(1000); // WARNING: test
-                        std::cout << "Plane " << args.id << ": waiting for passenger\n";
                         vCout("Plane " + std::to_string(args.id) + ": waiting for passenger\n");
                         while (semop(args.semIDPlanePassengerIn, &DEC_SEM, 1) == -1)
                         {
@@ -137,7 +135,6 @@ void planeProcess(PlaneProcessArgs args)
                                 perror("semctl");
                                 exit(1);
                         }
-
                         if (passengersOnBoard == plane.getMaxPassengers())
                         {
                                 vCout("Plane: Plane is full\n");
@@ -151,9 +148,18 @@ void planeProcess(PlaneProcessArgs args)
                                         perror("semctl");
                                         exit(1);
                                 }
+                                while (semctl(args.semIDStairsCounter, 0, SETVAL, 0) == -1)
+                                {
+                                        if (errno == EINTR)
+                                        {
+                                                continue;
+                                        }
+                                        perror("semctl");
+                                        exit(1);
+                                }
                                 sigqueue(args.pidDispatcher, SIGNAL_PLANE_READY_DEPART, sig);
 
-                                pause(); // wait for signal to go WARNING: check if this is correct
+                                pause(); // wait for signal to go
                                 break;
                         }
                 }

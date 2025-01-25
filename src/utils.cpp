@@ -9,6 +9,7 @@
 #include <string>
 #include <random>
 #include <sys/sem.h>
+#include <fcntl.h> // O_RDONLY, O_WRONLY
 
 #include "utils.h"
 
@@ -138,5 +139,22 @@ void createSubprocess(pid_t &pid, const std::string &name)
                 }
                 vCout("Created process: " + std::to_string(pid) + "\n");
                 vCout("Process name: " + name + "\n");
+        }
+}
+
+void safeFIFOOpen(int &fd, const std::string &name, int flags)
+{
+        fd = open(name.c_str(), flags);
+        if (fd == -1)
+        {
+                if (errno == EINTR)
+                {
+                        safeFIFOOpen(fd, name, flags);
+                }
+                else
+                {
+                        perror("open");
+                        exit(1);
+                }
         }
 }

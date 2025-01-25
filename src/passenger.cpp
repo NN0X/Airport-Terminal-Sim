@@ -17,6 +17,9 @@
 extern sembuf INC_SEM;
 extern sembuf DEC_SEM;
 
+static bool failedBaggageControl = false;
+static bool failedSecurityControl = false;
+
 void passengerSignalHandler(int signum)
 {
         switch (signum)
@@ -26,9 +29,17 @@ void passengerSignalHandler(int signum)
                         break;
                 case SIGNAL_PASSENGER_IS_OVERWEIGHT:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n");
-                        exit(0);
+                        failedBaggageControl = true;
+                        break;
                 case SIGNAL_PASSENGER_IS_DANGEROUS:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n");
+                        failedSecurityControl = true;
+                        break;
+                case SIGNAL_PASSENGER_SKIPPED:
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_SKIPPED\n");
+                        break;
+                case SIGTERM:
+                        vCout("Passenger " + std::to_string(getpid()) + ": Received signal SIGTERM\n");
                         exit(0);
                 default:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received unknown signal\n");
@@ -80,6 +91,16 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("sigaction");
                 exit(1);
         }
+        if (sigaction(SIGNAL_PASSENGER_SKIPPED, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGTERM, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
 
         // TODO: run passenger tasks here
 
@@ -101,12 +122,8 @@ void passengerProcess(PassengerProcessArgs args)
         BaggageInfo baggageInfo;
         baggageInfo.pid = args.pid;
         baggageInfo.weight = passenger.getBaggageWeight();
-        int fd = open(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), O_WRONLY);
-        if (fd == -1)
-        {
-                perror("open");
-                exit(1);
-        }
+        int fd;
+        safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_WRONLY);
         if (write(fd, &baggageInfo, sizeof(baggageInfo)) == -1)
         {
                 perror("write");
@@ -126,20 +143,31 @@ void passengerProcess(PassengerProcessArgs args)
                 exit(1);
         }
 
+        if (failedBaggageControl)
+        {
+                vCout("Passenger: " + std::to_string(args.id) + " failed baggage control\n");
+                exit(0);
+        }
+
         vCout("Passenger: " + std::to_string(args.id) + " released from baggage control\n");
 
         // INFO: passenger goes through security control
 
-        // wait for security control to be ready
+        // FIX: UNDER THIS THERE IS A BUG
         vCout("Passenger: " + std::to_string(args.id) + " waiting for security control\n");
-        if (semop(args.semIDSecurityControlEntrance, &DEC_SEM, 1) == -1)
+        while(semop(args.semIDSecurityControlEntrance, &DEC_SEM, 1) == -1)
         {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
                 perror("semop");
                 exit(1);
         }
 
         TypeInfo typeInfo;
         typeInfo.id = args.id;
+        typeInfo.pid = args.pid;
         typeInfo.type = passenger.getType();
         typeInfo.isVIP = passenger.getIsVip();
         fd = open(fifoNames[FIFO_SECURITY_CONTROL].c_str(), O_WRONLY);
@@ -153,6 +181,17 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("write");
                 exit(1);
         }
+
+        while (semop(args.semIDSecurityControlEntranceWait, &INC_SEM, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+
         close(fd);
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting for security control selector\n");
@@ -160,6 +199,16 @@ void passengerProcess(PassengerProcessArgs args)
         // wait until semIDSecurityControlSelector semaphore number args.id is 1
         sembuf decreaseNthSemaphore = {(uint16_t)args.id, -1, 0};
         while (semop(args.semIDSecurityControlSelector, &decreaseNthSemaphore, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+
+        while (semop(args.semIDSecurityControlSelectorEntranceWait, &INC_SEM, 1) == -1)
         {
                 if (errno == EINTR)
                 {
@@ -177,6 +226,17 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("open");
                 exit(1);
         }
+
+        while (semop(args.semIDSecurityControlSelectorWait, &DEC_SEM, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+
         if (read(fd, &selectedPair.gateIndex, sizeof(selectedPair.gateIndex)) == -1)
         {
                 perror("read");
@@ -193,6 +253,8 @@ void passengerProcess(PassengerProcessArgs args)
                 exit(1);
         }
 
+        // FIX: ABOVE THERE IS A BUG
+
         DangerInfo dangerInfo;
         dangerInfo.pid = args.pid;
         dangerInfo.hasDangerousBaggage = passenger.getHasDangerousBaggage();
@@ -207,6 +269,17 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("write");
                 exit(1);
         }
+
+        while (semop(args.semIDSecurityGatesWait[selectedPair.gateIndex], &INC_SEM, 1) == -1)
+        {
+                if (errno == EINTR)
+                {
+                        continue;
+                }
+                perror("semop");
+                exit(1);
+        }
+
         close(fd);
 
         while (semop(args.semIDSecurityControlOut, &DEC_SEM, 1) == -1)
@@ -217,6 +290,14 @@ void passengerProcess(PassengerProcessArgs args)
                 }
                 perror("semop");
                 exit(1);
+        }
+
+        // FIX: ABOVE THERE IS A BUG
+
+        if (failedSecurityControl)
+        {
+                vCout("Passenger: " + std::to_string(args.id) + " failed security control\n");
+                exit(0);
         }
 
         // INFO: passenger waits for plane to be ready
@@ -230,8 +311,6 @@ void passengerProcess(PassengerProcessArgs args)
                 perror("semop");
                 exit(1);
         }
-
-        //exit(0); // BUG: under this point some processes get stuck
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting at stairs\n");
         while (semop(args.semIDStairsPassengerWait, &DEC_SEM, 1) == -1)

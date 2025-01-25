@@ -27,14 +27,9 @@
 
 // TODO: send sigterm to all processes not just baggage control
 
-// TODO: change counter from signal to semaphore (PASSENGER_LEFT)
-// TODO: change while loop isOK in passenger to semaphore
-
 int totalPassengers;
 
 static std::vector<pid_t> pids(1);
-
-
 
 int main(int argc, char* argv[])
 {
@@ -67,10 +62,16 @@ int main(int argc, char* argv[])
 
         SecurityControlArgs securityControlArgs;
         securityControlArgs.semIDSecurityControlEntrance = semIDs[SEM_SECURITY_CONTROL_ENTRANCE];
+        securityControlArgs.semIDSecurityControlEntranceWait = semIDs[SEM_SECURITY_CONTROL_ENTRANCE_WAIT];
         securityControlArgs.semIDSecurityControlSelector = semIDs[SEM_SECURITY_CONTROL_SELECTOR];
+        securityControlArgs.semIDSecurityControlSelectorEntranceWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_ENTRANCE_WAIT];
+        securityControlArgs.semIDSecurityControlSelectorWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_WAIT];
         securityControlArgs.semIDSecurityGate0 = semIDs[SEM_SECURITY_GATE_0];
         securityControlArgs.semIDSecurityGate1 = semIDs[SEM_SECURITY_GATE_1];
         securityControlArgs.semIDSecurityGate2 = semIDs[SEM_SECURITY_GATE_2];
+        securityControlArgs.semIDSecurityGate0Wait = semIDs[SEM_SECURITY_GATE_0_WAIT];
+        securityControlArgs.semIDSecurityGate1Wait = semIDs[SEM_SECURITY_GATE_1_WAIT];
+        securityControlArgs.semIDSecurityGate2Wait = semIDs[SEM_SECURITY_GATE_2_WAIT];
         securityControlArgs.semIDSecurityControlOut = semIDs[SEM_SECURITY_CONTROL_OUT];
 
         StairsArgs stairsArgs;
@@ -104,10 +105,16 @@ int main(int argc, char* argv[])
                 passengerArgs.semIDBaggageControlEntrance = semIDs[SEM_BAGGAGE_CONTROL_ENTRANCE];
                 passengerArgs.semIDBaggageControlOut = semIDs[SEM_BAGGAGE_CONTROL_OUT];
                 passengerArgs.semIDSecurityControlEntrance = semIDs[SEM_SECURITY_CONTROL_ENTRANCE];
+                passengerArgs.semIDSecurityControlEntranceWait = semIDs[SEM_SECURITY_CONTROL_ENTRANCE_WAIT];
                 passengerArgs.semIDSecurityControlSelector = semIDs[SEM_SECURITY_CONTROL_SELECTOR];
+                passengerArgs.semIDSecurityControlSelectorEntranceWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_ENTRANCE_WAIT];
+                passengerArgs.semIDSecurityControlSelectorWait = semIDs[SEM_SECURITY_CONTROL_SELECTOR_WAIT];
                 passengerArgs.semIDSecurityGates[0] = semIDs[SEM_SECURITY_GATE_0];
                 passengerArgs.semIDSecurityGates[1] = semIDs[SEM_SECURITY_GATE_1];
                 passengerArgs.semIDSecurityGates[2] = semIDs[SEM_SECURITY_GATE_2];
+                passengerArgs.semIDSecurityGatesWait[0] = semIDs[SEM_SECURITY_GATE_0_WAIT];
+                passengerArgs.semIDSecurityGatesWait[1] = semIDs[SEM_SECURITY_GATE_1_WAIT];
+                passengerArgs.semIDSecurityGatesWait[2] = semIDs[SEM_SECURITY_GATE_2_WAIT];
                 passengerArgs.semIDSecurityControlOut = semIDs[SEM_SECURITY_CONTROL_OUT];
                 passengerArgs.semIDStairsPassengerIn = semIDs[SEM_STAIRS_PASSENGER_IN];
                 passengerArgs.semIDStairsPassengerWait = semIDs[SEM_STAIRS_PASSENGER_WAIT];

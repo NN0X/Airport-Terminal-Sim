@@ -96,6 +96,15 @@ int baggageControl(BaggageControlArgs args)
                 {
                         vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n");
                         kill(baggageInfo.pid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
+                        while (semop(args.semIDBaggageControlOut, &INC_SEM, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
                         // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
                         // and then event handler sending signal to passenger
                 }

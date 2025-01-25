@@ -7,6 +7,8 @@
 #include <signal.h>
 #include <cstdint>
 
+#define usleep(x) ;
+
 #define VERBOSE 0
 
 #define PLANE_PLACES 10
@@ -21,7 +23,7 @@
 #define STAIRS_MAX_ALLOWED_OCCUPANCY PLANE_PLACES / 2
 
 #define SEM_INIT_VALUE 0
-#define SEM_NUMBER 18
+#define SEM_NUMBER 23
 
 enum Colors
 {
@@ -77,9 +79,15 @@ enum Semaphores
         SEM_BAGGAGE_CONTROL_ENTRANCE = 0,
         SEM_BAGGAGE_CONTROL_OUT,
         SEM_SECURITY_CONTROL_ENTRANCE,
+        SEM_SECURITY_CONTROL_ENTRANCE_WAIT,
+        SEM_SECURITY_CONTROL_SELECTOR_ENTRANCE_WAIT,
+        SEM_SECURITY_CONTROL_SELECTOR_WAIT,
         SEM_SECURITY_GATE_0,
         SEM_SECURITY_GATE_1,
         SEM_SECURITY_GATE_2,
+        SEM_SECURITY_GATE_0_WAIT,
+        SEM_SECURITY_GATE_1_WAIT,
+        SEM_SECURITY_GATE_2_WAIT,
         SEM_SECURITY_CONTROL_OUT,
         SEM_STAIRS_PASSENGER_IN,
         SEM_STAIRS_PASSENGER_WAIT,
@@ -98,6 +106,7 @@ enum Signals
         SIGNAL_PASSENGER_IS_OVERWEIGHT = 35, // INFO: signals baggage control that passenger is overweight [baggageControl -> passenger]
         SIGNAL_PASSENGER_IS_DANGEROUS, // INFO: signals passenger that he has dangerous baggage [secControl -> passenger]
         SIGNAL_PASSENGER_LEFT_STAIRS, // INFO: signals stairs that passenger left stairs [stairs -> stairs]
+        SIGNAL_PASSENGER_SKIPPED, // INFO: signals passenger that he was skipped [secControl -> passenger]
         SIGNAL_STAIRS_OPEN, // INFO: signals stairs that stairs are open [dispatcher -> stairs]
         SIGNAL_STAIRS_CLOSE, // INFO: signals stairs that stairs are closed [dispatcher -> stairs]
         SIGNAL_PLANE_RECEIVE, // INFO: signals plane that it can receive passengers [dispatcher -> plane]
@@ -123,5 +132,13 @@ void vCout(const std::string &msg, int color = 0);
 
 void createSubprocesses(size_t n, std::vector<pid_t> &pids, const std::vector<std::string> &names);
 void createSubprocess(pid_t &pid, const std::string &name);
+
+void safeFIFOOpen(int &fd, const std::string &name, int flags);
+void safeFIFOWrite(int fd, const void *buf, size_t size);
+void safeFIFORead(int fd, void *buf, size_t size);
+void safeFIFOClose(int fd);
+
+void safeSemop(int semID, struct sembuf *sops, size_t nsops);
+void safeSemctl(int semID, int semnum, int cmd, union semun arg);
 
 #endif // UTILS_H

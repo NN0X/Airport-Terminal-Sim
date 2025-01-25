@@ -81,7 +81,6 @@ int stairs(StairsArgs args)
                 while (stairsOpen)
                 {
                         usleep(1000); // WARNING: test
-                        std::cout << "Stairs: Waiting for passengers\n";
                         while (semop(args.semIDStairsPassengerIn, &DEC_SEM, 1) == -1)
                         {
                                 if (errno == EINTR)
@@ -136,16 +135,6 @@ int stairs(StairsArgs args)
                         if (stairsOccupancy + passengersOnBoard == PLANE_PLACES)
                         {
                                 vCout("Stairs: Plane is full\n");
-                                // set semaphore to 0
-                                while (semctl(args.semIDStairsCounter, 0, SETVAL, 0) == -1)
-                                {
-                                        if (errno == EINTR)
-                                        {
-                                                continue;
-                                        }
-                                        perror("semctl");
-                                        exit(1);
-                                }
                                 break;
                         }
                         if (stairsOccupancy == STAIRS_MAX_ALLOWED_OCCUPANCY)

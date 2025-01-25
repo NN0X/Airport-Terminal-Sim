@@ -13,9 +13,12 @@ struct PassengerProcessArgs
         int semIDBaggageControlEntrance;
         int semIDBaggageControlOut;
         int semIDSecurityControlEntrance;
+        int semIDSecurityControlEntranceWait;
         int semIDSecurityControlSelector;
+        int semIDSecurityControlSelectorEntranceWait;
         int semIDSecurityControlSelectorWait;
         int semIDSecurityGates[3];
+        int semIDSecurityGatesWait[3];
         int semIDSecurityControlOut;
         int semIDStairsPassengerIn;
         int semIDStairsPassengerWait;
@@ -46,10 +49,16 @@ struct BaggageControlArgs
 struct SecurityControlArgs
 {
         int semIDSecurityControlEntrance;
+        int semIDSecurityControlEntranceWait;
         int semIDSecurityControlSelector;
+        int semIDSecurityControlSelectorEntranceWait;
+        int semIDSecurityControlSelectorWait;
         int semIDSecurityGate0;
         int semIDSecurityGate1;
         int semIDSecurityGate2;
+        int semIDSecurityGate0Wait;
+        int semIDSecurityGate1Wait;
+        int semIDSecurityGate2Wait;
         int semIDSecurityControlOut;
 };
 
@@ -61,6 +70,7 @@ struct SecuritySelectorArgs
 struct SecurityGateArgs
 {
         int semIDSecurityGate;
+        int semIDSecurityGateWait;
         int semIDSecurityControlOut;
 };
 

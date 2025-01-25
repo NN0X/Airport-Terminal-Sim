@@ -150,13 +150,17 @@ void signalSkipped(int selected)
         {
                 vCout("Security control: Passenger " + std::to_string(secControlQueue[i].id) + " skipped\n");
                 // send signal to passenger
+                kill(secControlQueue[i].pid, SIGNAL_PASSENGER_SKIPPED);
         }
         secControlMutex.unlock();
 }
 
 void *gateSelectorThread(void *args)
 {
-        int semIDSecuritySelector = *((int *)args);
+        int *selectorArgs = (int *)args;
+        int semIDSecuritySelector = selectorArgs[0];
+        int semIDSecuritySelectorEntranceWait = selectorArgs[1];
+        int semIDSecuritySelectorWait = selectorArgs[2];
 
         while (true)
         {
@@ -192,6 +196,16 @@ void *gateSelectorThread(void *args)
                         exit(1);
                 }
 
+                while (semop(semIDSecuritySelectorEntranceWait, &DEC_SEM, 1) == -1)
+                {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
+                        perror("semop");
+                        exit(1);
+                }
+
                 vCout("Security selector: Waiting for passenger to read from fifo\n");
                 int fd = open(fifoNames[FIFO_SECURITY_SELECTOR].c_str(), O_WRONLY);
                 if (fd == -1)
@@ -204,7 +218,22 @@ void *gateSelectorThread(void *args)
                         perror("write");
                         exit(1);
                 }
+                while (semop(semIDSecuritySelectorWait, &INC_SEM, 1) == -1)
+                {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
+                        perror("semop");
+                        exit(1);
+                }
+
                 close(fd);
+
+                std::cout << "Security selector: Passenger " << typeInfo.id << " selected gate " << selectedPair.gateIndex << "\n";
+                secControlMutex.lock();
+                std::cout << "Security selector: Queue size: " << secControlQueue.size() << "\n";
+                secControlMutex.unlock();
 
                 vCout("Security selector: waiting " + std::to_string(SECURITY_SELECTOR_DELAY) + " ms\n");
                 usleep(SECURITY_SELECTOR_DELAY * 1000);
@@ -219,8 +248,12 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
         while (true)
         {
                 // tell passenger to enter
-                if (semop(args.semIDSecurityGate, &INC_SEM, 1) == -1)
+                while (semop(args.semIDSecurityGate, &INC_SEM, 1) == -1)
                 {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
                         perror("semop");
                         exit(1);
                 }
@@ -231,6 +264,17 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
                         perror("open");
                         exit(1);
                 }
+
+                while (semop(args.semIDSecurityGateWait, &DEC_SEM, 1) == -1)
+                {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
+                        perror("semop");
+                        exit(1);
+                }
+
                 if (read(fd, &dangerInfo, sizeof(dangerInfo)) == -1)
                 {
                         perror("read");
@@ -243,6 +287,15 @@ void gateThreadTasks(int gate, SecurityGateArgs args)
                 {
                         vCout("Security gate " + std::to_string(gate) + ": Passenger " + std::to_string(dangerInfo.pid) + " has dangerous baggage\n");
                         kill(dangerInfo.pid, SIGNAL_PASSENGER_IS_DANGEROUS);
+                        while (semop(args.semIDSecurityControlOut, &INC_SEM, 1) == -1)
+                        {
+                                if (errno == EINTR)
+                                {
+                                        continue;
+                                }
+                                perror("semop");
+                                exit(1);
+                        }
                 }
                 else
                 {
@@ -355,7 +408,9 @@ int secControl(SecurityControlArgs args)
         // create thread for gate selector
         pthread_t gateSelector;
 
-        if (pthread_create(&gateSelector, NULL, gateSelectorThread, &args.semIDSecurityControlSelector) != 0)
+        int selectorArgs[] = {args.semIDSecurityControlSelector, args.semIDSecurityControlSelectorEntranceWait, args.semIDSecurityControlSelectorWait};
+
+        if (pthread_create(&gateSelector, NULL, gateSelectorThread, (void *)selectorArgs) != 0)
         {
                 perror("pthread_create");
                 exit(1);
@@ -364,9 +419,9 @@ int secControl(SecurityControlArgs args)
         pthread_t gate0;
         pthread_t gate1;
         pthread_t gate2;
-        SecurityGateArgs gateArgs0 = {args.semIDSecurityGate0, args.semIDSecurityControlOut};
-        SecurityGateArgs gateArgs1 = {args.semIDSecurityGate1, args.semIDSecurityControlOut};
-        SecurityGateArgs gateArgs2 = {args.semIDSecurityGate2, args.semIDSecurityControlOut};
+        SecurityGateArgs gateArgs0 = {args.semIDSecurityGate0, args.semIDSecurityGate0Wait, args.semIDSecurityControlOut};
+        SecurityGateArgs gateArgs1 = {args.semIDSecurityGate1, args.semIDSecurityGate1Wait, args.semIDSecurityControlOut};
+        SecurityGateArgs gateArgs2 = {args.semIDSecurityGate2, args.semIDSecurityGate2Wait, args.semIDSecurityControlOut};
 
         if (pthread_create(&gate0, NULL, gate0Thread, &gateArgs0) != 0)
         {
@@ -387,10 +442,13 @@ int secControl(SecurityControlArgs args)
         while (true)
         {
                 // receive passengers and add them to gateSelector queue
-
                 // tell passenger to enter
-                if (semop(args.semIDSecurityControlEntrance, &INC_SEM, 1) == -1)
+                while (semop(args.semIDSecurityControlEntrance, &INC_SEM, 1) == -1)
                 {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
                         perror("semop");
                         exit(1);
                 }
@@ -402,6 +460,16 @@ int secControl(SecurityControlArgs args)
                         exit(1);
                 }
                 TypeInfo typeInfo;
+                while (semop(args.semIDSecurityControlEntranceWait, &DEC_SEM, 1) == -1)
+                {
+                        if (errno == EINTR)
+                        {
+                                continue;
+                        }
+                        perror("semop");
+                        exit(1);
+                }
+
                 if (read(fd, &typeInfo, sizeof(typeInfo)) == -1)
                 {
                         perror("read");
