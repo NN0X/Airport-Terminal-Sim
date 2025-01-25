@@ -191,14 +191,19 @@ void passengerProcess(PassengerProcessArgs args)
 
         vCout("Passenger: " + std::to_string(args.id) + " waiting at stairs\n");
 
+        std::cout << "Passenger: " << args.id << " waiting for stairs\n";
+
         safeSemop(args.semIDStairsPassengerWait, &DEC_SEM, 1);
 
         vCout("Passenger: " + std::to_string(args.id) + " entering plane\n");
 
         safeSemop(args.semIDPlanePassengerIn, &INC_SEM, 1);
 
+        std::cout << "Passenger: " << args.id << " waiting for plane\n";
+
         safeSemop(args.semIDPlanePassengerWait, &DEC_SEM, 1);
 
+        std::cout << "Passenger: " << args.id << " entered plane\n";
         vCout("Passenger: " + std::to_string(args.id) + " entered plane\n");
 
         kill(args.pidStairs, SIGNAL_PASSENGER_LEFT_STAIRS);

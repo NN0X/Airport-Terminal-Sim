@@ -7,18 +7,18 @@
 #include <signal.h>
 #include <cstdint>
 
-#define usleep(x) ;
+//#define usleep(x) ;
 
 #define VERBOSE 0
 
 #define PLANE_PLACES 10
 #define PLANE_MIN_TIME 10 // in sec
-#define PLANE_MAX_TIME 1000 // in sec
+#define PLANE_MAX_TIME 100 // in sec
 #define PLANE_MAX_ALLOWED_BAGGAGE_WEIGHT 75 // kg
 
-#define SECURITY_SELECTOR_DELAY 100 // in ms
-#define SECURITY_GATE_MAX_DELAY 500 // in ms
-#define SECURITY_GATE_MIN_DELAY 200 // in ms
+#define SECURITY_SELECTOR_DELAY 10 // in ms
+#define SECURITY_GATE_MAX_DELAY 50 // in ms
+#define SECURITY_GATE_MIN_DELAY 20 // in ms
 
 #define STAIRS_MAX_ALLOWED_OCCUPANCY PLANE_PLACES / 2
 

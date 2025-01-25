@@ -9,8 +9,6 @@
 #include "plane.h"
 #include "utils.h"
 
-static bool stairsOpen = false;
-
 extern sembuf INC_SEM;
 extern sembuf DEC_SEM;
 
@@ -20,10 +18,6 @@ void stairsSignalHandler(int signum)
         {
         case SIGNAL_OK:
                 vCout("Stairs: Received signal OK\n");
-                break;
-        case SIGNAL_STAIRS_CLOSE:
-                vCout("Stairs: Received signal STAIRS_CLOSE\n");
-                stairsOpen = false;
                 break;
         case SIGNAL_PASSENGER_LEFT_STAIRS:
                 vCout("Stairs: Received signal PASSENGER_LEFT_STAIRS\n");
@@ -55,11 +49,6 @@ int stairs(StairsArgs args)
                 perror("sigaction");
                 exit(1);
         }
-        if (sigaction(SIGNAL_STAIRS_CLOSE, &sa, NULL) == -1)
-        {
-                perror("sigaction");
-                exit(1);
-        }
         if (sigaction(SIGTERM, &sa, NULL) == -1)
         {
                 perror("sigaction");
@@ -68,11 +57,10 @@ int stairs(StairsArgs args)
 
         while (true)
         {
-                stairsOpen = true;
                 safeSemop(args.semIDStairsWait, &DEC_SEM, 1);
-                while (stairsOpen)
+                while (true)
                 {
-                        usleep(1000); // WARNING: test
+                        //usleep(1000); // WARNING: test
                         safeSemop(args.semIDStairsPassengerIn, &DEC_SEM, 1);
                         safeSemop(args.semIDStairsPassengerWait, &INC_SEM, 1);
 
