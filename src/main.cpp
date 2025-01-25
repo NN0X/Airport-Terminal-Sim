@@ -19,17 +19,44 @@
 #include "passenger.h"
 #include "baggageControl.h"
 #include "secControl.h"
-#include "events.h"
 #include "dispatcher.h"
 #include "stairs.h"
 #include "utils.h"
 #include "args.h"
 
-// TODO: send sigterm to all processes not just baggage control
-
 int totalPassengers;
 
 static std::vector<pid_t> pids(1);
+static std::vector<pid_t> planePIDs;
+
+static bool mainLoop = true;
+
+void mainSignalHandler(int signum)
+{
+        switch (signum)
+        {
+        case SIGNAL_OK:
+                vCout("Main: Received signal OK\n", NONE, LOG_MAIN);
+                break;
+        case SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN:
+                for (size_t i = 0; i < pids.size(); i++)
+                {
+                        kill(pids[i], SIGTERM);
+                }
+                for (size_t i = 0; i < planePIDs.size(); i++)
+                {
+                        kill(planePIDs[i], SIGTERM);
+                }
+                mainLoop = false;
+                break;
+        case SIGTERM:
+                vCout("Main: Received signal SIGTERM\n", NONE, LOG_MAIN);
+                break;
+        default:
+                vCout("Main: Received unknown signal\n", NONE, LOG_MAIN);
+                break;
+        }
+}
 
 int main(int argc, char* argv[])
 {
@@ -39,9 +66,27 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        pids[PROCESS_MAIN] = getpid();
+        struct sigaction sa;
+        sa.sa_handler = mainSignalHandler;
+        sigemptyset(&sa.sa_mask);
+        sa.sa_flags = 0;
+        if (sigaction(SIGNAL_OK, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGTERM, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
 
-        // main + secControl + dispatcher + n passengers + n planes
+        pids[PROCESS_MAIN] = getpid();
 
         size_t numPassengers = std::stoul(argv[1]);
         size_t numPlanes = std::stoul(argv[2]);
@@ -98,6 +143,7 @@ int main(int argc, char* argv[])
                 vCout("Main process: " + std::to_string(currentPID) + "\n", NONE, LOG_MAIN);
 
                 PassengerProcessArgs passengerArgs;
+                passengerArgs.pidMain = currentPID;
                 passengerArgs.pidDispatcher = pids[PROCESS_DISPATCHER];
                 passengerArgs.pidStairs = pids[PROCESS_STAIRS];
                 passengerArgs.pidSecurityControl = pids[PROCESS_SECURITY_CONTROL];
@@ -134,7 +180,7 @@ int main(int argc, char* argv[])
                 std::vector<uint64_t> delays(numPassengers);
                 genRandomVector(delays, 0, MAX_PASSENGER_DELAY);
 
-                initPlanes(numPlanes, planeArgs);
+                planePIDs = initPlanes(numPlanes, planeArgs);
 
                 createSubprocesses(1, pids, {"spawnPassengers"});
                 if (getpid() != currentPID)
@@ -142,17 +188,12 @@ int main(int argc, char* argv[])
                         spawnPassengers(numPassengers, delays, passengerArgs);
                 }
 
-                while (true)
+                while (mainLoop)
                 {
-                        // INFO: wait for signal to exit
                         char c = getc(stdin);
                         if (c == 'q')
                         {
-                                for (size_t i = 1; i < pids.size(); i++)
-                                {
-                                        kill(pids[i], SIGTERM);
-                                }
-                                break;
+                                kill(0, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
                         }
                         else if (c == 'p')
                         {
@@ -160,23 +201,17 @@ int main(int argc, char* argv[])
                                 vCout("Main process: Forced plane depart\n", NONE, LOG_MAIN);
                         }
                 }
-                // INFO: cleanup
 
-                // delete semaphores
                 for (size_t i = 0; i < semIDs.size(); i++)
                 {
-                        if (semctl(semIDs[i], 0, IPC_RMID) == -1)
-                        {
-                                perror("semctl");
-                                exit(1);
-                        }
+                        semctl(semIDs[i], 0, IPC_RMID);
                 }
-                // delete fifo
-                if (unlink("baggageControlFIFO") == -1)
+
+                for (size_t i = 0; i < FIFO_SECURITY_GATE_2 + 1; i++)
                 {
-                        perror("unlink");
-                        exit(1);
+                        unlink(fifoNames[i].c_str());
                 }
+
                 vCout("Main process: Exiting\n", NONE, LOG_MAIN);
         }
         else if (currentPID == pids[PROCESS_BAGGAGE_CONTROL])

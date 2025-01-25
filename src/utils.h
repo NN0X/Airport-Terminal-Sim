@@ -7,7 +7,10 @@
 #include <signal.h>
 #include <cstdint>
 
-#define VERBOSE 1
+#define VERBOSE true
+
+#define WORST_CASE_SCENARIO true
+#define PASSENGER_MAX_SKIPPED 3
 
 #define PLANE_PLACES 10
 #define PLANE_MIN_TIME 10 // in sec
@@ -23,6 +26,9 @@
 #define SEM_INIT_VALUE 0
 #define SEM_NUMBER 24
 
+#define PASSENGER_GETS_AGGRESSIVE_BAGGAGE_PROBABILITY 0.01
+#define PASSENGER_GETS_AGGRESSIVE_SECURITY_PROBABILITY 0.05
+
 enum Colors
 {
         NONE = 0,
@@ -32,6 +38,7 @@ enum Colors
         BLUE,
         MAGENTA,
         CYAN,
+        ORANGE,
 };
 
 const std::string colors[] = {
@@ -42,6 +49,7 @@ const std::string colors[] = {
         "\033[34m",
         "\033[35m",
         "\033[36m",
+        "\033[91m",
 };
 
 enum ProcessTypes
@@ -110,6 +118,7 @@ enum Signals
         SIGNAL_PLANE_READY,
         SIGNAL_PLANE_READY_DEPART,
         SIGNAL_DISPATCHER_PLANE_FORCED_DEPART,
+        SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN,
         SIGNAL_OK,
 };
 
@@ -123,13 +132,6 @@ enum LOGS
         LOG_DISPATCHER,
         LOG_PLANE,
         LOG_MAIN,
-};
-
-enum EventSignals
-{
-        TRIGGER_AGRESSIVE = SIGNAL_OK + 1, // INFO: signals event handler that passenger is aggressive [passenger -> eventHandler]
-        TRIGGER_DANGEROUS, // INFO: signals event handler that passenger has dangerous baggage [secControl -> eventHandler]
-        TRIGGER_OVERWEIGHT, // INFO: signals event handler that passenger is overweight [baggageControl -> eventHandler]
 };
 
 std::vector<int> initSemaphores(int permissions, size_t numPassengers);

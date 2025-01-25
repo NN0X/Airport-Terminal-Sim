@@ -1,0 +1,1611 @@
+Security control: waiting for passenger
+Security gate 2: Waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 1: Waiting for passenger
+Security control: Received passenger 0
+Security control: waiting for passenger
+Security selector: Selected passenger 0 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 37 ms
+Security control: Received passenger 1
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 1 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security control: Received passenger 2
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 2 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 26 ms
+Security control: Received passenger 3
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 3 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 4
+Security control: waiting for passenger
+Security selector: Selected passenger 4 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 32 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 5
+Security control: waiting for passenger
+Security selector: Selected passenger 5 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 34 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 6
+Security control: waiting for passenger
+Security selector: Selected passenger 6 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 34 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 7
+Security control: waiting for passenger
+Security selector: Selected passenger 7 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 47 ms
+Security control: Received passenger 8
+Security control: waiting for passenger
+Security selector: Selected passenger 8 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 9
+Security control: waiting for passenger
+Security selector: Selected passenger 9 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 10
+Security control: waiting for passenger
+Security selector: Selected passenger 10 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 50 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 11
+Security control: waiting for passenger
+Security control: Received passenger 12
+Security control: waiting for passenger
+Security selector: Selected passenger 11 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security control: Received passenger 13
+Security control: waiting for passenger
+Security selector: Selected passenger 12 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 13 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 39 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 14
+Security control: waiting for passenger
+Security selector: Selected passenger 14 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 15
+Security control: waiting for passenger
+Security selector: Selected passenger 15 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 16
+Security control: waiting for passenger
+Security selector: Selected passenger 16 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security control: Received passenger 17
+Security control: waiting for passenger
+Security selector: Selected passenger 17 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 18
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 39 ms
+Security selector: Selected passenger 18 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 30 ms
+Security control: Received passenger 19
+Security control: waiting for passenger
+Security selector: Selected passenger 19 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 20
+Security control: waiting for passenger
+Security selector: Selected passenger 20 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 45 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 21
+Security control: waiting for passenger
+Security selector: Selected passenger 21 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 43 ms
+Security control: Received passenger 22
+Security control: waiting for passenger
+Security control: Received passenger 23
+Security control: waiting for passenger
+Security selector: Selected passenger 22 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 23 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 26 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 27 ms
+Security control: Received passenger 24
+Security control: waiting for passenger
+Security selector: Selected passenger 24 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: Waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 30 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 25
+Security control: waiting for passenger
+Security selector: Selected passenger 25 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 25 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 26
+Security control: waiting for passenger
+Security control: Received passenger 27
+Security control: waiting for passenger
+Security selector: Selected passenger 26 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security selector: Selected passenger 27 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 23 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 28
+Security control: waiting for passenger
+Security selector: Selected passenger 28 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 25 ms
+Security control: Received passenger 29
+Security control: waiting for passenger
+Security selector: Selected passenger 29 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 30
+Security control: waiting for passenger
+Security selector: Selected passenger 30 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 39 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 25 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 31
+Security control: waiting for passenger
+Security gate 1: Waiting for passenger
+Security selector: Selected passenger 31 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 32
+Security control: waiting for passenger
+Security selector: Selected passenger 32 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 33
+Security control: waiting for passenger
+Security selector: Selected passenger 33 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 43 ms
+Security control: Received passenger 34
+Security control: waiting for passenger
+Security selector: Selected passenger 34 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 41 ms
+Security control: Received passenger 35
+Security control: waiting for passenger
+Security selector: Selected passenger 35 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 25 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 36
+Security control: waiting for passenger
+Security selector: Selected passenger 36 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 37
+Security control: waiting for passenger
+Security selector: Selected passenger 37 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 49 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 38
+Security control: waiting for passenger
+Security selector: Selected passenger 38 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 49 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 39
+Security control: waiting for passenger
+Security selector: Selected passenger 39 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 21 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 40
+Security control: waiting for passenger
+Security selector: Selected passenger 40 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 41
+Security control: waiting for passenger
+Security selector: Selected passenger 41 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security control: Received passenger 42
+Security control: waiting for passenger
+Security selector: Selected passenger 42 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 44 ms
+Security control: Received passenger 43
+Security control: waiting for passenger
+Security selector: Selected passenger 43 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 44
+Security control: waiting for passenger
+Security selector: Selected passenger 44 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 45
+Security control: waiting for passenger
+Security selector: Selected passenger 45 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 24 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 46
+Security control: waiting for passenger
+Security selector: Selected passenger 46 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 39 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 47
+Security control: waiting for passenger
+Security selector: Selected passenger 47 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 48
+Security control: waiting for passenger
+Security selector: Selected passenger 48 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 48 ms
+Security control: Received passenger 49
+Security control: waiting for passenger
+Security selector: Selected passenger 49 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 50
+Security control: waiting for passenger
+Security selector: Selected passenger 50 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 26 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 37 ms
+Security gate 1: Waiting for passenger
+Security gate 0: Waiting for passenger
+Security control: Received passenger 51
+Security control: waiting for passenger
+Security selector: Selected passenger 51 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security control: Received passenger 52
+Security control: waiting for passenger
+Security selector: Selected passenger 52 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 47 ms
+Security control: Received passenger 53
+Security control: waiting for passenger
+Security control: Received passenger 54
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 53 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 38 ms
+Security selector: Selected passenger 54 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 55
+Security control: waiting for passenger
+Security selector: Selected passenger 55 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 44 ms
+Security control: Received passenger 56
+Security control: waiting for passenger
+Security selector: Selected passenger 56 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 43 ms
+Security control: Received passenger 57
+Security control: waiting for passenger
+Security selector: Selected passenger 57 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 39 ms
+Security control: Received passenger 58
+Security control: waiting for passenger
+Security selector: Selected passenger 58 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 24 ms
+Security control: Received passenger 59
+Security control: waiting for passenger
+Security selector: Selected passenger 59 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 60
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 36 ms
+Security selector: Selected passenger 60 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 27 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 61
+Security control: waiting for passenger
+Security selector: Selected passenger 61 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 26 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 62
+Security control: waiting for passenger
+Security selector: Selected passenger 62 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 47 ms
+Security control: Received passenger 63
+Security control: waiting for passenger
+Security selector: Selected passenger 63 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 64
+Security control: waiting for passenger
+Security selector: Selected passenger 64 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 65
+Security control: waiting for passenger
+Security selector: Selected passenger 65 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 32 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 66
+Security control: waiting for passenger
+Security selector: Selected passenger 66 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 43 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 67
+Security control: waiting for passenger
+Security control: Received passenger 68
+Security control: waiting for passenger
+Security selector: Selected passenger 67 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 50 ms
+Security selector: Selected passenger 68 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 45 ms
+Security control: Received passenger 69
+Security control: waiting for passenger
+Security selector: Selected passenger 69 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security control: Received passenger 70
+Security control: waiting for passenger
+Security selector: Selected passenger 70 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 28 ms
+Security control: Received passenger 71
+Security control: waiting for passenger
+Security selector: Selected passenger 71 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 30 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 72
+Security control: waiting for passenger
+Security selector: Selected passenger 72 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 39 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 73
+Security control: waiting for passenger
+Security selector: Selected passenger 73 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 74
+Security control: waiting for passenger
+Security selector: Selected passenger 74 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 44 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 75
+Security control: waiting for passenger
+Security selector: Selected passenger 75 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 24 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 76
+Security control: waiting for passenger
+Security selector: Selected passenger 76 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 77
+Security control: waiting for passenger
+Security selector: Selected passenger 77 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 48 ms
+Security control: Received passenger 78
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 78 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 79
+Security control: waiting for passenger
+Security selector: Selected passenger 79 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 22 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 80
+Security control: waiting for passenger
+Security selector: Selected passenger 80 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 81
+Security control: waiting for passenger
+Security selector: Selected passenger 81 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 21 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 82
+Security control: waiting for passenger
+Security selector: Selected passenger 82 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 83
+Security control: waiting for passenger
+Security selector: Selected passenger 83 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 38 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 84
+Security control: waiting for passenger
+Security selector: Selected passenger 84 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 32 ms
+Security control: Received passenger 85
+Security control: waiting for passenger
+Security selector: Selected passenger 85 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 28 ms
+Security control: Received passenger 86
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 86 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 29 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 87
+Security control: waiting for passenger
+Security selector: Selected passenger 87 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 27 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 88
+Security control: waiting for passenger
+Security selector: Selected passenger 88 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security control: Received passenger 89
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 89 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 90
+Security control: waiting for passenger
+Security selector: Selected passenger 90 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security control: Received passenger 91
+Security control: waiting for passenger
+Security control: Received passenger 92
+Security control: waiting for passenger
+Security selector: Selected passenger 91 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 92 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 32 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 93
+Security control: waiting for passenger
+Security selector: Selected passenger 93 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 94
+Security control: waiting for passenger
+Security selector: Selected passenger 94 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 95
+Security control: waiting for passenger
+Security selector: Selected passenger 95 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 47 ms
+Security control: Received passenger 96
+Security control: waiting for passenger
+Security selector: Selected passenger 96 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 45 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 97
+Security control: waiting for passenger
+Security selector: Selected passenger 97 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 48 ms
+Security control: Received passenger 98
+Security control: waiting for passenger
+Security selector: Selected passenger 98 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 41 ms
+Security control: Received passenger 99
+Security control: waiting for passenger
+Security selector: Selected passenger 99 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 24 ms
+Security control: Received signal SIGTERM
+Security control: Received signal SIGTERM
+Security gate 0: Waiting for passenger
+Security gate 1: Waiting for passenger
+Security control: waiting for passenger
+Security gate 2: Waiting for passenger
+Security control: Received passenger 0
+Security control: waiting for passenger
+Security selector: Selected passenger 0 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 38 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 1
+Security control: waiting for passenger
+Security selector: Selected passenger 1 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 29 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 2
+Security control: waiting for passenger
+Security selector: Selected passenger 2 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 25 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 3
+Security control: waiting for passenger
+Security selector: Selected passenger 3 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security control: Received passenger 4
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 4 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 50 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 5
+Security control: waiting for passenger
+Security selector: Selected passenger 5 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 29 ms
+Security control: Received passenger 6
+Security control: waiting for passenger
+Security selector: Selected passenger 6 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 48 ms
+Security control: Received passenger 7
+Security control: waiting for passenger
+Security selector: Selected passenger 7 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 29 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 8
+Security control: waiting for passenger
+Security selector: Selected passenger 8 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 46 ms
+Security control: Received passenger 9
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 9 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 40 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 10
+Security control: waiting for passenger
+Security selector: Selected passenger 10 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 11
+Security control: waiting for passenger
+Security control: Received passenger 12
+Security control: waiting for passenger
+Security selector: Selected passenger 12 for gate 0
+Security control: Passenger 11 skipped
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 30 ms
+Security selector: Selected passenger 11 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 13
+Security control: waiting for passenger
+Security selector: Selected passenger 13 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 14
+Security control: waiting for passenger
+Security selector: Selected passenger 14 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 48 ms
+Security control: Received passenger 15
+Security control: waiting for passenger
+Security selector: Selected passenger 15 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 44 ms
+Security control: Received passenger 16
+Security control: waiting for passenger
+Security selector: Selected passenger 16 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 17
+Security control: waiting for passenger
+Security selector: Selected passenger 17 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 18
+Security control: waiting for passenger
+Security selector: Selected passenger 18 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security control: Received passenger 19
+Security control: waiting for passenger
+Security control: Received passenger 20
+Security control: waiting for passenger
+Security selector: Selected passenger 19 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 35 ms
+Security control: Received passenger 21
+Security control: waiting for passenger
+Security control: Received passenger 22
+Security control: waiting for passenger
+Security selector: Selected passenger 20 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 21 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 23
+Security control: waiting for passenger
+Security control: Received passenger 24
+Security control: waiting for passenger
+Security selector: Selected passenger 22 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 32 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security selector: Selected passenger 23 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 24 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: Waiting for passenger
+Security gate 1: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 50 ms
+Security control: Received passenger 25
+Security control: waiting for passenger
+Security selector: Selected passenger 25 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 26
+Security control: waiting for passenger
+Security selector: Selected passenger 26 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: Waiting for passenger
+Security gate 1: waiting 36 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 43 ms
+Security gate 1: Waiting for passenger
+Security control: Received passenger 27
+Security control: waiting for passenger
+Security selector: Selected passenger 27 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 45 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security gate 1: Waiting for passenger
+Security control: Received passenger 28
+Security control: waiting for passenger
+Security selector: Selected passenger 28 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 29
+Security control: waiting for passenger
+Security selector: Selected passenger 29 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security control: Received passenger 30
+Security control: waiting for passenger
+Security selector: Selected passenger 30 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 31
+Security control: waiting for passenger
+Security selector: Selected passenger 31 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 27 ms
+Security control: Received passenger 32
+Security control: waiting for passenger
+Security selector: Selected passenger 32 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 47 ms
+Security gate 1: Waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 39 ms
+Security control: Received passenger 33
+Security control: waiting for passenger
+Security selector: Selected passenger 33 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 21 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 34
+Security control: waiting for passenger
+Security selector: Selected passenger 34 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 26 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 35
+Security control: waiting for passenger
+Security selector: Selected passenger 35 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 23 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 36
+Security control: waiting for passenger
+Security selector: Selected passenger 36 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 36 ms
+Security control: Received passenger 37
+Security control: waiting for passenger
+Security selector: Selected passenger 37 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 24 ms
+Security control: Received passenger 38
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 38 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 40 ms
+Security control: Received passenger 39
+Security control: waiting for passenger
+Security selector: Selected passenger 39 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 40
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security selector: Selected passenger 40 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 34 ms
+Security control: Received passenger 41
+Security control: waiting for passenger
+Security selector: Selected passenger 41 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 50 ms
+Security control: Received passenger 42
+Security control: waiting for passenger
+Security control: Received passenger 43
+Security control: waiting for passenger
+Security selector: Selected passenger 42 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security selector: Selected passenger 43 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 47 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security gate 1: Waiting for passenger
+Security gate 0: Waiting for passenger
+Security control: Received passenger 44
+Security control: waiting for passenger
+Security selector: Selected passenger 44 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 26 ms
+Security control: Received passenger 45
+Security control: waiting for passenger
+Security selector: Selected passenger 45 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 46 ms
+Security control: Received passenger 46
+Security control: waiting for passenger
+Security selector: Selected passenger 46 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 47 ms
+Security control: Received passenger 47
+Security control: waiting for passenger
+Security selector: Selected passenger 47 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 36 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 48
+Security control: waiting for passenger
+Security selector: Selected passenger 48 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 24 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 49
+Security control: waiting for passenger
+Security selector: Selected passenger 49 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 50
+Security control: waiting for passenger
+Security selector: Selected passenger 50 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 36 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 51
+Security control: waiting for passenger
+Security control: Received passenger 52
+Security control: waiting for passenger
+Security selector: Selected passenger 51 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 43 ms
+Security selector: Selected passenger 52 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 30 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 53
+Security control: waiting for passenger
+Security selector: Selected passenger 53 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 36 ms
+Security control: Received passenger 54
+Security control: waiting for passenger
+Security selector: Selected passenger 54 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 22 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 55
+Security control: waiting for passenger
+Security selector: Selected passenger 55 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security control: Received passenger 56
+Security control: waiting for passenger
+Security selector: Selected passenger 56 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 22 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 57
+Security control: waiting for passenger
+Security selector: Selected passenger 57 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 58
+Security control: waiting for passenger
+Security selector: Selected passenger 58 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 59
+Security control: waiting for passenger
+Security selector: Selected passenger 59 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 20 ms
+Security control: Received passenger 60
+Security control: waiting for passenger
+Security selector: Selected passenger 60 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 49 ms
+Security control: Received passenger 61
+Security control: waiting for passenger
+Security selector: Selected passenger 61 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 21 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 62
+Security control: waiting for passenger
+Security selector: Selected passenger 62 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 34 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 63
+Security control: waiting for passenger
+Security selector: Selected passenger 63 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 20 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 64
+Security control: waiting for passenger
+Security control: Received passenger 65
+Security control: waiting for passenger
+Security selector: Selected passenger 65 for gate 0
+Security control: Passenger 64 skipped
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security selector: Selected passenger 64 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security control: Received passenger 66
+Security control: waiting for passenger
+Security selector: Selected passenger 66 for gate 1
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 1: waiting 48 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security gate 1: Waiting for passenger
+Security control: Received passenger 67
+Security control: waiting for passenger
+Security selector: Selected passenger 67 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 68
+Security control: waiting for passenger
+Security selector: Selected passenger 68 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 36 ms
+Security control: Received passenger 69
+Security control: waiting for passenger
+Security selector: Selected passenger 69 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 48 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 70
+Security control: waiting for passenger
+Security selector: Selected passenger 70 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 71
+Security control: waiting for passenger
+Security selector: Selected passenger 71 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 72
+Security control: waiting for passenger
+Security selector: Selected passenger 72 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 48 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 73
+Security control: waiting for passenger
+Security selector: Selected passenger 73 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 46 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 74
+Security control: waiting for passenger
+Security selector: Selected passenger 74 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 32 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 75
+Security control: waiting for passenger
+Security selector: Selected passenger 75 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 44 ms
+Security control: Received passenger 76
+Security control: waiting for passenger
+Security selector: Selected passenger 76 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 36 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 77
+Security control: waiting for passenger
+Security selector: Selected passenger 77 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 29 ms
+Security control: Received passenger 78
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 78 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 41 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 79
+Security control: waiting for passenger
+Security selector: Selected passenger 79 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 80
+Security control: waiting for passenger
+Security selector: Selected passenger 80 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 27 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 81
+Security control: waiting for passenger
+Security selector: Selected passenger 81 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 42 ms
+Security control: Received passenger 82
+Security control: waiting for passenger
+Security selector: Selected passenger 82 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 45 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 83
+Security control: waiting for passenger
+Security selector: Selected passenger 83 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 35 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 84
+Security control: waiting for passenger
+Security selector: Selected passenger 84 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 28 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 85
+Security control: waiting for passenger
+Security selector: Selected passenger 85 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 38 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 86
+Security control: waiting for passenger
+Security selector: Selected passenger 86 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 25 ms
+Security control: Received passenger 87
+Security control: waiting for passenger
+Security selector: Selected passenger 87 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 24 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 88
+Security control: waiting for passenger
+Security selector: Selected passenger 88 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 31 ms
+Security control: Received passenger 89
+Security control: waiting for passenger
+Security selector: Selected passenger 89 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 33 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 90
+Security control: waiting for passenger
+Security selector: Selected passenger 90 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 32 ms
+Security control: Received passenger 91
+Security control: waiting for passenger
+Security selector: Selected passenger 91 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 42 ms
+Security control: Received passenger 92
+Security control: waiting for passenger
+Security selector: Selected passenger 92 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 46 ms
+Security control: Received passenger 93
+Security control: waiting for passenger
+Security gate 0: Waiting for passenger
+Security selector: Selected passenger 93 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 24 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 94
+Security control: waiting for passenger
+Security selector: Selected passenger 94 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 44 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 95
+Security control: waiting for passenger
+Security selector: Selected passenger 95 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 26 ms
+Security control: Received passenger 96
+Security control: waiting for passenger
+Security selector: Selected passenger 96 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 27 ms
+Security control: Received passenger 97
+Security control: waiting for passenger
+Security selector: Selected passenger 97 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: Waiting for passenger
+Security gate 0: waiting 38 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 98
+Security control: waiting for passenger
+Security selector: Selected passenger 98 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 21 ms
+Security gate 0: Waiting for passenger
+Security control: Received passenger 99
+Security control: waiting for passenger
+Security selector: Selected passenger 99 for gate 0
+Security selector: informing passenger
+Security selector: Waiting for passenger to read from fifo
+Security selector: waiting 10 ms
+Security gate 0: waiting 34 ms
+Security control: Received signal SIGTERM

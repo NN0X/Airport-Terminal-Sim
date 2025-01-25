@@ -91,33 +91,35 @@ void appendToLog(const std::string &msg, const std::string &log)
 
 void vCout(const std::string &msg, int color, int log)
 {
-        if (VERBOSE == 0)
-                return;
-        std::cout << colors[color];
-        std::cout << msg;
-        std::cout << colors[NONE];
+        if (VERBOSE != 0)
+        {
+                std::cout << colors[color];
+                std::cout << msg;
+                std::cout << colors[NONE];
+        }
+
         switch (log)
         {
                 case LOG_PASSENGER:
-                        appendToLog(msg, "passenger.log");
+                        appendToLog(msg, "logs/passenger.log");
                         break;
                 case LOG_BAGGAGE_CONTROL:
-                        appendToLog(msg, "baggageControl.log");
+                        appendToLog(msg, "logs/baggageControl.log");
                         break;
                 case LOG_SECURITY_CONTROL:
-                        appendToLog(msg, "securityControl.log");
+                        appendToLog(msg, "logs/securityControl.log");
                         break;
                 case LOG_STAIRS:
-                        appendToLog(msg, "stairs.log");
+                        appendToLog(msg, "logs/stairs.log");
                         break;
                 case LOG_DISPATCHER:
-                        appendToLog(msg, "dispatcher.log");
+                        appendToLog(msg, "logs/dispatcher.log");
                         break;
                 case LOG_PLANE:
-                        appendToLog(msg, "plane.log");
+                        appendToLog(msg, "logs/plane.log");
                         break;
                 case LOG_MAIN:
-                        appendToLog(msg, "main.log");
+                        appendToLog(msg, "logs/main.log");
                         break;
                 default:
                         break;

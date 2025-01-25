@@ -31,11 +31,6 @@ void baggageControlSignalHandler(int signum)
 
 int baggageControl(BaggageControlArgs args)
 {
-        // INFO: check if passenger baggage weight is within limits
-        // INFO: if not, signal event handler
-        // INFO: repeat until signal to exit
-
-        // check if fifo exists
         if (access(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), F_OK) == -1)
         {
                 if (mkfifo(fifoNames[FIFO_BAGGAGE_CONTROL].c_str(), 0666) == -1)
@@ -45,7 +40,6 @@ int baggageControl(BaggageControlArgs args)
                 }
         }
 
-        // set signal handler
         struct sigaction sa;
         sa.sa_handler = baggageControlSignalHandler;
         sigemptyset(&sa.sa_mask);
@@ -63,14 +57,12 @@ int baggageControl(BaggageControlArgs args)
 
         while (true)
         {
-                // tell passenger to enter
                 safeSemop(args.semIDBaggageControlEntrance, &INC_SEM, 1);
 
                 vCout("Baggage control: waiting for passenger\n", BLUE, LOG_BAGGAGE_CONTROL);
                 int fd;
                 safeFIFOOpen(fd, fifoNames[FIFO_BAGGAGE_CONTROL], O_RDONLY);
 
-                // read from fifo the passenger pid and baggage weight
                 BaggageInfo baggageInfo;
                 safeFIFORead(fd, &baggageInfo, sizeof(baggageInfo));
                 close(fd);
@@ -81,8 +73,6 @@ int baggageControl(BaggageControlArgs args)
                         vCout("Baggage control: passenger " + std::to_string(baggageInfo.pid) + " is overweight\n", BLUE, LOG_BAGGAGE_CONTROL);
                         kill(baggageInfo.pid, SIGNAL_PASSENGER_IS_OVERWEIGHT);
                         safeSemop(args.semIDBaggageControlOut, &INC_SEM, 1);
-                        // TODO: consider sending PASSENGER_IS_OVERWEIGHT signal to event handler
-                        // and then event handler sending signal to passenger
                 }
                 else
                 {

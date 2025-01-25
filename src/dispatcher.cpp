@@ -103,7 +103,9 @@ void dispatcherSignalHandler(int signum, siginfo_t *info, void *ptr)
 
 void *passengerCounterThread(void *arg)
 {
-        int semIDPassengerCounter = *((int *)arg);
+        int *args = (int *)arg;
+        int semIDPassengerCounter = args[0];
+        pid_t pidMain = args[1];
         int totalPassengersLeft = 0;
         while (true)
         {
@@ -113,8 +115,7 @@ void *passengerCounterThread(void *arg)
                 if (totalPassengersLeft == totalPassengers)
                 {
                         vCout("Dispatcher: All passengers left\n", RED, LOG_DISPATCHER);
-                        // TODO: send signal to main to exit all processes
-                        exit(0);
+                        kill(pidMain, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
                 }
         }
 }
@@ -156,7 +157,9 @@ int dispatcher(DispatcherArgs args)
         }
 
         pthread_t passengerCounter;
-        if (pthread_create(&passengerCounter, NULL, passengerCounterThread, (void *)&args.semIDPassengerCounter) != 0)
+        int argsPassengerCounter[2] = {args.semIDPassengerCounter, args.pidMain};
+
+        if (pthread_create(&passengerCounter, NULL, passengerCounterThread, (void *)argsPassengerCounter) != 0)
         {
                 perror("pthread_create");
                 exit(1);
