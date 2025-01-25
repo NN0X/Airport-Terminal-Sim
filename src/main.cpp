@@ -14,6 +14,8 @@
 #include <fcntl.h> // O_RDONLY, O_WRONLY
 #include <sys/stat.h> // mkfifo
 #include <signal.h>
+#include <sys/resource.h>
+#include <fstream>
 
 #include "plane.h"
 #include "passenger.h"
@@ -77,9 +79,53 @@ int main(int argc, char* argv[])
                 return 1;
         }
 
-        if (numPassengers > 30000 || numPlanes > 30000)
+        struct rlimit rl;
+        int processLimit = 0;
+        int maxSemsInGroup = 0;
+        if (getrlimit(RLIMIT_NPROC, &rl) == 0)
         {
-                std::cerr << "Maximum values: <numPassengers> = 30000, <numPlanes> = 30000\n";
+                 processLimit = rl.rlim_cur;
+        }
+        else
+        {
+                perror("getrlimit failed for RLIMIT_NPROC");
+        }
+
+            // Check semaphore limits by reading /proc/sys/kernel/sem (on Linux)
+        std::ifstream semFile("/proc/sys/kernel/sem");
+        if (semFile.is_open())
+        {
+                int semmsl, semmns, semopm, semmni;
+                semFile >> semmsl >> semmns >> semopm >> semmni;
+                if (semFile)
+                {
+                    maxSemsInGroup = semmsl;
+                }
+                else
+                {
+                    std::cerr << "Failed to parse /proc/sys/kernel/sem\n";
+                }
+                semFile.close();
+        }
+        else
+        {
+                perror("Failed to open /proc/sys/kernel/sem");
+        }
+
+        std::cout << "Process limit: " << processLimit << "\n";
+        std::cout << "Semaphore limit: " << maxSemsInGroup << "\n";
+
+
+        exit(1);
+        if (numPassengers + 5 > processLimit || numPlanes + 5 > processLimit)
+        {
+                std::cerr << "Number of passengers and planes must be less than process limit\n";
+                return 1;
+        }
+
+        if (numPassengers > maxSemsInGroup)
+        {
+                std::cerr << "Number of passengers must be less than semaphore limit\n";
                 return 1;
         }
 

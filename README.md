@@ -75,9 +75,11 @@ passenger, gdzie selector używa grupy N semaforów, gdzie N to ilość pasażer
 
 ## Testy
 
-N oraz M to dowolne unsigned int większe od 0  i mniejsze od 30000.
+N oraz M to dowolne unsigned int większe od 0 i mniejsze od limitów systemowych.
 
 ### Test 1
+
+Duża ilość samolotów i mała ilość pasażerów
 
 1 pasażer, 30000 samolotów
 
@@ -86,6 +88,8 @@ N oraz M to dowolne unsigned int większe od 0  i mniejsze od 30000.
 ```
 
 ### Test 2
+
+Duża ilość pasażerów i mała ilość samolotów
 
 30000 pasażerów, 1 samolot
 
@@ -96,6 +100,8 @@ N oraz M to dowolne unsigned int większe od 0  i mniejsze od 30000.
 Działa ale wolno.
 
 ### Test 3
+
+Duża ilość pasażerów i duża ilość samolotów
 
 30000 pasażerów, 30000 samolotów
 
