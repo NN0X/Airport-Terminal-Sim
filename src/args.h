@@ -7,6 +7,7 @@ struct PassengerProcessArgs
 {
         size_t id;
         size_t pid;
+        pid_t pidMain;
         pid_t pidDispatcher;
         pid_t pidStairs;
         pid_t pidSecurityControl;
@@ -86,6 +87,7 @@ struct StairsArgs
 
 struct DispatcherArgs
 {
+        pid_t pidMain;
         int semIDPlaneWait;
         int semIDPlaneDepart;
         int semIDStairsWait;

@@ -112,14 +112,16 @@ void planeProcess(PlaneProcessArgs args)
         }
 }
 
-void initPlanes(size_t num, PlaneProcessArgs args)
+std::vector<pid_t> initPlanes(size_t num, PlaneProcessArgs args)
 {
+        std::vector<pid_t> planePIDs;
         pid_t oldPID = getpid();
         vCout("Init planes\n", NONE, LOG_MAIN);
         for (size_t i = 0; i < num; i++)
         {
                 pid_t newPID;
                 createSubprocess(newPID, "plane");
+                planePIDs.push_back(newPID);
                 if (getpid() != oldPID)
                 {
                         args.id = i;
@@ -130,6 +132,8 @@ void initPlanes(size_t num, PlaneProcessArgs args)
         }
 
         vCout("All planes created\n", NONE, LOG_MAIN);
+
+        return planePIDs;
 }
 
 Plane::Plane(uint64_t id)

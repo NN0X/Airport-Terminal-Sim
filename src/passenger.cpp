@@ -10,6 +10,7 @@
 #include <sys/stat.h> // mkfifo
 #include <signal.h>
 #include <sys/sem.h>
+#include <mutex>
 
 #include "utils.h"
 #include "passenger.h"
@@ -20,8 +21,14 @@ extern sembuf DEC_SEM;
 static bool failedBaggageControl = false;
 static bool failedSecurityControl = false;
 
+static int skipped = 0;
+
+static pid_t mainPID;
+
 void passengerSignalHandler(int signum)
 {
+        uint64_t val;
+        uint64_t getsAggresiveToInt;
         switch (signum)
         {
                 case SIGNAL_OK:
@@ -29,14 +36,39 @@ void passengerSignalHandler(int signum)
                         break;
                 case SIGNAL_PASSENGER_IS_OVERWEIGHT:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_OVERWEIGHT\n", GREEN, LOG_PASSENGER);
+                        getsAggresiveToInt = PASSENGER_GETS_AGGRESSIVE_BAGGAGE_PROBABILITY * UINT64_MAX;
+                        genRandom(val, 0, UINT64_MAX);
+                        if (val < getsAggresiveToInt)
+                        {
+                                vCout("Passenger " + std::to_string(getpid()) + ": Passenger gets aggressive\n", GREEN, LOG_PASSENGER);
+                                kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
+                        }
                         failedBaggageControl = true;
                         break;
                 case SIGNAL_PASSENGER_IS_DANGEROUS:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_IS_DANGEROUS\n", GREEN, LOG_PASSENGER);
+                        getsAggresiveToInt = PASSENGER_GETS_AGGRESSIVE_SECURITY_PROBABILITY * UINT64_MAX;
+                        genRandom(val, 0, UINT64_MAX);
+                        if (val < getsAggresiveToInt)
+                        {
+                                vCout("Passenger " + std::to_string(getpid()) + ": Passenger gets aggressive\n", GREEN, LOG_PASSENGER);
+                                kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
+                        }
                         failedSecurityControl = true;
                         break;
                 case SIGNAL_PASSENGER_SKIPPED:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal PASSENGER_SKIPPED\n", GREEN, LOG_PASSENGER);
+                        skipped++;
+                        if (skipped == PASSENGER_MAX_SKIPPED && WORST_CASE_SCENARIO)
+                        {
+                                vCout("Passenger " + std::to_string(getpid()) + ": Skipped 3 times\n", GREEN, LOG_PASSENGER);
+                                kill(mainPID, SIGNAL_THIS_IS_THE_END_HOLD_YOUR_BREATH_AND_COUNT_TO_TEN);
+                        }
+                        else if (skipped == PASSENGER_MAX_SKIPPED && !WORST_CASE_SCENARIO)
+                        {
+                                vCout("Passenger " + std::to_string(getpid()) + ": Skipped 3 times\n", GREEN, LOG_PASSENGER);
+                                exit(0);
+                        }
                         break;
                 case SIGTERM:
                         vCout("Passenger " + std::to_string(getpid()) + ": Received signal SIGTERM\n", GREEN, LOG_PASSENGER);
@@ -61,6 +93,7 @@ void passengerProcess(PassengerProcessArgs args)
 
         Passenger passenger(args.id);
         semIDPassengerCounterGlobal = args.semIDPassengerCounter;
+        mainPID = args.pidMain;
 
         if (atexit(atExitPassenger) != 0)
         {
@@ -205,14 +238,59 @@ void passengerProcess(PassengerProcessArgs args)
         exit(0);
 }
 
+static std::vector<pid_t> passengerPIDs;
+
+static std::mutex spawnPassengersMutex;
+
+void spawnPassengersSignalHandler(int signum)
+{
+        switch (signum)
+        {
+                case SIGNAL_OK:
+                        vCout("Spawn passengers: Received signal OK\n", NONE, LOG_MAIN);
+                        break;
+                case SIGTERM:
+                        vCout("Spawn passengers: Received signal SIGTERM\n", NONE, LOG_MAIN);
+                        spawnPassengersMutex.lock();
+                        for (size_t i = 0; i < passengerPIDs.size(); i++)
+                        {
+                                kill(passengerPIDs[i], SIGTERM);
+                        }
+                        spawnPassengersMutex.unlock();
+                        exit(0);
+                        break;
+                default:
+                        vCout("Spawn passengers: Received unknown signal\n", NONE, LOG_MAIN);
+                        break;
+        }
+}
+
 void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerProcessArgs args)
 {
+        struct sigaction sa;
+        sa.sa_handler = spawnPassengersSignalHandler;
+        sigemptyset(&sa.sa_mask);
+        sa.sa_flags = 0;
+        if (sigaction(SIGNAL_OK, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+        if (sigaction(SIGTERM, &sa, NULL) == -1)
+        {
+                perror("sigaction");
+                exit(1);
+        }
+
         pid_t oldPID = getpid();
         vCout("Spawn passengers\n", NONE, LOG_MAIN);
         for (size_t i = 0; i < num; i++)
         {
                 pid_t newPID;
                 createSubprocess(newPID, "passenger");
+                spawnPassengersMutex.lock();
+                passengerPIDs.push_back(newPID);
+                spawnPassengersMutex.unlock();
                 if (getpid() != oldPID)
                 {
                         args.id = i;
@@ -225,8 +303,6 @@ void spawnPassengers(size_t num, const std::vector<uint64_t> &delays, PassengerP
         }
 
         vCout("All passengers created\n", NONE, LOG_MAIN);
-
-        exit(0);
 }
 
 Passenger::Passenger(uint64_t id)

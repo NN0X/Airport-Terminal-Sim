@@ -9,7 +9,7 @@
 #include "args.h"
 
 void planeProcess(PlaneProcessArgs args);
-void initPlanes(size_t num, PlaneProcessArgs args);
+std::vector<pid_t> initPlanes(size_t num, PlaneProcessArgs args);
 
 class Plane
 {
